@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
           <Navbar />
         </div>
 
-        <div className="py-6">{children}</div>
+        <div className="py-6 h-[calc(100vh-96px)]">{children}</div>
       </body>
     </html>
   );
