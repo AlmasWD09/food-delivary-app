@@ -1,3 +1,6 @@
+import Discount from "@/Component/Discount";
+import Restaurants from "@/Component/restaurants";
+import TopSell from "@/Component/TopSell";
 
 
 
@@ -5,8 +8,9 @@ export default function Home() {
   return (
    <>
    <div>
-    <h>food delivery app here...</h>
-    <h>new line added</h>
+    {/* <Restaurants></Restaurants> */}
+    {/* <TopSell></TopSell> */}
+    <Discount></Discount>
    </div>
    </>
   );
