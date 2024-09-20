@@ -32,14 +32,15 @@ const Navbar = () => {
 
   return (
     <div className="bg-navbar">
-      <div className="flex items-center justify-between  container mx-auto py-4">
+      <div className="flex items-center justify-between  container mx-auto py-6">
         <div className="flex items-center gap-2">
           <Icon
-            className="text-6xl text-amber-500"
-            icon="fluent:food-grains-20-filled"
+            className="text-6xl text-amber-600"
+            icon="material-symbols-light:fastfood-sharp"
           />
-          <h1 className="text-amber-800 text-5xl font-bold uppercase font-kanit">
-            Cravify
+
+          <h1 className="text-amber-800 text-5xl font-bold capitalize font-kanit">
+            Feast Express
           </h1>
         </div>
         <div>
