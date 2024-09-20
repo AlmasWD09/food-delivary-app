@@ -6,6 +6,7 @@ export default function Home() {
    <div>
     <h>food delivery app here...</h>
     <h>new line added</h>
+    <p>Hello</p>
    </div>
    </>
   );
