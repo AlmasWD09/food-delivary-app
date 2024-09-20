@@ -8,13 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        navbar: "#f7f4eb",
       },
     },
     fontFamily: {
-      inter: ["Inter"],
-      satisfy: ["Satisfy"],
+      inter: ["Urbanist"],
+      kanit: ["Kanit"],
     },
   },
   plugins: [],
