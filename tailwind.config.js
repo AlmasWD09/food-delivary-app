@@ -11,9 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        navbar: "#f7f4eb",
       },
+    },
+    fontFamily: {
+      urbanist: ["Urbanist"],
+      kanit: ["Kanit"],
     },
   },
   plugins: [require('daisyui'),],
