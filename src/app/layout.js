@@ -1,5 +1,5 @@
-
 import "./globals.css";
+import Footer from "./shared/Footer";
 
 export const metadata = {
   title: "Feast Express",
@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
 
       <body>
         {children}
+        <Footer />
       </body>
     </html>
   );
