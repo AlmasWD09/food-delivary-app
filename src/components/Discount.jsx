@@ -14,8 +14,8 @@ import {
 } from "react-icons/bi";
 
 const Discount = () => {
-    return (
-        <div className=" lg:w-[1200px] mx-auto">
+  return (
+    <div className=" lg:w-[1200px] mx-auto">
       <div className="flex flex-col justify-center items-center ">
         {/* Title Part */}
         <div className="mt-[100px]  ">
@@ -65,9 +65,14 @@ const Discount = () => {
                           src={shape1}
                           className="w-[150px] "
                           alt="shape"
-                        />                        
+                        />
                       </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">50% <span className="text-[10px] font-extralight">Discount</span></h3>
+                      <h3 className="text-white font-bold absolute top-[115%] right-6">
+                        50%{" "}
+                        <span className="text-[10px] font-extralight">
+                          Discount
+                        </span>
+                      </h3>
                     </div>
                   </div>
                 </div>
@@ -108,9 +113,14 @@ const Discount = () => {
                           src={shape1}
                           className="w-[150px] "
                           alt="shape"
-                        />                        
+                        />
                       </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">30% <span className="text-[10px] font-extralight">Discount</span></h3>
+                      <h3 className="text-white font-bold absolute top-[115%] right-6">
+                        30%{" "}
+                        <span className="text-[10px] font-extralight">
+                          Discount
+                        </span>
+                      </h3>
                     </div>
                   </div>
                 </div>
@@ -151,9 +161,14 @@ const Discount = () => {
                           src={shape1}
                           className="w-[150px] "
                           alt="shape"
-                        />                        
+                        />
                       </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">25% <span className="text-[10px] font-extralight">Discount</span></h3>
+                      <h3 className="text-white font-bold absolute top-[115%] right-6">
+                        25%{" "}
+                        <span className="text-[10px] font-extralight">
+                          Discount
+                        </span>
+                      </h3>
                     </div>
                   </div>
                 </div>
@@ -182,7 +197,7 @@ const Discount = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Discount;
