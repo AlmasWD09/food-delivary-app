@@ -12,7 +12,7 @@ export default function Restaurants() {
   return (
     <>
       {/* Search and Sorting */}
-      <div className='flex gap-2 justify-between w-11/12 mx-auto mt-4'>
+      <div className='flex gap-2 justify-between  mt-4'>
         <div className="flex gap-2 items-center">
           <label className="input flex items-center w-96 gap-2 rounded-lg pl-4 h-12 border border-black">
             <input type="text" className="grow rounded-full text-lg" placeholder="Search here by restaurant name...." />
