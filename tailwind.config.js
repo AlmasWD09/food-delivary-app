@@ -12,7 +12,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      inter: ["Urbanist"],
+      urbanist: ["Urbanist"],
       kanit: ["Kanit"],
     },
   },

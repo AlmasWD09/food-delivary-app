@@ -2,11 +2,13 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [getMenu, setMenu] = useState(false);
 
+  console.log(getMenu);
   const navLinks = [
     {
       title: "Home",
@@ -31,26 +33,38 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-navbar">
-      <div className="flex items-center justify-between  container mx-auto py-6">
+    <div className="py-2 bg-navbar font-urbanist relative ">
+      <div className="flex items-center justify-between  container mx-auto top-0  p-2 ">
+        <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
+          {getMenu ? (
+            <Icon className="text-4xl" icon="material-symbols:close" />
+          ) : (
+            <Icon className="text-4xl" icon="ic:baseline-menu" />
+          )}
+        </div>
+
+        {/* left section  */}
         <div className="flex items-center gap-2">
           <Icon
-            className="text-6xl text-amber-600"
+            className="text-2xl lg:text-6xl text-amber-600"
             icon="material-symbols-light:fastfood-sharp"
           />
 
-          <h1 className="text-amber-800 text-5xl font-bold capitalize font-kanit">
+          <h1 className="text-amber-800 text-2xl lg:text-5xl font-bold capitalize font-kanit">
             Feast Express
           </h1>
         </div>
-        <div>
+
+        {/* logo section end  */}
+
+        <div className="hidden lg:flex ">
           <ul className="flex items-center gap-6">
             {navLinks.map((item) => (
               <Link key={item.path} href={item.path}>
                 <div className="group relative">
                   <li
                     className={`font-semibold px-2 py-1 rounded-md ${
-                      pathname == item.path && "bg-amber-200"
+                      pathname == item.path && "bg-orange-200"
                     }`}
                   >
                     {item.title}
@@ -62,17 +76,20 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-        <div className="flex items-center gap-6">
+
+        {/* navlinks / center section end  */}
+
+        <div className="flex items-center gap-2 lg:gap-6">
           {/* button start  */}
 
-          <div className="group relative">
+          <div className="group relative hidden lg:flex">
             <button className="flex flex-col items-center gap-1 group-hover:scale-110  ">
               <Icon className="text-2xl" icon="ph:user" />
               <h2>Account</h2>
 
               <span className="h-0.5 w-full absolute -bottom-1 left-0 bg-black transform scale-x-0 group-hover:scale-x-100    transition-all duration-300 ease-in-out "></span>
             </button>
-            {/* account hover area  */}
+            {/* account hover area end */}
 
             <div className="absolute hidden   group-hover:flex flex-col   -left-20 top-11 ">
               <div className="w-full lg:py-3 "></div>
@@ -96,7 +113,7 @@ const Navbar = () => {
 
           {/* account button end  */}
 
-          <button className="flex flex-col items-center gap-1  group relative">
+          <button className="flex flex-col items-center   group relative">
             <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
             <p>Cart</p>
 
@@ -104,7 +121,10 @@ const Navbar = () => {
           </button>
 
           {/* cart button end  */}
-          <button className="flex flex-col items-center gap-1 group relative">
+          <button
+            onClick={() => setMenu(false)}
+            className="flex flex-col items-center  group relative"
+          >
             <Icon className="text-2xl" icon="ph:heart" />
             <p>WishList</p>
             <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
@@ -112,22 +132,60 @@ const Navbar = () => {
 
           {/* wishlist button end  */}
         </div>
+
+        {/* right section end  */}
+      </div>
+
+      {/* mobile responsive section  */}
+
+      <div
+        className={`h-screen w-full lg:hidden  absolute  transition-all bg-navbar ease-in-out duration-300 transform ${
+          getMenu ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="p-10 ">
+          <ul className=" flex flex-col gap-6">
+            {navLinks.map((item) => (
+              <Link key={item.path} href={item.path}>
+                <li
+                  key={item.path}
+                  className={`font-bold p-4 hover:bg-amber-200 ${
+                    pathname === item.path && "bg-orange-200"
+                  } `}
+                >
+                  {item.title}
+                </li>
+              </Link>
+            ))}
+          </ul>
+
+          <div className="pt-10">
+            <h1 className="capitalize font-semibold text-2xl text-center">
+              Welcome to Feast Express
+            </h1>
+            <h3 className="capitalize  text-md text-center">
+              login to access your accounts
+            </h3>
+
+            <div className="flex flex-col items-center gap-4 justify-center pt-4">
+              <Link href="/signin"> </Link>
+
+              <button className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out">
+                Sign In
+              </button>
+
+              <h2>
+                don't have an account ?{" "}
+                <Link href="/signup">
+                  <span className="font-semibold underline">create now</span>
+                </Link>
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Navbar;
-
-{
-  /* <Link href="/signin">
-          <button className="px-4 py-2 rounded-xl bg-blue-100 text-blue-700 font-semibold border-2 border-blue-200">
-            Sign In
-          </button>
-        </Link>
-        <Link href="/signup">
-          <button className="px-4 py-2 rounded-xl bg-green-100 text-green-700 font-semibold border-2 border-green-200">
-            Sign Up
-          </button>
-        </Link> */
-}
