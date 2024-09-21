@@ -1,4 +1,4 @@
-
+import Navbar from "@/Component/shared/Navbar";
 import "./globals.css";
 
 export const metadata = {
@@ -9,9 +9,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <body className=" ">
+        <div>
+          <Navbar />
+        </div>
 
-      <body>
-        {children}
+        <div className="p-6  h-[calc(100vh-96px)]">{children}</div>
       </body>
     </html>
   );
