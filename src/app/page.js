@@ -1,22 +1,18 @@
-
-import Discount from "@/Component/Discount";
-import Restaurants from "@/Component/restaurants";
-
-
-
+import Discount from "@/components/Discount";
+import Restaurants from "@/components/restaurants";
 
 export default function Home() {
   return (
-   <>
+    <>
+      <div>
+        <Discount />
+        {/* <Restaurants></Restaurants> */}
+        {/* <TopSell></TopSell> */}
 
-   <div>
-    {/* <Restaurants></Restaurants> */}
-    {/* <TopSell></TopSell> */}
-    <Discount></Discount>
-  <div className="bg-primary ">
-    <Restaurants/>
-   </div>
-   </div>
-   </>
+        <div className="bg-primary ">
+          <Restaurants />
+        </div>
+      </div>
+    </>
   );
 }
