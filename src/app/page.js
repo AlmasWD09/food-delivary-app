@@ -1,6 +1,6 @@
-import Discount from "@/Component/Discount";
-import Restaurants from "@/Component/restaurants";
-import TopSell from "@/Component/TopSell";
+import Discount from "@/components/Discount";
+// import Restaurants from "@/components/restaurants";
+// import TopSell from "@/components/TopSell";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <div>
         {/* <Restaurants></Restaurants> */}
         {/* <TopSell></TopSell> */}
-        <Discount></Discount>
+        <Discount />
       </div>
     </>
   );
