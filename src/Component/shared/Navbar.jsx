@@ -113,7 +113,7 @@ const Navbar = () => {
 
           {/* account button end  */}
 
-          <button className="flex flex-col items-center   group relative">
+          <button className=" hidden lg:flex flex-col items-center   group relative">
             <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
             <p>Cart</p>
 
@@ -123,7 +123,7 @@ const Navbar = () => {
           {/* cart button end  */}
           <button
             onClick={() => setMenu(false)}
-            className="flex flex-col items-center  group relative"
+            className="hidden lg:flex flex-col items-center  group relative"
           >
             <Icon className="text-2xl" icon="ph:heart" />
             <p>WishList</p>

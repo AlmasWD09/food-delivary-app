@@ -5,10 +5,9 @@ export default function Home() {
   return (
     <>
       <div>
-        <Discount />
         {/* <Restaurants></Restaurants> */}
         {/* <TopSell></TopSell> */}
-
+        <Discount></Discount>
         <div className="bg-primary ">
           <Restaurants />
         </div>

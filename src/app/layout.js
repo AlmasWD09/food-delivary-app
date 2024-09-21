@@ -1,5 +1,6 @@
 import Navbar from "@/Component/shared/Navbar";
 import "./globals.css";
+import Footer from "./shared/Footer";
 
 export const metadata = {
   title: "Feast Express",
@@ -9,12 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className=" ">
-        <div>
-          <Navbar />
-        </div>
-
-        <div className="p-6  h-[calc(100vh-96px)]">{children}</div>
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );
