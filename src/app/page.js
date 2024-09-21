@@ -1,10 +1,7 @@
 
 import Discount from "@/Component/Discount";
 import Restaurants from "@/Component/restaurants";
-import TopSell from "@/Component/TopSell";
 
-
-import Restaurants from "@/Component/restaurants";
 
 
 
@@ -18,6 +15,7 @@ export default function Home() {
     <Discount></Discount>
   <div className="bg-primary ">
     <Restaurants/>
+   </div>
    </div>
    </>
   );
