@@ -45,7 +45,12 @@ const page = () => {
               placeholder="password"
               name="password"
             />
-
+            <h2 className="text-sm py-4">
+              Forgot Your Password?{" "}
+              <button className="font-semibold hover:text-red-400">
+                click here
+              </button>
+            </h2>
             <button className="relative py-4 bg-blue-500 text-white group overflow-hidden flex items-center justify-center">
               <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
 
