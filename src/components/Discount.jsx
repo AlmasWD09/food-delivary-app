@@ -34,7 +34,7 @@ const Discount = () => {
                 className="flex flex-col justify-center items-center relative h-[550px]"
               >
                 <div className="w-[280px] h-[350px] bg-[#f9c94fdd] relative ">
-                  <div className="w-[154px] h-[154px] bg-[#f9c94fdd] rounded-full  z-[110] absolute right-[25%] top-[-20%] flex justify-center items-center">
+                  <div className="w-[154px] h-[154px] bg-[#f9c94fdd] rounded-full   absolute right-[25%] top-[-20%] flex justify-center items-center">
                     <Image
                       src={cheeseBurger}
                       className="w-[150px] h-[150px] rounded-full"

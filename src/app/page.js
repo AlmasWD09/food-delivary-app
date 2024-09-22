@@ -9,9 +9,9 @@ export default function Home() {
       <div>
         {/* <Restaurants></Restaurants> */}
         {/* <TopSell></TopSell> */}
-        <Banner/>
+        <Banner />
         <Discount></Discount>
-        <CustomerReviews/>
+        <CustomerReviews />
         <div className="bg-primary ">
           <Restaurants />
         </div>
