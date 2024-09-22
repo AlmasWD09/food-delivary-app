@@ -180,7 +180,7 @@ const Navbar = () => {
               </button>
 
               <h2>
-                don't have an account ?{" "}
+              Don&apos;t have an account ?{" "}
                 <Link href="/signup">
                   <span className="font-semibold underline">create now</span>
                 </Link>
