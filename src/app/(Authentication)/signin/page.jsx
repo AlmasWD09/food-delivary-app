@@ -81,7 +81,7 @@ const page = () => {
           </div>
 
           <h1 className="text-center py-4">
-            don't have an account ?{" "}
+          Don&apos;t have an account ? {" "}
             <Link href="/signup">
               <span className="font-semibold hover:text-red-500">sign in</span>
             </Link>{" "}
