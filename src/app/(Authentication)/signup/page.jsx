@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" max-w-6xl mx-auto  h-full flex justify-center">
+    <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
       <div className=" flex flex-col lg:flex-row items-center justify-center lg:pr-10 lg:gap-10">
         {/* left side area  */}
         <div className="w-1/2 hidden lg:flex">

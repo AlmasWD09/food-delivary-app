@@ -12,7 +12,7 @@ import { FaRegComment } from "react-icons/fa6";
 export default function Restaurants() {
   return (
     <>
-      {/* Search and Sorting */}
+      {/* Search and Banner */}
       <div className='text-center p-32 mb-8' style={{ backgroundImage: `url('/assets/Bg restaurant.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="m-12">
           <h1 className="text-5xl font-poppins text-[#FFFFFF] font-semibold mb-3">Restaurants & Cafe</h1>
@@ -24,7 +24,7 @@ export default function Restaurants() {
       </div>
 
       {/* Card Section */}
-      <div className="w-11/12 mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div className="w-11/12 mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-7">
         {/* 1st Card */}
         <div>
           <div className="mb-5">
