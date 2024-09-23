@@ -5,8 +5,8 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" max-w-6xl mx-auto  h-full flex justify-center">
-      <div className=" flex items-center justify-center lg:pr-10">
+    <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
+      <div className="  flex items-center justify-center lg:pr-10 ">
         {/* left side area  */}
         <div className="flex-1 hidden lg:flex">
           <Image

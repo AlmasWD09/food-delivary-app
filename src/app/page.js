@@ -4,15 +4,17 @@ import Discount from "@/components/Discount";
 import Restaurants from "@/components/restaurants";
 import TopSell from "@/components/TopSell";
 
-export default function Home() {
+import React from "react";
+
+const page = () => {
   return (
-    <>
-      <div>
-        <Banner />
-        {/* <Discount></Discount> */}
-        <CustomerReviews />
-        <TopSell></TopSell>
-      </div>
-    </>
+    <div>
+      <Banner />
+      <Discount></Discount>
+      <CustomerReviews />
+      <TopSell></TopSell>
+    </div>
   );
-}
+};
+
+export default page;
