@@ -1,6 +1,6 @@
 import Navbar from "@/Component/shared/Navbar";
 import "./globals.css";
-import Footer from "./shared/Footer";
+import Footer from "@/Component/shared/Footer";
 
 export const metadata = {
   title: "Feast Express",

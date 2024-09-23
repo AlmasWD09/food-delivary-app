@@ -10,11 +10,9 @@ export default function Home() {
         {/* <Restaurants></Restaurants> */}
         {/* <TopSell></TopSell> */}
         <Banner />
-        <Discount></Discount>
-        <CustomerReviews />
-        <div className="bg-primary ">
-          <Restaurants />
-        </div>
+        {/* <Discount></Discount> */}
+        {/* <CustomerReviews /> */}
+        <div className="bg-primary ">{/* <Restaurants /> */}</div>
       </div>
     </>
   );
