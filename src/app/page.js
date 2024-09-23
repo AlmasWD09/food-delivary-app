@@ -7,12 +7,11 @@ import TopSell from "@/components/TopSell";
 export default function Home() {
   return (
     <>
-      <div>  
-        <Banner/>
+      <div>
+        <Banner />
         {/* <Discount></Discount> */}
-        <CustomerReviews/>
+        <CustomerReviews />
         <TopSell></TopSell>
-        
       </div>
     </>
   );
