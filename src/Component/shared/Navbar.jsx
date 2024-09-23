@@ -91,7 +91,7 @@ const Navbar = () => {
             </button>
             {/* account hover area end */}
 
-            <div className="absolute hidden   group-hover:flex flex-col   -left-20 top-11 ">
+            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-12 ">
               <div className="w-full lg:py-3 "></div>
               <div className="w-full p-8 bg-secondaryGray text-nowrap">
                 <h1 className="uppercase font-bold text-xl text-center">
@@ -100,12 +100,17 @@ const Navbar = () => {
                 <h3 className="text-center">login to access your account</h3>
 
                 <div className="flex items-center gap-4 justify-center pt-4">
-                  <button className="px-4 py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out">
-                    Login
-                  </button>
-                  <button className="px-4 py-2 bg-green-600 text-white font-semibold hover:scale-110 hover:bg-green-500 transition-all duration-300 ease-in-out">
-                    Register
-                  </button>
+                  <Link href="/signup">
+                    <button className="px-4 py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out">
+                      Sign Up
+                    </button>
+                  </Link>
+
+                  <Link href="/signin">
+                    <button className="px-4 py-2 bg-green-600 text-white font-semibold hover:scale-110 hover:bg-green-500 transition-all duration-300 ease-in-out">
+                      Sign In
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -175,7 +180,7 @@ const Navbar = () => {
               </button>
 
               <h2>
-                don't have an account ?{" "}
+              Don&apos;t have an account ?{" "}
                 <Link href="/signup">
                   <span className="font-semibold underline">create now</span>
                 </Link>

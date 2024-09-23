@@ -8,10 +8,12 @@ export default function Home() {
   return (
     <>
       <div>
+        {/* <Restaurants></Restaurants> */}
+        {/* <TopSell></TopSell> */}
         <Banner/>
+        <Discount></Discount>
         <CustomerReviews/>
-        <TopSell></TopSell> 
-        {/* <div className="bg-primary ">
+        <div className="bg-primary ">
           <Restaurants />
         </div> */}
       </div>
