@@ -2,19 +2,16 @@ import Banner from "@/components/Banner";
 import CustomerReviews from "@/components/CustomerReviews";
 import Discount from "@/components/Discount";
 import Restaurants from "@/components/restaurants";
+import TopSell from "@/components/TopSell";
 
 export default function Home() {
   return (
     <>
-      <div className="space-y-4">
-        {/* <Restaurants></Restaurants> */}
-        {/* <TopSell></TopSell> */}
+      <div>
         <Banner />
         {/* <Discount></Discount> */}
-        {/* <CustomerReviews /> */}
-        <div className="bg-primary ">
-          <Restaurants />
-        </div>
+        <CustomerReviews />
+        <TopSell></TopSell>
       </div>
     </>
   );
