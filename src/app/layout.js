@@ -14,7 +14,9 @@ export default function RootLayout({ children }) {
         <div className="sticky z-[9999] top-0">
           <Navbar />
         </div>
-        <div className=" font-poppins h-screen ">{children}</div>
+
+        {/* don't remove height  */}
+        <div className=" font-poppins h-[calc(100vh-96px)] ">{children}</div>
         <Footer />
       </body>
     </html>

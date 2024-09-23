@@ -6,13 +6,15 @@ import Restaurants from "@/components/restaurants";
 export default function Home() {
   return (
     <>
-      <div>
+      <div className="space-y-4">
         {/* <Restaurants></Restaurants> */}
         {/* <TopSell></TopSell> */}
         <Banner />
         {/* <Discount></Discount> */}
         {/* <CustomerReviews /> */}
-        <div className="bg-primary ">{/* <Restaurants /> */}</div>
+        <div className="bg-primary ">
+          <Restaurants />
+        </div>
       </div>
     </>
   );
