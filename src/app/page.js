@@ -1,13 +1,17 @@
-
-
+import Banner from "@/components/Banner";
+import CustomerReviews from "@/components/CustomerReviews";
+import Discount from "@/components/Discount";
 
 export default function Home() {
   return (
-   <>
-   <div>
-    <h>food delivery app here...</h>
-    <h>new line added</h>
-   </div>
-   </>
+    <>
+      <div>
+        {/* <Restaurants></Restaurants> */}
+        {/* <TopSell></TopSell> */}
+        <Banner />
+        <Discount></Discount>
+        <CustomerReviews />
+      </div>
+    </>
   );
 }
