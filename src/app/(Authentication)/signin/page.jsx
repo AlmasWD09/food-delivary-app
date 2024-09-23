@@ -29,7 +29,7 @@ const page = () => {
           <div className="pb-6 space-y-4 ">
             <h1 className="text-center text-3xl font-semibold">Hello Again!</h1>
             <h1 className="text-center text-sm ">
-              Make today tasty—let’s get your order started!
+              Make today tasty—let&apos;s get your order started!
             </h1>
           </div>
           <form action="" className="flex flex-col gap-4">
@@ -81,7 +81,7 @@ const page = () => {
           </div>
 
           <h1 className="text-center py-4">
-            don't have an account ?{" "}
+            Don&apos;t have an account ?{" "}
             <Link href="/signup">
               <span className="font-semibold hover:text-red-500">sign in</span>
             </Link>{" "}
