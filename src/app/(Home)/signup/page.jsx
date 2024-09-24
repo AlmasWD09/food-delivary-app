@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
 const page = () => {
   return (
     <div className=" max-w-6xl mx-auto  h-screen flex justify-center">

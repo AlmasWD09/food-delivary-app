@@ -1,6 +1,6 @@
-import Navbar from "@/Component/shared/Navbar";
-import "./globals.css";
-import Footer from "@/Component/shared/Footer";
+import Navbar from "@/components/shared/Navbar";
+import "../globals.css";
+import Footer from "@/components/shared/Footer";
 
 export const metadata = {
   title: "Delish -  Your Favorite Flavors, Delivered",
@@ -11,14 +11,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="sticky z-[9999] top-0 ">
+        <div className="sticky z-[999] top-0 ">
           <Navbar />
         </div>
 
         {/* don't remove height  */}
-        <div className=" font-poppins min-h-[calc(100vh-96px)]  ">
+        <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10 ">
           {children}
         </div>
+
         <Footer />
       </body>
     </html>
