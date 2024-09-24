@@ -34,8 +34,8 @@ const Navbar = () => {
   ];
 
   return (
-    <div className=" font-urbanist  bg-secondaryGray relative">
-      <div className="flex items-center justify-between  container mx-auto top-0  p-2 ">
+    <div className="  font-urbanist  bg-secondaryGray relative">
+      <div className=" h-20 flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
             <Icon className="text-4xl" icon="material-symbols:close" />
@@ -86,7 +86,7 @@ const Navbar = () => {
             {/* account hover area end */}
 
             <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-12 ">
-              <div className="w-full lg:py-3 "></div>
+              <div className="w-full lg:py-3 bg-secondaryGray "></div>
               <div className="w-full p-8 bg-secondaryGray text-nowrap">
                 <h1 className="uppercase font-bold text-xl text-center">
                   my account
