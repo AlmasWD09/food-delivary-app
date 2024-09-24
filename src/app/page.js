@@ -8,11 +8,10 @@ export default function Home() {
   return (
     <>
       <div>  
-        <Banner/>
-        {/* <Discount></Discount> */}
+        {/* <Banner/>
         <CustomerReviews/>
-        <TopSell></TopSell>
-        
+        <TopSell></TopSell> */}
+        <Discount></Discount>
       </div>
     </>
   );
