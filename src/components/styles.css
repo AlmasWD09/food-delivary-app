@@ -6,8 +6,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
-  
+   
     
   }
   
@@ -22,3 +21,22 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  .swiper-button-prev, .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background-color: #FF4D00; /* Orange color */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+    background-color: #e03d00; /* Darker shade of orange on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
