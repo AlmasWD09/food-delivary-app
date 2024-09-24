@@ -62,7 +62,12 @@ const Footer = () => {
       <div className="flex flex-col lg:flex-row  lg:justify-between container mx-auto gap-10 ">
         {/* first col */}
         <div className="space-y-4 flex flex-col items-center lg:items-start">
-          <Image src="/assets/logo.png" alt="logo" height={1000} width={200} />
+          <Image
+            src="/assets/footerlogo.png"
+            alt="logo"
+            height={1000}
+            width={200}
+          />
 
           <p className="max-w-96 text-center lg:text-left">
             Discover the joy of delicious food delivered to your doorstep. Enjoy

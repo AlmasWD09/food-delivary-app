@@ -34,8 +34,8 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="  font-urbanist  bg-secondaryGray relative">
-      <div className=" h-20 flex items-center justify-between  container mx-auto top-0  p-2 ">
+    <div className="h-20 font-urbanist  bg-secondaryGray   relative">
+      <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
             <Icon className="text-4xl" icon="material-symbols:close" />
@@ -77,16 +77,15 @@ const Navbar = () => {
           {/* button start  */}
 
           <div className="group relative hidden lg:flex">
-            <button className="flex flex-col items-center gap-1 group-hover:scale-110  ">
+            <button className="flex flex-col items-center gap-1 group-hover:scale-110 z-20 ">
               <Icon className="text-2xl" icon="ph:user" />
               <h2>Account</h2>
 
               <span className="h-0.5 w-full absolute -bottom-1 left-0 bg-black transform scale-x-0 group-hover:scale-x-100    transition-all duration-300 ease-in-out "></span>
             </button>
-            {/* account hover area end */}
+            {/* account hover area start */}
 
-            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-12 ">
-              <div className="w-full lg:py-3 bg-secondaryGray "></div>
+            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-14 ">
               <div className="w-full p-8 bg-secondaryGray text-nowrap">
                 <h1 className="uppercase font-bold text-xl text-center">
                   my account
