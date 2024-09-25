@@ -5,8 +5,8 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" max-w-6xl mx-auto  h-full flex justify-center">
-      <div className=" flex items-center justify-center lg:pr-10">
+    <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
+      <div className="  flex items-center justify-center lg:pr-10 ">
         {/* left side area  */}
         <div className="flex-1 hidden lg:flex">
           <Image
@@ -29,7 +29,7 @@ const page = () => {
           <div className="pb-6 space-y-4 ">
             <h1 className="text-center text-3xl font-semibold">Hello Again!</h1>
             <h1 className="text-center text-sm ">
-              Make today tasty—let’s get your order started!
+              Make today tasty—let&apos;s get your order started!
             </h1>
           </div>
           <form action="" className="flex flex-col gap-4">
@@ -81,7 +81,7 @@ const page = () => {
           </div>
 
           <h1 className="text-center py-4">
-          Don&apos;t have an account ? {" "}
+            Don&apos;t have an account ?{" "}
             <Link href="/signup">
               <span className="font-semibold hover:text-red-500">sign in</span>
             </Link>{" "}

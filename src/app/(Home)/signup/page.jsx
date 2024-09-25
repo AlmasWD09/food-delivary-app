@@ -1,10 +1,20 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
 
-const page = () => {
+const SignupPage = () => {
+  // Initialize useForm hook
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  // Form submission handler
+  const onSubmit = async (data) => {
+    console.log("Form Data:", data);
+  };
+
   return (
-    <div className=" max-w-6xl mx-auto  h-full flex justify-center">
+    <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
       <div className=" flex flex-col lg:flex-row items-center justify-center lg:pr-10 lg:gap-10">
         {/* left side area  */}
         <div className="w-1/2 hidden lg:flex">
@@ -33,30 +43,43 @@ const page = () => {
               sign up now and unlock exclusive access!
             </h1>
           </div>
-          <form action="" className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+            {/* Full Name */}
             <input
               type="text"
+              name="fullname"
+              {...register("fullname", { required: true })}
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
               placeholder="Full Name"
-              name="fullname"
             />
+            {errors.fullname && <p className="text-red-500">Full name is required</p>}
+
+            {/* Email **/}
             <input
               type="email"
+              name="emailAddress"
+              {...register("emailAddress", { required: true })}
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
               placeholder="Email Address"
-              name="emailaddress"
             />
+            {errors.emailaddress && <p className="text-red-500">Email is required</p>}
+
+            {/* Password */}
             <input
               type="password"
+              name="password"
+              {...register("password", { required: true })}
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
               placeholder="password"
-              name="password"
             />
+
+            {/* Confirm Password */}
             <input
               type="password"
+              name="confirmPassword"
+              {...register("confirmPassword", { required: true })}
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
               placeholder="Confirm password"
-              name="password"
             />
             <button className="relative py-4 bg-green-600 text-white group overflow-hidden flex items-center justify-center">
               <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
@@ -76,4 +99,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignupPage;
