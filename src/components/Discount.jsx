@@ -40,21 +40,22 @@ const Discount = () => {
           </div>
 
           {/* ---slider section--- */}
-          <div className="">
-            <div>
+          <div >
+            <div className="">
               <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
                 pagination={{
                   clickable: true,
+                  
                 }}
                 breakpoints={{
                   640: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                     spaceBetween: 20,
                   },
                   768: {
-                    slidesPerView: 4,
+                    slidesPerView: 2,
                     spaceBetween: 40,
                   },
                   1024: {
@@ -64,22 +65,35 @@ const Discount = () => {
                 }}
                 modules={[Pagination]}
                 className="mySwiper"
+
+                style={{
+                  padding:"20px",
+                  "--swiper-pagination-bottom": "-2%",
+                  "--swiper-pagination-bullet-width": "80px",
+                  "--swiper-pagination-bullet-height": "2px",
+                  "--swiper-pagination-color": "#d97706",
+                  "--swiper-pagination-bullet-inactive-color": "#9b9b9b",
+                  "--swiper-pagination-bullet-inactive-opacity": "1",
+                  "--swiper-pagination-bullet-size": "16px",
+                  "--swiper-pagination-bullet-horizontal-gap": "6px",
+                }}
               >
+                 
+
                 <SwiperSlide style={{
                   height:"250px",
                   position: 'relative',
                   
                 }} className="relative z-10 " >
                   {/* upper discount part */}
-                  <div className='absolute bottom-[30%] z-50 flex p-3 rounded-md bg-primary text-white'>
-                      <h3>$17</h3>
-                      <span>/per</span>
+                  <div className='absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white'>
+                      <h3 className="font-semibold text-[16px]">$17</h3>
+                      <sub className="text-sm font-thin">/per</sub>
                     </div>
 
                   {/* --card-- */}
                   <div onMouseEnter={() => setHover(1)}
-                onMouseLeave={() => setHover(0)} className={`flex items-center bg-white ${hover===1 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'transition-transform transform '}`}>
-
+                onMouseLeave={() => setHover(0)} className={`flex items-center  ${hover===1 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'bg-white  transition-transform transform '}`}>
                     
 
                     {/* card img */}
@@ -126,7 +140,7 @@ const Discount = () => {
                       </div>
                     </div>
                   </div>
-                </SwiperSlide> 
+                </SwiperSlide>
 
                 <SwiperSlide style={{
                   height:"250px",
@@ -134,14 +148,14 @@ const Discount = () => {
                   
                 }} className="relative z-10 " >
                   {/* upper discount part */}
-                  <div className='absolute bottom-[30%] z-50 flex p-3 rounded-md bg-primary text-white'>
-                      <h3>$17</h3>
-                      <span>/per</span>
+                  <div className='absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white'>
+                      <h3 className="font-semibold text-[16px]">$17</h3>
+                      <sub className="text-sm font-thin">/per</sub>
                     </div>
 
                   {/* --card-- */}
                   <div onMouseEnter={() => setHover(2)}
-                onMouseLeave={() => setHover(0)} className={`flex items-center bg-white ${hover===2 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'transition-transform transform '}`}>
+                onMouseLeave={() => setHover(0)} className={`flex items-center  ${hover===2 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'bg-white transition-transform transform '}`}>
 
                     
 
@@ -191,21 +205,21 @@ const Discount = () => {
                   </div>
                 </SwiperSlide>
 
+
                 <SwiperSlide style={{
                   height:"250px",
                   position: 'relative',
                   
                 }} className="relative z-10 " >
                   {/* upper discount part */}
-                  <div className='absolute bottom-[30%] z-50 flex p-3 rounded-md bg-primary text-white'>
-                      <h3>$17</h3>
-                      <span>/per</span>
+                  <div className='absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white'>
+                      <h3 className="font-semibold text-[16px]">$17</h3>
+                      <sub className="text-sm font-thin">/per</sub>
                     </div>
 
                   {/* --card-- */}
                   <div onMouseEnter={() => setHover(3)}
-                onMouseLeave={() => setHover(0)} className={`flex items-center bg-white ${hover===3 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'transition-transform transform '}`}>
-
+                onMouseLeave={() => setHover(0)} className={`flex items-center  ${hover===3 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'bg-white  transition-transform transform '}`}>
                     
 
                     {/* card img */}
@@ -249,6 +263,69 @@ const Discount = () => {
                       {/* button */}
                       <div className="mt-[10px] text-left text-[14px] font-normal ">
                         <button className="flex justify-center items-center space-x-2" ><p className={` ${hover===3 ?'text-white text-[14px] ' : ''}`}>Details</p> <CiLocationArrow1 className={` ${hover===3 ?'text-white text-[14px] rotate-45' : 'text-primary transition-transform duration-300 transform '}`}/></button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+
+                <SwiperSlide style={{
+                  height:"250px",
+                  position: 'relative',
+                  
+                }} className="relative z-10 " >
+                  {/* upper discount part */}
+                  <div className='absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white'>
+                      <h3 className="font-semibold text-[16px]">$17</h3>
+                      <sub className="text-sm font-thin">/per</sub>
+                    </div>
+
+                  {/* --card-- */}
+                  <div onMouseEnter={() => setHover(4)}
+                onMouseLeave={() => setHover(0)} className={`flex items-center  ${hover===4 ?'bg-[#68ee5c] -translate-y-4 transition-delay-200' : 'bg-white  transition-transform transform '}`}>
+                    
+
+                    {/* card img */}
+                    <div style={{
+                      backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }} className='basis-1/3 h-[250px] rounded-tr-full rounded-br-full' >
+                      
+                    </div>
+
+
+                    {/* card details */}
+                    <div className='ml-[24px]'>
+
+                      {/* heading */}
+                      <div className="text-left ">
+                        <h3 className=''>Chickhen Curry</h3>
+                        <h3 className={`${hover===4 ?'text-[#ffffff]' : 'text-[#68ee5c]'}`}>$85<span className='text-sm font-light' >only </span> <span className='line-through text-[#a5a5a5] text-sm'>$99</span></h3>
+                      </div>
+
+                      {/* bullet points */}
+                      <div className="mt-[10px] text-left text-[13px] font-light">
+                        <div>
+                          <ul style={{
+                            listStyleType: "disc",
+                            listStylePosition: "inside",
+                            margin: "0",
+                            padding: "0",
+                            
+                          }}
+                          className={`${hover===4 ?'marker:text-white ' : 'marker:text-[#d97706]'}`}>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            <li>Lorem ipsum dolor elit.</li>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* button */}
+                      <div className="mt-[10px] text-left text-[14px] font-normal ">
+                        <button className="flex justify-center items-center space-x-2" ><p className={` ${hover===4 ?'text-white text-[14px] ' : ''}`}>Details</p> <CiLocationArrow1 className={` ${hover===4 ?'text-white text-[14px] rotate-45' : 'text-primary transition-transform duration-300 transform '}`}/></button>
                       </div>
                     </div>
                   </div>
