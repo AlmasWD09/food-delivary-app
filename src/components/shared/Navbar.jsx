@@ -1,5 +1,6 @@
 "use client";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -33,8 +34,8 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="   py-2 font-urbanist  bg-secondaryGray relative">
-      <div className="flex items-center justify-between  container mx-auto top-0  p-2 ">
+    <div className="h-20 font-urbanist  bg-secondaryGray   relative">
+      <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
             <Icon className="text-4xl" icon="material-symbols:close" />
@@ -44,15 +45,8 @@ const Navbar = () => {
         </div>
 
         {/* left section  */}
-        <div className="flex items-center gap-2">
-          <Icon
-            className="text-2xl lg:text-6xl text-amber-600"
-            icon="material-symbols-light:fastfood-sharp"
-          />
-
-          <h1 className="text-amber-800 text-2xl lg:text-5xl font-bold capitalize font-kanit">
-            Feast Express
-          </h1>
+        <div className="flex items-center ">
+          <Image src="/assets/logo.png" alt="logo" height={1000} width={200} />
         </div>
 
         {/* logo section end  */}
@@ -83,16 +77,15 @@ const Navbar = () => {
           {/* button start  */}
 
           <div className="group relative hidden lg:flex">
-            <button className="flex flex-col items-center gap-1 group-hover:scale-110  ">
+            <button className="flex flex-col items-center gap-1 group-hover:scale-110 z-20 ">
               <Icon className="text-2xl" icon="ph:user" />
               <h2>Account</h2>
 
               <span className="h-0.5 w-full absolute -bottom-1 left-0 bg-black transform scale-x-0 group-hover:scale-x-100    transition-all duration-300 ease-in-out "></span>
             </button>
-            {/* account hover area end */}
+            {/* account hover area start */}
 
-            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-12 ">
-              <div className="w-full lg:py-3 "></div>
+            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-14 ">
               <div className="w-full p-8 bg-secondaryGray text-nowrap">
                 <h1 className="uppercase font-bold text-xl text-center">
                   my account
@@ -101,13 +94,13 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-4 justify-center pt-4">
                   <Link href="/signup">
-                    <button className="px-4 py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out">
+                    <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
                       Sign Up
                     </button>
                   </Link>
 
                   <Link href="/signin">
-                    <button className="px-4 py-2 bg-green-600 text-white font-semibold hover:scale-110 hover:bg-green-500 transition-all duration-300 ease-in-out">
+                    <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
                       Sign In
                     </button>
                   </Link>
@@ -151,7 +144,11 @@ const Navbar = () => {
         <div className="p-10 ">
           <ul className=" flex flex-col gap-6">
             {navLinks.map((item) => (
-              <Link key={item.path} href={item.path}>
+              <Link
+                onClick={() => setMenu(false)}
+                key={item.path}
+                href={item.path}
+              >
                 <li
                   key={item.path}
                   className={`font-bold p-4 hover:bg-amber-200 ${
@@ -173,15 +170,18 @@ const Navbar = () => {
             </h3>
 
             <div className="flex flex-col items-center gap-4 justify-center pt-4">
-              <Link href="/signin"> </Link>
-
-              <button className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out">
-                Sign In
-              </button>
+              <Link href="/signin" className="w-full">
+                <button
+                  onClick={() => setMenu(false)}
+                  className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out"
+                >
+                  Sign In
+                </button>
+              </Link>
 
               <h2>
-              Don&apos;t have an account ?{" "}
-                <Link href="/signup">
+                don&apos;t have an account ?{" "}
+                <Link onClick={() => setMenu(false)} href="/signup">
                   <span className="font-semibold underline">create now</span>
                 </Link>
               </h2>

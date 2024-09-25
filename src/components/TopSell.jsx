@@ -11,14 +11,14 @@ import { MdEmojiFoodBeverage } from "react-icons/md";
 import { IoIceCream } from "react-icons/io5";
 import { GiTropicalFish } from "react-icons/gi";
 
-const TopSell = () => {
 
-  const[isActive,setActive] = useState(1);
-  const[pageActive,setpageActive] = useState(1);
+const TopSell = () => {
+  const [isActive, setActive] = useState(1);
+  const [pageActive, setpageActive] = useState(1);
 
   return (
     <div>
-      <div className="lg:max-w-[1240px] h-[600px] mx-auto my-[100px]">
+      <div className="container lg:h-[600px] mx-auto my-[100px] ">
         <div className="lg:flex">
           {/* ----most Left side div---- */}
           <div
@@ -36,34 +36,56 @@ const TopSell = () => {
                 <h3 className="text-white leading-[60px] font-bold text-5xl">
                   Our Top Selling Food
                 </h3>
-                <div className="absolute right-[1px] bottom-[65px]">
-                  <Image
-                    src={rightArrow}
-                    className="w-[235px]"
-                    alt="rightArrow"
-                  />
-                </div>
+                
               </div>
 
               {/* --type sections-- */}
               <div className="flex-end space-y-2">
                 {/* main dish */}
-                <div onClick={() => setActive(1)} className={isActive===1?"px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center" : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"}>
+                <div
+                  onClick={() => setActive(1)}
+                  className={
+                    isActive === 1
+                      ? "px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center"
+                      : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"
+                  }
+                >
                   <h3 className="font-bold text-[18px]">MAIN DISHES</h3>
                   <GiChickenOven className="text-[28px]" />
                 </div>
                 {/* Beverage */}
-                <div onClick={() => setActive(2)} className={isActive===2?"px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center" : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"}>
+                <div
+                  onClick={() => setActive(2)}
+                  className={
+                    isActive === 2
+                      ? "px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center"
+                      : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"
+                  }
+                >
                   <h3 className="font-bold text-[18px]">BEVERAGE</h3>
                   <MdEmojiFoodBeverage className="text-[28px]" />
                 </div>
                 {/* Dessert*/}
-                <div onClick={() => setActive(3)} className={isActive===3?"px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center" : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"}>
+                <div
+                  onClick={() => setActive(3)}
+                  className={
+                    isActive === 3
+                      ? "px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center"
+                      : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"
+                  }
+                >
                   <h3 className="font-bold text-[18px]">DESSERT</h3>
                   <IoIceCream className="text-[28px]" />
                 </div>
                 {/* Sea Food */}
-                <div onClick={() => setActive(4)} className={isActive===4?"px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center" : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"}>
+                <div
+                  onClick={() => setActive(4)}
+                  className={
+                    isActive === 4
+                      ? "px-4 py-2 w-full h-[50px] bg-primary rounded-md text-white flex justify-between items-center"
+                      : "px-4 py-2 border-2 border-white  w-full h-[50px]  rounded-md text-white flex justify-between items-center"
+                  }
+                >
                   <h3 className="font-bold text-[18px]">SEA FOOD</h3>
                   <GiTropicalFish className="text-[28px]" />
                 </div>
@@ -75,7 +97,6 @@ const TopSell = () => {
           <div className="lg:basis-[60%] lg:h-[600px] bg-[#f8e5c8] lg:flex lg:justify-center lg:items-center">
             {/* --card container--  */}
             <div className=" lg:mt-0 mt-[20px] h-[410px] lg:w-[600px] flex flex-col space-y-4 justify-center items-center">
-
               {/* single card */}
               <div className="mt-[20px] lg:mt-0 p-3 flex h-[90px] lg:w-[500px]  bg-white rounded-md shadow-md">
                 <div className="h-[70px] min-w-[70px] rounded-md">
@@ -232,17 +253,29 @@ const TopSell = () => {
                   <div></div>
                 </div>
               </div>
-
-              
             </div>
 
             {/* Pagination */}
             <div className="w-[450px] lg:w-[0px] lg:space-y-2 space-x-2 lg:space-x-0 mt-[20px] flex lg:flex-col justify-center items-center">
-              <div onClick={()=>setpageActive(1)} className={pageActive===1? "flex justify-center items-center w-[28px] h-[28px] bg-primary text-white rounded-full":"flex justify-center items-center w-[28px] h-[28px] border-[2px] border-white text-primary rounded-full"}>
+              <div
+                onClick={() => setpageActive(1)}
+                className={
+                  pageActive === 1
+                    ? "flex justify-center items-center w-[28px] h-[28px] bg-primary text-white rounded-full"
+                    : "flex justify-center items-center w-[28px] h-[28px] border-[2px] border-white text-primary rounded-full"
+                }
+              >
                 <h3>1</h3>
               </div>
-              <div onClick={()=>setpageActive(2)} className={pageActive===2? "flex justify-center items-center w-[28px] h-[28px] bg-primary text-white rounded-full":"flex justify-center items-center w-[28px] h-[28px] border-[2px] border-white text-primary rounded-full"} >
-                <h3 >2</h3>
+              <div
+                onClick={() => setpageActive(2)}
+                className={
+                  pageActive === 2
+                    ? "flex justify-center items-center w-[28px] h-[28px] bg-primary text-white rounded-full"
+                    : "flex justify-center items-center w-[28px] h-[28px] border-[2px] border-white text-primary rounded-full"
+                }
+              >
+                <h3>2</h3>
               </div>
             </div>
           </div>

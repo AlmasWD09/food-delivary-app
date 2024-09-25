@@ -78,7 +78,7 @@ const Discount = () => {
                   "--swiper-pagination-bullet-horizontal-gap": "6px",
                 }}
               >
-                 
+
 
                 <SwiperSlide style={{
                   height:"250px",
