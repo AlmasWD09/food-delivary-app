@@ -1,12 +1,10 @@
-"use client"
-
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import './styles.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+"use client";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./styles.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
 
 const CustomerReviews = () => {
@@ -193,10 +191,10 @@ const CustomerReviews = () => {
             </div>
             
                </div>
-            </div>
-        </div>
-    </div>
-    );
+               </div>
+               </div>
+               </div>
+  )
 };
 
 export default CustomerReviews;
