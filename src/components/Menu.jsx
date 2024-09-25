@@ -22,7 +22,7 @@ const Menu = () => {
                     {/* cards 1 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -42,7 +42,7 @@ const Menu = () => {
                     {/* cards 2 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center  duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -62,7 +62,7 @@ const Menu = () => {
                     {/* cards 3 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -82,7 +82,7 @@ const Menu = () => {
                     {/* cards 4 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -102,7 +102,7 @@ const Menu = () => {
                     {/* cards 5 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -122,7 +122,7 @@ const Menu = () => {
                     {/* cards 6 */}
                     <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                       <div className="overflow-hidden rounded-t-xl">
-                      <img className="transition-all duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
+                      <img className="transition-all object-cover bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src="https://i.ibb.co.com/L89mFt1/1700604212111.jpg" alt="" />
                       </div>
                       <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                          <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
