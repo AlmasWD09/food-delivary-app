@@ -3,7 +3,7 @@ import React from 'react';
 
 const Parallex = () => {
     return (
-        <div className='parallex-item bg-fixed text-white lg:p-32 p-6'>
+        <div className='parallex-item bg-fixed text-white lg:p-32 p-6 mt-[100px]'>
             <div className='space-y-6'>
                 <h2 className='text-center lg:text-lg text-red-600 '><em>Website for Restaurant and Cafe</em></h2>
                 <h1 className='uppercase text-center text-2xl lg:text-4xl font-bold'>easy order in 3 steps</h1>

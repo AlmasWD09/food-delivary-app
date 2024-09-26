@@ -15,8 +15,8 @@ const page = () => {
 
       <Discount></Discount>
       <CustomerReviews />
-      <TopSell></TopSell>
       <Parallex />
+      <TopSell></TopSell>
     </div>
 
   );
