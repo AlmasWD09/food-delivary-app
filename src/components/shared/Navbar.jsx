@@ -31,6 +31,10 @@ const Navbar = () => {
       title: "Profile",
       path: "/profile",
     },
+    {
+      title: "Dashboard",
+      path: "/dashboard",
+    },
   ];
 
   return (
