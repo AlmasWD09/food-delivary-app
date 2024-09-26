@@ -1,12 +1,14 @@
 .swiper {
     width: 100%;
     height: 100%;
+    
   }
   
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-   
+    
+    
     
   }
   
@@ -20,7 +22,11 @@
   .swiper {
     margin-left: auto;
     margin-right: auto;
+    
   }
+
+
+
 
   .swiper-button-prev, .swiper-button-next {
     width: 40px;
