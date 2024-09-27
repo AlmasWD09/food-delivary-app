@@ -41,10 +41,10 @@ const Menu = ({foods}) => {
                 <div className="flex w-full md:w-4/5 lg:w-1/2 flex-col md:flex-row p-4 md:border-2 md:border-black rounded-lg justify-center uppercase my-3 gap-4">
                    
                     <button onClick={()=> filterByCategory("All")} className={`${click === "All" && "bg-[#FF4D00] border text-white transition-all duration-700"} md:border-none  rounded-lg p-3`}>All</button>
-                    <button onClick={()=> filterByCategory("Main Dishes")} className={`${click === "Main Dishes" && "bg-[#FF4D00] border text-white transition-all duration-700"} md:border-none  rounded-lg p-3`}>Main Dishes</button>
-                    <button onClick={()=> filterByCategory("Desserts")} className={`${click === "Desserts" && "bg-[#FF4D00] border text-white transition-all duration-700"} md:border-none  rounded-lg p-3`}>Desserts</button>
-                    <button onClick={()=> filterByCategory("Sea Food")} className={`${click === "Sea Food" && "bg-[#FF4D00] border text-white transition-all duration-700"} md:border-none  rounded-lg p-3`}>Sea Food</button>
-                    <button onClick={()=> filterByCategory("Beverage")} className={`${click === "Beverage" && "bg-[#FF4D00] border text-white transition-all duration-700"} md:border-none  rounded-lg p-3`}>Beverage</button>
+                    <button onClick={()=> filterByCategory("Main Dishes")} className={`${click === "Main Dishes" && "bg-[#FF4D00] text-white transition-all duration-700"}  border md:border-none  rounded-lg p-3`}>Main Dishes</button>
+                    <button onClick={()=> filterByCategory("Desserts")} className={`${click === "Desserts" && "bg-[#FF4D00] text-white transition-all duration-700"} border md:border-none  rounded-lg p-3`}>Desserts</button>
+                    <button onClick={()=> filterByCategory("Sea Food")} className={`${click === "Sea Food" && "bg-[#FF4D00]  text-white transition-all duration-700"}  border md:border-none  rounded-lg p-3`}>Sea Food</button>
+                    <button onClick={()=> filterByCategory("Beverage")} className={`${click === "Beverage" && "bg-[#FF4D00] text-white transition-all duration-700"}  border md:border-none  rounded-lg p-3`}>Beverage</button>
                 </div>
                 </div>
                 <div className="mt-8 px-3 lg:px-0 grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 md:gap-6 gap-4 lg:gap-10">
