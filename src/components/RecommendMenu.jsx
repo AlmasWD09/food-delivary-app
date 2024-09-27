@@ -10,7 +10,8 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import img from "../../public/cheeseBurger.jpg"
 import Image from 'next/image';
 import { FaStar } from 'react-icons/fa';
-const RecommendMenu = () => {
+const RecommendMenu = ({foods}) => {
+ 
     return (
         <div>
             <Swiper
@@ -46,126 +47,27 @@ const RecommendMenu = () => {
             modules={[Pagination, Navigation,Autoplay]}
             className="mySwiper "
             >
-                <SwiperSlide>
+             {
+              foods?.map(food => 
+              <>
+                  <SwiperSlide>
                     <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
                         <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
+                            <img src={food?.image} className="rounded-t-xl max-h-[178px] transition-all duration-700 hover:scale-110" alt="" />
                         </figure>
                        <div className='p-4'>
                         <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
+                        <h3 className="text-xl font-semibold text-center">{food?.title}</h3>
                         <div className="flex justify-center gap-1 items-center">
                           <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
+                          <p className="font-bold text-xl">${food?.price}</p>
                          </div>
                        </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
-                        <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
-                        </figure>
-                       <div className='p-4'>
-                        <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
-                        <div className="flex justify-center gap-1 items-center">
-                          <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
-                         </div>
-                       </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
-                        <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
-                        </figure>
-                       <div className='p-4'>
-                        <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
-                        <div className="flex justify-center gap-1 items-center">
-                          <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
-                         </div>
-                       </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
-                        <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
-                        </figure>
-                       <div className='p-4'>
-                        <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
-                        <div className="flex justify-center gap-1 items-center">
-                          <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
-                         </div>
-                       </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
-                        <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
-                        </figure>
-                       <div className='p-4'>
-                        <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
-                        <div className="flex justify-center gap-1 items-center">
-                          <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
-                         </div>
-                       </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
-                        <figure className='overflow-hidden rounded-t-xl'>
-                            <Image
-                            src={img}
-                            className="rounded-t-xl transition-all duration-700 hover:scale-110"
-                            alt="Restaurant"
-                            layout="responsive"
-                            />
-                        </figure>
-                       <div className='p-4'>
-                        <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                        <h3 className="text-xl font-semibold text-center">Braised Chicken Legs</h3>
-                        <div className="flex justify-center gap-1 items-center">
-                          <p className="line-through">$35</p> 
-                          <p className="font-bold text-xl">$33</p>
-                         </div>
-                       </div>
-                    </div>
-                </SwiperSlide>
+              </>)
+             }
+               
                
             </Swiper>
         </div>

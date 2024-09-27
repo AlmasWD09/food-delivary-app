@@ -1,9 +1,18 @@
+"use client"
 import Menu from '@/components/Menu';
 import RecommendMenu from '@/components/RecommendMenu';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
-const page = () => {
+const MenuPage = () => {
+     const [foods,setFoods] = useState([])
+
+     useEffect(()=>{
+       fetch("./menu.json")
+       .then(res => res.json())
+       .then(data => setFoods(data))
+     },[])
+  
     return (
         <div>
         <div
@@ -19,14 +28,16 @@ const page = () => {
                 </div>
             </div>
         </div>
-       <Menu/>
+       <Menu foods={foods} />
        <div className="py-20 px-3 lg:px-0 lg:max-w-[1240px] mx-auto">
         <p className="text-xl  font-medium">Recommended</p>
           <h3 className="text-4xl mt-1 mb-8 font-bold">Just for you</h3>
-          <RecommendMenu/>
+          <RecommendMenu foods={foods} />
        </div>
     </div>
     );
 };
 
-export default page;
+
+
+export default MenuPage;
