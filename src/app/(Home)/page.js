@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import CustomerReviews from "@/components/CustomerReviews";
 import Discount from "@/components/Discount";
+import Parallex from "@/components/Parallex";
 
 import TopSell from "@/components/TopSell";
 
@@ -14,6 +15,7 @@ const page = () => {
 
       <Discount></Discount>
       <CustomerReviews />
+      <Parallex />
       <TopSell></TopSell>
     </div>
 

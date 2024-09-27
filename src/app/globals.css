@@ -6,3 +6,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.parallex-item{
+    background-image: url('/assets/bg-bread.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
