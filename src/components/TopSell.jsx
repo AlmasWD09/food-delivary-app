@@ -17,7 +17,7 @@ const TopSell = () => {
 
   return (
     <div>
-      <div className="lg:max-w-[1240px] lg:h-[600px] mx-auto my-[100px] ">
+      <div className="container lg:h-[600px] mx-auto  ">
         <div className="lg:flex">
           {/* ----most Left side div---- */}
           <div
@@ -35,13 +35,6 @@ const TopSell = () => {
                 <h3 className="text-white leading-[60px] font-bold text-5xl">
                   Our Top Selling Food
                 </h3>
-                <div className="absolute right-[1px] bottom-[65px]">
-                  <Image
-                    src={rightArrow}
-                    className="w-[235px]"
-                    alt="rightArrow"
-                  />
-                </div>
               </div>
 
               {/* --type sections-- */}

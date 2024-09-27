@@ -8,15 +8,14 @@ import React from "react";
 
 const page = () => {
   return (
-
     <div>
       <Banner />
-
-      <Discount></Discount>
-      <CustomerReviews />
-      <TopSell></TopSell>
+      <div className="py-10 space-y-28">
+        <Discount></Discount>
+        <CustomerReviews />
+        <TopSell></TopSell>
+      </div>
     </div>
-
   );
 };
 
