@@ -280,7 +280,7 @@ const Navbar = () => {
                       <Icon className="text-lg" icon="solar:heart-outline" />
                       <li>Wishlist</li>
                     </Link>
-                    <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4flex items-center w-full">
+                    <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>
                     </button>
