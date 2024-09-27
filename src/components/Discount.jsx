@@ -1,199 +1,473 @@
-import React from "react";
-import Image from "next/image";
-import discount from "../../public/discount.png";
-import restaurant1 from "../../public/restaurant1.jpg";
-import cheeseBurger from "../../public/cheeseBurger.jpg";
-import chickenFry from "../../public/chickenFry.jpg";
-import spicyBurger from "../../public/spicyBurger.jpg";
-import shape1 from "../../public/shape1.png";
-import { FaStar } from "react-icons/fa6";
-import { IoIosStarHalf } from "react-icons/io";
-import {
-  BiSolidSkipNextCircle,
-  BiSolidSkipPreviousCircle,
-} from "react-icons/bi";
+"use client";
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "./styles.css";
+// import required modules
+import { Pagination } from "swiper/modules";
+
+import { CiLocationArrow1 } from "react-icons/ci";
+import { IoRestaurant } from "react-icons/io5";
 
 const Discount = () => {
+  const [hover, setHover] = useState(0);
   return (
-    <div className=" lg:w-[1200px] mx-auto">
-      <div className="flex flex-col justify-center items-center ">
-        {/* Title Part */}
-        <div className="mt-[100px]  ">
-          <Image src={discount} className="w-[250px]" alt="Discount" />
-        </div>
-
-        {/* Carousel Part */}
-        <div className="carousel  w-full mt-[10px] mb-[100px]">
-          <div
-            id="slide1"
-            className="carousel-item  relative w-full justify-center"
-          >
-            <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-6 justify-between">
-              <div
-                id="container"
-                className="flex flex-col justify-center items-center relative h-[550px]"
-              >
-                <div className="w-[280px] h-[350px] bg-[#f9c94fdd] relative ">
-                  <div className="w-[154px] h-[154px] bg-[#f9c94fdd] rounded-full   absolute right-[25%] top-[-20%] flex justify-center items-center">
-                    <Image
-                      src={cheeseBurger}
-                      className="w-[150px] h-[150px] rounded-full"
-                      alt="Discount"
-                    />
-                  </div>
-                  <div className="w-[280px] h-[350px] bg-[#151615dd] z-[100] absolute right-[8px] bottom-[8px]">
-                    <div className="relative">
-                      <h3 className="mt-[38%] text-[18px] text-center font-bold  text-[#f9c94fdd]">
-                        Cheese Burger
-                      </h3>
-                      <p className="text-white font-normal p-[10px] text-[13px] text-center">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Iste fugiat, omnis quis dolorem eveniet
-                        perferendis sed tempore fugit?
-                      </p>
-
-                      <div className="flex justify-center space-x-2 mt-[13px] text-[#f9c94fdd]">
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <IoIosStarHalf />
-                      </div>
-
-                      <div className="absolute right-[-8%]">
-                        <Image
-                          src={shape1}
-                          className="w-[150px] "
-                          alt="shape"
-                        />
-                      </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">
-                        50%{" "}
-                        <span className="text-[10px] font-extralight">
-                          Discount
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
+    <div>
+      <div className="mt-10 container mx-auto">
+        {/* ----background Pattern image && Container---- */}
+        <div
+          className="h-[500px] py-8 px-4 space-y-[50px]"
+          style={{
+            backgroundImage: `url(https://i.ibb.co.com/CVdvL3Q/food-Pattern.jpg)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {/* --- heading section ---   */}
+          <div>
+            <div className="flex flex-col justify-center items-center text-center ">
+              <IoRestaurant className="text-[#68ee5c] text-2xl" />
+              <div className="leading-6 mt-[5px]">
+                <h3 className="font-normal text-[13px] tracking-[.35rem]">
+                  MENU FOR EVERY TASTE
+                </h3>
+                <h3 className="font-bold text-3xl text-[#666666] tracking-[.07rem]">
+                  Choose your meal plan{" "}
+                </h3>
               </div>
-              <div
-                id="container"
-                className="flex flex-col justify-center items-center relative h-[550px]"
-              >
-                <div className="w-[280px] h-[350px] bg-[#f9c94fdd] relative ">
-                  <div className="w-[154px] h-[154px] bg-[#f9c94fdd] rounded-full  z-[110] absolute right-[25%] top-[-20%] flex justify-center items-center">
-                    <Image
-                      src={chickenFry}
-                      className="w-[150px] h-[150px] rounded-full"
-                      alt="Discount"
-                    />
-                  </div>
-                  <div className="w-[280px] h-[350px] bg-[#151615dd] z-[100] absolute right-[8px] bottom-[8px]">
-                    <div className="relative">
-                      <h3 className="mt-[38%] text-[18px] text-center font-bold  text-[#f9c94fdd]">
-                        chicken fries
-                      </h3>
-                      <p className="text-white font-normal p-[10px] text-[13px] text-center">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Iste fugiat, omnis quis dolorem eveniet
-                        perferendis sed tempore fugit?
-                      </p>
-
-                      <div className="flex justify-center space-x-2 mt-[13px] text-[#f9c94fdd]">
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <IoIosStarHalf />
-                      </div>
-
-                      <div className="absolute right-[-8%]">
-                        <Image
-                          src={shape1}
-                          className="w-[150px] "
-                          alt="shape"
-                        />
-                      </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">
-                        30%{" "}
-                        <span className="text-[10px] font-extralight">
-                          Discount
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                id="container"
-                className="flex flex-col justify-center items-center relative h-[550px]"
-              >
-                <div className="w-[280px] h-[350px] bg-[#f9c94fdd] relative ">
-                  <div className="w-[154px] h-[154px] bg-[#f9c94fdd] rounded-full  z-[110] absolute right-[25%] top-[-20%] flex justify-center items-center">
-                    <Image
-                      src={spicyBurger}
-                      className="w-[150px] h-[150px] rounded-full"
-                      alt="Discount"
-                    />
-                  </div>
-                  <div className="w-[280px] h-[350px] bg-[#151615dd] z-[100] absolute right-[8px] bottom-[8px]">
-                    <div className="relative">
-                      <h3 className="mt-[38%] text-[18px] text-center font-bold  text-[#f9c94fdd]">
-                        spicy Burger
-                      </h3>
-                      <p className="text-white font-normal p-[10px] text-[13px] text-center">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Iste fugiat, omnis quis dolorem eveniet
-                        perferendis sed tempore fugit?
-                      </p>
-
-                      <div className="flex justify-center space-x-2 mt-[13px] text-[#f9c94fdd]">
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <IoIosStarHalf />
-                      </div>
-
-                      <div className="absolute right-[-8%]">
-                        <Image
-                          src={shape1}
-                          className="w-[150px] "
-                          alt="shape"
-                        />
-                      </div>
-                      <h3 className="text-white font-bold absolute top-[115%] right-6">
-                        25%{" "}
-                        <span className="text-[10px] font-extralight">
-                          Discount
-                        </span>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-              <a href="#slide2">
-                <BiSolidSkipPreviousCircle className="text-3xl" />
-              </a>
-              <a href="#slide2">
-                <BiSolidSkipNextCircle className="text-3xl" />
-              </a>
             </div>
           </div>
-          {/* <div id="slide2" className="carousel-item relative w-full">
-            <p className="mx-auto">Hello</p>
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-              <a href="#slide1">
-                <BiSolidSkipPreviousCircle className="text-3xl" />
-              </a>
-              <a href="#slide1">
-                <BiSolidSkipNextCircle className="text-3xl" />
-              </a>
+
+          {/* ---slider section--- */}
+          <div>
+            <div className="">
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={10}
+                pagination={{
+                  clickable: true,
+                }}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                }}
+                modules={[Pagination]}
+                className="mySwiper"
+                style={{
+                  padding: "20px",
+                  "--swiper-pagination-bottom": "-2%",
+                  "--swiper-pagination-bullet-width": "80px",
+                  "--swiper-pagination-bullet-height": "2px",
+                  "--swiper-pagination-color": "#d97706",
+                  "--swiper-pagination-bullet-inactive-color": "#9b9b9b",
+                  "--swiper-pagination-bullet-inactive-opacity": "1",
+                  "--swiper-pagination-bullet-size": "16px",
+                  "--swiper-pagination-bullet-horizontal-gap": "6px",
+                }}
+              >
+                <SwiperSlide
+                  style={{
+                    height: "250px",
+                    position: "relative",
+                  }}
+                  className="relative z-10 "
+                >
+                  {/* upper discount part */}
+                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
+                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <sub className="text-sm font-thin">/per</sub>
+                  </div>
+
+                  {/* --card-- */}
+                  <div
+                    onMouseEnter={() => setHover(1)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`flex items-center transition duration-300    ${
+                      hover === 1
+                        ? "bg-[#68ee5c]  -translate-y-4 transition-delay-400"
+                        : "bg-white  transition-transform transform "
+                    }`}
+                  >
+                    {/* card img */}
+                    <div
+                      style={{
+                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
+                    ></div>
+
+                    {/* card details */}
+                    <div className="ml-[24px]">
+                      {/* heading */}
+                      <div className="text-left ">
+                        <h3 className="">Chickhen Curry</h3>
+                        <h3
+                          className={`${
+                            hover === 1 ? "text-[#ffffff]" : "text-[#68ee5c]"
+                          }`}
+                        >
+                          $85<span className="text-sm font-light">only </span>{" "}
+                          <span className="line-through text-[#a5a5a5] text-sm">
+                            $99
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* bullet points */}
+                      <div className="mt-[10px] text-left text-[13px] font-light">
+                        <div>
+                          <ul
+                            style={{
+                              listStyleType: "disc",
+                              listStylePosition: "inside",
+                              margin: "0",
+                              padding: "0",
+                            }}
+                            className={`${
+                              hover === 1
+                                ? "marker:text-white "
+                                : "marker:text-[#d97706]"
+                            }`}
+                          >
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            <li>Lorem ipsum dolor elit.</li>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* button */}
+                      <div className="mt-[10px] text-left text-[14px] font-normal ">
+                        <button className="flex justify-center items-center space-x-2">
+                          <p
+                            className={` ${
+                              hover === 1 ? "text-white text-[14px] " : ""
+                            }`}
+                          >
+                            Details
+                          </p>{" "}
+                          <CiLocationArrow1
+                            className={` ${
+                              hover === 1
+                                ? "text-white text-[14px] rotate-45"
+                                : "text-primary transition-transform duration-300 transform "
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                <SwiperSlide
+                  style={{
+                    height: "250px",
+                    position: "relative",
+                  }}
+                  className="relative z-10 "
+                >
+                  {/* upper discount part */}
+                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
+                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <sub className="text-sm font-thin">/per</sub>
+                  </div>
+
+                  {/* --card-- */}
+                  <div
+                    onMouseEnter={() => setHover(2)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`flex items-center transition duration-300   ${
+                      hover === 2
+                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
+                        : "bg-white transition-transform transform "
+                    }`}
+                  >
+                    {/* card img */}
+                    <div
+                      style={{
+                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
+                    ></div>
+
+                    {/* card details */}
+                    <div className="ml-[24px]">
+                      {/* heading */}
+                      <div className="text-left ">
+                        <h3 className="">Chickhen Curry</h3>
+                        <h3
+                          className={`${
+                            hover === 2 ? "text-[#ffffff]" : "text-[#68ee5c]"
+                          }`}
+                        >
+                          $85<span className="text-sm font-light">only </span>{" "}
+                          <span className="line-through text-[#a5a5a5] text-sm">
+                            $99
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* bullet points */}
+                      <div className="mt-[10px] text-left text-[13px] font-light">
+                        <div>
+                          <ul
+                            style={{
+                              listStyleType: "disc",
+                              listStylePosition: "inside",
+                              margin: "0",
+                              padding: "0",
+                            }}
+                            className={`${
+                              hover === 2
+                                ? "marker:text-white "
+                                : "marker:text-[#d97706]"
+                            }`}
+                          >
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            <li>Lorem ipsum dolor elit.</li>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* button */}
+                      <div className="mt-[10px] text-left text-[14px] font-normal ">
+                        <button className="flex justify-center items-center space-x-2">
+                          <p
+                            className={` ${
+                              hover === 2 ? "text-white text-[14px] " : ""
+                            }`}
+                          >
+                            Details
+                          </p>{" "}
+                          <CiLocationArrow1
+                            className={` ${
+                              hover === 2
+                                ? "text-white text-[14px] rotate-45"
+                                : "text-primary transition-transform duration-300 transform "
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                <SwiperSlide
+                  style={{
+                    height: "250px",
+                    position: "relative",
+                  }}
+                  className="relative z-10 "
+                >
+                  {/* upper discount part */}
+                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
+                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <sub className="text-sm font-thin">/per</sub>
+                  </div>
+
+                  {/* --card-- */}
+                  <div
+                    onMouseEnter={() => setHover(3)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`flex items-center transition duration-300   ${
+                      hover === 3
+                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
+                        : "bg-white  transition-transform transform "
+                    }`}
+                  >
+                    {/* card img */}
+                    <div
+                      style={{
+                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
+                    ></div>
+
+                    {/* card details */}
+                    <div className="ml-[24px]">
+                      {/* heading */}
+                      <div className="text-left ">
+                        <h3 className="">Chickhen Curry</h3>
+                        <h3
+                          className={`${
+                            hover === 3 ? "text-[#ffffff]" : "text-[#68ee5c]"
+                          }`}
+                        >
+                          $85<span className="text-sm font-light">only </span>{" "}
+                          <span className="line-through text-[#a5a5a5] text-sm">
+                            $99
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* bullet points */}
+                      <div className="mt-[10px] text-left text-[13px] font-light">
+                        <div>
+                          <ul
+                            style={{
+                              listStyleType: "disc",
+                              listStylePosition: "inside",
+                              margin: "0",
+                              padding: "0",
+                            }}
+                            className={`${
+                              hover === 3
+                                ? "marker:text-white "
+                                : "marker:text-[#d97706]"
+                            }`}
+                          >
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            <li>Lorem ipsum dolor elit.</li>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* button */}
+                      <div className="mt-[10px] text-left text-[14px] font-normal ">
+                        <button className="flex justify-center items-center space-x-2">
+                          <p
+                            className={` ${
+                              hover === 3 ? "text-white text-[14px] " : ""
+                            }`}
+                          >
+                            Details
+                          </p>{" "}
+                          <CiLocationArrow1
+                            className={` ${
+                              hover === 3
+                                ? "text-white text-[14px] rotate-45"
+                                : "text-primary transition-transform duration-300 transform "
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                <SwiperSlide
+                  style={{
+                    height: "250px",
+                    position: "relative",
+                  }}
+                  className="relative z-10 "
+                >
+                  {/* upper discount part */}
+                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
+                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <sub className="text-sm font-thin">/per</sub>
+                  </div>
+
+                  {/* --card-- */}
+                  <div
+                    onMouseEnter={() => setHover(4)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`flex items-center transition duration-300   ${
+                      hover === 4
+                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
+                        : "bg-white  transition-transform transform "
+                    }`}
+                  >
+                    {/* card img */}
+                    <div
+                      style={{
+                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
+                    ></div>
+
+                    {/* card details */}
+                    <div className="ml-[24px]">
+                      {/* heading */}
+                      <div className="text-left ">
+                        <h3 className="">Chickhen Curry</h3>
+                        <h3
+                          className={`${
+                            hover === 4 ? "text-[#ffffff]" : "text-[#68ee5c]"
+                          }`}
+                        >
+                          $85<span className="text-sm font-light">only </span>{" "}
+                          <span className="line-through text-[#a5a5a5] text-sm">
+                            $99
+                          </span>
+                        </h3>
+                      </div>
+
+                      {/* bullet points */}
+                      <div className="mt-[10px] text-left text-[13px] font-light">
+                        <div>
+                          <ul
+                            style={{
+                              listStyleType: "disc",
+                              listStylePosition: "inside",
+                              margin: "0",
+                              padding: "0",
+                            }}
+                            className={`${
+                              hover === 4
+                                ? "marker:text-white "
+                                : "marker:text-[#d97706]"
+                            }`}
+                          >
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            <li>Lorem ipsum dolor elit.</li>
+                            <li>Lorem ipsum dolor sit amet elit.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* button */}
+                      <div className="mt-[10px] text-left text-[14px] font-normal ">
+                        <button className="flex justify-center items-center space-x-2">
+                          <p
+                            className={` ${
+                              hover === 4 ? "text-white text-[14px] " : ""
+                            }`}
+                          >
+                            Details
+                          </p>{" "}
+                          <CiLocationArrow1
+                            className={` ${
+                              hover === 4
+                                ? "text-white text-[14px] rotate-45"
+                                : "text-primary transition-transform duration-300 transform "
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
