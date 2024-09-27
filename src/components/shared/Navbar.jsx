@@ -184,7 +184,7 @@ const Navbar = () => {
               </Link>
 
               <h2>
-                don't have an account ?{" "}
+                don&apos;t have an account ?{" "}
                 <Link onClick={() => setMenu(false)} href="/signup">
                   <span className="font-semibold underline">create now</span>
                 </Link>

@@ -3,6 +3,7 @@ import navLinks from "./DashboardLinks";
 import logo from "../../../../public/assets/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 const DashboardNav = () => {
   const currentUser = "admin";
 
@@ -17,13 +18,14 @@ const DashboardNav = () => {
 
         <ul className="space-y-4">
           {navRule.map((item) => (
-            <div
+            <Link
+              href={item.link}
               key={item.path}
               className=" hover:bg-secondaryGray hover:text-primary rounded-md  flex items-center gap-3 px-2 py-2  "
             >
               <span className="text-2xl">{item.icons}</span>
               <li>{item.title}</li>
-            </div>
+            </Link>
           ))}
         </ul>
       </div>

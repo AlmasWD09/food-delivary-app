@@ -4,37 +4,40 @@ const navLinks = {
   admin: [
     {
       title: "Overview",
-      link: "/admin/overview",
+      link: "admin-overview",
       icons: <Icon icon="charm:home" />,
     },
     {
       title: "Users",
+      link: "users",
       icons: <Icon icon="mdi:user" />,
     },
     {
-      title: "Orders",
-      icons: <Icon icon="lets-icons:order" />,
+      title: "Reports",
+      link: "admin/reports",
+      icons: <Icon icon="iconoir:reports" />,
     },
     {
-      title: "Restaurants",
-      link: "/admin/restaurants/manage",
-      icons: <Icon icon="material-symbols:restaurant" />,
-    },
-    {
-      title: "Menu",
-      link: "/admin/menu/manage",
-      icons: <Icon icon="bx:food-menu" />,
+      title: "All Restaurants",
+      link: "restaurants",
+      icons: <Icon icon="solar:shop-linear" />,
     },
 
     {
-      title: "Reports",
-      link: "/admin/reports",
-      icons: <Icon icon="iconoir:reports" />,
+      title: "New Listing",
+      link: "orders",
+      icons: <Icon icon="mdi:shop-plus" />,
+    },
+
+    {
+      title: "Listing Requests",
+      link: "admin/reports",
+      icons: <Icon icon="hugeicons:message-user-01" />,
     },
 
     {
       title: "Support Inbox",
-      link: "/admin/support",
+      link: "admin/support",
       icons: <Icon icon="ic:outline-contact-support" />,
     },
   ],

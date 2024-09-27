@@ -14,15 +14,18 @@ const TopBar = () => {
 
   return (
     <div className="flex items-center justify-between ">
-      <form action="" className=" flex items-center  flex-1 ">
+      <form action="" className=" flex items-center  flex-1 relative ">
         <input
           type="text"
-          placeholder="Search Here"
-          className="px-6 py-3 bg-base-100 w-full outline-none "
+          placeholder="Search food or restaurant"
+          className="pl-16 py-3 bg-base-100 w-full outline-none rounded-full "
         />
-        <button className="px-6 py-3 bg-green-600 text-white" type="submit ">
+        <button
+          className="absolute px-6 py-3  -left-2 text-gray-500"
+          type="submit "
+        >
           {" "}
-          <Icon className=" text-2xl" icon="uil:search" />
+          <Icon className=" text-3xl" icon="uil:search" />
         </button>
       </form>
 
