@@ -1,4 +1,6 @@
+import DashboardNav from "@/components/shared/Dashboard/DashboardNav";
 import "../../globals.css";
+import TopBar from "@/components/shared/Dashboard/TopBar";
 
 export const metadata = {
   title: "Delish -  Your Favorite Flavors, Delivered",
@@ -9,7 +11,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="h-screen">{children}</div>
+        <div className="flex items-center h-screen">
+          <div className="w-fit  h-full font-urbanist font-bold p-10 ">
+            <DashboardNav />
+          </div>
+          <div className="h-screen bg-gray-100 flex-1  font-poppins px-10 py-4 overflow-y-auto">
+            <TopBar />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

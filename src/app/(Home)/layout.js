@@ -1,6 +1,10 @@
+
 import Navbar from "@/components/shared/Navbar";
 import "../globals.css"
 import Footer from "@/components/shared/Footer";
+
+
+
 
 
 export const metadata = {
