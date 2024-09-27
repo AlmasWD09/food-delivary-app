@@ -109,7 +109,11 @@ const Navbar = () => {
 
             <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 ">
               <div className="h-4 w-full"></div>
-              <div className="w-full  bg-secondaryGray text-nowrap">
+              <div
+                className={` ${
+                  currentUser ? "w-full" : "p-10"
+                }  bg-secondaryGray text-nowrap`}
+              >
                 {currentUser ? (
                   <>
                     <h1 className="uppercase font-bold text-xl text-center p-6">
