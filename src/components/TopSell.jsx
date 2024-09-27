@@ -11,14 +11,13 @@ import { MdEmojiFoodBeverage } from "react-icons/md";
 import { IoIceCream } from "react-icons/io5";
 import { GiTropicalFish } from "react-icons/gi";
 
-
 const TopSell = () => {
   const [isActive, setActive] = useState(1);
   const [pageActive, setpageActive] = useState(1);
 
   return (
     <div>
-      <div className="container lg:h-[600px] mx-auto my-[100px] ">
+      <div className="container lg:h-[600px] mx-auto  ">
         <div className="lg:flex">
           {/* ----most Left side div---- */}
           <div
@@ -36,7 +35,6 @@ const TopSell = () => {
                 <h3 className="text-white leading-[60px] font-bold text-5xl">
                   Our Top Selling Food
                 </h3>
-                
               </div>
 
               {/* --type sections-- */}

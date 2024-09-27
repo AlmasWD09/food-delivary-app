@@ -9,6 +9,14 @@ const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
 
+  // current user details make sure replace it with original user
+  const currentUser = {
+    name: "snehashis roy",
+    role: "admin",
+    image:
+      "https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg",
+  };
+
   console.log(getMenu);
   const navLinks = [
     {
@@ -19,10 +27,7 @@ const Navbar = () => {
       title: "Menu",
       path: "/menu",
     },
-    {
-      title: "Orders",
-      path: "/orders",
-    },
+
     {
       title: "Restaurants",
       path: "/restaurants",
@@ -30,6 +35,10 @@ const Navbar = () => {
     {
       title: "Profile",
       path: "/profile",
+    },
+    {
+      title: "Dashboard",
+      path: "/dashboard",
     },
   ];
 
@@ -77,41 +86,101 @@ const Navbar = () => {
           {/* button start  */}
 
           <div className="group relative hidden lg:flex">
-            <button className="flex flex-col items-center gap-1 group-hover:scale-110 z-20 ">
-              <Icon className="text-2xl" icon="ph:user" />
-              <h2>Account</h2>
+            {currentUser ? (
+              <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
+                <Image
+                  className="object-cover h-full w-full"
+                  src={currentUser.image}
+                  alt={currentUser.name}
+                  height={1000}
+                  width={1000}
+                />
+              </div>
+            ) : (
+              <button className="flex flex-col items-center gap-1 group-hover:scale-110 z-20 ">
+                <Icon className="text-2xl" icon="ph:user" />
+                <h2>Account</h2>
 
-              <span className="h-0.5 w-full absolute -bottom-1 left-0 bg-black transform scale-x-0 group-hover:scale-x-100    transition-all duration-300 ease-in-out "></span>
-            </button>
+                <span className="h-0.5 w-full absolute -bottom-1 left-0 bg-black transform scale-x-0 group-hover:scale-x-100    transition-all duration-300 ease-in-out "></span>
+              </button>
+            )}
+
             {/* account hover area start */}
 
-            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-14 ">
-              <div className="w-full p-8 bg-secondaryGray text-nowrap">
-                <h1 className="uppercase font-bold text-xl text-center">
-                  my account
-                </h1>
-                <h3 className="text-center">login to access your account</h3>
+            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 ">
+              <div className="h-4 w-full"></div>
+              <div
+                className={` ${
+                  currentUser ? "w-full" : "p-10"
+                }  bg-secondaryGray text-nowrap`}
+              >
+                {currentUser ? (
+                  <>
+                    <h1 className="uppercase font-bold text-xl text-center p-6">
+                      {currentUser.name}
+                    </h1>
 
-                <div className="flex items-center gap-4 justify-center pt-4">
-                  <Link href="/signup">
-                    <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
-                      Sign Up
-                    </button>
-                  </Link>
+                    <div>
+                      <ul className=" font-semibold  ">
+                        <Link
+                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary w-full "
+                          href="/profile"
+                        >
+                          <Icon icon="gg:profile" />
+                          <li>Profile</li>
+                        </Link>
+                        <Link
+                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                          href="/orders"
+                        >
+                          <Icon icon="solar:box-broken" />
+                          <li>Orders</li>
+                        </Link>
+                        <Link
+                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4  border-b-2 border-secondary w-full"
+                          href="/whishlist"
+                        >
+                          <Icon icon="solar:heart-outline" />
+                          <li>Wishlist</li>
+                        </Link>
+                        <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
+                          <Icon icon="hugeicons:logout-04" />
+                          <span>Logout</span>
+                        </button>
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h1 className="uppercase font-bold text-xl text-center">
+                      my account
+                    </h1>
+                    <h3 className="text-center">
+                      login to access your account
+                    </h3>
 
-                  <Link href="/signin">
-                    <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
-                      Sign In
-                    </button>
-                  </Link>
-                </div>
+                    <div className="flex items-center gap-4 justify-center pt-4">
+                      <Link href="/signup">
+                        <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
+                          Sign Up
+                        </button>
+                      </Link>
+
+                      <Link href="/signin">
+                        <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
+                          Sign In
+                        </button>
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
 
           {/* account button end  */}
 
-          <button className=" hidden lg:flex flex-col items-center   group relative">
+          <button className=" hidden lg:flex flex-col items-center   group relative z-20">
             <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
             <p>Cart</p>
 
@@ -121,7 +190,7 @@ const Navbar = () => {
           {/* cart button end  */}
           <button
             onClick={() => setMenu(false)}
-            className="hidden lg:flex flex-col items-center  group relative"
+            className="hidden lg:flex flex-col items-center  group relative z-20"
           >
             <Icon className="text-2xl" icon="ph:heart" />
             <p>WishList</p>
@@ -137,7 +206,7 @@ const Navbar = () => {
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${
           getMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -161,31 +230,97 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <div className="pt-10">
-            <h1 className="capitalize font-semibold text-2xl text-center">
-              Welcome to Feast Express
-            </h1>
-            <h3 className="capitalize  text-md text-center">
-              login to access your accounts
-            </h3>
+          <hr />
+          <div
+            className={` ${
+              currentUser
+                ? " border-2  border-primary w-fit mx-auto mt-10"
+                : "w-full"
+            }`}
+          >
+            {currentUser ? (
+              <>
+                <div className="flex items-center gap-2 p-4 ">
+                  <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
+                    <Image
+                      className="object-cover h-full w-full"
+                      src={currentUser.image}
+                      alt={currentUser.name}
+                      height={1000}
+                      width={1000}
+                    />
+                  </div>
 
-            <div className="flex flex-col items-center gap-4 justify-center pt-4">
-              <Link href="/signin" className="w-full">
-                <button
-                  onClick={() => setMenu(false)}
-                  className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out"
-                >
-                  Sign In
-                </button>
-              </Link>
+                  <div>
+                    <h1 className="text-xl capitalize font-bold">
+                      {currentUser.name}
+                    </h1>
+                    <h2 className="font-semibold capitalize">
+                      {currentUser.role}
+                    </h2>
+                  </div>
+                </div>
 
-              <h2>
-                don&apos;t have an account ?{" "}
-                <Link onClick={() => setMenu(false)} href="/signup">
-                  <span className="font-semibold underline">create now</span>
-                </Link>
-              </h2>
-            </div>
+                <div>
+                  <ul className=" font-semibold  text-lg">
+                    <Link
+                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full "
+                      href="/profile"
+                    >
+                      <Icon className="text-lg" icon="gg:profile" />
+                      <li>Profile</li>
+                    </Link>
+                    <Link
+                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      href="/orders"
+                    >
+                      <Icon className="text-lg" icon="solar:box-broken" />
+                      <li>Orders</li>
+                    </Link>
+                    <Link
+                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      href="/whishlist"
+                    >
+                      <Icon className="text-lg" icon="solar:heart-outline" />
+                      <li>Wishlist</li>
+                    </Link>
+                    <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
+                      <Icon className="text-lg" icon="hugeicons:logout-04" />
+                      <span>Logout</span>
+                    </button>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <div className="pt-10">
+                <h1 className="capitalize font-semibold text-2xl text-center">
+                  Welcome to Feast Express
+                </h1>
+                <h3 className="capitalize  text-md text-center">
+                  login to access your accounts
+                </h3>
+
+                <div className="flex flex-col items-center gap-4 justify-center pt-4">
+                  <Link href="/signin" className="w-full">
+                    <button
+                      onClick={() => setMenu(false)}
+                      className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out"
+                    >
+                      Sign In
+                    </button>
+                  </Link>
+
+                  <h2>
+                    don&apos;t have an account ?{" "}
+                    <Link onClick={() => setMenu(false)} href="/signup">
+                      <span className="font-semibold underline">
+                        create now
+                      </span>
+                    </Link>
+                  </h2>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
