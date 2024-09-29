@@ -12,12 +12,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className="flex items-center h-screen">
-          <div className="w-fit  h-full font-urbanist font-bold p-10 ">
+          <div className="w-fit  h-full font-Manrope font-bold px-10  py-4">
             <DashboardNav />
           </div>
-          <div className="h-screen bg-gray-100 flex-1  font-poppins px-10 py-4 overflow-y-auto">
+          <div className="h-screen  flex-1  font-Manrope  overflow-y-auto  ">
             <TopBar />
-            {children}
+            <div className="p-10 bg-gray-100">{children}</div>
           </div>
         </div>
       </body>

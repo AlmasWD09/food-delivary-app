@@ -1,9 +1,12 @@
+"use client";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const TopBar = () => {
+  const [notiOn, setNoti] = useState(false);
+
   // current user demo
   const currentUser = {
     name: "Snehashis Roy",
@@ -13,53 +16,98 @@ const TopBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between ">
-      <form action="" className=" flex items-center  flex-1 relative ">
+    <div className="w-full flex items-center justify-between sticky top-0 bg-base-100 px-10 py-6">
+      {/* welcome section  */}
+      <div>
+        <p className="capitalize font-extrabold text-2xl">Welcome back</p>
+        <p className="capitalize text-sm font-semibold text-text ">
+          your admin dashboard overview today
+        </p>
+      </div>
+
+      {/* search section  */}
+      <form
+        action=""
+        className=" flex items-center w-full  max-w-2xl relative    "
+      >
         <input
           type="text"
           placeholder="Search food or restaurant"
-          className="pl-16 py-3 bg-base-100 w-full outline-none rounded-full "
+          className="pl-16 py-3 w-full outline-none rounded-2xl  bg-gray-100  "
         />
         <button
           className="absolute px-6 py-3  -left-2 text-gray-500"
-          type="submit "
+          type="submit"
         >
           {" "}
           <Icon className=" text-3xl" icon="uil:search" />
         </button>
       </form>
 
-      <div className=" flex items-center gap-6 px-20 border-r-2 border-gray-400  ">
-        <button className="p-2 rounded-md bg-sky-200 relative ">
+      {/* notification icon section  */}
+      <div className=" flex items-center justify-center gap-6 px-20 relative  ">
+        <button onClick={() => setNoti(!notiOn)} className="p-2 relative z-10">
           <Icon
-            className=" text-3xl text-sky-500"
+            className={` text-3xl ${
+              notiOn ? "text-blue-600" : "text-orange-500"
+            } `}
             icon="mingcute:notification-line"
           />
 
-          <span className="absolute -top-3  right-0 p-2  ">
-            <span className="animate-ping h-full w-full rounded-full bg-sky-600 absolute "></span>
-            <span className=" h-full w-full rounded-full bg-sky-600 absolute z-10  "></span>
+          <span className="absolute top-0  right-0 p-1  ">
+            <span
+              className={`animate-ping h-full w-full rounded-full ${
+                notiOn ? "bg-blue-600" : "bg-orange-500"
+              }  absolute `}
+            ></span>
+            <span
+              className={` h-full w-full rounded-full  ${
+                notiOn ? "bg-blue-600" : "bg-orange-500"
+              }  absolute z-10  `}
+            ></span>
           </span>
         </button>
 
-        <Link href="/dashboard/chats">
-          <button className="p-2 rounded-md bg-green-200">
-            <Icon
-              className=" text-3xl text-green-600"
-              icon="mingcute:message-4-line"
-            />
-          </button>
-        </Link>
-        <Link href="/dashboard/settings">
-          <button className="p-2 rounded-md bg-red-100">
-            <Icon className=" text-3xl text-red-600" icon="uil:setting" />
-          </button>
-        </Link>
+        <div
+          className={` ${
+            notiOn ? "visible" : "invisible"
+          }   bg-white w-80  absolute top-24  shadow-md group border-2 border-blue-600`}
+        >
+          <span className="absolute -top-6 text-blue-600 text-center  -z-10 flex justify-center w-full ">
+            <Icon className="text-3xl " icon="tabler:triangle-filled" />
+          </span>
+          <h1 className="py-2 border-b-2 h-fit w-full text-center font-bold">
+            Notification
+          </h1>
+
+          <ol className="p-6 list-decimal list-inside">
+            <li className="flex items-center justify-between gap-4 w-full h-full">
+              <div className="w-8 h-8 rounded-full  overflow-hidden ">
+                <Image
+                  src={currentUser.image}
+                  height={1000}
+                  width={1000}
+                  alt="snehashisroy"
+                />
+              </div>
+              <p className="flex-1 text-sm">
+                Snehashis roy sent you a listing request
+              </p>
+              <p className="px-2 py-1 rounded-lg bg-slate-200 cursor-pointer hover:bg-green-300 font-semibold">
+                view
+              </p>
+            </li>
+          </ol>
+
+          <p className="py-2 text-sm bg-blue-600 text-center font-bold text-white cursor-pointer hover:underline">
+            show all messages{" "}
+          </p>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2 pl-10">
-        <p>Hi, {currentUser.name}</p>
-        <span className="w-10 h-10  rounded-full overflow-hidden">
+      {/* profile section  */}
+      <div className="flex items-center gap-3 pl-10">
+        <span className="w-12 h-12  rounded-full overflow-hidden">
           <Image
             src={currentUser.image}
             alt={currentUser.name}
@@ -67,6 +115,13 @@ const TopBar = () => {
             width={500}
             className="object-cover w-full h-full"
           />
+        </span>
+        <span>
+          <p className="text-md font-bold">{currentUser.name}</p>
+          <p className="text-sm font-bold text-text">{currentUser.role}</p>
+        </span>
+        <span>
+          <Icon className="text-xl" icon="iconamoon:arrow-down-2-light" />
         </span>
       </div>
     </div>
