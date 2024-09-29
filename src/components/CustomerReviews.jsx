@@ -9,14 +9,14 @@ import { FaStar } from "react-icons/fa";
 
 const CustomerReviews = () => {
     return (
-        <div className='bg-no-repeat bg-cover bg-blend-darken'  style={{
+        <div className='relative bg-no-repeat bg-cover bg-blend-darken'  style={{
             backgroundImage: "url(https://i.ibb.co.com/H4T28jw/360-F-219949741-f-Yw-RBdw-SW2-ZRn9-PLZ6-Dv-Djn1jw-RIx8-YS.jpg)",
           }}>
-            
+           <div className="absolute inset-0 bg-gradient-to-r from-yellow-800 to-slate-800 opacity-80"></div>
         <div className="px-2 lg:px-0 lg:max-w-[1240px] mx-auto dark:bg-gray-900">
             <div className="container  py-10 mx-auto">
                 <div className="my-6 text-white md:flex md:items-center md:justify-between">
-                    <div className='flex flex-col justify-center text-center'>
+                    <div className='flex z-40 flex-col justify-center text-center'>
                         <p className='font-semibold my-3'>Testimonials</p>
                         <h1 className="text-2xl font-semibold  capitalize lg:text-3xl dark:text-white">
                             What our clients are saying
