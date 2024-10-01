@@ -16,9 +16,9 @@ const TopBar = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between sticky top-0 bg-base-100 px-10 py-6">
+    <div className="w-full flex items-center justify-between  bg-base-100 lg:px-10 py-6">
       {/* welcome section  */}
-      <div>
+      <div className="hidden lg:flex lg:flex-col">
         <p className="capitalize font-extrabold text-2xl">Welcome back</p>
         <p className="capitalize text-sm font-semibold text-text ">
           your admin dashboard overview today
@@ -45,7 +45,7 @@ const TopBar = () => {
       </form>
 
       {/* notification icon section  */}
-      <div className=" flex items-center justify-center gap-6 px-20 relative  ">
+      <div className=" flex items-center justify-center gap-6 lg:px-20 relative z-20  ">
         <button onClick={() => setNoti(!notiOn)} className="p-2 relative z-10">
           <Icon
             className={` text-3xl ${
@@ -106,7 +106,7 @@ const TopBar = () => {
       </div>
 
       {/* profile section  */}
-      <div className="flex items-center gap-3 pl-10">
+      <div className="flex items-center gap-2 lg:pl-10">
         <span className="w-12 h-12  rounded-full overflow-hidden">
           <Image
             src={currentUser.image}
@@ -119,9 +119,6 @@ const TopBar = () => {
         <span>
           <p className="text-md font-bold">{currentUser.name}</p>
           <p className="text-sm font-bold text-text">{currentUser.role}</p>
-        </span>
-        <span>
-          <Icon className="text-xl" icon="iconamoon:arrow-down-2-light" />
         </span>
       </div>
     </div>
