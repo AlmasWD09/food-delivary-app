@@ -41,5 +41,32 @@ const navLinks = {
       icons: <Icon icon="ic:outline-contact-support" />,
     },
   ],
+  restaurants: [
+    {
+      title: "Overview",
+      link: "overview",
+      icons: <Icon icon="charm:home" />,
+    },
+    {
+      title: "Orders",
+      link: "orders",
+      icons: <Icon icon="material-symbols:orders" />,
+    },
+    {
+      title: "Menu",
+      link: "admin-overview",
+      icons: <Icon icon="hugeicons:menu-restaurant" />,
+    },
+    {
+      title: "Reviews",
+      link: "admin-overview",
+      icons: <Icon icon="carbon:review" />,
+    },
+    {
+      title: "Payments",
+      link: "admin-overview",
+      icons: <Icon icon="la:money-bill-wave" />,
+    },
+  ],
 };
 export default navLinks;

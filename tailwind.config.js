@@ -29,12 +29,15 @@ module.exports = {
         primaryGray: "#fffbeb", // amber-50
         secondary: "#fde68a", // amber-200
         secondaryGray: "#fef3c7", // amber-100
+        redish: "#ff0055", // redandpink
+        text: "#9B9B93", // lightgray
       },
     },
     fontFamily: {
       urbanist: ["Urbanist"],
       kanit: ["Kanit"],
       poppins: ["Poppins"],
+      Manrope: ["Manrope"],
     },
   },
   plugins: [require("daisyui")],
