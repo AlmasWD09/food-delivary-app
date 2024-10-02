@@ -1,6 +1,5 @@
 "use client";
 import { Icon } from "@iconify/react";
-import { data } from "autoprefixer";
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import DatePicker from "react-datepicker";
