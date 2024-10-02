@@ -5,7 +5,9 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-const overviewPage = () => {
+const OverviewPage = () => {
+  const [startDate, setStartDate] = useState(new Date());
+
   const colors = [
     "#FF4560",
     "#008FFB",
@@ -82,7 +84,6 @@ const overviewPage = () => {
     },
   };
 
-  const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="space-y-5 ">
       {/* stats icons with data  */}
@@ -193,7 +194,7 @@ const overviewPage = () => {
 
           <div className="flex items-center justify-between gap-10">
             <div>
-              <h1 className="font-extrabold">Total Orders</h1>
+              <h1 className="font-extrabold">Total Review</h1>
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">5.2%</span>
@@ -248,4 +249,4 @@ const overviewPage = () => {
   );
 };
 
-export default overviewPage;
+export default OverviewPage;
