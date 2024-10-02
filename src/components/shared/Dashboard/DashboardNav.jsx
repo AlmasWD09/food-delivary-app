@@ -29,8 +29,8 @@ const DashboardNav = () => {
       </div>
 
       <div
-        className={`  bg-white lg:static  flex flex-col items-start justify-between w-full h-screen lg:p-10  px-8 py-36   transition-all lg:translate-x-0 ${
-          getMenu ? "translate-x-0" : "-translate-x-full"
+        className={`  bg-white lg:static absolute lg:h-screen flex flex-col items-start justify-between w-full  lg:p-10  px-8 py-36   transition-all lg:translate-x-0 ${
+          getMenu ? "translate-x-0 h-screen" : "-translate-x-full"
         }  `}
       >
         <div className="lg:flex-grow w-full lg:h-full ">

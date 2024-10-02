@@ -1,5 +1,6 @@
 "use client";
 import { Icon } from "@iconify/react";
+import { data } from "autoprefixer";
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import DatePicker from "react-datepicker";
@@ -16,7 +17,7 @@ const overviewPage = () => {
     "#FFB6C1",
   ];
 
-  //   revenuew chart data
+  //   revenue chart data
   let options = {
     series: [
       {
@@ -24,14 +25,10 @@ const overviewPage = () => {
       },
     ],
 
-    chart: {
-      height: 350,
-      type: "bar",
-    },
     colors: colors,
     plotOptions: {
       bar: {
-        columnWidth: "40%",
+        columnWidth: "70%",
         distributed: true,
       },
     },
@@ -41,6 +38,7 @@ const overviewPage = () => {
     legend: {
       show: false,
     },
+
     xaxis: {
       categories: [
         "Jan",
@@ -56,13 +54,6 @@ const overviewPage = () => {
         "Nov",
         "Dec",
       ],
-
-      labels: {
-        style: {
-          colors: colors,
-          fontSize: "12px",
-        },
-      },
     },
   };
 
@@ -89,18 +80,13 @@ const overviewPage = () => {
     chartOptions: {
       labels: ["Apple", "Mango", "Orange", "Watermelon"],
     },
-    options: {
-      chart: {
-        type: "donut",
-      },
-    },
   };
 
   const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="space-y-5 ">
       {/* stats icons with data  */}
-      <div className="flex items-center justify-between">
+      <div className=" flex flex-col lg:flex-row items-center lg:justify-between gap-6  ">
         {/* card 1 stats */}
         <div className="flex flex-col  gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-6">
@@ -108,7 +94,7 @@ const overviewPage = () => {
               <Icon icon="mdi:chart-line" />
             </span>
             <h1 className="text-4xl flex items-center gap-2">
-              ₹<span className="font-semibold">85426</span>
+              $<span className="font-semibold">85426</span>
             </h1>
           </div>
 
@@ -222,28 +208,30 @@ const overviewPage = () => {
         </div>
       </div>
 
-      <div className="flex items-center h-full  gap-10">
-        <div className="p-5 shadow-md w-fit bg-white rounded-xl ">
+      {/* chart area  */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between lg:h-full gap-6   ">
+        <div className="p-5 shadow-md  bg-white rounded-xl  w-full ">
           <div className="space-y-3">
             <h1 className="text-2xl font-extrabold">Revenue</h1>
             <DatePicker
               showYearPicker
               dateFormat="yyyy"
               selected={startDate}
-              className="p-2 outline-none rounded-md"
+              className="p-2 outline-none rounded-md bg-slate-100 w-fit"
               onChange={(date) => setStartDate(date)}
             />
           </div>
-
-          <Chart
-            options={options}
-            series={options.series}
-            type="bar"
-            width={800}
-          />
+          <div>
+            <Chart
+              options={options}
+              series={options.series}
+              type="bar"
+              width="100%"
+            />
+          </div>
         </div>
 
-        <div className="p-5 w-fit bg-white full  rounded-xl  shadow-md  ">
+        <div className="p-5  bg-white full  rounded-xl  shadow-md  w-full">
           <div className="space-y-3">
             <h1 className="text-2xl font-extrabold">Top Selling</h1>
           </div>
@@ -251,7 +239,8 @@ const overviewPage = () => {
             options={donutOption}
             series={donutOption.series}
             type="donut"
-            width={600}
+            height="500"
+            width="100%"
           />
         </div>
       </div>
