@@ -193,7 +193,7 @@ const overviewPage = () => {
 
           <div className="flex items-center justify-between gap-10">
             <div>
-              <h1 className="font-extrabold">Total Orders</h1>
+              <h1 className="font-extrabold">Total Review</h1>
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">5.2%</span>
