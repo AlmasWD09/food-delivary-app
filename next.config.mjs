@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  
   images: {
-    domains: ["images.unsplash.com", "i.ibb.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+        port: "",
+        pathname: "**",
+      },
+    ],
+  },
+  redirects: async () => {
+    return [
+      {
+        source: "/dashboard",
+        destination: "/dashboard/overview",
+        permanent: true,
+      },
+    ];
   },
 };
 

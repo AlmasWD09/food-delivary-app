@@ -1,18 +1,26 @@
 "use client"
 import Menu from '@/components/Menu';
 import RecommendMenu from '@/components/RecommendMenu';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
 const MenuPage = () => {
      const [foods,setFoods] = useState([])
-
+   
      useEffect(()=>{
-       fetch("./menu.json")
-       .then(res => res.json())
-       .then(data => setFoods(data))
+      try{
+        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
+        .then(response => {
+          setFoods(response.data)
+        })
+      }
+      catch(error){
+        console.log(error.message)
+      }
      },[])
-  
+
+    
     return (
         <div>
         <div
