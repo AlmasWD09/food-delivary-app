@@ -11,10 +11,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="sticky z-[999] top-0 ">
+      <div className="sticky z-[999] top-0 ">
           <Navbar />
         </div>
-
+        
+     
         {/* don't remove height  */}
         <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
           {children}
