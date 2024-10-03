@@ -25,9 +25,7 @@ const NavCartList = () => {
         fetchItems();
     }, []);
 
-    if (loading) {
-        return <li>Loading...</li>; 
-    }
+   
 
     return (
         <>
