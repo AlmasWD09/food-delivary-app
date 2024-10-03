@@ -80,7 +80,7 @@ const MenuDetails = ({params}) => {
         <div className="lg:max-w-[1240px] mt-10  md:mt-14  px-3 lg:px-0  mx-auto">
            <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 my-16 lg:my-20">
            <div className="lg:col-span-1">
-                <img src={singleData?.image} className="lg:max-h-[400px]" alt="" />
+                <Image width={400} height={400} src={singleData?.image} className="lg:max-h-[400px]" alt="" />
             </div>
             <div className="lg:col-span-1">
                 <h3 className="text-4xl font-bold">{singleData?.title}</h3>
@@ -120,7 +120,7 @@ const MenuDetails = ({params}) => {
                     <div>
                           <div className="lg:w-4/5 mb-5 rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6 bg-base-300">
                             <div>
-                                <img className="md:w-32 rounded-xl" src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg" alt="" />
+                                <Image width={128} height={120} className="md:w-32 rounded-xl" src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg" alt="" />
                             </div>
                             <div>
                                 <h3 className="text-lg">Ahmed Antor <span className="text-sm border p-1 ml-2">15 July, 2024</span></h3>
@@ -136,7 +136,7 @@ const MenuDetails = ({params}) => {
                           </div>
                           <div className="lg:w-4/5 rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6 bg-base-300">
                             <div>
-                                <img className="md:w-32 rounded-xl" src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg" alt="" />
+                            <Image width={128} height={120} className="md:w-32 rounded-xl" src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg" alt="" />
                             </div>
                             <div>
                                 <h3 className="text-lg">Ahmed Antor <span className="text-sm border p-1 ml-2">15 July, 2024</span></h3>
