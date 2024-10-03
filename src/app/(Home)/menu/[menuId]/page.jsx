@@ -6,19 +6,61 @@ import { IoCartOutline } from "react-icons/io5";
 
 import RecommendMenu from "@/components/RecommendMenu";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const MenuDetails = ({params}) => {
  
   const [click,setClick] = useState("overview")
   const [foods,setFoods] = useState([])
+  const [quantity,setQuantity] = useState(1)
   
   useEffect(()=>{
-    fetch("../menu.json")
-    .then(res => res.json())
-    .then(data => setFoods(data))
-  },[])
+    try{
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
+      .then(response => {
+        setFoods(response.data)
+      })
+    }
+    catch(error){
+      console.log(error.message)
+    }
+   },[])
   
-  const singleData = foods.find(food => food.id === params.menuId)
+  const singleData = foods.find(food => food._id === params.menuId)
+
+  const handleQuantity = (qua) => {
+    if (qua === "plus") {
+        setQuantity(quantity + 1); 
+    } else {
+        if (quantity > 1) {
+            setQuantity(quantity - 1); 
+        }
+    }
+};
+
+
+  const handleCart = async(data) => {
+   
+     const { _id,price, ...rest } = data;
+     const item = {
+      ...rest,
+      price : parseInt(price) * parseInt(quantity),
+      menuId : _id,
+      quantity : quantity,
+      userEmail : "tariquelislam2015@gmail.com"
+     }
+   
+     try{
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/single-menu`,item)
+       console.log(response.data)
+       if(response.data.insertedId){
+        alert("You have successfully added to cart")
+       }
+     }
+     catch(error){
+       alert(error.message)
+     }
+   }
   
     return (
         <div>
@@ -55,11 +97,11 @@ const MenuDetails = ({params}) => {
                       <p>Total orders: <span className="font-semibold text-xl">{singleData?.totalOrder}</span></p>
                     <div className="flex mt-3 gap-4 items-center">
                         <div className="flex items-center  gap-3">
-                            <button className="font-semibold rounded-full text-white px-2 py-1 bg-primaryLight">-</button>
-                            <p>0</p>
-                            <button className="font-semibold rounded-full text-white px-2 py-1 bg-primaryLight">+</button>
+                            <button onClick={()=>handleQuantity("minus")} className="font-semibold rounded-full text-white px-2 py-1 bg-primaryLight">-</button>
+                            <p>{quantity}</p>
+                            <button onClick={()=>handleQuantity("plus")} className="font-semibold rounded-full text-white px-2 py-1 bg-primaryLight">+</button>
                         </div>
-                        <button className="flex  justify-center w-1/2 items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-primaryLight"><IoCartOutline /> Add to cart</button>
+                        <button onClick={()=>handleCart(singleData)} className="flex  justify-center w-1/2 items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-primaryLight"><IoCartOutline /> Add to cart</button>
                     </div>
             </div>
            </div>
