@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-const OverviewPage = () => {
+const RestaurantOverview = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const colors = [
@@ -84,7 +84,7 @@ const OverviewPage = () => {
   };
 
   return (
-    <div className="space-y-5 ">
+    <div className="space-y-5  ">
       {/* stats icons with data  */}
       <div className=" flex flex-col lg:flex-row items-center lg:justify-between gap-6  ">
         {/* card 1 stats */}
@@ -248,4 +248,4 @@ const OverviewPage = () => {
   );
 };
 
-export default OverviewPage;
+export default RestaurantOverview;

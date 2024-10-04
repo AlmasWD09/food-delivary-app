@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             <div className="sticky top-0 hidden lg:flex ">
               <TopBar />
             </div>
-            <div className=" bg-gray-100 px-3 pb-3  pt-24  lg:p-10 ">
+            <div className=" bg-gray-100 px-3 pb-3  pt-24  lg:p-5 min-h-[calc(100vh-100px)] ">
               {children}
             </div>
           </div>
