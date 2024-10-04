@@ -53,7 +53,7 @@ const RecommendMenu = ({foods}) => {
                   <SwiperSlide>
                     <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>
                         <figure className='overflow-hidden rounded-t-xl'>
-                            <img src={food?.image} className="rounded-t-xl max-h-[178px] transition-all duration-700 hover:scale-110" alt="" />
+                            <Image width={250} height={178} src={food?.image} className="rounded-t-xl max-h-[178px] transition-all duration-700 hover:scale-110" alt="" />
                         </figure>
                        <div className='p-4'>
                         <p className="flex justify-center items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>

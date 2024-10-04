@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@tanstack/react-table": "^8.20.5",
+=======
+    "@tanstack/react-query": "^5.56.2",
+    "axios": "^1.7.7",
+>>>>>>> a82e60521ac74593ebcb868588aeeea8296a9831
     "apexcharts": "^3.54.0",
     "lottie-react": "^2.4.0",
     "next": "14.2.12",

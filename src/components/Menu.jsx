@@ -1,4 +1,6 @@
 "use client"
+import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
@@ -10,7 +12,7 @@ const Menu = ({foods}) => {
 
   const [filterData,setFilterData] = useState([])
   const [click,setClick] = useState("All")
-
+  
   useEffect(() => {
     if (foods && foods.length > 0) {
       setFilterData(foods);
@@ -30,7 +32,26 @@ const Menu = ({foods}) => {
     
  }
 
- 
+ const handleCart = async(data) => {
+  const { _id, ...rest } = data;
+   const item = {
+    ...rest,
+    menuId : _id,
+    quantity : 1,
+    userEmail : "tariquelislam2015@gmail.com"
+   }
+  
+   try{
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/single-menu`,item)
+     console.log(response.data)
+     if(response.data.insertedId){
+      alert("You have successfully added to cart")
+     }
+   }
+   catch(error){
+     alert(error.message)
+   }
+ }
  
     return (
         <div className="my-10 lg:max-w-[1240px] mx-auto">
@@ -53,7 +74,7 @@ const Menu = ({foods}) => {
                       filterData.map(food => <>
                            <div className="rounded-xl border lg::w-[412px] max-h-[515px]">
                           <div className="overflow-hidden rounded-t-xl">
-                          <img className="transition-all object-cover lg:w-[385px] bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" src={food?.image} alt="" />
+                          <Image className="transition-all object-cover lg:w-[385px] bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" width={385} height={310} src={food?.image} alt="" />
                           </div>
                           <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
                             <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
@@ -65,10 +86,10 @@ const Menu = ({foods}) => {
                           
                           <div className="p-4 pt-2">
                           
-                            <Link href={`/menu/${food?.id}`} className="text-2xl hover:underline font-semibold mb-3">{food?.title}</Link>
+                            <Link href={`/menu/${food?._id}`} className="text-2xl hover:underline font-semibold mb-3">{food?.title}</Link>
 
                             <p>{food?.description.slice(0,80)}</p>
-                            <button className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-[#FF4D00]"><IoCartOutline /> Add to cart</button>
+                            <button onClick={()=>handleCart(food)} className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-[#FF4D00]"><IoCartOutline /> Add to cart</button>
                           </div>
                               </div>
                       
