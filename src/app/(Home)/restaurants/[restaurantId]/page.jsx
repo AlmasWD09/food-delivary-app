@@ -88,6 +88,7 @@ export default function RestaurantD({ params }) {
 
                 <div className="p-4 pt-2">
 
+
                   {/* <Link className="text-2xl hover:underline font-semibold mb-3">Biriyani</Link> */}
                   <h2 className="text-2xl hover:underline font-semibold mb-3">{menus.title}</h2>
 
