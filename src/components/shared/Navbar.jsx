@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import NavCartList from "../NavCartList";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -181,31 +180,12 @@ const Navbar = () => {
 
           {/* account button end  */}
 
-         <div className="group relative hidden lg:flex">
-         <button className=" hidden lg:flex flex-col items-center   group relative z-20">
+          <button className=" hidden lg:flex flex-col items-center   group relative z-20">
             <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
             <p>Cart</p>
 
             <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
-            <span className="absolute -top-2  text-2xl font-semibold -right-1">4</span>
           </button>
-           {/* cart hover start */}
-           <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
-              <div className="h-4 w-full"></div>
-               <div className="bg-secondaryGray  w-[300px] text-nowrap">
-                  <p className="font-semibold text-lg p-4">All added items</p>
-                  <div>
-                    <ul>
-                     <NavCartList/>
-                    </ul>
-                  </div>
-                 <div className="py-4 flex justify-center">
-                 <Link href={"/order"} className="px-2 font-medium bg-primary text-white py-1">View Process</Link>
-                 </div>
-               </div>
-            </div>
-           {/* cart hover end */}
-         </div>
 
           {/* cart button end  */}
           <button
