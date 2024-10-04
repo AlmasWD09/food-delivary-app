@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  
   images: {
     remotePatterns: [
       {
@@ -15,7 +14,7 @@ const nextConfig = {
     return [
       {
         source: "/dashboard",
-        destination: "/dashboard/overview",
+        destination: "/dashboard/restaurant/overview",
         permanent: true,
       },
     ];
