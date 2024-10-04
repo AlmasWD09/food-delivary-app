@@ -176,8 +176,8 @@ const Discount = () => {
                             }`}
                           >
                             {
-                              item.recipe.map((reci) => (
-                                <li>{reci}</li>
+                              item.recipe.map((reci,index) => (
+                                <li key={index}>{reci}</li>
                               ))
                             }
                           </ul>
