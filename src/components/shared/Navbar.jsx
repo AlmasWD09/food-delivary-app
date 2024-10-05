@@ -6,13 +6,14 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
 import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
-
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const session = useSession();
 
   useEffect(() => {
       const fetchItems = async () => {
@@ -32,15 +33,6 @@ const Navbar = () => {
   if (loading) {
       return <li>Loading...</li>; 
   }
-
-  // current user details make sure replace  with original user
-  const currentUser = {
-    name: "snehashis roy",
-    role: "admin",
-    image:
-      "https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg",
-  };
-
 
   const navLinks = [
     {
@@ -110,12 +102,13 @@ const Navbar = () => {
           {/* button start  */}
 
           <div className="group relative hidden lg:flex">
-            {currentUser ? (
+            {session?.data?.user ? (
               <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
                 <Image
                   className="object-cover h-full w-full"
-                  src={currentUser.image}
-                  alt={currentUser.name}
+                  // src={session?.data?.user?.image}
+                  src={'https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg'}
+                  alt={session?.data?.user?.name}
                   height={1000}
                   width={1000}
                 />
@@ -135,13 +128,14 @@ const Navbar = () => {
               <div className="h-4 w-full"></div>
               <div
                 className={` ${
-                  currentUser ? "w-full" : "p-10"
+                  session?.data?.user ? "w-full" : "p-10"
                 }  bg-secondaryGray text-nowrap`}
               >
-                {currentUser ? (
+                {session?.data?.user ? (
                   <>
-                    <h1 className="uppercase font-bold text-xl text-center p-6">
-                      {currentUser.name}
+                   <div className="w-[240px]">
+                   <h1 className="uppercase font-bold text-xl  p-6">
+                      {session?.data?.user?.name}
                     </h1>
 
                     <div>
@@ -167,12 +161,13 @@ const Navbar = () => {
                           <Icon icon="solar:heart-outline" />
                           <li>Wishlist</li>
                         </Link>
-                        <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
+                        <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
                           <Icon icon="hugeicons:logout-04" />
                           <span>Logout</span>
                         </button>
                       </ul>
                     </div>
+                   </div>
                   </>
                 ) : (
                   <>
@@ -276,19 +271,19 @@ const Navbar = () => {
           <hr />
           <div
             className={` ${
-              currentUser
+              session
                 ? " border-2  border-primary w-fit mx-auto mt-10"
                 : "w-full"
             }`}
           >
-            {currentUser ? (
+            {session?.data?.user ? (
               <>
                 <div className="flex items-center gap-2 p-4 ">
                   <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
                     <Image
                       className="object-cover h-full w-full"
-                      src={currentUser.image}
-                      alt={currentUser.name}
+                      src={session?.data?.user?.image}
+                      alt={session?.data?.user?.name}
                       height={1000}
                       width={1000}
                     />
@@ -296,10 +291,10 @@ const Navbar = () => {
 
                   <div>
                     <h1 className="text-xl capitalize font-bold">
-                      {currentUser.name}
+                      {session?.data?.user?.name}
                     </h1>
                     <h2 className="font-semibold capitalize">
-                      {currentUser.role}
+                      {session?.data?.user?.role}
                     </h2>
                   </div>
                 </div>
@@ -327,7 +322,7 @@ const Navbar = () => {
                       <Icon className="text-lg" icon="solar:heart-outline" />
                       <li>Wishlist</li>
                     </Link>
-                    <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
+                    <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>
                     </button>

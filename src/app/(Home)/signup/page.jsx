@@ -32,6 +32,7 @@ const router = useRouter();
         email: event.target.emailAddress.value,
         password: event.target.password.value,
         image: imageUrl, // Add the image URL
+        role:'admin',
       };
 
       // Send newUser data to your server (uncomment if needed)
