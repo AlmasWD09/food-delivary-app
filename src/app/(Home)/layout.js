@@ -1,6 +1,7 @@
 import Navbar from "@/components/shared/Navbar";
 import "../globals.css";
 import Footer from "@/components/shared/Footer";
+import AuthProvider from "@/services/AuthProvider";
 
 export const metadata = {
   title: "Delish -  Your Favorite Flavors, Delivered",
@@ -11,17 +12,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <AuthProvider>
       <div className="sticky z-[999] top-0 ">
           <Navbar />
         </div>
-        
-     
         {/* don't remove height  */}
         <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
           {children}
         </div>
-
         <Footer />
+      </AuthProvider>
       </body>
     </html>
   );

@@ -41,7 +41,7 @@ const Navbar = () => {
       "https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg",
   };
 
-  console.log(getMenu);
+
   const navLinks = [
     {
       title: "Home",
