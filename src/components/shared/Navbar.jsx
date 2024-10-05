@@ -35,13 +35,13 @@ const Navbar = () => {
 
   // current user details make sure replace it with original user
   const currentUser = {
-    name: "snehashis roy",
+    name: 'ALMAS HOSSAIN',
     role: "admin",
     image:
       "https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg",
   };
 
-  console.log(getMenu);
+
   const navLinks = [
     {
       title: "Home",
@@ -90,9 +90,8 @@ const Navbar = () => {
               <Link key={item.path} href={item.path}>
                 <div className="group relative">
                   <li
-                    className={`font-semibold px-2 py-1 rounded-md ${
-                      pathname == item.path && "bg-orange-200"
-                    }`}
+                    className={`font-semibold px-2 py-1 rounded-md ${pathname == item.path && "bg-orange-200"
+                      }`}
                   >
                     {item.title}
                   </li>
@@ -134,11 +133,10 @@ const Navbar = () => {
             <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 ">
               <div className="h-4 w-full"></div>
               <div
-                className={` ${
-                  currentUser ? "w-full" : "p-10"
-                }  bg-secondaryGray text-nowrap`}
+                className={` ${currentUser ? "w-full" : "p-10"
+                  }  bg-secondaryGray text-nowrap`}
               >
-                {currentUser ? (
+                {currentUser  ? (
                   <>
                     <h1 className="uppercase font-bold text-xl text-center p-6">
                       {currentUser.name}
@@ -167,7 +165,7 @@ const Navbar = () => {
                           <Icon icon="solar:heart-outline" />
                           <li>Wishlist</li>
                         </Link>
-                        <button className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
+                        <button  className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
                           <Icon icon="hugeicons:logout-04" />
                           <span>Logout</span>
                         </button>
@@ -176,7 +174,8 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <h1 className="uppercase font-bold text-xl text-center">
+                   <div className="p-4">
+                   <h1 className="uppercase font-bold text-xl text-center">
                       my account
                     </h1>
                     <h3 className="text-center">
@@ -191,17 +190,19 @@ const Navbar = () => {
                       </Link>
 
                       <Link href="/signin">
-                        <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
+                        <button className="px-4 py-2 bg-secondary hover:text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
                           Sign In
                         </button>
                       </Link>
                     </div>
+                   </div>
                   </>
                 )}
               </div>
             </div>
           </div>
-
+          <div>
+          </div>
           {/* account button end  */}
 
          <div className="group relative hidden lg:flex">
@@ -246,12 +247,11 @@ const Navbar = () => {
         {/* right section end  */}
       </div>
 
-      {/* mobile responsive section  */}
 
+      {/* mobile responsive section  */}
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${
-          getMenu ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${getMenu ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="p-10 ">
           <ul className=" flex flex-col gap-6">
@@ -263,9 +263,8 @@ const Navbar = () => {
               >
                 <li
                   key={item.path}
-                  className={`font-bold p-4 hover:bg-amber-200 ${
-                    pathname === item.path && "bg-orange-200"
-                  } `}
+                  className={`font-bold p-4 hover:bg-amber-200 ${pathname === item.path && "bg-orange-200"
+                    } `}
                 >
                   {item.title}
                 </li>
@@ -275,11 +274,10 @@ const Navbar = () => {
 
           <hr />
           <div
-            className={` ${
-              currentUser
+            className={` ${currentUser
                 ? " border-2  border-primary w-fit mx-auto mt-10"
                 : "w-full"
-            }`}
+              }`}
           >
             {currentUser ? (
               <>
