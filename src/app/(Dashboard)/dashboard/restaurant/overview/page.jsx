@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const DatePicker = dynamic(() => import("react-datepicker"), { ssr: false });
 
-const OverviewPage = () => {
+const RestaurantOverview = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const colors = [
@@ -85,7 +85,7 @@ const OverviewPage = () => {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-16  ">
       {/* stats icons with data  */}
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-6">
         {/* card 1 stats */}
@@ -215,8 +215,17 @@ const OverviewPage = () => {
       {/* charts  */}
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-5">
         {/* revenue chart */}
-        <div className="flex flex-col p-6 gap-3 rounded-xl w-full bg-white shadow-md">
-          <h1 className="font-extrabold">Revenue Report</h1>
+        <div className="flex flex-col p-6 gap-3 rounded-xl w-full h-full bg-white shadow-md">
+          <div className="flex items-center gap-3">
+            <h1 className="font-extrabold">Revenue: </h1>
+            <DatePicker
+              className="text-center w-20 outline-none focus:ring-1  bg-slate-100 rounded-lg"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              showYearPicker
+              dateFormat="yyyy"
+            />
+          </div>
           <Chart
             options={options}
             series={options.series}
@@ -236,16 +245,6 @@ const OverviewPage = () => {
             height={400}
           />
         </div>
-      </div>
-
-      {/* date filter */}
-      <div className="flex flex-col gap-2">
-        <h1 className="font-extrabold">Filter By Date</h1>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          className="p-3 rounded-xl shadow-md"
-        />
       </div>
     </div>
   );
