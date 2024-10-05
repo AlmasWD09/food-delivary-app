@@ -33,7 +33,7 @@ const Navbar = () => {
       return <li>Loading...</li>; 
   }
 
-  // current user details make sure replace it with original user
+  // current user details make sure replace  with original user
   const currentUser = {
     name: "snehashis roy",
     role: "admin",
