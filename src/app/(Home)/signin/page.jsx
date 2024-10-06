@@ -1,9 +1,32 @@
+"use client"
 import { Icon } from "@iconify/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+
+
+const SignInPage = () => {
+const router = useRouter()
+  const handleSignin = async (event) => {
+    event.preventDefault();
+    const email = event.target.emailAddress.value;
+    const password = event.target.password.value;
+  
+    const resp = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (resp.status === 200) { 
+      router.push("/"); 
+    } else {
+      // Handle error (optional)
+      alert("Sign-in failed. Please check your credentials.");
+    }
+  };
+
   return (
     <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
       <div className="  flex items-center justify-center lg:pr-10 ">
@@ -32,12 +55,12 @@ const page = () => {
               Make today tasty—let&apos;s get your order started!
             </h1>
           </div>
-          <form action="" className="flex flex-col gap-4">
+          <form onSubmit={handleSignin} action="" className="flex flex-col gap-4">
             <input
               type="email"
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-blue-200 "
               placeholder="Email Address"
-              name="emailaddress"
+              name="emailAddress"
             />
             <input
               type="password"
@@ -51,9 +74,8 @@ const page = () => {
                 click here
               </button>
             </h2>
-            <button className="relative py-4 bg-blue-500 text-white group overflow-hidden flex items-center justify-center">
+            <button type="submit" className="relative py-4 bg-blue-500 text-white group overflow-hidden flex items-center justify-center">
               <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
-
               <span className="relative">Sign In</span>
             </button>
           </form>
@@ -92,4 +114,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignInPage;
