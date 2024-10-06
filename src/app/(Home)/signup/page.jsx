@@ -3,6 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -47,9 +48,10 @@ const router = useRouter();
       if (resp.status === 200) {
         event.target.reset(); // Reset form after successful submission
         router.push('/')
+        toast.success('user create successfully')
       }
       else{
-        alert('Sign-up failed. Please try again')
+        toast.error('Sign-up failed. Please try again')
       }
     } catch (error) {
       console.error("Error uploading image:", error);

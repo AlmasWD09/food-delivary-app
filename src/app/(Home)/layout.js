@@ -2,6 +2,7 @@ import Navbar from "@/components/shared/Navbar";
 import "../globals.css";
 import Footer from "@/components/shared/Footer";
 import AuthProvider from "@/services/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Delish -  Your Favorite Flavors, Delivered",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         {/* don't remove height  */}
         <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
           {children}
+          <Toaster />
         </div>
         <Footer />
       </AuthProvider>
