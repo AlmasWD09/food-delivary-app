@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2024-01-01",
+    "registrations": 15
+  },
+  {
+    "date": "2024-01-02",
+    "registrations": 20
+  },
+  {
+    "date": "2024-01-03",
+    "registrations": 25
+  },
+  {
+    "date": "2024-01-04",
+    "registrations": 18
+  },
+  {
+    "date": "2024-01-05",
+    "registrations": 30
+  },
+  {
+    "date": "2024-01-06",
+    "registrations": 22
+  },
+  {
+    "date": "2024-01-07",
+    "registrations": 28
+  },
+  {
+    "date": "2024-01-08",
+    "registrations": 35
+  },
+  {
+    "date": "2024-01-09",
+    "registrations": 40
+  },
+  {
+    "date": "2024-01-10",
+    "registrations": 50
+  },
+  {
+    "date": "2024-01-11",
+    "registrations": 45
+  },
+  {
+    "date": "2024-01-12",
+    "registrations": 60
+  },
+  {
+    "date": "2024-01-13",
+    "registrations": 55
+  },
+  {
+    "date": "2024-01-14",
+    "registrations": 70
+  },
+  {
+    "date": "2024-01-15",
+    "registrations": 80
+  }
+]

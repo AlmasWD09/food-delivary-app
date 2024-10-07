@@ -83,7 +83,6 @@ const Orders = () => {
   });
 
   const pageNumbers = [5, 10, 20, 30, 40, 50, 60];
-  // console.log(table.getRowModel().rows[1].getVisibleCells()[1].getContext());
   return (
     <div className="h-full">
       <h1>Table Design</h1>
