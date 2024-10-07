@@ -3,14 +3,18 @@ import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
 import React from "react";
 import raw from "./growth.json";
-import { useState } from "react";
+
 import salesData from "./sales.json";
 import Image from "next/image";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const DatePicker = dynamic(() => import("react-datepicker"), { ssr: false });
+
+import TimeAgo from "react-timeago";
+
 const Overview = () => {
   // Create an array of registration counts
-  const registrationCounts = raw.map((item) => item.registrations);
+  const userJoined = raw.map((item) => item.joined);
+  const userDate = raw.map((item) => item.date);
+  const userLeft = raw.map((item) => item.left);
 
   // Create an array of dates
   const registrationDates = raw.map((item) => item.date);
@@ -20,15 +24,20 @@ const Overview = () => {
   const ChartData = {
     series: [
       {
-        name: "Growth",
-        data: registrationCounts,
+        name: "Joined",
+        data: userJoined,
+      },
+      {
+        name: "Left",
+        data: userLeft,
       },
     ],
     options: {
       xaxis: {
-        categories: registrationDates,
+        categories: userDate,
         type: "datetime",
       },
+      colors: ["#33d300", "#ff0000"],
       stroke: {
         curve: "smooth",
       },
@@ -43,9 +52,9 @@ const Overview = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-10">
       {/* card section  */}
-      <div className="flex items-center justify-between text-white">
+      <div className="flex flex-col lg:flex-row items-center justify-between text-white gap-10 lg:gap-0">
         <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-lime-400 to-lime-500 rounded-lg w-fit">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">435</h2>
@@ -84,43 +93,59 @@ const Overview = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="p-10 bg-white rounded-xl w-fit flex-1">
-          <h1 className="text-2xl font-semibold capitalize">
-            new users registration trends
+      <div className="w-full  flex flex-col lg:flex-row items-center justify-between gap-10 ">
+        {/* charts  */}
+        <div className="p-8 lg:p-10 bg-white rounded-xl  w-full ">
+          <h1 className="text-2xl font-bold capitalize pb-2">
+            registration trends
           </h1>
 
-          <Chart
-            options={ChartData.options}
-            series={ChartData.series}
-            width={800}
-            type="area"
-          />
-        </div>
-        <div className="p-10 bg-white rounded-xl w-fit flex-1">
-          <div className="capitalize flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Recent Sales</h2>
-            <h2 className="p-2 border-2 ">Sell all</h2>
+          <div className="w-full ">
+            <Chart
+              options={ChartData.options}
+              series={ChartData.series}
+              height={500}
+              type="area"
+            />
           </div>
+        </div>
 
-          {salesData.map((item, idx) => (
-            <div key="idx">
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-full overflow-hidden object-cover">
-                  <Image
-                    className="w-full h-full object-cover"
-                    src={item.profile_photo}
-                    width={1000}
-                    height={1000}
-                    alt={item.user_name}
-                  />
+        {/* recent sales */}
+        <div className="p-10 bg-white rounded-xl w-full  lg:w-1/3">
+          <div className="capitalize flex items-center justify-between pb-4">
+            <h2 className="text-2xl font-bold">Recent Sales</h2>
+            <button className="px-2 py-1 font-semibold rounded-xl border-2  capitalize">
+              see all
+            </button>
+          </div>
+          <div className="">
+            {salesData.map((item, idx) => (
+              <div
+                key="idx"
+                className="flex items-center justify-between py-4 border-t-2 "
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-12 h-12 rounded-full overflow-hidden object-cover">
+                    <Image
+                      className="w-full h-full object-cover"
+                      src={item.profile_photo}
+                      width={1000}
+                      height={1000}
+                      alt={item.user_name}
+                    />
+                  </div>
+                  <span>
+                    <h2 className="font-semibold text-base">
+                      {item.user_name}
+                    </h2>
+                    <TimeAgo date={item.date_time} />
+                  </span>
                 </div>
-                <h2>{item.user_name}</h2>
 
-                <h2>${item.amount}</h2>
+                <h1 className="text-xl font-bold">${item.amount}</h1>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

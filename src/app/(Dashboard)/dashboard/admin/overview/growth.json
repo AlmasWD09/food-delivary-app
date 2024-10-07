@@ -1,62 +1,22 @@
 [
-  {
-    "date": "2024-01-01",
-    "registrations": 15
-  },
-  {
-    "date": "2024-01-02",
-    "registrations": 20
-  },
-  {
-    "date": "2024-01-03",
-    "registrations": 25
-  },
-  {
-    "date": "2024-01-04",
-    "registrations": 18
-  },
-  {
-    "date": "2024-01-05",
-    "registrations": 30
-  },
-  {
-    "date": "2024-01-06",
-    "registrations": 22
-  },
-  {
-    "date": "2024-01-07",
-    "registrations": 28
-  },
-  {
-    "date": "2024-01-08",
-    "registrations": 35
-  },
-  {
-    "date": "2024-01-09",
-    "registrations": 40
-  },
-  {
-    "date": "2024-01-10",
-    "registrations": 50
-  },
-  {
-    "date": "2024-01-11",
-    "registrations": 45
-  },
-  {
-    "date": "2024-01-12",
-    "registrations": 60
-  },
-  {
-    "date": "2024-01-13",
-    "registrations": 55
-  },
-  {
-    "date": "2024-01-14",
-    "registrations": 70
-  },
-  {
-    "date": "2024-01-15",
-    "registrations": 80
-  }
+  { "date": "2024-01-01", "joined": 10, "left": 15 },
+  { "date": "2024-01-02", "joined": 12, "left": 20 },
+  { "date": "2024-01-03", "joined": 15, "left": 25 },
+  { "date": "2024-01-04", "joined": 8, "left": 18 },
+  { "date": "2024-01-05", "joined": 20, "left": 30 },
+  { "date": "2024-01-06", "joined": 18, "left": 22 },
+  { "date": "2024-01-07", "joined": 25, "left": 28 },
+  { "date": "2024-01-08", "joined": 30, "left": 35 },
+  { "date": "2024-01-09", "joined": 40, "left": 40 },
+  { "date": "2024-01-10", "joined": 50, "left": 50 },
+  { "date": "2024-01-11", "joined": 45, "left": 45 },
+  { "date": "2024-01-12", "joined": 60, "left": 60 },
+  { "date": "2024-01-13", "joined": 55, "left": 55 },
+  { "date": "2024-01-14", "joined": 70, "left": 70 },
+  { "date": "2024-01-15", "joined": 80, "left": 80 },
+  { "date": "2024-01-16", "joined": 65, "left": 75 },
+  { "date": "2024-01-17", "joined": 50, "left": 65 },
+  { "date": "2024-01-18", "joined": 55, "left": 60 },
+
+  { "date": "2024-01-31", "joined": 100, "left": 55 }
 ]

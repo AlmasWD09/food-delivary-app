@@ -230,7 +230,6 @@ const RestaurantOverview = () => {
             options={options}
             series={options.series}
             type="bar"
-            height={400}
             className="overflow-x-auto"
           />
         </div>
