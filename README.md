@@ -8,3 +8,5 @@ packages i used
 #npm i bcrypt
 #npm i @tanstack/react-query
 #npm install react-hot-toast
+#npm i mongodb
+#npm install @tanstack/react-table
