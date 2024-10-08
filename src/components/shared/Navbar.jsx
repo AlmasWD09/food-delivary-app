@@ -14,7 +14,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-
+console.log('navbar page----->17',session);
   useEffect(() => {
       const fetchItems = async () => {
           try {
@@ -103,14 +103,13 @@ const Navbar = () => {
 
           <div className="group relative hidden lg:flex">
             {session?.data?.user ? (
-              <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
+              <div className="h-12 w-12 overflow-hidden rounded-full object-center ring-2  z-20 ">
                 <Image
                   className="object-cover h-full w-full"
-                  // src={session?.data?.user?.image}
-                  src={'https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg'}
+                  src={session?.data?.user?.image}
                   alt={session?.data?.user?.name}
-                  height={1000}
-                  width={1000}
+                  height={100}
+                  width={100}
                 />
               </div>
             ) : (
