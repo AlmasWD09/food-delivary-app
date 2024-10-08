@@ -109,7 +109,9 @@ const Navbar = () => {
                 <Image
                   className="object-cover h-full w-full"
                   // src={session?.data?.user?.image}
-                  src={'https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg'}
+                  src={
+                    "https://i.ibb.co/FVyQRJn/414102136-3551419075133636-309801870608838235-n.jpg"
+                  }
                   alt={session?.data?.user?.name}
                   height={1000}
                   width={1000}
@@ -135,47 +137,50 @@ const Navbar = () => {
                 />
               </div>
               <div
-                className={` bg-third  border-4 border-secondary ${
-                  currentUser ? "w-full" : "p-10"
-                }  bg-secondaryGray text-nowrap`}
+                className={` ${
+                  session?.data?.user ? "w-full" : "p-10"
+                }   text-nowrap bg-third  border-4 border-secondary`}
               >
                 {session?.data?.user ? (
                   <>
-                   <div className="w-[240px]">
-                   <h1 className="uppercase font-bold text-xl  p-6">
-                      {session?.data?.user?.name}
-                    </h1>
+                    <div className="w-[240px]">
+                      <h1 className="uppercase font-bold text-xl  p-6">
+                        {session?.data?.user?.name}
+                      </h1>
 
-                    <div>
-                      <ul className=" font-semibold  ">
-                        <Link
-                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary w-full "
-                          href="/profile"
-                        >
-                          <Icon icon="gg:profile" />
-                          <li>Profile</li>
-                        </Link>
-                        <Link
-                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary  w-full"
-                          href="/orders"
-                        >
-                          <Icon icon="solar:box-broken" />
-                          <li>Orders</li>
-                        </Link>
-                        <Link
-                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4  border-b-2 border-secondary w-full"
-                          href="/whishlist"
-                        >
-                          <Icon icon="solar:heart-outline" />
-                          <li>Wishlist</li>
-                        </Link>
-                        <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
-                          <Icon icon="hugeicons:logout-04" />
-                          <span>Logout</span>
-                        </button>
-                      </ul>
+                      <div>
+                        <ul className=" font-semibold  ">
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary w-full "
+                            href="/profile"
+                          >
+                            <Icon icon="gg:profile" />
+                            <li>Profile</li>
+                          </Link>
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary  w-full"
+                            href="/orders"
+                          >
+                            <Icon icon="solar:box-broken" />
+                            <li>Orders</li>
+                          </Link>
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4  border-b-2 border-secondary w-full"
+                            href="/whishlist"
+                          >
+                            <Icon icon="solar:heart-outline" />
+                            <li>Wishlist</li>
+                          </Link>
+                          <button
+                            onClick={signOut}
+                            className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full"
+                          >
+                            <Icon icon="hugeicons:logout-04" />
+                            <span>Logout</span>
+                          </button>
+                        </ul>
+                      </div>
                     </div>
-                   </div>
                   </>
                 ) : (
                   <>
@@ -290,7 +295,7 @@ const Navbar = () => {
           <hr />
           <div
             className={` ${
-              currentUser
+              session
                 ? " border-4  border-secondary w-fit mx-auto mt-10"
                 : "w-full"
             }`}
@@ -341,7 +346,10 @@ const Navbar = () => {
                       <Icon className="text-lg" icon="solar:heart-outline" />
                       <li>Wishlist</li>
                     </Link>
-                    <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
+                    <button
+                      onClick={signOut}
+                      className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full"
+                    >
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>
                     </button>
