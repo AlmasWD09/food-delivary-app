@@ -28,9 +28,13 @@ module.exports = {
         primaryLight: "#fd8802",
         primaryGray: "#fffbeb", // amber-50
         secondary: "#fde68a", // amber-200
-        secondaryGray: "#3b3a45", // amber-100
+        secondaryGray: "#ffffff", // amber-100
         redish: "#ff0055", // redandpink
         text: "#9B9B93", // lightgray
+
+        secondary: "#f4d321", //snehashisroy
+        third: "#fefbe9", //snehashisroy
+        fourth: "#1a1a1a", //snehashisroy
       },
     },
     fontFamily: {

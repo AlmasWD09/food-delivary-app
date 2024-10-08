@@ -241,7 +241,7 @@ const RestaurantOverview = () => {
             options={donutOption}
             series={donutOption.series}
             type="donut"
-            height={400}
+            height={460}
           />
         </div>
       </div>

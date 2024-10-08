@@ -162,21 +162,21 @@ const Overview = () => {
     <div className="space-y-10">
       {/* card section  */}
       <div className="flex flex-col lg:flex-row items-center justify-between text-white gap-10 lg:gap-0">
-        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg w-fit">
+        <div className="flex items-center justify-between w-full lg:w-fit gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg ">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">435</h2>
             <p className="">Total Users</p>
           </div>
           <Icon className="text-6xl " icon="mdi:user" />
         </div>
-        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-red-500 to-orange-500  rounded-lg w-fit">
+        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-red-500 to-orange-500  rounded-lg w-full lg:w-fit">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">$ 7135</h2>
             <p className="">Total Earnings</p>
           </div>
           <Icon className="text-6xl " icon="solar:wallet-money-outline" />
         </div>
-        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-fuchsia-600 to-pink-600  rounded-lg w-fit">
+        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-fuchsia-600 to-pink-600  rounded-lg w-full lg:w-fit">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">78</h2>
             <p className="">Pending Orders</p>
@@ -184,14 +184,14 @@ const Overview = () => {
 
           <Icon className="text-6xl " icon="heroicons:shopping-bag-20-solid" />
         </div>
-        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-blue-600 to-violet-600  rounded-lg w-fit">
+        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-blue-600 to-violet-600  rounded-lg w-full lg:w-fit">
           <div className="flex flex-col  items-center gap-2">
             <h2 className="text-4xl font-semibold ">535</h2>
             <p className="">Total Restaurants</p>
           </div>
           <Icon className="text-6xl " icon="entypo:shop" />
         </div>
-        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-slate-900 to-slate-700 rounded-lg w-fit">
+        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-slate-900 to-slate-700 rounded-lg w-full lg:w-fit">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">435</h2>
             <p className="">Total Riders</p>
@@ -249,7 +249,7 @@ const Overview = () => {
                   </span>
                 </div>
 
-                <h1 className="text-xl font-bold">${item.amount}</h1>
+                <h1 className="text-xl">${item.amount}</h1>
               </div>
             ))}
           </div>
@@ -257,39 +257,45 @@ const Overview = () => {
       </div>
 
       {/* tables  */}
-      <div className="w-full p-10 bg-white rounded-2xl overflow-auto">
+      <div className="w-full p-10 bg-white rounded-2xl ">
         <h2 className="font-bold text-xl py-4">Recent Transaction</h2>
-        <table className=" w-full  divide-y-2">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    onClick={header.column.getToggleSortingHandler()}
-                    key={header.id}
-                    className="font-extrabold p-4 cursor-pointer hover:bg-slate-100"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="text-center  divide-y-2">
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-slate-100  ">
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="p-4 ">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+
+        <div className="overflow-auto">
+          <table className=" w-full  divide-y-2 ">
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      onClick={header.column.getToggleSortingHandler()}
+                      key={header.id}
+                      className="font-extrabold p-4 cursor-pointer hover:bg-slate-100"
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody className="text-center  divide-y-2">
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id} className="hover:bg-slate-100  ">
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className="p-4 ">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

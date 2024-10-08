@@ -69,7 +69,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="h-20 font-urbanist  bg-secondaryGray   relative">
+    <div className="h-20 font-urbanist  bg-base-100   relative  shadow-md ">
       <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
@@ -93,13 +93,13 @@ const Navbar = () => {
                 <div className="group relative">
                   <li
                     className={`font-semibold px-2 py-1 rounded-md ${
-                      pathname == item.path && "bg-orange-200"
+                      pathname == item.path && "bg-secondary text-fourth"
                     }`}
                   >
                     {item.title}
                   </li>
 
-                  <span className="w-full h-0.5 absolute bg-black -bottom-1 left-0 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"></span>
+                  <span className="w-full h-0.5 absolute bg-secondary -bottom-1 left-0 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"></span>
                 </div>
               </Link>
             ))}
@@ -133,10 +133,16 @@ const Navbar = () => {
 
             {/* account hover area start */}
 
-            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 ">
-              <div className="h-4 w-full"></div>
+            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 gap-0 ">
+              <div className="h-14  w-full "></div>
+              <div className="w-full flex justify-center  ">
+                <Icon
+                  className="text-4xl absolute top-7  text-secondary "
+                  icon="ri:triangle-fill"
+                />
+              </div>
               <div
-                className={` ${
+                className={` bg-third  border-4 border-secondary ${
                   currentUser ? "w-full" : "p-10"
                 }  bg-secondaryGray text-nowrap`}
               >
@@ -149,21 +155,21 @@ const Navbar = () => {
                     <div>
                       <ul className=" font-semibold  ">
                         <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary w-full "
+                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary w-full "
                           href="/profile"
                         >
                           <Icon icon="gg:profile" />
                           <li>Profile</li>
                         </Link>
                         <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary  w-full"
                           href="/orders"
                         >
                           <Icon icon="solar:box-broken" />
                           <li>Orders</li>
                         </Link>
                         <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4  border-b-2 border-secondary w-full"
+                          className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4  border-b-2 border-secondary w-full"
                           href="/whishlist"
                         >
                           <Icon icon="solar:heart-outline" />
@@ -187,7 +193,7 @@ const Navbar = () => {
 
                     <div className="flex items-center gap-4 justify-center pt-4">
                       <Link href="/signup">
-                        <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
+                        <button className="px-4 py-2 bg-secondary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
                           Sign Up
                         </button>
                       </Link>
@@ -262,7 +268,7 @@ const Navbar = () => {
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-third ease-in-out duration-300 transform ${
           getMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -277,7 +283,7 @@ const Navbar = () => {
                 <li
                   key={item.path}
                   className={`font-bold p-4 hover:bg-amber-200 ${
-                    pathname === item.path && "bg-orange-200"
+                    pathname === item.path && "bg-secondary text-fourth"
                   } `}
                 >
                   {item.title}
@@ -290,7 +296,7 @@ const Navbar = () => {
           <div
             className={` ${
               currentUser
-                ? " border-2  border-primary w-fit mx-auto mt-10"
+                ? " border-4  border-secondary w-fit mx-auto mt-10"
                 : "w-full"
             }`}
           >
@@ -320,21 +326,21 @@ const Navbar = () => {
                 <div>
                   <ul className=" font-semibold  text-lg">
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full "
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full "
                       href="/profile"
                     >
                       <Icon className="text-lg" icon="gg:profile" />
                       <li>Profile</li>
                     </Link>
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full"
                       href="/orders"
                     >
                       <Icon className="text-lg" icon="solar:box-broken" />
                       <li>Orders</li>
                     </Link>
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full"
                       href="/whishlist"
                     >
                       <Icon className="text-lg" icon="solar:heart-outline" />
