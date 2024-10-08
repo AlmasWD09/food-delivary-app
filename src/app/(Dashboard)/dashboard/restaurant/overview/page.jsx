@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const DatePicker = dynamic(() => import("react-datepicker"), { ssr: false });
 
-const OverviewPage = () => {
+const RestaurantOverview = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const colors = [
@@ -85,7 +85,7 @@ const OverviewPage = () => {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-16  ">
       {/* stats icons with data  */}
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-6">
         {/* card 1 stats */}
@@ -179,7 +179,8 @@ const OverviewPage = () => {
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
           <button className="bg-slate-100 text-green-500 px-2 py-1 rounded-lg font-extrabold cursor-pointer text-sm flex items-center justify-center gap-6 w-fit">
-            Manage orders <Icon className="text-xl" icon="weui:arrow-outlined" />
+            Manage orders{" "}
+            <Icon className="text-xl" icon="weui:arrow-outlined" />
           </button>
         </div>
 
@@ -214,13 +215,21 @@ const OverviewPage = () => {
       {/* charts  */}
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-5">
         {/* revenue chart */}
-        <div className="flex flex-col p-6 gap-3 rounded-xl w-full bg-white shadow-md">
-          <h1 className="font-extrabold">Revenue Report</h1>
+        <div className="flex flex-col p-6 gap-3 rounded-xl w-full h-full bg-white shadow-md">
+          <div className="flex items-center gap-3">
+            <h1 className="font-extrabold">Revenue: </h1>
+            <DatePicker
+              className="text-center w-20 outline-none focus:ring-1  bg-slate-100 rounded-lg"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              showYearPicker
+              dateFormat="yyyy"
+            />
+          </div>
           <Chart
             options={options}
             series={options.series}
             type="bar"
-            height={400}
             className="overflow-x-auto"
           />
         </div>
@@ -232,22 +241,12 @@ const OverviewPage = () => {
             options={donutOption}
             series={donutOption.series}
             type="donut"
-            height={400}
+            height={460}
           />
         </div>
-      </div>
-
-      {/* date filter */}
-      <div className="flex flex-col gap-2">
-        <h1 className="font-extrabold">Filter By Date</h1>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          className="p-3 rounded-xl shadow-md"
-        />
       </div>
     </div>
   );
 };
 
-export default OverviewPage;
+export default RestaurantOverview;

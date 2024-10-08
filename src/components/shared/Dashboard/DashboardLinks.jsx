@@ -4,12 +4,12 @@ const navLinks = {
   admin: [
     {
       title: "Overview",
-      link: "admin-overview",
+      link: "admin/overview",
       icons: <Icon icon="charm:home" />,
     },
     {
       title: "Users",
-      link: "users",
+      link: "admin/users",
       icons: <Icon icon="mdi:user" />,
     },
     {
@@ -18,14 +18,19 @@ const navLinks = {
       icons: <Icon icon="iconoir:reports" />,
     },
     {
-      title: "All Restaurants",
-      link: "restaurants",
-      icons: <Icon icon="solar:shop-linear" />,
+      title: "Manage Restaurants",
+      link: "admin/manage-restaurants",
+      icons: <Icon icon="mdi:shop-outline" />,
+    },
+    {
+      title: "Manage Riders",
+      link: "admin/manage-riders",
+      icons: <Icon icon="mdi:bike" />,
     },
 
     {
       title: "New Listing",
-      link: "orders",
+      link: "admin/new-listing",
       icons: <Icon icon="mdi:shop-plus" />,
     },
 
@@ -44,28 +49,33 @@ const navLinks = {
   restaurants: [
     {
       title: "Overview",
-      link: "overview",
-      icons: <Icon icon="charm:home" />,
+      link: "restaurant/overview",
+      icons: <Icon icon="material-symbols:dashboard" />,
     },
     {
       title: "Orders",
-      link: "orders",
+      link: "restaurant/orders",
       icons: <Icon icon="material-symbols:orders" />,
     },
     {
       title: "Menu",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="hugeicons:menu-restaurant" />,
     },
     {
       title: "Reviews",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="carbon:review" />,
     },
     {
       title: "Payments",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="la:money-bill-wave" />,
+    },
+    {
+      title: "Home",
+      link: "/",
+      icons: <Icon icon="charm:home" />,
     },
   ],
 };

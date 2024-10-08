@@ -1,0 +1,50 @@
+[
+  {
+    "orderId": "OD12345",
+    "userId": "U001",
+    "customerName": "John Doe",
+    "profilePhoto": "https://example.com/profiles/johndoe.jpg",
+    "foodItem": "Cheeseburger",
+    "quantity": 2,
+    "totalPrice": 14.47,
+    "paymentMethod": "Credit Card",
+    "status": "Canceled",
+    "orderDate": "2024-10-01T14:30:00Z"
+  },
+  {
+    "orderId": "OD12346",
+    "userId": "U002",
+    "customerName": "Jane Smith",
+    "profilePhoto": "https://example.com/profiles/janesmith.jpg",
+    "foodItem": "Margherita Pizza",
+    "quantity": 1,
+    "totalPrice": 15.98,
+    "paymentMethod": "PayPal",
+    "status": "In Progress",
+    "orderDate": "2024-10-02T11:15:00Z"
+  },
+  {
+    "orderId": "OD12347",
+    "userId": "U003",
+    "customerName": "Alice Johnson",
+    "profilePhoto": "https://example.com/profiles/alicejohnson.jpg",
+    "foodItem": "Spaghetti Carbonara",
+    "quantity": 1,
+    "totalPrice": 14.48,
+    "paymentMethod": "Debit Card",
+    "status": "Canceled",
+    "orderDate": "2024-10-03T09:00:00Z"
+  },
+  {
+    "orderId": "OD12348",
+    "userId": "U004",
+    "customerName": "Michael Brown",
+    "profilePhoto": "https://example.com/profiles/michaelbrown.jpg",
+    "foodItem": "Vegetable Stir Fry",
+    "quantity": 3,
+    "totalPrice": 21.0,
+    "paymentMethod": "Cash",
+    "status": "Completed",
+    "orderDate": "2024-10-04T17:45:00Z"
+  }
+]
