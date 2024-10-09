@@ -4,45 +4,45 @@ const navLinks = {
   admin: [
     {
       title: "Overview",
-      link: "admin/overview",
+      link: "overview",
       icons: <Icon icon="charm:home" />,
     },
     {
       title: "Users",
-      link: "admin/users",
+      link: "users",
       icons: <Icon icon="mdi:user" />,
     },
     {
       title: "Reports",
-      link: "admin/reports",
+      link: "reports",
       icons: <Icon icon="iconoir:reports" />,
     },
     {
       title: "Manage Restaurants",
-      link: "admin/manage-restaurants",
+      link: "manage-restaurants",
       icons: <Icon icon="mdi:shop-outline" />,
     },
     {
       title: "Manage Riders",
-      link: "admin/manage-riders",
+      link: "manage-riders",
       icons: <Icon icon="mdi:bike" />,
     },
 
     {
       title: "New Listing",
-      link: "admin/new-listing",
+      link: "new-listings",
       icons: <Icon icon="mdi:shop-plus" />,
     },
 
     {
       title: "Listing Requests",
-      link: "admin/reports",
+      link: "listing-requests",
       icons: <Icon icon="hugeicons:message-user-01" />,
     },
 
     {
       title: "Support Inbox",
-      link: "admin/support",
+      link: "support-inbox",
       icons: <Icon icon="ic:outline-contact-support" />,
     },
   ],
