@@ -10,15 +10,15 @@ const nextConfig = {
       },
     ],
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/dashboard",
-  //       destination: "/dashboard/admin/overview",
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: "/dashboard",
+        destination: "/dashboard/admin/overview",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
