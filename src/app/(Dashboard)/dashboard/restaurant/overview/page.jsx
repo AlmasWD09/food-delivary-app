@@ -1,10 +1,14 @@
 "use client";
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
-import Chart from "react-apexcharts";
-import DatePicker from "react-datepicker";
+import dynamic from "next/dynamic"; // Import dynamic for client-side rendering
 import "react-datepicker/dist/react-datepicker.css";
-const OverviewPage = () => {
+
+// Dynamically import Chart and DatePicker to ensure they only render on the client-side
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const DatePicker = dynamic(() => import("react-datepicker"), { ssr: false });
+
+const RestaurantOverview = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const colors = [
@@ -25,7 +29,6 @@ const OverviewPage = () => {
         data: [21, 22, 10, 28, 16, 21, 13, 30, 45, 45, 75, 42],
       },
     ],
-
     colors: colors,
     plotOptions: {
       bar: {
@@ -39,7 +42,6 @@ const OverviewPage = () => {
     legend: {
       show: false,
     },
-
     xaxis: {
       categories: [
         "Jan",
@@ -61,7 +63,7 @@ const OverviewPage = () => {
   //   top selling chart data
   let donutOption = {
     series: [44, 55, 41, 17, 15],
-    labels: ["Pizaa", "Butter Chicken", "Biriyani", "Friend Chicken", "Burger"],
+    labels: ["Pizza", "Butter Chicken", "Biriyani", "Fried Chicken", "Burger"],
     legend: {
       show: true,
       position: "bottom",
@@ -77,20 +79,19 @@ const OverviewPage = () => {
         enabled: false,
       },
     },
-
     chartOptions: {
       labels: ["Apple", "Mango", "Orange", "Watermelon"],
     },
   };
 
   return (
-    <div className="space-y-5 ">
+    <div className="space-y-16  ">
       {/* stats icons with data  */}
-      <div className=" flex flex-col lg:flex-row items-center lg:justify-between gap-6  ">
+      <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-6">
         {/* card 1 stats */}
-        <div className="flex flex-col  gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
+        <div className="flex flex-col gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-6">
-            <span className="p-3 rounded-full bg-blue-400  text-white text-4xl">
+            <span className="p-3 rounded-full bg-blue-400 text-white text-4xl">
               <Icon icon="mdi:chart-line" />
             </span>
             <h1 className="text-4xl flex items-center gap-2">
@@ -101,20 +102,20 @@ const OverviewPage = () => {
           <div className="flex items-center justify-between gap-10">
             <div>
               <h1 className="font-extrabold">Total Sales</h1>
-              <span className="flex items-center gap-1  font-semibold">
+              <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">2.1%</span>
                 <span className="text-text">vs last week</span>
               </span>
             </div>
-            <Icon className="text-4xl text-green-500 " icon="ph:trend-up" />
+            <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
         </div>
 
         {/* card 2 menu */}
-        <div className="flex flex-col  gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
+        <div className="flex flex-col gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-10">
-            <span className="p-3 rounded-full bg-orange-400  text-white text-4xl">
+            <span className="p-3 rounded-full bg-orange-400 text-white text-4xl">
               <Icon icon="ic:baseline-restaurant-menu" />
             </span>
             <h1 className="text-4xl font-semibold">85426</h1>
@@ -129,13 +130,14 @@ const OverviewPage = () => {
                 <span className="text-text">vs last week</span>
               </span>
             </div>
-            <Icon className="text-4xl text-green-500 " icon="ph:trend-up" />
+            <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
         </div>
+
         {/* card 3 user */}
-        <div className="flex flex-col  gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
+        <div className="flex flex-col gap-9 p-6 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-10">
-            <span className="p-3 rounded-full bg-blue-700  text-white text-4xl">
+            <span className="p-3 rounded-full bg-blue-700 text-white text-4xl">
               <Icon icon="ph:user" />
             </span>
             <h1 className="text-4xl font-semibold">980</h1>
@@ -150,13 +152,14 @@ const OverviewPage = () => {
                 <span className="text-text">vs last week</span>
               </span>
             </div>
-            <Icon className="text-4xl text-green-500 " icon="ph:trend-up" />
+            <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
         </div>
-        {/* card 4  orders*/}
-        <div className="flex flex-col   px-6 py-4 gap-3 rounded-xl w-fit bg-white shadow-md">
+
+        {/* card 4 orders */}
+        <div className="flex flex-col px-6 py-4 gap-3 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-10">
-            <span className="p-3 rounded-full bg-green-500  text-white text-4xl">
+            <span className="p-3 rounded-full bg-green-500 text-white text-4xl">
               <Icon icon="material-symbols:order-approve-outline-sharp" />
             </span>
             <h1 className="text-4xl font-semibold p-2 bg-slate-100 rounded-xl text-green-600">
@@ -173,17 +176,18 @@ const OverviewPage = () => {
                 <span className="text-text">vs last week</span>
               </span>
             </div>
-            <Icon className="text-4xl text-green-500 " icon="ph:trend-up" />
+            <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
-          <button className="bg-slate-100 text-green-500 px-2 py-1 rounded-lg font-extrabold cursor-pointer text-sm flex items-center justify-center gap-6 w-fit  ">
+          <button className="bg-slate-100 text-green-500 px-2 py-1 rounded-lg font-extrabold cursor-pointer text-sm flex items-center justify-center gap-6 w-fit">
             Manage orders{" "}
             <Icon className="text-xl" icon="weui:arrow-outlined" />
           </button>
         </div>
+
         {/* card 5 reviews */}
-        <div className="flex flex-col  px-6 py-4 gap-3  rounded-xl w-fit bg-white shadow-md">
+        <div className="flex flex-col px-6 py-4 gap-3 rounded-xl w-fit bg-white shadow-md">
           <div className="flex items-center justify-between gap-10">
-            <span className="p-3 rounded-full bg-amber-400  text-white text-4xl">
+            <span className="p-3 rounded-full bg-amber-400 text-white text-4xl">
               <Icon icon="material-symbols:reviews-outline" />
             </span>
             <h1 className="text-4xl font-semibold p-2 bg-slate-100 rounded-xl text-amber-500">
@@ -200,47 +204,44 @@ const OverviewPage = () => {
                 <span className="text-text">vs last week</span>
               </span>
             </div>
-            <Icon className="text-4xl text-green-500 " icon="ph:trend-up" />
+            <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
           </div>
-          <button className="bg-slate-100 text-amber-500  px-2 py-1  rounded-lg font-extrabold cursor-pointer text-sm flex items-center justify-center gap-6 w-fit">
-            view reviews <Icon className="text-xl" icon="weui:arrow-outlined" />
+          <button className="bg-slate-100 text-amber-500 px-2 py-1 rounded-lg font-extrabold cursor-pointer text-sm flex items-center justify-center gap-6 w-fit">
+            View reviews <Icon className="text-xl" icon="weui:arrow-outlined" />
           </button>
         </div>
       </div>
 
-      {/* chart area  */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between lg:h-full gap-6   ">
-        <div className="p-5 shadow-md  bg-white rounded-xl  w-full ">
-          <div className="space-y-3">
-            <h1 className="text-2xl font-extrabold">Revenue</h1>
+      {/* charts  */}
+      <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-5">
+        {/* revenue chart */}
+        <div className="flex flex-col p-6 gap-3 rounded-xl w-full h-full bg-white shadow-md">
+          <div className="flex items-center gap-3">
+            <h1 className="font-extrabold">Revenue: </h1>
             <DatePicker
+              className="text-center w-20 outline-none focus:ring-1  bg-slate-100 rounded-lg"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
               showYearPicker
               dateFormat="yyyy"
-              selected={startDate}
-              className="p-2 outline-none rounded-md bg-slate-100 w-fit"
-              onChange={(date) => setStartDate(date)}
             />
           </div>
-          <div>
-            <Chart
-              options={options}
-              series={options.series}
-              type="bar"
-              width="100%"
-            />
-          </div>
+          <Chart
+            options={options}
+            series={options.series}
+            type="bar"
+            className="overflow-x-auto"
+          />
         </div>
 
-        <div className="p-5  bg-white full  rounded-xl  shadow-md  w-full">
-          <div className="space-y-3">
-            <h1 className="text-2xl font-extrabold">Top Selling</h1>
-          </div>
+        {/* top selling chart */}
+        <div className="flex flex-col p-6 gap-3 rounded-xl w-full bg-white shadow-md">
+          <h1 className="font-extrabold">Top Selling Menu</h1>
           <Chart
             options={donutOption}
             series={donutOption.series}
             type="donut"
-            height="500"
-            width="100%"
+            height={460}
           />
         </div>
       </div>
@@ -248,4 +249,4 @@ const OverviewPage = () => {
   );
 };
 
-export default OverviewPage;
+export default RestaurantOverview;

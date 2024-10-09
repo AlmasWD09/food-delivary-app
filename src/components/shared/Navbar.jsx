@@ -14,25 +14,27 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-console.log('navbar page----->17',session);
+  console.log("navbar page----->17", session);
   useEffect(() => {
-      const fetchItems = async () => {
-          try {
-              const response = await axios.get(`http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`);
-              setItems(response.data);
-          } catch (error) {
-              console.log(error.message);
-          } finally {
-              setLoading(false);
-          }
-      };
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`
+        );
+        setItems(response.data);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchItems();
+    fetchItems();
   }, []);
 
-  if (loading) {
-      return <li>Loading...</li>; 
-  }
+  // if (loading) {
+  //     return <li>Loading...</li>;
+  // }
 
   const navLinks = [
     {
@@ -59,7 +61,7 @@ console.log('navbar page----->17',session);
   ];
 
   return (
-    <div className="h-20 font-urbanist  bg-secondaryGray   relative">
+    <div className="h-20 font-urbanist  bg-base-100   relative  shadow-md ">
       <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
@@ -83,13 +85,13 @@ console.log('navbar page----->17',session);
                 <div className="group relative">
                   <li
                     className={`font-semibold px-2 py-1 rounded-md ${
-                      pathname == item.path && "bg-orange-200"
+                      pathname == item.path && "bg-secondary text-fourth"
                     }`}
                   >
                     {item.title}
                   </li>
 
-                  <span className="w-full h-0.5 absolute bg-black -bottom-1 left-0 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"></span>
+                  <span className="w-full h-0.5 absolute bg-secondary -bottom-1 left-0 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"></span>
                 </div>
               </Link>
             ))}
@@ -123,50 +125,59 @@ console.log('navbar page----->17',session);
 
             {/* account hover area start */}
 
-            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-20 top-10 ">
-              <div className="h-4 w-full"></div>
+            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-24 top-10 gap-0 ">
+              <div className="h-14  w-full "></div>
+              <div className="w-full flex justify-center  ">
+                <Icon
+                  className="text-4xl absolute top-7  text-secondary "
+                  icon="ri:triangle-fill"
+                />
+              </div>
               <div
                 className={` ${
                   session?.data?.user ? "w-full" : "p-10"
-                }  bg-secondaryGray text-nowrap`}
+                }   text-nowrap bg-third  border-4 border-secondary`}
               >
                 {session?.data?.user ? (
                   <>
-                   <div className="w-[240px]">
-                   <h1 className="uppercase font-bold text-xl  p-6">
-                      {session?.data?.user?.name}
-                    </h1>
+                    <div className="w-[240px]">
+                      <h1 className="uppercase font-bold text-xl  p-6">
+                        {session?.data?.user?.name}
+                      </h1>
 
-                    <div>
-                      <ul className=" font-semibold  ">
-                        <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary w-full "
-                          href="/profile"
-                        >
-                          <Icon icon="gg:profile" />
-                          <li>Profile</li>
-                        </Link>
-                        <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
-                          href="/orders"
-                        >
-                          <Icon icon="solar:box-broken" />
-                          <li>Orders</li>
-                        </Link>
-                        <Link
-                          className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4  border-b-2 border-secondary w-full"
-                          href="/whishlist"
-                        >
-                          <Icon icon="solar:heart-outline" />
-                          <li>Wishlist</li>
-                        </Link>
-                        <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full">
-                          <Icon icon="hugeicons:logout-04" />
-                          <span>Logout</span>
-                        </button>
-                      </ul>
+                      <div>
+                        <ul className=" font-semibold  ">
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary w-full "
+                            href="/profile"
+                          >
+                            <Icon icon="gg:profile" />
+                            <li>Profile</li>
+                          </Link>
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4 border-b-2 border-secondary  w-full"
+                            href="/orders"
+                          >
+                            <Icon icon="solar:box-broken" />
+                            <li>Orders</li>
+                          </Link>
+                          <Link
+                            className=" gap-2 hover:bg-secondary hover:text-fourth flex items-center p-4  border-b-2 border-secondary w-full"
+                            href="/whishlist"
+                          >
+                            <Icon icon="solar:heart-outline" />
+                            <li>Wishlist</li>
+                          </Link>
+                          <button
+                            onClick={signOut}
+                            className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full"
+                          >
+                            <Icon icon="hugeicons:logout-04" />
+                            <span>Logout</span>
+                          </button>
+                        </ul>
+                      </div>
                     </div>
-                   </div>
                   </>
                 ) : (
                   <>
@@ -179,7 +190,7 @@ console.log('navbar page----->17',session);
 
                     <div className="flex items-center gap-4 justify-center pt-4">
                       <Link href="/signup">
-                        <button className="px-4 py-2 bg-primary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
+                        <button className="px-4 py-2 bg-secondary text-white font-semibold hover:scale-110 hover:bg-primaryLight transition-all duration-300 ease-in-out">
                           Sign Up
                         </button>
                       </Link>
@@ -198,31 +209,42 @@ console.log('navbar page----->17',session);
 
           {/* account button end  */}
 
-         <div className="group relative hidden lg:flex">
-         <button className=" hidden lg:flex flex-col items-center   group relative z-20">
-            <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
-            <p>Cart</p>
+          <div className="group relative hidden lg:flex">
+            <button className=" hidden lg:flex flex-col items-center   group relative z-20">
+              <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
+              <p>Cart</p>
 
-            <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
-            <span className={`absolute ${items?.length === 0 && "hidden"} bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}>{items?.length}</span>
-          </button>
-           {/* cart hover start */}
-           <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
+              <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
+              <span
+                className={`absolute ${
+                  items?.length === 0 && "hidden"
+                } bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}
+              >
+                {items?.length}
+              </span>
+            </button>
+            {/* cart hover start */}
+            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
               <div className="h-4 w-full"></div>
-               <div className="bg-secondaryGray  w-[300px] text-nowrap">
-                  <p className="font-semibold text-lg p-4">All added items</p>
-                  <div>
-                    <ul>
-                     <NavCartList/>
-                    </ul>
-                  </div>
-                 <div className="py-4 flex justify-center">
-                 <Link href={"/order"} className="px-2 font-medium bg-primary text-white py-1">View Process</Link>
-                 </div>
-               </div>
+              <div className="bg-secondaryGray  w-[300px] text-nowrap">
+                <p className="font-semibold text-lg p-4">All added items</p>
+                <div>
+                  <ul>
+                    <NavCartList />
+                  </ul>
+                </div>
+                <div className="py-4 flex justify-center">
+                  <Link
+                    href={"/order"}
+                    className="px-2 font-medium bg-primary text-white py-1"
+                  >
+                    View Process
+                  </Link>
+                </div>
+              </div>
             </div>
-           {/* cart hover end */}
-         </div>
+            {/* cart hover end */}
+          </div>
 
           {/* cart button end  */}
           <button
@@ -243,7 +265,7 @@ console.log('navbar page----->17',session);
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-secondaryGray ease-in-out duration-300 transform ${
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-third ease-in-out duration-300 transform ${
           getMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -258,7 +280,7 @@ console.log('navbar page----->17',session);
                 <li
                   key={item.path}
                   className={`font-bold p-4 hover:bg-amber-200 ${
-                    pathname === item.path && "bg-orange-200"
+                    pathname === item.path && "bg-secondary text-fourth"
                   } `}
                 >
                   {item.title}
@@ -271,7 +293,7 @@ console.log('navbar page----->17',session);
           <div
             className={` ${
               session
-                ? " border-2  border-primary w-fit mx-auto mt-10"
+                ? " border-4  border-secondary w-fit mx-auto mt-10"
                 : "w-full"
             }`}
           >
@@ -301,27 +323,30 @@ console.log('navbar page----->17',session);
                 <div>
                   <ul className=" font-semibold  text-lg">
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full "
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full "
                       href="/profile"
                     >
                       <Icon className="text-lg" icon="gg:profile" />
                       <li>Profile</li>
                     </Link>
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full"
                       href="/orders"
                     >
                       <Icon className="text-lg" icon="solar:box-broken" />
                       <li>Orders</li>
                     </Link>
                     <Link
-                      className=" gap-2 hover:bg-primary hover:text-white flex items-center p-4 border-b-2 border-secondary  w-full"
+                      className=" gap-2 hover:bg-secondary hover:text-fouth flex items-center p-4 border-b-2 border-secondary  w-full"
                       href="/whishlist"
                     >
                       <Icon className="text-lg" icon="solar:heart-outline" />
                       <li>Wishlist</li>
                     </Link>
-                    <button onClick={signOut} className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full">
+                    <button
+                      onClick={signOut}
+                      className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full"
+                    >
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>
                     </button>
