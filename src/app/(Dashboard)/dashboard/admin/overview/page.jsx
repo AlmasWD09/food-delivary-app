@@ -160,46 +160,52 @@ const Overview = () => {
 
   return (
     <div className="space-y-10">
-      {/* card section  */}
-      <div className="flex flex-col lg:flex-row items-center justify-between text-white gap-10 lg:gap-0">
-        <div className="flex items-center justify-between w-full lg:w-fit gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg ">
+      {/* section 1 / card section  */}
+      <div className="grid lg:grid-cols-5   text-white gap-10  lg:gap-12 ">
+        {/* total users card 1  */}
+        <div className="flex items-center justify-between w-full p-6 shadow-md bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg ">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">435</h2>
-            <p className="">Total Users</p>
+            <p className="text-nowrap">Total Users</p>
           </div>
           <Icon className="text-6xl " icon="mdi:user" />
         </div>
-        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-red-500 to-orange-500  rounded-lg w-full lg:w-fit">
+        {/* total earnings card 2  */}
+        <div className="flex items-center justify-between  shadow-md p-6 bg-gradient-to-r from-red-500 to-orange-500  rounded-lg w-full ">
           <div className="flex flex-col  items-center gap-2 ">
-            <h2 className="text-4xl font-semibold ">$ 7135</h2>
-            <p className="">Total Earnings</p>
+            <h2 className="text-4xl font-semibold text-nowrap ">$ 7135</h2>
+            <p className="text-nowrap">Total Earnings</p>
           </div>
           <Icon className="text-6xl " icon="solar:wallet-money-outline" />
         </div>
-        <div className="flex items-center justify-between gap-16 shadow-md px-8 py-8 bg-gradient-to-r from-fuchsia-600 to-pink-600  rounded-lg w-full lg:w-fit">
+        {/* pending orders card 3  */}
+        <div className="flex items-center justify-between  shadow-md p-6 bg-gradient-to-r from-fuchsia-600 to-pink-600  rounded-lg w-full ">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">78</h2>
-            <p className="">Pending Orders</p>
+            <p className="text-nowrap">Pending Orders</p>
           </div>
 
-          <Icon className="text-6xl " icon="heroicons:shopping-bag-20-solid" />
+          <Icon className="text-6xl" icon="heroicons:shopping-bag-20-solid" />
         </div>
-        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-blue-600 to-violet-600  rounded-lg w-full lg:w-fit">
+        {/* total restaurants card 4  */}
+        <div className="flex items-center justify-between  p-6 shadow-md bg-gradient-to-r from-blue-600 to-violet-600  rounded-lg w-full ">
           <div className="flex flex-col  items-center gap-2">
             <h2 className="text-4xl font-semibold ">535</h2>
-            <p className="">Total Restaurants</p>
+            <p className="text-nowrap">Total Restaurants</p>
           </div>
           <Icon className="text-6xl " icon="entypo:shop" />
         </div>
-        <div className="flex items-center justify-between gap-16 px-8 py-8 shadow-md bg-gradient-to-r from-slate-900 to-slate-700 rounded-lg w-full lg:w-fit">
+        {/* total riders card 5  */}
+        <div className="flex items-center justify-between  p-6  shadow-md bg-gradient-to-r from-slate-900 to-slate-700 rounded-lg w-full ">
           <div className="flex flex-col  items-center gap-2 ">
             <h2 className="text-4xl font-semibold ">435</h2>
-            <p className="">Total Riders</p>
+            <p className="text-nowrap">Total Riders</p>
           </div>
           <Icon className="text-6xl " icon="mdi:bike" />
         </div>
       </div>
 
+      {/* section 2 charts  */}
       <div className="w-full  flex flex-col lg:flex-row items-center justify-between gap-10 ">
         {/* charts  */}
         <div className="p-8 lg:p-10 bg-white rounded-xl  w-full ">
@@ -256,10 +262,14 @@ const Overview = () => {
         </div>
       </div>
 
-      {/* tables  */}
+      {/* section 3 tables  */}
       <div className="w-full p-10 bg-white rounded-2xl ">
-        <h2 className="font-bold text-xl py-4">Recent Transaction</h2>
-
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold text-xl py-4">Recent Transaction</h2>
+          <button className="font-bold border-2  text-base px-2 py-1 rounded-xl capitalize">
+            sell all
+          </button>
+        </div>
         <div className="overflow-auto">
           <table className=" w-full  divide-y-2 ">
             <thead>
