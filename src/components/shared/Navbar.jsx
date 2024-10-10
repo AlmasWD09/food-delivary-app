@@ -12,27 +12,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
   const session = useSession();
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`
-        );
-        setItems(response.data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchItems();
-  }, []);
-
-  // if (loading) {
-  //     return <li>Loading...</li>;
-  // }
   const [data,refetch,isLoading] = useCartItems()
   console.log(data)
   if (isLoading) {
@@ -147,7 +126,7 @@ const Navbar = () => {
                   <>
                     <div className="w-[240px]">
                       <h1 className="uppercase font-bold text-xl  p-6">
-                        {session?.data?.user?.firstName} {session?.data?.user?.lastName}
+                        {session?.data?.user?.name}
                       </h1>
 
                       <div>
@@ -315,7 +294,7 @@ const Navbar = () => {
                     <Image
                       className="object-cover h-full w-full"
                       src={session?.data?.user?.image}
-                      alt={session?.data?.user?.firstName}
+                      alt={session?.data?.user?.name}
                       height={1000}
                       width={1000}
                     />
@@ -323,7 +302,7 @@ const Navbar = () => {
 
                   <div>
                     <h1 className="text-xl capitalize font-bold">
-                    {session?.data?.user?.firstName} {session?.data?.user?.lastName}
+                      {session?.data?.user?.name}
                     </h1>
                     <h2 className="font-semibold capitalize">
                       {session?.data?.user?.role}
