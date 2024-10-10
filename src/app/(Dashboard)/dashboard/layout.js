@@ -16,10 +16,7 @@ export default function RootLayout({ children }) {
             <DashboardNav />
           </div>
           <div className=" h-screen flex-1  font-Manrope  overflow-y-auto ">
-            <div className="sticky top-0 hidden lg:flex z-50 ">
-              <TopBar />
-            </div>
-            <div className=" bg-gray-100 px-3 pb-3  pt-32  lg:p-5 h-[calc(100vh-100px)] ">
+            <div className="w-full  bg-gray-100 px-3 pb-3  pt-32  lg:p-5 flex justify-between  border-2 border-pink-400 min-h-screen  ">
               {children}
             </div>
           </div>

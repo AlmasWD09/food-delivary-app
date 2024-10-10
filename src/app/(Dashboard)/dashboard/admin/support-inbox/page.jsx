@@ -3,7 +3,7 @@ import ComingSoon from "../../../../../../public/comingsoon.svg";
 import Image from "next/image";
 const Users = () => {
   return (
-    <div className="h-full w-full flex justify-center items-center">
+    <div className="min-h-screen w-full flex justify-center items-center">
       <Image
         src={ComingSoon}
         width={500}
