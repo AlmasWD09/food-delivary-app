@@ -112,7 +112,7 @@ const OrderPage = () => {
                           <label className="block text-sm font-medium text-gray-700">Full name</label>
                           <input
                             required
-                            defaultValue={"Ahmed Antor"}
+                            defaultValue={session?.data?.user?.name}
                             placeholder="Enter w-full your name"
                             className="border mt-2 rounded-xl p-3"
                             type="text"
@@ -148,7 +148,7 @@ const OrderPage = () => {
                           <input
                             required
                             placeholder="Enter  your email"
-                            defaultValue={"ahmedAntor@gmail.com"}
+                            defaultValue={session?.data?.user?.email}
                             className="border mt-2 w-full rounded-xl p-3"
                             type="email"
                             disabled={ship === "no"}
