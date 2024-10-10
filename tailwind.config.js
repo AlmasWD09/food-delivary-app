@@ -24,7 +24,7 @@ module.exports = {
       colors: {
         // background: "var(--background)",
         // foreground: "var(--foreground)",
-        primary: "#d97706", // amber-600
+        primary: "#ea580c", // orange-600
         primaryLight: "#fd8802",
         primaryGray: "#fffbeb", // amber-50
         secondary: "#fde68a", // amber-200

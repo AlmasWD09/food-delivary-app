@@ -8,13 +8,21 @@ import "react-tabs/style/react-tabs.css";
 const ProfilePage = () => {
   const session = useSession();
   console.log(session, 'profile page');
+  const currentUser = {
+   firstName : 'MD.ALMAS',
+   lastName : 'HOSSAIN',
+   email : 'almashossain7384@gmail.com',
+   phoneNumber : '017049958..',
+   image : 'https://i.ibb.co.com/JzSBvRY/442442918-1782293755513191-8449340473128848588-n.jpg',
+   address : ''
+  }
   return (
     <div className="container mx-auto p-4 mt-2">
       <div className="flex justify-center items-center h-full w-full">
         <div className="h-1/2 flex flex-col lg:flex-row   w-full gap-6 ">
           {/* left side profile  */}
 
-          <div className="h-fit w-full lg:w-1/3  relative  shadow-lg">
+          <div className="md:min-h-[470px] w-full lg:w-1/3  relative  shadow-lg">
             <div className="w-full h-52 object-cover">
               <Image
                 src="/assets/profile-cover.webp"
@@ -24,8 +32,9 @@ const ProfilePage = () => {
                 width={1000}
               />
             </div>
-            <div className="flex flex-col items-center justify-center w-full  ">
-              <div className="w-32 border-4 border-white h-32 rounded-full overflow-hidden absolute top-36">
+            <div className="flex flex-col items-center justify-center w-full">
+              {
+                session?.data?.user && <div className="w-32 border-4 border-white h-32 rounded-full overflow-hidden absolute top-36">
                 <Image
                   src={session?.data?.user?.image}
                   alt="example image"
@@ -34,6 +43,7 @@ const ProfilePage = () => {
                   width={1000}
                 />
               </div>
+              }
               {/* name and level heading  */}
 
               <div className=" w-full px-8 pb-8 pt-20  ">
