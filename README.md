@@ -11,3 +11,4 @@ packages i used
 #npm i react-leaflet
 #npm i mongodb
 #npm install @tanstack/react-table
+#npm i react-rating-stars-component

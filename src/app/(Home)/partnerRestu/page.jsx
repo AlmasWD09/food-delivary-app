@@ -1,9 +1,71 @@
+"use client"
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import { FaAngleDoubleUp, FaArrowRight, FaCogs, FaHeart } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 
 
 const PartnerRestu = () => {
+  const axiosPub = useAxiosPublic()
+  const queryClient = useQueryClient();
+  const session = useSession()
+
+  const {mutateAsync} = useMutation({
+    mutationKey: ["restu"],
+    mutationFn : async(item)=>{
+      const {data} = await axiosPub.post("/restaurents",item)
+      console.log(data)
+      return data
+    },
+    onSuccess : () => {
+      toast.success("Your apply recorded. Please wait for approval.")
+      queryClient.invalidateQueries("restu");
+    }
+  })
+  
+  const handlePartner = async(e) => {
+    e.preventDefault();
+    const form = e.target;
+  
+    const name = form.name.value;
+    const number = form.number.value;
+    const address = form.address.value;
+    const email = session?.data?.user?.email;
+    const shop = form.shop.value;
+    const businessAddress = form.businessAddress.value;
+    const fileInput = form.fileInput.files[0];  
+ 
+    const formData = new FormData();
+    formData.append('image', fileInput); 
+
+    try{
+     const {data} = await axios.post(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,formData)
+    
+     const restaurant = {
+      name,
+      number,
+      address,
+      email,
+      shop,
+      businessAddress,
+      status: "pending",
+      image : data?.data?.url
+    };
+    mutateAsync(restaurant)
+    }
+    catch(error){
+     console.log(error)
+    }
+  
+   
+  
+   
+  };
+  
     return (
         <div>
              <div
@@ -32,7 +94,7 @@ const PartnerRestu = () => {
                    <h3 className="text-2xl mb-3 font-semibold flex items-center gap-3"><FaAngleDoubleUp className="text-primaryLight" /> Increased Visibility</h3>
                    <p>Dui sapien eget mi proin sed. Nibh nisl condimentum id venenatis a. Vulputate eu scelerisque felis imperdiet proin fermentum leo.</p>
                  </div>
-                  <div className="border rounded-lg p-4">
+                  <div className="border shadow-lg rounded-lg p-4">
                    <h3 className="text-2xl mb-3 font-semibold flex items-center gap-3"><FaCogs className="text-primaryLight" /> Seamless Operations</h3>
                    <p>Consequat semper viverra nam libero justo laoreet sit. Consequat semper viverra nam libero justo laoreet sit amet cursus. Morbi tincidunt ornare .</p>
                  </div>
@@ -45,26 +107,26 @@ const PartnerRestu = () => {
              <div className="mt-24 flex flex-col md:flex-row  md:justify-around gap-10">
             
             <div className="md:shadow-xl lg:p-10"> 
-                 <form>
+                 <form onSubmit={handlePartner}>
                    <div className="grid lg:grid-cols-2 gap-5">
                      <div className="flex col-span-1 flex-col">
                        <label className="block text-sm font-medium text-gray-700">Full name</label>
                        <input
                          required
-                         placeholder="Enter w-full your name"
+                         placeholder="Enter your name"
                          className="border mt-2 rounded-xl p-3"
                          type="text"
-                         
+                         name="name"
                        />
                      </div>
                      <div className="flex col-span-1 flex-col">
                        <label className="block text-sm font-medium text-gray-700">Mobile number</label>
                        <input
                          required
-                         placeholder="Enter w-full your number"
+                         placeholder="Enter your number"
                          className="border mt-2 rounded-xl p-3"
                          type="number"
-                       
+                         name="number"
                        />
                      </div>
                    </div>
@@ -74,19 +136,20 @@ const PartnerRestu = () => {
                        <input
                          placeholder="Enter  your address"
                          required
-                         className="border mt-2 w-full rounded-xl p-3"
+                         className="border mt-2 rounded-xl p-3"
                          type="text"
-                         
+                          name="address"
                        />
                      </div>
                      <div className="flex col-span-1 flex-col">
                        <label className="block text-sm font-medium text-gray-700">Email address</label>
                        <input
                          required
-                         placeholder="Enter  your email"
-                         className="border mt-2 w-full rounded-xl p-3"
+                         placeholder={session?.data?.user?.email}
+                         className="border mt-2 rounded-xl p-3"
                          type="email"
-                         
+                         name="email"
+                         disabled
                        />
                      </div>
                    </div>
@@ -96,9 +159,9 @@ const PartnerRestu = () => {
                        <input
                          placeholder="Enter  your address"
                          required
-                         className="border mt-2 w-full rounded-xl p-3"
+                         className="border mt-2 rounded-xl p-3"
                          type="text"
-                         
+                         name="shop"
                        />
                      </div>
                      <div className="flex col-span-1 flex-col">
@@ -109,7 +172,7 @@ const PartnerRestu = () => {
                          placeholder="Enter  your business address"
                          className="border mt-2 w-full rounded-xl p-3"
                          type="text"
-                         
+                         name="businessAddress"
                        />
                      </div>
                    </div>
