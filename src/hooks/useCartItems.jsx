@@ -7,7 +7,6 @@ const useCartItems = () => {
     const axiosPublic = useAxiosPublic();
     const session = useSession()
     const email = session?.data?.user?.email
-    console.log(email,"from cart items")
     const {data = [],refetch,isLoading} = useQuery({
         queryKey: ['foods',], 
         queryFn: async() =>{

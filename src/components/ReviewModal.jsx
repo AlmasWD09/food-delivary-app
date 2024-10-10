@@ -78,7 +78,7 @@ const ReviewModal = ({restaurantName}) => {
         userName:session?.data?.user?.name,
       };
    
-      const { data, isLoading, refetch } = useQuery({
+      const { data=[], isLoading, refetch } = useQuery({
         queryKey: ["fav"],
         queryFn: async () => {
        

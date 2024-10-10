@@ -20,19 +20,16 @@ export default function RestaurantD({ params }) {
   
  
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/rest`)
       .then(res => res.json())
       .then(data => setRestaurant(data))
   }, [])
 
-  const restaurant = restaurants.find(restaurent => restaurent._id === params.restaurantId)
+  const restaurant = restaurants?.find(restaurent => restaurent._id === params.restaurantId)
   const name = restaurant?.restaurantName
 
   const [data,isLoading,refetch] = useResturantReviews({name})
 
-  
- console.log(data)
- 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
       .then(res => res.json())
@@ -46,7 +43,7 @@ export default function RestaurantD({ params }) {
  
 
   // Ensure the comparison is case-insensitive and trims extra spaces
-  const restaurantMenus = foods.filter(food =>
+  const restaurantMenus = foods?.filter(food =>
     food.restaurant?.trim().toLowerCase() === restaurant?.restaurantName?.trim().toLowerCase()
   );
   
@@ -57,18 +54,18 @@ export default function RestaurantD({ params }) {
   return (
     <div className="container px-2 mx-auto">
       <div className="mb-5 relative">
-        <Image src={restaurant.restaurantImage} width={900} height={450} alt="restaurant image" className="h-52 object-cover bg-center w-full md:h-80 lg:h-[450px] rounded-xl" />
+        <Image src={restaurant?.restaurantImage} width={900} height={450} alt="restaurant image" className="h-52 object-cover bg-center w-full md:h-80 lg:h-[450px] rounded-xl" />
         <ReviewModal restaurantName={restaurant?.restaurantName} />
       </div>
       <div>
         <div className="flex items-center gap-5">
-        <h1 className="text-3xl md:text-4xl font-semibold">{restaurant.restaurantName}</h1>
-        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant.rating} <IoStarSharp className="text-lg text-orange-400" /></h1>
+        <h1 className="text-3xl md:text-4xl font-semibold">{restaurant?.restaurantName}</h1>
+        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant?.rating} <IoStarSharp className="text-lg text-orange-400" /></h1>
         </div>
-        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant.location}</h1>
-        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant.openTime} - {restaurant.closeTime}</h1>
+        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant?.location}</h1>
+        <h1 className="flex items-center gap-1 text-[#677480]">{restaurant?.openTime} - {restaurant?.closeTime}</h1>
         
-        <p className="text-sm w-full md:w-9/12 lg:w-7/12 text-[#677480]">{restaurant.description} Papa Johns Pizza (2545 E. Speedway Blvd #165) in Tucson offers a variety of classic and specialty pizzas, including popular choices like Pepperoni Pizza, Cheese Pizza, and Sausage Pizza. Guests can also customize their meals with the Create Your Own Pizza option. Beyond pizza, the menu features Papadias – a unique flatbread-style sandwich – and a selection of sides such as Garlic Parmesan Breadsticks and Cheesesticks. For those with a sweet tooth, desserts like the Double Chocolate Chip Brownie and OREO Cookie Papa Bites are available. </p>
+        <p className="text-sm w-full md:w-9/12 lg:w-7/12 text-[#677480]">{restaurant?.description} Papa Johns Pizza (2545 E. Speedway Blvd #165) in Tucson offers a variety of classic and specialty pizzas, including popular choices like Pepperoni Pizza, Cheese Pizza, and Sausage Pizza. Guests can also customize their meals with the Create Your Own Pizza option. Beyond pizza, the menu features Papadias – a unique flatbread-style sandwich – and a selection of sides such as Garlic Parmesan Breadsticks and Cheesesticks. For those with a sweet tooth, desserts like the Double Chocolate Chip Brownie and OREO Cookie Papa Bites are available. </p>
       </div>
       <hr className="my-3" />
       {/* Discount */}
@@ -155,7 +152,7 @@ export default function RestaurantD({ params }) {
         <h3 className="text-2xl   font-semibold">Rating and Reviews</h3>
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
-            data.length > 0 ? data?.map(review => <>
+            data?.length > 0 ? data?.map(review => <>
               <div className="border hover:shadow-lg p-6 rounded-lg">
               <h1 className="text-orange-500 flex items-center justify-center gap-2">
               {Array(review?.rating).fill().map((_, i) => (
@@ -179,7 +176,7 @@ export default function RestaurantD({ params }) {
       </div>
 
       <div className="my-10">
-        <RestaurantMap location={restaurant.location} />
+        <RestaurantMap location={restaurant?.location} />
       </div>
       
     </div>
