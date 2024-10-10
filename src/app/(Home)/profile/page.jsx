@@ -1,10 +1,14 @@
 "use client";
 import { Icon } from "@iconify/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-const page = () => {
+const ProfilePage = () => {
+   const session = useSession()
+   console.log(session)
+
   return (
     <div className="container mx-auto p-4 lg:mt-10 mt-8">
       <div className="flex justify-center items-center h-full w-full">
@@ -156,4 +160,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;

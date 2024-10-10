@@ -1,26 +1,15 @@
 "use client"
 import Menu from '@/components/Menu';
 import RecommendMenu from '@/components/RecommendMenu';
+import useMenus from '@/hooks/useMenus';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
 const MenuPage = () => {
-     const [foods,setFoods] = useState([])
    
-     useEffect(()=>{
-      try{
-        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
-        .then(response => {
-          setFoods(response.data)
-        })
-      }
-      catch(error){
-        console.log(error.message)
-      }
-     },[])
-
-    
+     const [menuData,isLoading,refetch] = useMenus()
+   
     return (
         <div>
         <div
@@ -36,11 +25,11 @@ const MenuPage = () => {
                 </div>
             </div>
         </div>
-       <Menu foods={foods} />
+       <Menu menuData={menuData} refetch={refetch} />
        <div className="py-20 px-3 lg:px-0 lg:max-w-[1240px] mx-auto">
         <p className="text-xl  font-medium">Recommended</p>
           <h3 className="text-4xl mt-1 mb-8 font-bold">Just for you</h3>
-          <RecommendMenu foods={foods} />
+          <RecommendMenu menuData={menuData} isLoading={isLoading} />
        </div>
     </div>
     );
