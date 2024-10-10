@@ -1,6 +1,7 @@
 "use client";
 import SocialSignin from "@/components/shared/SocialSignin";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,9 +11,10 @@ const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const SignupPage = () => {
   const router = useRouter();
+  const session = useSession();
+  console.log(session, 'signup page--> 15');
   const handleSignUp = async (event) => {
     event.preventDefault();
-
 
     const imageFile = event.target.image.files[0]; // Get the image file properly
     const formData = new FormData(); // Create FormData for file upload
@@ -30,8 +32,10 @@ const SignupPage = () => {
 
       // Create newUser object with the image URL
       const newUser = {
-        name: event.target.fullname.value,
+        firstName: event.target.firstName.value,
+        lastName: event.target.lastName.value,
         email: event.target.emailAddress.value,
+        phoneNumber: event.target.phoneNumber.value,
         password: event.target.password.value,
         image: imageUrl, // Add the image URL
         role: 'admin',
@@ -91,14 +95,28 @@ const SignupPage = () => {
               </h1>
             </div>
             <form onSubmit={handleSignUp} className="flex flex-col gap-4">
-              {/* Full Name */}
+              {/* First Name */}
               <input
                 type="text"
-                name="fullname"
+                name="firstName"
                 className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
-                placeholder="Full Name"
+                placeholder="First Name"
+              />
+              {/* Last Name */}
+              <input
+                type="text"
+                name="lastName"
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
+                placeholder="Last Name"
               />
 
+              {/* Phone Number */}
+              <input
+                type="tel"
+                name="phoneNumber"
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200"
+                placeholder="Phone Number"
+              />
 
               {/* Email **/}
               <input
@@ -107,6 +125,7 @@ const SignupPage = () => {
                 className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
                 placeholder="Email Address"
               />
+
 
               {/* Image */}
               <input
