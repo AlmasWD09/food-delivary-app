@@ -12,7 +12,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
   const session = useSession();
-<<<<<<< HEAD
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -34,7 +33,6 @@ const Navbar = () => {
   // if (loading) {
   //     return <li>Loading...</li>;
   // }
-=======
   const [data,refetch,isLoading] = useCartItems()
   console.log(data)
   if (isLoading) {
@@ -42,7 +40,6 @@ const Navbar = () => {
   }
   console.log("navbar page----->17", session);
   
->>>>>>> 7773eee6810bff7fa0dcda1df263ae3835a27cc1
 
   const navLinks = [
     {
