@@ -9,13 +9,14 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const MenuDetails = ({params}) => {
   const axiosPub = useAxiosPublic()
   const [click,setClick] = useState("overview")
-  const [foods,setFoods] = useState([])
   const [quantity,setQuantity] = useState(1)
   const queryClient = useQueryClient();
+  const session = useSession()
  
   const {data,isLoading}  = useQuery({
     queryKey: ["menu"],
@@ -60,7 +61,7 @@ const MenuDetails = ({params}) => {
       ...rest,
       menuId : _id,
       quantity : quantity,
-      userEmail : "tariquelislam2015@gmail.com"
+      userEmail : session?.data?.user?.email
      }
    
      try{

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 const DashboardNav = () => {
-  const currentUser = "restaurants";
+  const currentUser = "admin";
   const [getMenu, setMenu] = useState(false);
   const navRule = navLinks[currentUser];
 

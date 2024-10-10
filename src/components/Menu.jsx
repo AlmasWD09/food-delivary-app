@@ -1,6 +1,7 @@
 "use client"
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ const Menu = ({menuData,refetch}) => {
   const [click,setClick] = useState("All")
   const axiosPub = useAxiosPublic()
   const queryClient = useQueryClient();
+  const session = useSession()
 
   const {mutateAsync} = useMutation({
     mutationKey: ["cart"],
@@ -55,7 +57,7 @@ const Menu = ({menuData,refetch}) => {
     ...rest,
     menuId : _id,
     quantity : 1,
-    userEmail : "tariquelislam2015@gmail.com"
+    userEmail : session?.data?.user?.email
    }
   
    try{

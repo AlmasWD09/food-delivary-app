@@ -14,7 +14,6 @@ export default function Restaurants() {
       .then(res => res.json())
       .then(data => setRestaurant(data))
   }, [])
-
   return (
     <>
       {/* Search and Banner */}
@@ -49,7 +48,7 @@ export default function Restaurants() {
       <div className="w-11/12 mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-7">
         {/* 1st Card */}
         {
-          restaurants.map(restaurant =>
+          restaurants?.map(restaurant =>
             <div key={restaurant._id}>
               <div className="mb-5">
                 <Image src={restaurant?.restaurantImage} width={500} height={400} alt="restaurant image" className="h-64" />
