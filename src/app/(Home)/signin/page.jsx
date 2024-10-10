@@ -1,4 +1,5 @@
 "use client"
+import SocialSignin from "@/components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -88,24 +89,14 @@ const router = useRouter()
             </div>
 
             <div className=" flex items-center justify-center gap-10 py-6">
-              <button>
-                <Icon className="text-4xl" icon="flat-color-icons:google" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="logos:facebook" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="devicon:twitter" />
-              </button>
+              <SocialSignin /> 
             </div>
           </div>
 
           <h1 className="text-center py-4">
             Don&apos;t have an account ?{" "}
             <Link href="/signup">
-              <span className="font-semibold hover:text-red-500">sign in</span>
+              <span className="font-semibold hover:text-red-500">sign Up</span>
             </Link>{" "}
           </h1>
         </div>
