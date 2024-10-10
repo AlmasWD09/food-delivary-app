@@ -131,11 +131,11 @@ const Overview = () => {
   const ChartData = {
     series: [
       {
-        name: "Joined",
+        name: "Delivered",
         data: userJoined,
       },
       {
-        name: "Left",
+        name: "Canceled",
         data: userLeft,
       },
     ],
@@ -210,7 +210,7 @@ const Overview = () => {
         {/* charts  */}
         <div className="p-8 lg:p-10 bg-white rounded-xl  w-full ">
           <h1 className="text-xl font-bold capitalize pb-2">
-            registration trends
+            Order trends
           </h1>
 
           <div className="w-full ">
