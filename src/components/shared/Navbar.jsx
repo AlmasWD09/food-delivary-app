@@ -5,20 +5,36 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
+import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
-import useCartItems from "@/hooks/useCartItems";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const session = useSession();
-  const [data,refetch,isLoading] = useCartItems()
-  console.log(data)
-  if (isLoading) {
-      return <li>Loading...</li>; 
-  }
   console.log("navbar page----->17", session);
-  
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`
+        );
+        setItems(response.data);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  // if (loading) {
+  //     return <li>Loading...</li>;
+  // }
 
   const navLinks = [
     {
@@ -126,7 +142,7 @@ const Navbar = () => {
                   <>
                     <div className="w-[240px]">
                       <h1 className="uppercase font-bold text-xl  p-6">
-                        {session?.data?.user?.name}
+                        {session?.data?.user?.firstName} {session?.data?.user?.lastName}
                       </h1>
 
                       <div>
@@ -194,53 +210,46 @@ const Navbar = () => {
           {/* account button end  */}
 
           <div className="group relative hidden lg:flex">
-            <button className=" hidden  lg:flex flex-col items-center   group relative z-20">
+            <button className=" hidden lg:flex flex-col items-center   group relative z-20">
               <Icon className="text-3xl" icon="bitcoin-icons:cart-outline" />
               <p>Cart</p>
 
-            <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
-            <span className={`absolute ${data?.length === 0 && "hidden"} bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}>{data?.length}</span>
-          </button>
-           
-            {/* cart hover start  */}
-            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-36 top-10 gap-0 ">
-              <div className="h-14  w-full "></div>
-              <div className="w-full flex justify-center  ">
-                <Icon
-                  className="text-4xl absolute top-7  text-secondary "
-                  icon="ri:triangle-fill"
-                />
-              </div>
-              <div
-                className={` p-6   text-nowrap bg-third  border-4 border-secondary`}
+              <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
+              <span
+                className={`absolute ${
+                  items?.length === 0 && "hidden"
+                } bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}
               >
-                 <div className="w-[240px]">
-                 <p className="font-semibold text-lg p-4">All added items</p>
-
-                 <div>
-                      <ul>
-                        <NavCartList />
-                      </ul>
-                    </div>
-                    <div className="py-4 flex justify-center">
-                      <Link
-                        href={"/order"}
-                        className="px-2 font-medium bg-primary text-white py-1"
-                      >
-                        View Process
-                      </Link>
-                    </div>
-                    </div>
+                {items?.length}
+              </span>
+            </button>
+            {/* cart hover start */}
+            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
+              <div className="h-4 w-full"></div>
+              <div className="bg-secondaryGray  w-[300px] text-nowrap">
+                <p className="font-semibold text-lg p-4">All added items</p>
+                <div>
+                  <ul>
+                    <NavCartList />
+                  </ul>
+                </div>
+                <div className="py-4 flex justify-center">
+                  <Link
+                    href={"/order"}
+                    className="px-2 font-medium bg-primary text-white py-1"
+                  >
+                    View Process
+                  </Link>
+                </div>
               </div>
             </div>
-            {/* cart hover end  */}
+            {/* cart hover end */}
+          </div>
 
           {/* cart button end  */}
-         
-        </div>
-        <button
+          <button
             onClick={() => setMenu(false)}
-            className="hidden  lg:flex flex-col items-center  group relative z-20"
+            className="hidden lg:flex flex-col items-center  group relative z-20"
           >
             <Icon className="text-2xl" icon="ph:heart" />
             <p>WishList</p>
@@ -248,6 +257,7 @@ const Navbar = () => {
           </button>
 
           {/* wishlist button end  */}
+        </div>
 
         {/* right section end  */}
       </div>
@@ -294,7 +304,7 @@ const Navbar = () => {
                     <Image
                       className="object-cover h-full w-full"
                       src={session?.data?.user?.image}
-                      alt={session?.data?.user?.name}
+                      alt={session?.data?.user?.firstName}
                       height={1000}
                       width={1000}
                     />
@@ -302,7 +312,7 @@ const Navbar = () => {
 
                   <div>
                     <h1 className="text-xl capitalize font-bold">
-                      {session?.data?.user?.name}
+                    {session?.data?.user?.firstName} {session?.data?.user?.lastName}
                     </h1>
                     <h2 className="font-semibold capitalize">
                       {session?.data?.user?.role}
@@ -377,8 +387,6 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-    </div>
-    
   );
 };
 
