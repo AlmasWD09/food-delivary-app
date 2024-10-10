@@ -10,14 +10,15 @@ import { useEffect, useState } from "react";
 export default function RestaurantD({ params }) {
 
   const [foods, setFoods] = useState([]);
-  const [restaurants, setRestaurant] = useState([]);
+  const [restaurant, setRestaurant] = useState([]);
+  console.log(params)
   useEffect(() => {
-    fetch("http://localhost:5000/restaurents")
+    fetch(`http://localhost:5000/restaurents/${params}`)
       .then(res => res.json())
       .then(data => setRestaurant(data))
-  }, [])
+  }, [params])
 
-  const restaurant = restaurants.find(restaurent => restaurent._id === params.restaurantId)
+  // const restaurant = restaurants.find(restaurent => restaurent._id === params.restaurantId)
 
   useEffect(() => {
     fetch("http://localhost:5000/menus")
@@ -74,31 +75,31 @@ export default function RestaurantD({ params }) {
               {/* cards 1 */}
               {
                 restaurantMenus.map(menus =>
-                <div className="rounded-xl border lg::w-[412px] max-h-[515px]" key={menus._id}>
-                <div className="overflow-hidden rounded-t-xl">
-                  <Image src={menus.image} alt="food image" width={500} height={400} className="transition-all object-cover lg:w-[385px] bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" />
-                </div>
-                <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
-                  <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
-                  <div className="flex gap-1 items-center">
-                    <p className="line-through">${menus.MRP}</p>
-                    <p className="font-bold text-xl">${menus.price}</p>
+                  <div className="rounded-xl border lg::w-[412px] max-h-[515px]" key={menus._id}>
+                    <div className="overflow-hidden rounded-t-xl">
+                      <Image src={menus.image} alt="food image" width={500} height={400} className="transition-all object-cover lg:w-[385px] bg-center duration-700 hover:scale-110 rounded-t-xl h-[310px]" />
+                    </div>
+                    <div className="md:w-1/2 w-3/5 -mt-12 rounded-tr-xl p-4 relative  bg-white flex items-center gap-2 justify-between">
+                      <p className="flex items-center font-medium"><FaStar className="text-orange-400" /> {"4.8(5.4k)"}</p>
+                      <div className="flex gap-1 items-center">
+                        <p className="line-through">${menus.MRP}</p>
+                        <p className="font-bold text-xl">${menus.price}</p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 pt-2">
+
+
+                      {/* <Link className="text-2xl hover:underline font-semibold mb-3">Biriyani</Link> */}
+                      <h2 className="text-2xl hover:underline font-semibold mb-3">{menus.title}</h2>
+
+                      <p>{menus?.description.slice(0, 80)}</p>
+                      <button className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-[#FF4D00]"><IoCartOutline /> Add to cart</button>
+                    </div>
                   </div>
-                </div>
-
-                <div className="p-4 pt-2">
-
-
-                  {/* <Link className="text-2xl hover:underline font-semibold mb-3">Biriyani</Link> */}
-                  <h2 className="text-2xl hover:underline font-semibold mb-3">{menus.title}</h2>
-
-                  <p>{menus?.description.slice(0,80)}</p>
-                  <button className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-[#FF4D00]"><IoCartOutline /> Add to cart</button>
-                </div>
-              </div>
-        )
+                )
               }
-              
+
             </div>
           </div>
         </div>

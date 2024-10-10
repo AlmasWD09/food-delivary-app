@@ -9,11 +9,21 @@ import { useEffect, useState } from "react";
 export default function Restaurants() {
 
   const [restaurants, setRestaurant] = useState([]);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
-    fetch("http://localhost:5000/restaurents")
+    fetch(`http://localhost:5000/restaurents?search=${search}`)
       .then(res => res.json())
-      .then(data => setRestaurant(data))
-  }, [])
+      .then(data => setRestaurant(data.restaurents))
+  }, [search])
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const search = form.get("search");
+    console.log(search);
+    setSearch(search);
+  };
 
   return (
     <>
@@ -31,9 +41,10 @@ export default function Restaurants() {
           <h1 className="text-5xl font-poppins text-[#FFFFFF] font-semibold mb-3">
             Restaurants & Cafe
           </h1>
-          <div className="flex gap-2 items-center justify-center bg-[#c7c6c6] w-9/12 mx-auto py-3 px-8 rounded-lg">
+          <form action="" onSubmit={handleSearch} id="handleReSet" className="flex gap-2 items-center justify-center bg-[#c7c6c6] w-9/12 mx-auto py-3 px-8 rounded-lg">
             <input
               type="text"
+              name="search" 
               className="text-lg rounded-lg p-2 w-full"
               placeholder="Search here by restaurant name...."
             />
@@ -41,7 +52,7 @@ export default function Restaurants() {
               {" "}
               Search
             </button>
-          </div>
+          </form>
         </div>
       </div>
 

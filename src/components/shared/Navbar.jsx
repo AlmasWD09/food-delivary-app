@@ -3,12 +3,35 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
+import axios from "axios";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
+
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchItems = async () => {
+          try {
+              const response = await axios.get(`http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`);
+              setItems(response.data);
+          } catch (error) {
+              console.log(error.message);
+          } finally {
+              setLoading(false);
+          }
+      };
+
+      fetchItems();
+  }, []);
+
+  if (loading) {
+      return <li>Loading...</li>; 
+  }
 
   // current user details make sure replace it with original user
   const currentUser = {
@@ -187,7 +210,7 @@ const Navbar = () => {
             <p>Cart</p>
 
             <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
-            <span className="absolute -top-2  text-2xl font-semibold -right-1">4</span>
+            <span className={`absolute ${items?.length === 0 && "hidden"} bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}>{items?.length}</span>
           </button>
            {/* cart hover start */}
            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
