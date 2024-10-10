@@ -1,31 +1,48 @@
 "use client"
-import axios from "axios";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 
 
 
-const Menu = ({foods}) => {
-
+const Menu = ({menuData,refetch}) => {
+  
   const [filterData,setFilterData] = useState([])
   const [click,setClick] = useState("All")
+  const axiosPub = useAxiosPublic()
+  const queryClient = useQueryClient();
+
+  const {mutateAsync} = useMutation({
+    mutationKey: ["cart"],
+    mutationFn : async(item)=>{
+      const {data} = await axiosPub.post("/single-menu",item)
+      console.log(data)
+      return data
+    },
+    onSuccess : () => {
+      toast.success("You have successfully added to cart")
+      queryClient.invalidateQueries("cart");
+    }
+  })
   
   useEffect(() => {
-    if (foods && foods.length > 0) {
-      setFilterData(foods);
+    if (menuData && menuData.length > 0) {
+      setFilterData(menuData);
     }
-  }, [foods]);
+  }, [menuData]);
  
 
  const filterByCategory = category => {
     if(category === "All"){
-      setFilterData(foods)
+      setFilterData(menuData)
       setClick(category)
     }else{
-      const data = foods.filter(food => food.category === category)
+      const data = menuData.filter(food => food.category === category)
       setFilterData(data)
       setClick(category)
     }
@@ -42,14 +59,11 @@ const Menu = ({foods}) => {
    }
   
    try{
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/single-menu`,item)
-     console.log(response.data)
-     if(response.data.insertedId){
-      alert("You have successfully added to cart")
-     }
+    mutateAsync(item)
+    
    }
    catch(error){
-     alert(error.message)
+     toast.error(error.message)
    }
  }
  

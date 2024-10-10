@@ -6,12 +6,26 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import img from "../../public/cheeseBurger.jpg"
 import Image from 'next/image';
 import { FaStar } from 'react-icons/fa';
-const RecommendMenu = ({foods}) => {
- 
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+const RecommendMenu = () => {
+
+  const axiosPublic = useAxiosPublic();
+    const {data = [],refetch,isLoading} = useQuery({
+        queryKey: ['menu',], 
+        queryFn: async() =>{
+            const res = await axiosPublic.get('/menus');
+            return res.data;
+        }
+    })
+   
+  if(isLoading){
+    return <>Loading....</>
+  }
     return (
         <div>
             <Swiper
@@ -44,11 +58,11 @@ const RecommendMenu = ({foods}) => {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             }}
-            modules={[Pagination, Navigation,Autoplay]}
+            modules={[ Navigation,Autoplay]}
             className="mySwiper "
             >
              {
-              foods?.map(food => 
+              data?.map(food => 
               <>
                   <SwiperSlide>
                     <div className='border lg:w-[270px] lg:h-[295px] rounded-xl'>

@@ -10,7 +10,7 @@ export default function Restaurants() {
 
   const [restaurants, setRestaurant] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/restaurents")
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents`)
       .then(res => res.json())
       .then(data => setRestaurant(data))
   }, [])

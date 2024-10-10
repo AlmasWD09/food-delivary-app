@@ -3,30 +3,44 @@ import Image from "next/image";
 import { FaArrowRight, FaStar } from "react-icons/fa";
 import img from "../../../../../public/chickenFry.jpg"
 import { IoCartOutline } from "react-icons/io5";
-
 import RecommendMenu from "@/components/RecommendMenu";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const MenuDetails = ({params}) => {
- 
+  const axiosPub = useAxiosPublic()
   const [click,setClick] = useState("overview")
   const [foods,setFoods] = useState([])
   const [quantity,setQuantity] = useState(1)
-  
-  useEffect(()=>{
-    try{
-      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
-      .then(response => {
-        setFoods(response.data)
-      })
+  const queryClient = useQueryClient();
+ 
+  const {data,isLoading}  = useQuery({
+    queryKey: ["menu"],
+    queryFn : async()=>{
+      const {data} = await axiosPub.get(`/menus`)
+      return data
     }
-    catch(error){
-      console.log(error.message)
-    }
-   },[])
+  })
   
-  const singleData = foods.find(food => food._id === params.menuId)
+//  add to cart st
+  const {mutateAsync} = useMutation({
+    mutationKey: ["cart"],
+    mutationFn : async(item)=>{
+      const {data} = await axiosPub.post("/single-menu",item)
+   
+      return data
+    },
+    onSuccess : () => {
+      toast.success("You have successfully added to cart")
+      queryClient.invalidateQueries("cart");
+    }
+  })
+  // end
+ 
+  const singleData = data?.find(food => food._id === params.menuId)
 
   const handleQuantity = (qua) => {
     if (qua === "plus") {
@@ -41,21 +55,16 @@ const MenuDetails = ({params}) => {
 
   const handleCart = async(data) => {
    
-     const { _id,price, ...rest } = data;
+     const { _id, ...rest } = data;
      const item = {
       ...rest,
-      price : parseInt(price) * parseInt(quantity),
       menuId : _id,
       quantity : quantity,
       userEmail : "tariquelislam2015@gmail.com"
      }
    
      try{
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/single-menu`,item)
-       console.log(response.data)
-       if(response.data.insertedId){
-        alert("You have successfully added to cart")
-       }
+       mutateAsync(item)
      }
      catch(error){
        alert(error.message)
@@ -80,7 +89,7 @@ const MenuDetails = ({params}) => {
         <div className="lg:max-w-[1240px] mt-10  md:mt-14  px-3 lg:px-0  mx-auto">
            <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 my-16 lg:my-20">
            <div className="lg:col-span-1">
-                <Image width={400} height={400} src={singleData?.image} className="lg:max-h-[400px]" alt="" />
+                <Image width={400} height={400} src={singleData?.image} className="lg:max-h-[400px] w-full" alt="" />
             </div>
             <div className="lg:col-span-1">
                 <h3 className="text-4xl font-bold">{singleData?.title}</h3>
@@ -156,7 +165,7 @@ const MenuDetails = ({params}) => {
            </div>
            <div className="mb-10 mt-16">
             <h3 className="text-3xl mb-10 font-semibold">Related Item</h3>
-            <RecommendMenu foods={foods} />
+            <RecommendMenu isLoading={isLoading} foods={data} />
            </div>
         </div>
         </div>

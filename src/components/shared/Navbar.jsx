@@ -5,32 +5,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
-import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
+import useCartItems from "@/hooks/useCartItems";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [getMenu, setMenu] = useState(false);
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const session = useSession();
-
-  useEffect(() => {
-      const fetchItems = async () => {
-          try {
-              const response = await axios.get(`http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`);
-              setItems(response.data);
-          } catch (error) {
-              console.log(error.message);
-          } finally {
-              setLoading(false);
-          }
-      };
-
-      fetchItems();
-  }, []);
-
-  if (loading) {
+  const [data,refetch,isLoading] = useCartItems()
+  
+  if (isLoading) {
       return <li>Loading...</li>; 
   }
 
@@ -205,7 +189,7 @@ const Navbar = () => {
             <p>Cart</p>
 
             <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-black transition-all duration-300 ease-in-out"></span>
-            <span className={`absolute ${items?.length === 0 && "hidden"} bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}>{items?.length}</span>
+            <span className={`absolute ${data?.length === 0 && "hidden"} bg-pink-600 rounded-full text-white px-1 -top-2  text-xl font-semibold -right-2`}>{data?.length}</span>
           </button>
            {/* cart hover start */}
            <div className="absolute    group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-16 top-10 ">
