@@ -32,8 +32,8 @@ module.exports = {
         redish: "#ff0055", // redandpink
         text: "#9B9B93", // lightgray
 
-        secondary: "#f4d321", //snehashisroy
-        third: "#fefbe9", //snehashisroy
+        secondary: "#ff6600", //snehashisroy
+        background: "#FFFBE6", //snehashisroy
         fourth: "#1a1a1a", //snehashisroy
       },
     },

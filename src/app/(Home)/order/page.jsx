@@ -1,31 +1,29 @@
 "use client";
 import OrderCartCard from "@/components/cards/OrderCartCard";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
 
 
 const OrderPage = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+ 
   const [page, setPage] = useState("backPack");
   const [ship, setShip] = useState("no");
+  const axiosPub = useAxiosPublic()
+  const [total,setTotal] = useState(0)
+  const session = useSession()
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`);
-        setItems(response.data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {data: cartData = [],refetch,isLoading} = useQuery({
+    queryKey: ['cartData',], 
+    queryFn: async() =>{
+        const res = await axiosPub.get(`/cart-menu/${session?.data?.user?.email}`);
+        return res.data;
+    }
+})
 
-    fetchItems();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <li>Loading...</li>;
   }
 
@@ -33,15 +31,37 @@ const OrderPage = () => {
     setShip(event.target.checked ? "yes" : "no");
   };
 
-  const totalPrice = items.reduce((total, item) => {
-    return total + item.price;
+  const totalPrice = cartData?.reduce((total, item) => {
+    return total + (parseInt(item.price)* parseInt(item.quantity));
+  }, 0);
+  const totalMRP = cartData?.reduce((total, item) => {
+    return total + (parseInt(item.MRP)* parseInt(item.quantity));
   }, 0);
   
-
-  const totalMRP = 139
   const discountMRP = totalMRP - totalPrice
   const totalAmount = totalPrice + 10
 
+  // useEffect(() => {
+  //   let discountedAmount = totalAmount;
+
+  //   if (totalAmount >= 50) {
+  //     const discount = Math.ceil(totalAmount / 10);
+  //     discountedAmount = totalAmount - discount;
+  //   } else if (totalAmount >= 100) {
+  //     const discount = Math.ceil(totalAmount / 16);
+  //     discountedAmount = totalAmount - discount;
+  //   } else if (totalAmount >= 150) {
+  //     const discount = Math.ceil(totalAmount / 20);
+  //     discountedAmount = totalAmount - discount;
+  //   } else if (totalAmount >= 190) {
+  //     const discount = Math.ceil(totalAmount / 25);
+  //     discountedAmount = totalAmount - discount;
+  //   }
+
+  //   setTotal(discountedAmount);
+  // }, [totalAmount]);
+
+  // console.log(total);
   return (
     <div className="px-3">
       <div className="lg:max-w-[1240px] py-20 mx-auto">
@@ -69,7 +89,14 @@ const OrderPage = () => {
               <>
                 {/* all cart items container start*/}
                 <div className="grid grid-cols-1 gap-5">
-                  {items.map((item) => <OrderCartCard key={item?._id} item={item} />)}
+                  {
+                    cartData.length > 0 ?
+                    cartData.map((item) => <OrderCartCard totalPrice={totalPrice} refetch={refetch} key={item?._id} item={item} />)
+                   : <div className="flex w-full h-[450px] flex-col justify-center items-center">
+                     <h3 className="text-2xl font-bold text-center">! Oops you have not  added <br/> any item</h3>
+                     <Link className="bg-primaryLight rounded-lg p-2 text-white text-center my-4" href={"/menu"}>Browse menus</Link>
+                   </div>
+                  }
                 </div>
                 {/* all cart items container end*/}
               </>
@@ -85,7 +112,7 @@ const OrderPage = () => {
                           <label className="block text-sm font-medium text-gray-700">Full name</label>
                           <input
                             required
-                            defaultValue={"Ahmed Antor"}
+                            defaultValue={session?.data?.user?.name}
                             placeholder="Enter w-full your name"
                             className="border mt-2 rounded-xl p-3"
                             type="text"
@@ -121,7 +148,7 @@ const OrderPage = () => {
                           <input
                             required
                             placeholder="Enter  your email"
-                            defaultValue={"ahmedAntor@gmail.com"}
+                            defaultValue={session?.data?.user?.email}
                             className="border mt-2 w-full rounded-xl p-3"
                             type="email"
                             disabled={ship === "no"}
@@ -166,10 +193,10 @@ const OrderPage = () => {
           </div>
           {/* price calculation */}
           <div className="lg:col-span-2 md:col-span-1 h-[450px] px-6 py-10 border">
-            <p className="mb-5 pb-3">Price details {`(${items.length} items)`}</p>
+            <p className="mb-5 pb-3">Price details {`(${cartData.length} items)`}</p>
             <div className="flex text-base justify-between">
               <p>Total MRP</p>
-              <p>{"$139"}</p>
+              <p>${totalMRP}</p>
             </div>
             <div className="flex my-2 text-base justify-between">
               <p>Discount on MRP</p>
@@ -202,8 +229,8 @@ const OrderPage = () => {
                             </label>
                             </div>
                             {
-                                page === "backPack" ? <button onClick={()=>setPage("address")} className="w-full uppercase  mt-5 text-center py-2 bg-pink-600 text-white">Place on processed</button> :
-                                <button className="w-full uppercase  mt-5 text-center py-2 bg-pink-600 text-white">Place Order</button>
+                                page === "backPack" ? <button disabled={cartData.length === 0} onClick={()=>setPage("address")} className={`w-full uppercase ${cartData.length === 0 && 'bg-pink-300'} mt-5 text-center py-2 bg-pink-600 text-white`}>Place on processed</button> :
+                                <button disabled={cartData.length === 0} className={`w-full uppercase ${cartData.length === 0 && 'bg-pink-300'} mt-5 text-center py-2 bg-pink-600 text-white`}>Place Order</button>
                             }
           </div>
         </div>
