@@ -24,17 +24,20 @@ module.exports = {
       colors: {
         // background: "var(--background)",
         // foreground: "var(--foreground)",
-        primary: "#d97706", // amber-600
         primaryLight: "#fd8802",
-        primaryGray: "#fffbeb", // amber-50
-        secondary: "#fde68a", // amber-200
-        secondaryGray: "#ffffff", // amber-100
-        redish: "#ff0055", // redandpink
-        text: "#9B9B93", // lightgray
+        // secondary: "#fde68a", // amber-200
+        redish: "#ff0055", // dashboard
+        globalText: "#9B9B93", // textcolor
 
-        secondary: "#ff6600", //snehashisroy
-        background: "#FFFBE6", //snehashisroy
-        fourth: "#1a1a1a", //snehashisroy
+        primary: "#FF9100", //orange
+        primaryGray: "#f9ac7d",
+
+        secondary: "#4681F4", // blue
+        secondaryGray: "#bbebff", //
+
+        secondaryBg: "#FFFBE6", //snehashisroy
+        third: "#D5ED9F", //snehashisroy
+        fourth: "#00712D", //snehashisroy
       },
     },
     fontFamily: {
@@ -44,5 +47,4 @@ module.exports = {
       Manrope: ["Manrope"],
     },
   },
-  plugins: [require("daisyui")],
 };

@@ -20,7 +20,7 @@ const TopBar = () => {
       {/* welcome section  */}
       <div className="hidden lg:flex lg:flex-col">
         <p className="capitalize font-extrabold text-2xl">Welcome back</p>
-        <p className="capitalize text-sm font-semibold text-text ">
+        <p className="capitalize text-sm font-semibold text-globalText ">
           your admin dashboard overview today
         </p>
       </div>
@@ -118,7 +118,9 @@ const TopBar = () => {
         </span>
         <span>
           <p className="text-md font-bold">{currentUser.name}</p>
-          <p className="text-sm font-bold text-text">{currentUser.role}</p>
+          <p className="text-sm font-bold text-globalText">
+            {currentUser.role}
+          </p>
         </span>
       </div>
     </div>

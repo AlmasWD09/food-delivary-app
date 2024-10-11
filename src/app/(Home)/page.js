@@ -4,19 +4,17 @@ import Discount from "@/components/Discount";
 import Parallex from "@/components/Parallex";
 import Partner from "@/components/Partner";
 
-import TopSell from "@/components/TopSell";
-
 import React from "react";
 
 const page = () => {
   return (
     <div>
       <Banner />
-      <div className="py-10 space-y-28">
+      <div className="py-40 space-y-40">
         <Discount></Discount>
-        <Partner/>
+        <Partner />
         <CustomerReviews />
-        <TopSell></TopSell>
+
         <Parallex />
       </div>
     </div>
