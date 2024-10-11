@@ -13,17 +13,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-      <AuthProvider>
-      <div className="sticky z-[999] top-0 ">
-          <Navbar />
-        </div>
-        {/* don't remove height  */}
-        <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
-          {children}
-          <Toaster />
-        </div>
-        <Footer />
-      </AuthProvider>
+        <AuthProvider>
+          <div className="sticky z-[999] top-0 ">
+            <Navbar />
+          </div>
+          {/* don't remove height  */}
+          <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
+            {children}
+            <Toaster />
+          </div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

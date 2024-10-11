@@ -35,7 +35,7 @@ const SignupPage = () => {
         email: event.target.emailAddress.value,
         phoneNumber: event.target.phoneNumber.value,
         password: event.target.password.value,
-        image: imageUrl, // Add the image URL
+        // image: imageUrl, // Add the image URL
         role: "admin",
       };
 
@@ -65,7 +65,7 @@ const SignupPage = () => {
 
   return (
     <div>
-      <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
+      <div className=" max-w-6xl mx-auto  h-screen flex justify-center ">
         <div className=" flex flex-col lg:flex-row items-center justify-center lg:pr-10 lg:gap-10">
           {/* left side area  */}
           <div className="w-1/2 hidden lg:flex">
@@ -80,11 +80,11 @@ const SignupPage = () => {
 
           {/* right side area  */}
 
-          <div className="border-2 border-green-600 lg:w-2/5  p-10  relative  ">
-            <div className="h-full w-full absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
-              <span className="w-36 h-36 bg-green-600 absolute -top-20 -right-20 rotate-[-40deg]"></span>
+          <div className="border-2 border-primary lg:w-2/5  p-10  relative  ">
+            <div className="h-full bg-white w-full absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
+              <span className="w-36 h-36 bg-primary absolute -top-20 -right-20 rotate-[-40deg]"></span>
             </div>
-            <span className="h-full w-full bg-green-100 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
+            <span className="h-full w-full bg-primaryGray/20 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
 
             <div className="pb-6 ">
               <h1 className="text-center text-3xl font-semibold">
@@ -99,14 +99,14 @@ const SignupPage = () => {
               <input
                 type="text"
                 name="firstName"
-                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
                 placeholder="First Name"
               />
               {/* Last Name */}
               <input
                 type="text"
                 name="lastName"
-                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
                 placeholder="Last Name"
               />
 
@@ -114,7 +114,7 @@ const SignupPage = () => {
               <input
                 type="tel"
                 name="phoneNumber"
-                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200"
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20"
                 placeholder="Phone Number"
               />
 
@@ -122,7 +122,7 @@ const SignupPage = () => {
               <input
                 type="email"
                 name="emailAddress"
-                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
                 placeholder="Email Address"
               />
 
@@ -138,24 +138,22 @@ const SignupPage = () => {
               <input
                 type="password"
                 name="password"
-                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-green-200 "
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
                 placeholder="password"
               />
 
               <button
                 type="submit"
-                className="relative py-4 bg-green-600 text-white group overflow-hidden flex items-center justify-center"
+                className="relative py-4 bg-primaryGray text-black hover:text-white group overflow-hidden flex items-center justify-center"
               >
-                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
+                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-primary rounded-full group-hover:w-96 group-hover:h-96 "></span>
                 <span className="relative">Create Account</span>
               </button>
             </form>
             <h1 className="text-center py-4">
               have an account ?{" "}
               <Link href="/signin">
-                <span className="font-semibold hover:text-red-500">
-                  sign in
-                </span>
+                <span className="font-semibold text-primary">sign in</span>
               </Link>{" "}
             </h1>
           </div>

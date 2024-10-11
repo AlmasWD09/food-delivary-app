@@ -105,7 +105,7 @@ const RestaurantOverview = () => {
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">2.1%</span>
-                <span className="text-text">vs last week</span>
+                <span className="text-globalText">vs last week</span>
               </span>
             </div>
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
@@ -127,7 +127,7 @@ const RestaurantOverview = () => {
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">5.2%</span>
-                <span className="text-text">vs last week</span>
+                <span className="text-globalText">vs last week</span>
               </span>
             </div>
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
@@ -149,7 +149,7 @@ const RestaurantOverview = () => {
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">7.9%</span>
-                <span className="text-text">vs last week</span>
+                <span className="text-globalText">vs last week</span>
               </span>
             </div>
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
@@ -173,7 +173,7 @@ const RestaurantOverview = () => {
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">5.2%</span>
-                <span className="text-text">vs last week</span>
+                <span className="text-globalText">vs last week</span>
               </span>
             </div>
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
@@ -201,7 +201,7 @@ const RestaurantOverview = () => {
               <span className="flex items-center gap-1 font-semibold">
                 <Icon className="text-green-500" icon="ph:arrow-up" />
                 <span className="text-green-500">5.2%</span>
-                <span className="text-text">vs last week</span>
+                <span className="text-globalText">vs last week</span>
               </span>
             </div>
             <Icon className="text-4xl text-green-500" icon="ph:trend-up" />
