@@ -7,11 +7,10 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const SignupPage = () => {
   const router = useRouter();
   const session = useSession();
-  console.log(session, 'signup page--> 15');
   const handleSignUp = async (event) => {
     event.preventDefault();
 
@@ -37,25 +36,27 @@ const SignupPage = () => {
         phoneNumber: event.target.phoneNumber.value,
         password: event.target.password.value,
         image: imageUrl, // Add the image URL
-        role: 'admin',
+        role: "admin",
       };
 
       // Send newUser data to your server (uncomment if needed)
-      const resp = await fetch("http://localhost:3000/signup/api", {
-        method: "POST",
-        body: JSON.stringify(newUser),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/signup/api`,
+        {
+          method: "POST",
+          body: JSON.stringify(newUser),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       console.log(resp);
       if (resp.status === 200) {
         event.target.reset(); // Reset form after successful submission
-        router.push('/')
-        toast.success('user create successfully')
-      }
-      else {
-        toast.error('Sign-up failed. Please try again')
+        router.push("/");
+        toast.success("user create successfully");
+      } else {
+        toast.error("Sign-up failed. Please try again");
       }
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -125,7 +126,6 @@ const SignupPage = () => {
                 placeholder="Email Address"
               />
 
-
               {/* Image */}
               <input
                 type="file"
@@ -142,7 +142,10 @@ const SignupPage = () => {
                 placeholder="password"
               />
 
-              <button type="submit" className="relative py-4 bg-green-600 text-white group overflow-hidden flex items-center justify-center">
+              <button
+                type="submit"
+                className="relative py-4 bg-green-600 text-white group overflow-hidden flex items-center justify-center"
+              >
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
                 <span className="relative">Create Account</span>
               </button>
@@ -150,7 +153,9 @@ const SignupPage = () => {
             <h1 className="text-center py-4">
               have an account ?{" "}
               <Link href="/signin">
-                <span className="font-semibold hover:text-red-500">sign in</span>
+                <span className="font-semibold hover:text-red-500">
+                  sign in
+                </span>
               </Link>{" "}
             </h1>
           </div>

@@ -25,11 +25,14 @@ const handler = NextAuth({
         }
         const db = await connectDB();
         const currentUser = await db.collection("users").findOne({ email });
-        console.log(currentUser,'route page----> 28');
+
         if (!currentUser) {
           return null;
         }
-        const passwordMatched = bcrypt.compareSync(password, currentUser.password);
+        const passwordMatched = bcrypt.compareSync(
+          password,
+          currentUser.password
+        );
         if (!passwordMatched) {
           return null;
         }
@@ -71,13 +74,13 @@ const handler = NextAuth({
         // If user doesn't exist, create a new user with default values for firstName, lastName, phoneNumber, and role
         await userCollection.insertOne({
           email,
-          firstName: user.name || '', // Get firstName from OAuth if available
-          lastName: '',
-          phoneNumber: '',
-          role: 'user', // Default role
-          image: user.image || '', // Add user image if available
+          firstName: user.name || "", // Get firstName from OAuth if available
+          lastName: "",
+          phoneNumber: "",
+          role: "user", // Default role
+          image: user.image || "", // Add user image if available
         });
-      } 
+      }
 
       return true;
     },

@@ -12,9 +12,9 @@ const DashboardNav = () => {
 
   return (
     <div
-      className={`flex flex-col justify-between items-center w-full   relative  `}
+      className={`flex flex-col justify-between items-center w-full    relative  `}
     >
-      <div className="w-full z-10 py-1 top-0 bg-white flex items-center justify-between px-10 lg:hidden">
+      <div className="w-full relative  py-1 top-0 bg-white flex items-center justify-between px-10 lg:hidden">
         <Image src={logo} alt="delish logo" height={100} width={200} />
         <div
           className="lg:hidden cursor-pointer"
@@ -29,8 +29,8 @@ const DashboardNav = () => {
       </div>
 
       <div
-        className={`  bg-white lg:static absolute lg:h-screen flex flex-col items-start justify-between w-full  lg:p-10  px-8 py-36   transition-all lg:translate-x-0 ${
-          getMenu ? "translate-x-0 h-screen" : "-translate-x-full"
+        className={`   bg-white lg:static absolute z-50 lg:h-screen  flex flex-col items-start justify-between w-full top-20  lg:p-10  px-8 py-4  transition-all lg:translate-x-0 border-2 border-red-400  ${
+          getMenu ? "translate-x-0 " : "-translate-x-full "
         }  `}
       >
         <div className="lg:flex-grow w-full lg:h-full ">
@@ -52,9 +52,10 @@ const DashboardNav = () => {
               <Link
                 href={item.link}
                 key={item.path}
-                className=" hover:bg-redish hover:text-white   rounded-md  flex items-center gap-3 px-2 py-2  "
+                onClick={() => setMenu(false)}
+                className=" hover:bg-redish hover:text-white   rounded-md  flex items-center gap-3 px-2 py-2  text-base "
               >
-                <span className="text-2xl">{item.icons}</span>
+                <span className="text-lg">{item.icons}</span>
                 <li>{item.title}</li>
               </Link>
             ))}

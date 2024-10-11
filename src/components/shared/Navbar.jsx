@@ -14,12 +14,11 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-  console.log("navbar page----->17", session);
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/cart-menu/tariquelislam2015@gmail.com`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/cart-menu/tariquelislam2015@gmail.com`
         );
         setItems(response.data);
       } catch (error) {
@@ -136,13 +135,14 @@ const Navbar = () => {
               <div
                 className={` ${
                   session?.data?.user ? "w-full" : "p-10"
-                }   text-nowrap bg-third  border-4 border-secondary`}
+                }   text-nowrap bg-white  border-4 border-secondary`}
               >
                 {session?.data?.user ? (
                   <>
                     <div className="w-[240px]">
-                      <h1 className="uppercase font-bold text-xl  p-6">
-                        {session?.data?.user?.firstName} {session?.data?.user?.lastName}
+                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                        {session?.data?.user?.firstName}{" "}
+                        {session?.data?.user?.lastName}
                       </h1>
 
                       <div>
@@ -265,7 +265,7 @@ const Navbar = () => {
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-third ease-in-out duration-300 transform ${
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-white ease-in-out duration-300 transform ${
           getMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -311,8 +311,9 @@ const Navbar = () => {
                   </div>
 
                   <div>
-                    <h1 className="text-xl capitalize font-bold">
-                    {session?.data?.user?.firstName} {session?.data?.user?.lastName}
+                    <h1 className="text-xl capitalize font-bold ">
+                      {session?.data?.user?.firstName}{" "}
+                      {session?.data?.user?.lastName}
                     </h1>
                     <h2 className="font-semibold capitalize">
                       {session?.data?.user?.role}
