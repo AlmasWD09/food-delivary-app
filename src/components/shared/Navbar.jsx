@@ -63,7 +63,7 @@ const Navbar = () => {
 
   console.log(items);
   return (
-    <div className="h-20 font-urbanist  bg-white  relative  shadow-md ">
+    <div className="h-20 font-Inter bg-white  relative  shadow-md ">
       <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
         <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
           {getMenu ? (
@@ -89,7 +89,7 @@ const Navbar = () => {
                     className={`px-2 py-1 rounded-md ${
                       pathname == item.path
                         ? " font-extrabold text-primary"
-                        : "font-semibold"
+                        : ""
                     }`}
                   >
                     {item.title}
@@ -129,7 +129,11 @@ const Navbar = () => {
 
             {/* account hover area start */}
 
-            <div className="absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150  -left-24 top-10 gap-0 ">
+            <div
+              className={`absolute  group-hover:flex flex-col transform scale-y-0 group-hover:scale-y-100 origin-top ease-in transition duration-150 ${
+                session?.data?.user ? "-left-24" : "-left-32"
+              }   top-10 gap-0 `}
+            >
               <div className="h-14  w-full "></div>
               <div className="w-full flex justify-center  ">
                 <Icon

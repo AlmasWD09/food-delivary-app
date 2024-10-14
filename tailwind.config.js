@@ -41,7 +41,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      urbanist: ["Urbanist"],
+      urbanist: ["Inter"],
       kanit: ["Kanit"],
       poppins: ["Poppins"],
       Inter: ["Inter"],

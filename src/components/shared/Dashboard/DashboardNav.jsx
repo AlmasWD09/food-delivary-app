@@ -19,7 +19,9 @@ const DashboardNav = () => {
       {/* mobile section topbar  */}
 
       <div className="w-full z-50  bg-white flex items-center justify-between px-10 lg:hidden border-b-2 border-primary">
-        <Image src={logo} alt="delish logo" height={100} width={200} />
+        <Link href="/">
+          <Image src={logo} alt="delish logo" height={100} width={200} />
+        </Link>
         <div
           className="lg:hidden cursor-pointer"
           onClick={() => setMenu(!getMenu)}
@@ -42,7 +44,9 @@ const DashboardNav = () => {
         <div className="lg:flex-grow w-full lg:h-full  ">
           {/* logo section */}
           <div className="pb-10 hidden lg:flex items-center justify-between  ">
-            <Image src={logo} alt="delish logo" height={100} width={200} />
+            <Link href="/">
+              <Image src={logo} alt="delish logo" height={100} width={200} />
+            </Link>
             <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
               {getMenu ? (
                 <Icon className="text-4xl" icon="material-symbols:close" />
@@ -78,12 +82,12 @@ const DashboardNav = () => {
             <button className="px-4 py-2 rounded-xl bg-gray-800 text-white">
               Dark
             </button>
-            <button className="px-4 py-2 rounded-xl bg-base-200 border-2 border-primaryLight  text-gray-800">
+            <button className="px-4 py-2 rounded-xl bg-base-200 bg-white  text-gray-800">
               Light
             </button>
           </div>
 
-          <button className="flex items-center justify-center gap-2 w-full bg-primary p-4 rounded-2xl text-white font-extrabold">
+          <button className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-600 p-4 rounded-2xl text-white font-extrabold">
             <Icon className="text-xl" icon="tabler:logout-2" />
             Logout
           </button>
