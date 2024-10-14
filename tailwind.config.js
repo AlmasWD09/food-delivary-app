@@ -44,7 +44,7 @@ module.exports = {
       urbanist: ["Urbanist"],
       kanit: ["Kanit"],
       poppins: ["Poppins"],
-      Manrope: ["Manrope"],
+      Inter: ["Inter"],
     },
   },
 };

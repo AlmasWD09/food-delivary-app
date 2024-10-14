@@ -12,11 +12,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className="flex items-center h-screen relative">
-          <div className=" absolute lg:static z-50 top-0   font-Manrope font-bold w-full lg:w-fit">
+          <div className=" font-Inter">
             <DashboardNav />
           </div>
-          <div className=" h-screen flex-1  font-Manrope  overflow-y-auto ">
-            <div className="w-full  bg-gray-100 px-3 pb-3  pt-32  lg:p-5 flex justify-between  border-2 border-pink-400 min-h-screen  ">
+          <div className=" h-screen flex-1  font-Inter  overflow-y-auto ">
+            <div className="sticky top-0 z-50 hidden lg:flex">
+              <TopBar />
+            </div>
+
+            <div className="w-full  bg-gray-100 px-3 pb-3  pt-32  lg:p-5 min-h-screen  ">
               {children}
             </div>
           </div>
