@@ -5,11 +5,13 @@ import logo from "../../../../public/assets/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 const DashboardNav = () => {
   const currentUser = "admin";
   const [getMenu, setMenu] = useState(false);
   const navRule = navLinks[currentUser];
-
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <div
       className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}
@@ -50,18 +52,22 @@ const DashboardNav = () => {
             </div>
           </div>
 
-          {/* navlinks section  */}
           <ul className="space-y-4">
             {navRule.map((item) => (
-              <Link
-                href={item.link}
-                key={item.path}
-                onClick={() => setMenu(false)}
-                className=" hover:bg-primary/30   hover:border-l-4 border-primary  rounded-md  flex items-center gap-6 px-2 py-2  text-base "
-              >
-                <span className="text-lg">{item.icons}</span>
-                <li>{item.title}</li>
-              </Link>
+              <li key={item.path}>
+                <Link
+                  href={item.link}
+                  onClick={() => setMenu(false)}
+                  className={`hover:bg-primary/30 hover:border-l-4 border-primary rounded-md flex items-center gap-6 px-2 py-2 text-base ${
+                    pathname === `/dashboard/${currentUser}/${item.link}`
+                      ? "bg-primary/30 border-l-4 border-primary"
+                      : ""
+                  }`}
+                >
+                  <span className="text-lg">{item.icons}</span>
+                  {item.title}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>

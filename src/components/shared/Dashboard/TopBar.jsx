@@ -2,11 +2,15 @@
 import { Icon } from "@iconify/react";
 import moment from "moment";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 
 const TopBar = () => {
   const [notiOn, setNoti] = useState(false);
   const notificationRef = useRef(null);
+  const pathname = usePathname();
+  const lastPart = pathname.split("/").filter(Boolean).slice(-1)[0];
+  const final = lastPart.split("-").join(" ");
 
   // current user demo
   const currentUser = {
@@ -35,7 +39,9 @@ const TopBar = () => {
   return (
     <div className="w-full flex items-center justify-between bg-white lg:px-10 py-4 border-b-2 border-primaryGray">
       <div>
-        <h1 className="text-2xl font-semibold">Overview</h1>
+        <h1 className="text-2xl font-semibold capitalize text-primaryLight">
+          {final}
+        </h1>
         <p>Today is {moment().format("MMMM Do YYYY, h:mm a")}</p>
       </div>
       <div className="flex items-center">
@@ -69,10 +75,10 @@ const TopBar = () => {
             ref={notificationRef}
             className={`${
               notiOn ? "visible" : "invisible"
-            } bg-white w-80 absolute top-16 shadow-md group border-2 border-blue-600`}
+            } bg-white w-80 absolute top-16 shadow-md group border-2 border-blue-600 rounded-2xl`}
           >
-            <span className="absolute -top-6 text-blue-600 text-center -z-10 flex justify-center w-full">
-              <Icon className="text-3xl" icon="tabler:triangle-filled" />
+            <span className="absolute -top-3 text-blue-600 text-center -z-10 flex justify-center w-full">
+              <Icon className="text-xl" icon="tabler:triangle-filled" />
             </span>
             <h1 className="py-2 border-b-2 h-fit w-full text-center font-bold">
               Notification
@@ -97,8 +103,8 @@ const TopBar = () => {
               </li>
             </ol>
 
-            <p className="py-2 text-sm bg-blue-600 text-center font-bold text-white cursor-pointer hover:underline">
-              show all messages{" "}
+            <p className="py-2 text-sm text-center font-bold  underline cursor-pointer ">
+              show all messages
             </p>
           </div>
         </div>
