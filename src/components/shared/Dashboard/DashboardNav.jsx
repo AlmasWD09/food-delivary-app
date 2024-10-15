@@ -5,17 +5,23 @@ import logo from "../../../../public/assets/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 const DashboardNav = () => {
   const currentUser = "admin";
   const [getMenu, setMenu] = useState(false);
   const navRule = navLinks[currentUser];
-
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <div
-      className={`flex flex-col justify-between items-center w-full    relative  `}
+      className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}
     >
-      <div className="w-full relative  py-1 top-0 bg-white flex items-center justify-between px-10 lg:hidden">
-        <Image src={logo} alt="delish logo" height={100} width={200} />
+      {/* mobile section topbar  */}
+
+      <div className="w-full z-50  bg-white flex items-center justify-between px-10 lg:hidden border-b-2 border-primary">
+        <Link href="/">
+          <Image src={logo} alt="delish logo" height={100} width={200} />
+        </Link>
         <div
           className="lg:hidden cursor-pointer"
           onClick={() => setMenu(!getMenu)}
@@ -29,14 +35,18 @@ const DashboardNav = () => {
       </div>
 
       <div
-        className={`   bg-white lg:static absolute z-50 lg:h-screen  flex flex-col items-start justify-between w-full top-20  lg:p-10  px-8 py-4  transition-all lg:translate-x-0 border-2 border-red-400  ${
-          getMenu ? "translate-x-0 " : "-translate-x-full "
+        className={` top-20  overflow-y-auto bg-white lg:bg-orange-100 lg:static absolute z-30 lg:h-screen  flex flex-col items-start justify-between w-full   lg:p-10  px-8 py-4  transition-all lg:translate-x-0   ${
+          getMenu
+            ? "translate-x-0 h-[calc(100vh-80px)]  "
+            : "-translate-x-full "
         }  `}
       >
-        <div className="lg:flex-grow w-full lg:h-full ">
+        <div className="lg:flex-grow w-full lg:h-full  ">
           {/* logo section */}
           <div className="pb-10 hidden lg:flex items-center justify-between  ">
-            <Image src={logo} alt="delish logo" height={100} width={200} />
+            <Link href="/">
+              <Image src={logo} alt="delish logo" height={100} width={200} />
+            </Link>
             <div className="lg:hidden" onClick={() => setMenu(!getMenu)}>
               {getMenu ? (
                 <Icon className="text-4xl" icon="material-symbols:close" />
@@ -46,18 +56,22 @@ const DashboardNav = () => {
             </div>
           </div>
 
-          {/* navlinks section  */}
           <ul className="space-y-4">
             {navRule.map((item) => (
-              <Link
-                href={item.link}
-                key={item.path}
-                onClick={() => setMenu(false)}
-                className=" hover:bg-redish hover:text-white   rounded-md  flex items-center gap-3 px-2 py-2  text-base "
-              >
-                <span className="text-lg">{item.icons}</span>
-                <li>{item.title}</li>
-              </Link>
+              <li key={item.path}>
+                <Link
+                  href={item.link}
+                  onClick={() => setMenu(false)}
+                  className={`hover:bg-primary/30 hover:border-l-4 border-primary rounded-md flex items-center gap-6 px-2 py-2 text-base ${
+                    pathname === `/dashboard/${currentUser}/${item.link}`
+                      ? "bg-primary/30 border-l-4 border-primary"
+                      : ""
+                  }`}
+                >
+                  <span className="text-lg">{item.icons}</span>
+                  {item.title}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -68,12 +82,12 @@ const DashboardNav = () => {
             <button className="px-4 py-2 rounded-xl bg-gray-800 text-white">
               Dark
             </button>
-            <button className="px-4 py-2 rounded-xl bg-base-200  text-gray-800">
+            <button className="px-4 py-2 rounded-xl bg-base-200 bg-white  text-gray-800">
               Light
             </button>
           </div>
 
-          <button className="flex items-center justify-center gap-2 w-full bg-redish p-4 rounded-2xl text-white">
+          <button className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-600 p-4 rounded-2xl text-white font-extrabold">
             <Icon className="text-xl" icon="tabler:logout-2" />
             Logout
           </button>
