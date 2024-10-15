@@ -83,8 +83,8 @@ const page = () => {
 
               {/* User Profile */}
               <TabPanel>
-                <div className="lg:py-8 lg:pr-8 h-full space-y-4  ">
-                  <div className="flex items-center justify-between gap-2 border-2 p-2  lg:p-6 overflow-hidden">
+                <div className="lg:py-8 lg:pr-8 h-full space-y-4">
+                  <div className="flex items-center justify-between gap-2 border-2 p-2 lg:p-6 overflow-hidden">
                     {/* left side columns */}
                     <div className="space-y-3 ">
                       <div className="flex items-center gap-2">
@@ -131,23 +131,288 @@ const page = () => {
               </TabPanel>
 
               {/* Update Profile */}
-              {/* <TabPanel>
-                <div className="p-8">
-                  <h2>jfhshfosh</h2>
+              <TabPanel>
+                <div className="flex flex-col lg:flex-row w-full lg:py-8 lg:pr-8 gap-6 p-3">
+                  <div className="flex-1 space-y-6">
+                    {/* First Name */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        placeholder="Md Alamin"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    {/* Mobile No */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Mobile No. *
+                      </label>
+                      <div className="flex">
+                        <span className="px-3 py-2 bg-gray-100 border rounded-l-lg">
+                          +88
+                        </span>
+                        <input
+                          type="text"
+                          name="mobile"
+                          placeholder="Enter mobile no."
+                          className="w-full px-3 py-2 border rounded-r-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
+                      </div>
+                    </div>
+                    {/* Avatar */}
+                    <div className="mb-4 hidden lg:block">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Avatar
+                      </label>
+                      <input
+                        type="file"
+                        name="avatar"
+                        className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-500 hover:file:bg-orange-100"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-6">
+                    {/* Last Name */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        placeholder="Ahmed"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    {/* Email */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="alaminahmed79000@gmail.com"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </TabPanel> */}
+                {/* Buttons */}
+                <div className="flex justify-end lg:mb-8">
+                  <button
+                    type="button"
+                    className="mr-4 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </TabPanel>
               {/* Update Address */}
-              {/* <TabPanel>
-                <div className="p-8">
-                  <h2>Any content 1</h2>
+              <TabPanel>
+                <div className="flex flex-col lg:flex-row w-full lg:py-8 lg:pr-8 gap-6 p-3">
+                  <div className="flex-1 space-y-6">
+                    {/* Address Type */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Address Type *
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        placeholder="Md Alamin"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    {/* Road */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Road#
+                      </label>
+                      <div className="">
+                        <input
+                          type="text"
+                          name="mobile"
+                          placeholder="Enter road no."
+                          className="w-full px-3 py-2 border rounded-r-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
+                      </div>
+                    </div>
+                    {/* Avatar */}
+                    {/* <div className="flex items-center">
+                      <div className="w-full">
+                        <label className="block text-gray-700 text-sm font-bold mb-1">
+                          Location
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Location"
+                          className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"  
+                        />
+                      </div>
+                      <button
+                        className="ml-4 text-red-500 font-semibold hover:text-red-600 focus:outline-none"
+                      >
+                        Edit
+                      </button>
+                    </div> */}
+                  </div>
+                  <div className="flex-1 space-y-6">
+                    {/* House */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        House#
+                      </label>
+                      <input
+                        type="text"
+                        name="house"
+                        placeholder="Enter house no."
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    {/* Block */}
+                    <div className="mb-4">
+                      <label className="block text-gray-700 font-bold mb-2">
+                        Block#
+                      </label>
+                      <input
+                        type="text"
+                        name="block"
+                        placeholder="Enter block no."
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </TabPanel> */}
+                {/* Buttons */}
+                <div className="flex justify-end lg:mb-8">
+                  <button
+                    type="button"
+                    className="mr-4 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </TabPanel>
               {/* Change Password */}
-              {/* <TabPanel>
-                <div className="p-8">
-                  <h2>Any content 1</h2>
+              <TabPanel>
+                <div className="lg:py-8 lg:pr-8 p-3">
+                  {/* Old Password */}
+                  <div className="mb-4 relative">
+                    <label className="block text-gray-700 font-bold mb-2">
+                      Old Password *
+                    </label>
+                    <input
+                      // type={showPassword.oldPassword ? "text" : "password"}
+                      name="oldPassword"
+                      // value={formData.oldPassword}
+                      // onChange={handleInputChange}
+                      placeholder="Enter your password"
+                      className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      // required
+                    />
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5 cursor-pointer"
+                      // onClick={() => togglePasswordVisibility("oldPassword")}
+                    >
+                      {/* {showPassword.oldPassword ? (
+                        <Icon
+                          className="h-5 w-5"
+                          icon="clarity:eye-show-line"
+                        />
+                      ) : (
+                        <Icon className="h-5 w-5" icon="clarity:eye-hide-solid" />
+                      )} */}
+                    </div>
+                  </div>
+
+                  {/* New Password */}
+                  <div className="mb-4 relative">
+                    <label className="block text-gray-700 font-bold mb-2">
+                      New Password *
+                    </label>
+                    <input
+                      // type={showPassword.newPassword ? "text" : "password"}
+                      name="newPassword"
+                      // value={formData.newPassword}
+                      // onChange={handleInputChange}
+                      placeholder="Enter your password"
+                      className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      // required
+                    />
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5 cursor-pointer"
+                      // onClick={() => togglePasswordVisibility("newPassword")}
+                    >
+                      {/* {showPassword.newPassword ? (
+                          <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-500" />
+                        )} */}
+                    </div>
+                  </div>
+
+                  {/* Confirm Password */}
+                  <div className="mb-4 relative">
+                    <label className="block text-gray-700 font-bold mb-2">
+                      Confirm Password *
+                    </label>
+                    <input
+                      // type={
+                      //   showPassword.confirmPassword ? "text" : "password"
+                      // }
+                      name="confirmPassword"
+                      // value={formData.confirmPassword}
+                      // onChange={handleInputChange}
+                      placeholder="Re-enter your password"
+                      className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      // required
+                    />
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5 cursor-pointer"
+                      // onClick={() =>
+                      //   togglePasswordVisibility("confirmPassword")
+                      // }
+                    >
+                      {/* {showPassword.confirmPassword ? (
+                          <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-500" />
+                        )} */}
+                    </div>
+                  </div>
                 </div>
-              </TabPanel> */}
+                <div className="flex justify-end lg:mb-8">
+                  <button
+                    type="button"
+                    className="mr-4 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </TabPanel>
             </Tabs>
           </div>
         </div>
