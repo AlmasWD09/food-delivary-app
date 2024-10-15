@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import ChooseUs from "@/components/ChooseUs";
 import CustomerReviews from "@/components/CustomerReviews";
 import Discount from "@/components/Discount";
 import Parallex from "@/components/Parallex";
@@ -14,7 +15,7 @@ const page = () => {
         <Discount></Discount>
         <Partner />
         <CustomerReviews />
-
+        <ChooseUs />
         <Parallex />
       </div>
     </div>

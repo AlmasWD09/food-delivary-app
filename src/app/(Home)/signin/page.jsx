@@ -1,4 +1,5 @@
 "use client";
+import SocialSignin from "@/components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -90,19 +91,8 @@ const SignInPage = () => {
               <span className="h-0.5 bg-gray-200 w-full"></span>
             </div>
 
-            <div className=" flex items-center justify-center gap-10 py-6">
-              <button>
-                <Icon className="text-4xl" icon="flat-color-icons:google" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="logos:facebook" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="devicon:twitter" />
-              </button>
-            </div>
+            {/* social sign here */}
+            <SocialSignin />
           </div>
 
           <h1 className="text-center py-4">
