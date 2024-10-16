@@ -7,9 +7,15 @@ import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
+import useAllUsers from "@/hooks/useAllUsers";
 
 const Navbar = () => {
+  const [allUsersData] = useAllUsers();
+
+  console.log(allUsersData);
+
   const pathname = usePathname();
+
   const [getMenu, setMenu] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +67,7 @@ const Navbar = () => {
     },
   ];
 
-  console.log(items);
+  // console.log(items);
   return (
     <div className="h-20 font-Inter bg-white  relative  shadow-md ">
       <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
