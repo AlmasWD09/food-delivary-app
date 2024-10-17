@@ -18,11 +18,11 @@ export default async function RootLayout({ children }) {
         <AuthProvider session={session}>
           {" "}
           {/* Pass the session */}
-          <div className="flex items-center h-screen relative">
-            <div className="font-Inter">
+          <div className="flex items-center h-screen relative font-Inter">
+            <div className="">
               <DashboardNav />
             </div>
-            <div className="h-screen flex-1 font-Inter overflow-y-auto">
+            <div className="h-screen flex-1  overflow-y-auto">
               <div className="sticky top-0 z-50 hidden lg:flex">
                 <TopBar />
               </div>

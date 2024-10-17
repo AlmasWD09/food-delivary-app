@@ -15,33 +15,19 @@ import { Icon } from "@iconify/react";
 import useMenus from "@/hooks/useMenus";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import moment from "moment";
 
 const columnHelper = createColumnHelper();
 
 const columns = [
-  // columnHelper.accessor("image", {
-  //   cell: (info) => (
-  //     <div className="h-10 w-10 rounded-full overflow-hidden">
-  //       <Image
-  //         className="w-full h-full"
-  //         src={info.getValue()}
-  //         height={1000}
-  //         width={1000}
-  //         alt={info.row.original.firstName}
-  //       />
-  //     </div>
-  //   ),
-  //   header: () => (
-  //     <div>
-  //       <h1>Image</h1>
-  //     </div>
-  //   ),
-  // }),
-
+  columnHelper.accessor("userId", {
+    cell: (info) => <div>#{info.getValue()}</div>,
+    header: () => <div>user</div>,
+  }),
   columnHelper.accessor("firstName", {
     cell: (info) => (
-      <div className="flex items-center justify-start gap-2 ">
-        <div className="h-10 w-10 rounded-full overflow-hidden">
+      <div className="flex items-center justify-start gap-4 font-medium">
+        <div className="h-8 w-8 rounded-full overflow-hidden">
           {info.row.original.image ? (
             <Image
               className="w-full h-full"
@@ -73,7 +59,7 @@ const columns = [
     ),
     header: () => (
       <div>
-        <h1>NAME</h1>
+        <h1>name</h1>
       </div>
     ),
   }),
@@ -82,7 +68,7 @@ const columns = [
     cell: (info) => <div>{info.getValue()}</div>,
     header: () => (
       <div>
-        <h1>EMAIL</h1>
+        <h1>email</h1>
       </div>
     ),
   }),
@@ -91,7 +77,7 @@ const columns = [
     cell: (info) => <div>{info.getValue()}</div>,
     header: () => (
       <div>
-        <h1>PHONE</h1>
+        <h1>phone</h1>
       </div>
     ),
   }),
@@ -100,14 +86,14 @@ const columns = [
     cell: (info) => (
       <div className="flex justify-center items-center">
         <div
-          className={`p-2 rounded-full capitalize w-fit  ${
+          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
             info.getValue() == "admin"
-              ? "bg-red-100 text-red-700"
+              ? "bg-red-100 text-red-500"
               : info.getValue() == "rider"
-              ? "bg-orange-100 text-orange-700"
+              ? "bg-orange-100 text-orange-500"
               : info.getValue() == "restaurant"
-              ? "bg-blue-100 text-blue-700"
-              : "bg-green-100 text-green-700"
+              ? "bg-blue-100 text-blue-500"
+              : "bg-green-100 text-green-500"
           } `}
         >
           {info.getValue()}
@@ -116,10 +102,20 @@ const columns = [
     ),
     header: () => (
       <div>
-        <h1>ROLE</h1>
+        <h1>role</h1>
       </div>
     ),
   }),
+
+  columnHelper.accessor("status", {
+    cell: (info) => <div>{info.getValue()}</div>,
+    header: () => <div>status</div>,
+  }),
+  columnHelper.accessor("created", {
+    cell: (info) => <div>{moment(info.getValue()).format("L")}</div>,
+    header: () => <div>created</div>,
+  }),
+
   columnHelper.accessor("action", {
     cell: (info) => (
       <div className="flex items-center justify-center gap-4">
@@ -134,7 +130,7 @@ const columns = [
         </button>
       </div>
     ),
-    header: () => <div>ACTION</div>,
+    header: () => <div>action</div>,
   }),
 ];
 
@@ -199,19 +195,16 @@ const Users = () => {
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 gap-5">
-        <form action="" className="  border-2 border-secondary w-fit ">
+        <form action="" className=" relative flex items-center justify-end ">
           <input
             value={filter ?? ""}
             onChange={(e) => setFilter(e.target.value)}
             placeholder=" type here.."
             type="text"
-            className="p-2 outline-none  focus-within:bg-yellow-100   "
+            className="px-4 py-2 outline-none rounded-xl focus:ring-2 border-2  "
           />
-          <button
-            type="submit"
-            className="p-2 bg-secondary   focus-within:bg-secondary text-white"
-          >
-            Search
+          <button type="submit" className=" absolute  pr-4">
+            <Icon className="text-2xl" icon="mingcute:search-line" />
           </button>
         </form>
 
@@ -220,7 +213,7 @@ const Users = () => {
           <select
             value={table.getState().pagination.pageSize}
             onChange={(e) => table.setPageSize(Number(e.target.value))}
-            className="border-2 border-slate-300 outline-none "
+            className="border-2 border-slate-300 outline-none p-1 rounded-xl "
           >
             {pageNumber.map((num) => (
               <option value={num} key={num}>
@@ -231,8 +224,8 @@ const Users = () => {
           <p>entries</p>
         </div>
       </div>
-      <div className="overflow-auto">
-        <table className="w-full text-center  ">
+      <div className="overflow-auto  bg-white divide-y-2 rounded-3xl ">
+        <table className="w-full text-center ">
           <thead>
             {table.getHeaderGroups().map((headerGroups) => (
               <tr key={headerGroups.id}>
@@ -240,7 +233,7 @@ const Users = () => {
                   <th
                     onClick={header.column.getToggleSortingHandler()}
                     key={header.id}
-                    className=" py-4 bg-secondary text-white "
+                    className=" py-4  capitalize text-sm  bg-blue-500 text-white "
                   >
                     <div className="flex items-center  justify-center">
                       {flexRender(
@@ -250,11 +243,11 @@ const Users = () => {
                       {
                         {
                           asc: (
-                            <Icon className="text-2xl" icon="tabler:arrow-up" />
+                            <Icon className="text-lg" icon="tabler:arrow-up" />
                           ),
                           desc: (
                             <Icon
-                              className="text-2xl"
+                              className="text-lg"
                               icon="tabler:arrow-down"
                             />
                           ),
@@ -275,9 +268,9 @@ const Users = () => {
               )
 
               .map((row) => (
-                <tr key={row.id} className="hover:bg-slate-200/20 bg-white">
+                <tr key={row.id} className="hover:bg-primary/10 bg-white">
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="p-4  text-center text-sm">
+                    <td key={cell.id} className="p-3  text-center  ">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -288,60 +281,59 @@ const Users = () => {
               ))}
           </tbody>
         </table>
-      </div>
+        {/* pagination footer  */}
 
-      {/* pagination footer  */}
+        <div lassName="">
+          <div className="flex items-center justify-center gap-2 py-2   bg-blue-100 ">
+            {/* left side  */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => table.setPageIndex(0)}
+                disabled={!table.getCanPreviousPage()}
+                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+              >
+                <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
+              </button>
+              <button
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+              >
+                <Icon
+                  className="text-3xl"
+                  icon="fluent:arrow-circle-left-12-regular"
+                />
+              </button>
+            </div>
 
-      <div lassName="border-2">
-        <div className="flex items-center justify-center gap-2  border-2 bg-slate-200">
-          {/* left side  */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => table.setPageIndex(0)}
-              disabled={!table.getCanPreviousPage()}
-              className="p-2 hover:bg-slate-300"
-            >
-              <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
-            </button>
-            <button
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-              className="p-2 hover:bg-slate-300"
-            >
-              <Icon
-                className="text-3xl"
-                icon="fluent:arrow-circle-left-12-regular"
-              />
-            </button>
-          </div>
+            {/* center  */}
+            <div>
+              <p>
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </p>
+            </div>
 
-          {/* center  */}
-          <div>
-            <p>
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
-            </p>
-          </div>
-
-          {/* right  */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-              className="p-2 hover:bg-slate-300"
-            >
-              <Icon
-                className="text-3xl"
-                icon="fluent:arrow-circle-right-12-regular"
-              />
-            </button>
-            <button
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
-              className="p-2 hover:bg-slate-300"
-            >
-              <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
-            </button>
+            {/* right  */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+              >
+                <Icon
+                  className="text-3xl"
+                  icon="fluent:arrow-circle-right-12-regular"
+                />
+              </button>
+              <button
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!table.getCanNextPage()}
+                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+              >
+                <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
