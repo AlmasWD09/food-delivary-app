@@ -14,12 +14,11 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/cart-menu/tariquelislam2015@gmail.com`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/cart-menu/${session?.data?.user?.email}`
         );
         setItems(response.data);
       } catch (error) {
@@ -30,7 +29,7 @@ const Navbar = () => {
     };
 
     fetchItems();
-  }, []);
+  }, [session?.data?.user?.email]);
 
   // if (loading) {
   //     return <li>Loading...</li>;
@@ -237,7 +236,7 @@ const Navbar = () => {
                   className={` absolute ${items?.length === 0 && "hidden"
                     } bg-primary rounded-full text-white w-fit h-fit p-1 -top-2  text-sm font-semibold -right-2`}
                 >
-                  {items.length}
+                  {items.slice(0,8).length}
                 </span>
                 {items?.length > 0 && (
                   <span className="  w-10 h-10 rounded-full animate-ping bg-primaryGray "></span>
@@ -272,7 +271,7 @@ const Navbar = () => {
                   {items?.length > 0 && (
                     <>
                       <div className="divide-y-2 space-y-3 py-3">
-                        {items.map((item, idx) => (
+                        {items?.slice(0,8)?.map((item, idx) => (
                           <div
                             key={idx}
                             className="flex items-center justify-between gap-2 "
@@ -298,9 +297,9 @@ const Navbar = () => {
                           </div>
                         ))}
                       </div>
-                      <button className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold">
+                      <Link href={"/order"} className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold">
                         Process to Checkout
-                      </button>
+                      </Link>
                     </>
                   )}
                 </>

@@ -4,6 +4,7 @@ import CustomerReviews from "@/components/CustomerReviews";
 import Discount from "@/components/Discount";
 import Parallex from "@/components/Parallex";
 import Partner from "@/components/Partner";
+import TopRestaurants from "@/components/TopRestaurants";
 
 import React from "react";
 
@@ -12,11 +13,12 @@ const page = () => {
     <div>
       <Banner />
       <div className="py-40 space-y-40">
+        <TopRestaurants/>
         <Discount></Discount>
         <Partner />
-        <CustomerReviews />
+        {/* <CustomerReviews /> */}
         <ChooseUs />
-        <Parallex />
+        {/* <Parallex /> */}
       </div>
     </div>
   );

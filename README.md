@@ -13,3 +13,5 @@ packages i used
 #npm i react-rating-stars-component
 #npm install moment --save
 #npm i socket.io-client
+#npm install react-slick --save
+#npm i slick-carousel
