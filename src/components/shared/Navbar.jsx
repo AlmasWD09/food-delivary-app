@@ -14,7 +14,6 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-  
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -187,7 +186,7 @@ const Navbar = () => {
                           </Link>
                           <button
                             onClick={signOut}
-                            className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full"
+                            className=" gap-2 hover:bg-primary hover:text-white  p-4  flex items-center w-full"
                           >
                             <Icon icon="hugeicons:logout-04" />
                             <span>Logout</span>
@@ -413,7 +412,7 @@ const Navbar = () => {
                     </Link>
                     <button
                       onClick={signOut}
-                      className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full"
+                      className=" gap-2 hover:bg-primary hover:text-white  p-4 flex items-center w-full"
                     >
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>

@@ -92,7 +92,7 @@ const SignInPage = () => {
             </div>
 
             {/* social sign here */}
-            <SocialSignin />
+            {/* <SocialSignin /> */}
           </div>
 
           <h1 className="text-center py-4">

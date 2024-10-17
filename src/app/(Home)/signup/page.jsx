@@ -6,27 +6,27 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-// const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
-// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const SignupPage = () => {
   const router = useRouter();
   const session = useSession();
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    // const imageFile = event.target.image.files[0]; // Get the image file properly
-    // const formData = new FormData(); // Create FormData for file upload
-    // formData.append("image", imageFile); // Append image to FormData
+    const imageFile = event.target.image.files[0]; // Get the image file properly
+    const formData = new FormData(); // Create FormData for file upload
+    formData.append("image", imageFile); // Append image to FormData
 
     try {
       // Upload the image to imgbb
-      // const res = await axios.post(image_hosting_api, formData, {
-      //   headers: {
-      //     "content-type": "multipart/form-data",
-      //   },
-      // });
-      // const imageUrl = res?.data?.data?.url; // Extract the uploaded image URL
-      // console.log("Image uploaded successfully:", imageUrl);
+      const res = await axios.post(image_hosting_api, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      const imageUrl = res?.data?.data?.url; // Extract the uploaded image URL
+      console.log("Image uploaded successfully:", imageUrl);
 
       // Create newUser object with the image URL
       const newUser = {
