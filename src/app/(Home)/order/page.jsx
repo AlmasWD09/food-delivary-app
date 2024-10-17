@@ -1,6 +1,9 @@
 "use client";
 import OrderCartCard from "@/components/cards/OrderCartCard";
+import CheckoutForm from "@/components/CheckoutForm";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -12,8 +15,10 @@ const OrderPage = () => {
   const [page, setPage] = useState("backPack");
   const [ship, setShip] = useState("no");
   const axiosPub = useAxiosPublic()
-  const [total,setTotal] = useState(0)
+  const [trip,setTrip] = useState(0)
   const session = useSession()
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
 
   const {data: cartData = [],refetch,isLoading} = useQuery({
     queryKey: ['cartData',], 
@@ -31,6 +36,12 @@ const OrderPage = () => {
     setShip(event.target.checked ? "yes" : "no");
   };
 
+  const handleChange = (e) => {
+    setTrip(parseInt(e.target.value) || 0);
+   
+  }
+  
+ 
   const totalPrice = cartData?.reduce((total, item) => {
     return total + (parseInt(item.price)* parseInt(item.quantity));
   }, 0);
@@ -39,7 +50,36 @@ const OrderPage = () => {
   }, 0);
   
   const discountMRP = totalMRP - totalPrice
-  const totalAmount = totalPrice + 10
+  const totalAmount = totalPrice + 10 + parseInt(trip) 
+
+  const paymentData = {
+    totalAmount,
+    userName : session?.data?.user?.name,
+    userEmail: session?.data?.user?.email,
+    userAddress : "Dhaka, Bangladesh",
+    userNumber : "01568606366",
+    titles : cartData?.map(item => item?.title) || [],
+    itemsId : cartData?.map(item => item?._id) || []
+  }
+
+  // const handleAddress = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target
+  //   const name = form.name.value
+  //   const number = form.number.value
+  //   const address = form.address.value
+  //   const email = form.email.value
+  //   const message = form.message.value
+  //   const userInfo = {
+  //     name,
+  //     number,
+  //     address,
+  //     email,
+  //     message
+  //   }
+  //   localStorage.setItem("userOrder",userInfo)
+   
+  // }
 
   // useEffect(() => {
   //   let discountedAmount = totalAmount;
@@ -116,6 +156,7 @@ const OrderPage = () => {
                             placeholder="Enter w-full your name"
                             className="border mt-2 rounded-xl p-3"
                             type="text"
+                            name="name"
                             disabled={ship === "no"}
                           />
                         </div>
@@ -127,6 +168,7 @@ const OrderPage = () => {
                             placeholder="Enter w-full your number"
                             className="border mt-2 rounded-xl p-3"
                             type="number"
+                            name="number"
                             disabled={ship === "no"}
                           />
                         </div>
@@ -136,10 +178,11 @@ const OrderPage = () => {
                           <label className="block text-sm font-medium text-gray-700">Delivery address</label>
                           <input
                             placeholder="Enter  your address"
-                            defaultValue={"Bhulta Gausiya, Rupganj, Narayanganj"}
+                            defaultValue={"Dhaka, Bangladesh"}
                             required
                             className="border mt-2 w-full rounded-xl p-3"
                             type="text"
+                            name="address"
                             disabled={ship === "no"}
                           />
                         </div>
@@ -151,6 +194,7 @@ const OrderPage = () => {
                             defaultValue={session?.data?.user?.email}
                             className="border mt-2 w-full rounded-xl p-3"
                             type="email"
+                            name="email"
                             disabled={ship === "no"}
                           />
                         </div>
@@ -180,7 +224,7 @@ const OrderPage = () => {
                         />
                       </div>
                       <input
-                        className={`${ship === "no" ? "hidden" : ""} w-1/4 rounded-lg cursor-pointer uppercase mt-5 text-center py-2 bg-pink-600 text-white`}
+                        className={`${ship === "no" ? "hidden" : ""} w-1/4 rounded-lg cursor-pointer uppercase mt-5 text-center py-2 bg-primary text-white`}
                         type="submit"
                         value="Save"
                       />
@@ -192,11 +236,15 @@ const OrderPage = () => {
             )}
           </div>
           {/* price calculation */}
-          <div className="lg:col-span-2 md:col-span-1 h-[450px] px-6 py-10 border">
+          <div className="lg:col-span-2 md:col-span-1 h-[550px] px-6 py-10 border">
             <p className="mb-5 pb-3">Price details {`(${cartData.length} items)`}</p>
             <div className="flex text-base justify-between">
               <p>Total MRP</p>
               <p>${totalMRP}</p>
+            </div>
+            <div className="flex text-base justify-between">
+              <p>Total Price</p>
+              <p>${totalPrice}</p>
             </div>
             <div className="flex my-2 text-base justify-between">
               <p>Discount on MRP</p>
@@ -212,7 +260,15 @@ const OrderPage = () => {
             </div>
             <div className="flex text-sm justify-between">
               <p>Coupon discount</p>
-              <button className="text-pink-600">Apply Coupon</button>
+              <button className="text-primary">Apply Coupon</button>
+            </div>
+            <div className="flex border-t pt-4 mt-4 text-base justify-between">
+              <p>Tips for rider</p>
+              <div className="flex items-center gap-2">
+                <button onClick={()=> setTrip(5)} className={`p-2 w-10 rounded-xl border ${trip === 5 && "bg-primaryGray"}`}>$5</button>
+                <button onClick={()=> setTrip(10)} className={`p-2 w-10 rounded-xl border ${trip === 10 && "bg-primaryGray"}`}>$10</button>
+                <button ><input onChange={handleChange} name="trip" className="p-2 w-16 rounded-xl border" type="text" placeholder="Other" /></button>
+                </div>
             </div>
             <div className="flex border-t pt-4 mt-4 text-base justify-between">
               <p>Total amount</p>
@@ -229,9 +285,28 @@ const OrderPage = () => {
                             </label>
                             </div>
                             {
-                                page === "backPack" ? <button disabled={cartData.length === 0} onClick={()=>setPage("address")} className={`w-full uppercase ${cartData.length === 0 && 'bg-pink-300'} mt-5 text-center py-2 bg-pink-600 text-white`}>Place on processed</button> :
-                                <button disabled={cartData.length === 0} className={`w-full uppercase ${cartData.length === 0 && 'bg-pink-300'} mt-5 text-center py-2 bg-pink-600 text-white`}>Place Order</button>
+                                page === "backPack" ? <button disabled={cartData.length === 0} onClick={()=>setPage("address")} className={`w-full uppercase ${cartData.length === 0 && 'bg-primaryLight'} mt-5 text-center py-2 bg-primary text-white`}>Place on processed</button> :
+                                <button 
+                                onClick={()=>setIsModalOpen(true)}
+                                disabled={cartData.length === 0} 
+                                className={`w-full uppercase ${cartData.length === 0 && 'bg-primaryLight'} mt-5 text-center py-2 bg-primary text-white`}>Place Order</button>
                             }
+                             {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed px-5 lg:px-0 z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white md:w-[600px] relative rounded-lg p-6 max-w-sm mx-auto">
+                        <button onClick={() => setIsModalOpen(false)} className="absolute top-0 right-0 rounded-full shadow-lg p-3 bg-[#FFFFFF] md:w-11">X</button>
+                        <h2 className="text-lg font-semibold">Hey {session?.data?.user?.name}</h2>
+                        <p className="text-sm">Last task for your order</p>
+                        <div className="bg-base-300 p-10 h-[200px]  rounded-xl mx-auto">
+                          <Elements stripe={stripePromise}>
+                              <CheckoutForm setIsModalOpen={setIsModalOpen} setPage={setPage} refetch={refetch} paymentData={paymentData} />
+                          </Elements>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* end */}
           </div>
         </div>
       </div>

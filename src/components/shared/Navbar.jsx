@@ -19,7 +19,7 @@ const Navbar = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/cart-menu/tariquelislam2015@gmail.com`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/cart-menu/${session?.data?.user?.email}`
         );
         setItems(response.data);
       } catch (error) {
@@ -30,7 +30,7 @@ const Navbar = () => {
     };
 
     fetchItems();
-  }, []);
+  }, [session?.data?.user?.email]);
 
   // if (loading) {
   //     return <li>Loading...</li>;
@@ -147,13 +147,21 @@ const Navbar = () => {
                   session?.data?.user ? "w-full" : "p-10"
                 }   text-nowrap bg-white  border-4 border-primary`}
               >
-                {session?.data?.user ? (
+                {/* condition rendering use for social signIn */}
+                {session?.data?.user || session?.status === "authenticated" ? (
                   <>
                     <div className="w-[240px]">
-                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                        {session?.data?.user?.firstName}{" "}
-                        {session?.data?.user?.lastName}
-                      </h1>
+                      {session?.data?.user?.name ? (
+                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                          {/* only social signIn */}
+                          {session?.data?.user?.name}
+                        </h1>
+                      ) : (
+                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                          {session?.data?.user?.firstName}{" "}
+                          {session?.data?.user?.lastName}
+                        </h1>
+                      )}
 
                       <div>
                         <ul className=" font-semibold  ">
@@ -180,7 +188,7 @@ const Navbar = () => {
                           </Link>
                           <button
                             onClick={signOut}
-                            className=" gap-2 hover:bg-red-600 hover:text-white  p-4  flex items-center w-full"
+                            className=" gap-2 hover:bg-primary hover:text-white  p-4  flex items-center w-full"
                           >
                             <Icon icon="hugeicons:logout-04" />
                             <span>Logout</span>
@@ -231,7 +239,7 @@ const Navbar = () => {
                     items?.length === 0 && "hidden"
                   } bg-primary rounded-full text-white w-fit h-fit p-1 -top-2  text-sm font-semibold -right-2`}
                 >
-                  {items.length}
+                  {items.slice(0, 8).length}
                 </span>
                 {items?.length > 0 && (
                   <span className="  w-10 h-10 rounded-full animate-ping bg-primaryGray "></span>
@@ -267,7 +275,7 @@ const Navbar = () => {
                   {items?.length > 0 && (
                     <>
                       <div className="divide-y-2 space-y-3 py-3">
-                        {items.map((item, idx) => (
+                        {items?.slice(0, 8)?.map((item, idx) => (
                           <div
                             key={idx}
                             className="flex items-center justify-between gap-2 "
@@ -293,9 +301,12 @@ const Navbar = () => {
                           </div>
                         ))}
                       </div>
-                      <button className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold">
+                      <Link
+                        href={"/order"}
+                        className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold"
+                      >
                         Process to Checkout
-                      </button>
+                      </Link>
                     </>
                   )}
                 </>
@@ -355,7 +366,7 @@ const Navbar = () => {
                 : "w-full"
             }`}
           >
-            {session?.data?.user ? (
+            {session?.data?.user || session?.status === "authenticated" ? (
               <>
                 <div className="flex items-center gap-2 p-4 ">
                   <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
@@ -369,10 +380,17 @@ const Navbar = () => {
                   </div>
 
                   <div>
-                    <h1 className="text-xl capitalize font-bold ">
-                      {session?.data?.user?.firstName}{" "}
-                      {session?.data?.user?.lastName}
-                    </h1>
+                    {session?.data?.user?.name ? (
+                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                        {/* only social signIn */}
+                        {session?.data?.user?.name}
+                      </h1>
+                    ) : (
+                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                        {session?.data?.user?.firstName}{" "}
+                        {session?.data?.user?.lastName}
+                      </h1>
+                    )}
                     <h2 className="font-semibold capitalize">
                       {session?.data?.user?.role}
                     </h2>
@@ -404,7 +422,7 @@ const Navbar = () => {
                     </Link>
                     <button
                       onClick={signOut}
-                      className=" gap-2 hover:bg-red-600 hover:text-white  p-4 flex items-center w-full"
+                      className=" gap-2 hover:bg-primary hover:text-white  p-4 flex items-center w-full"
                     >
                       <Icon className="text-lg" icon="hugeicons:logout-04" />
                       <span>Logout</span>
