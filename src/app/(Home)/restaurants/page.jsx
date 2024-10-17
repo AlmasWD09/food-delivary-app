@@ -14,6 +14,7 @@ export default function Restaurants() {
       .then((res) => res.json())
       .then((data) => setRestaurant(data.restaurents));
   }, [search]);
+  console.log(restaurants)
 
   const handleSearch = (e) => {
     e.preventDefault();
