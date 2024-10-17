@@ -6,8 +6,8 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 const ProfilePage = () => {
-   const session = useSession()
-   console.log(session)
+  const session = useSession();
+  console.log(session);
 
   return (
     <div className="container mx-auto p-4 lg:mt-10 mt-8">

@@ -25,7 +25,7 @@ const MenuPage = () => {
                 </div>
             </div>
         </div>
-       {/* <Menu menuData={menuData} refetch={refetch} /> */}
+       <Menu menuData={menuData} refetch={refetch} />
        <div className="py-20 px-3 lg:px-0 lg:max-w-[1240px] mx-auto">
         <p className="text-xl  font-medium">Recommended</p>
           <h3 className="text-4xl mt-1 mb-8 font-bold">Just for you</h3>

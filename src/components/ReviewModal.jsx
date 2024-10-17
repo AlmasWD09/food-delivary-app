@@ -18,7 +18,7 @@ const ReviewModal = ({restaurantName}) => {
   const {mutateAsync} = useMutation({
     mutationKey: ["review"],
     mutationFn : async(review)=>{
-      const {data} = await axiosPub.post('/restaurents/restReviews',review)
+      const {data} = await axiosPub.post('/reviews',review)
       console.log(data)
       return data
     },
@@ -33,7 +33,7 @@ const ReviewModal = ({restaurantName}) => {
   const {mutateAsync:favorite} = useMutation({
     mutationKey: ["favorite"],
     mutationFn : async(fav)=>{
-      const {data} = await axiosPub.post('/restaurents/restFavorite',fav)
+      const {data} = await axiosPub.post('/favorite',fav)
      
       return data
     },
@@ -78,13 +78,13 @@ const ReviewModal = ({restaurantName}) => {
         userName:session?.data?.user?.name,
       };
    
-      const { data, isLoading, refetch } = useQuery({
+      const { data=[], isLoading, refetch } = useQuery({
         queryKey: ["fav"],
         queryFn: async () => {
        
           const queryString = new URLSearchParams(favo).toString();
       
-          const { data } = await axiosPub.get(`/restaurents/restFavorite?${queryString}`);
+          const { data } = await axiosPub.get(`/favorite?${queryString}`);
           return data;
         },
       });

@@ -128,56 +128,56 @@ const Footer = () => {
           <ul className="capitalize grid grid-cols-2 gap-x-4 gap-y-2">
             <li className="group relative">
               <Link href="/menu/margherita-pizza">Margherita Pizza</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/spaghetti-carbonara">Spaghetti Carbonara</Link>{" "}
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/chicken-tikka-masala">
                 Chicken Tikka Masala
               </Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/caesar-salad">Caesar Salad</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/beef-tacos">Beef Tacos</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/vegetable-stir-fry">Vegetable Stir-Fry</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/sushi-platter">Sushi Platter</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/chocolate-lava-cake">Chocolate Lava Cake</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/fresh-fruit-smoothie">
                 Fresh Fruit Smoothie
               </Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
 
             <li className="group relative">
               <Link href="/menu/garlic-bread">Garlic Bread</Link>
-              <span className="w-full bg-secondary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
+              <span className="w-full bg-primary absolute -bottom-1 left-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 ease-out duration-300 transition origin-left"></span>
             </li>
           </ul>
         </div>
@@ -233,7 +233,7 @@ const Footer = () => {
       <div className="w-full flex justify-center pb-10 lg:pb-6 pt-10 text-sm">
         <div className=" flex items-center  gap-2 text-nowrap capitalize">
           copyright <Icon icon="ic:baseline-copyright" />
-          <Link className="hover:text-secondary" href="/">
+          <Link className="hover:text-pribg-primary" href="/">
             delish
           </Link>
           . all rights reserved

@@ -131,11 +131,11 @@ const Overview = () => {
   const ChartData = {
     series: [
       {
-        name: "Joined",
+        name: "Delivered",
         data: userJoined,
       },
       {
-        name: "Left",
+        name: "Canceled",
         data: userLeft,
       },
     ],
@@ -209,9 +209,7 @@ const Overview = () => {
       <div className="w-full  flex flex-col lg:flex-row items-center justify-between gap-10 ">
         {/* charts  */}
         <div className="p-8 lg:p-10 bg-white rounded-xl  w-full ">
-          <h1 className="text-xl font-bold capitalize pb-2">
-            registration trends
-          </h1>
+          <h1 className="text-xl font-bold capitalize pb-2">Order trends</h1>
 
           <div className="w-full ">
             <Chart
@@ -227,7 +225,7 @@ const Overview = () => {
         <div className="p-12 bg-white rounded-xl w-full  lg:w-1/3">
           <div className="capitalize flex items-center justify-between pb-4">
             <h2 className="text-xl font-bold">Recent Sales</h2>
-            <button className="px-2 py-1 font-semibold rounded-xl border-2  capitalize">
+            <button className="px-2 py-1 font-semibold text-sm rounded-xl border-2  capitalize">
               see all
             </button>
           </div>
@@ -237,7 +235,7 @@ const Overview = () => {
                 key="idx"
                 className="flex items-center justify-between py-4 border-t-2 "
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden object-cover">
                     <Image
                       className="w-full h-full object-cover"
@@ -248,14 +246,12 @@ const Overview = () => {
                     />
                   </div>
                   <span>
-                    <h2 className="font-semibold text-base">
-                      {item.user_name}
-                    </h2>
-                    <TimeAgo date={item.date_time} />
+                    <h2 className=" text-base">{item.user_name}</h2>
+                    <TimeAgo date={item.date_time} className="text-sm" />
                   </span>
                 </div>
 
-                <h1 className="text-xl">${item.amount}</h1>
+                <h1 className="text-base">${item.amount}</h1>
               </div>
             ))}
           </div>
@@ -266,7 +262,7 @@ const Overview = () => {
       <div className="w-full p-10 bg-white rounded-2xl ">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl py-4">Recent Transaction</h2>
-          <button className="font-bold border-2  text-base px-2 py-1 rounded-xl capitalize">
+          <button className="font-semibold border-2  text-sm px-2 py-1 rounded-xl capitalize">
             sell all
           </button>
         </div>
@@ -279,7 +275,7 @@ const Overview = () => {
                     <th
                       onClick={header.column.getToggleSortingHandler()}
                       key={header.id}
-                      className="font-extrabold p-4 cursor-pointer hover:bg-slate-100"
+                      className="font-bold p-4 cursor-pointer hover:bg-slate-100"
                     >
                       {flexRender(
                         header.column.columnDef.header,
@@ -294,7 +290,7 @@ const Overview = () => {
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="hover:bg-slate-100  ">
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="p-4 ">
+                    <td key={cell.id} className="p-4 text-sm">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
