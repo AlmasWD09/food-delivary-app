@@ -7,13 +7,8 @@ import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
-import useAllUsers from "@/hooks/useAllUsers";
 
 const Navbar = () => {
-  const [allUsersData] = useAllUsers();
-
-  console.log(allUsersData);
-
   const pathname = usePathname();
 
   const [getMenu, setMenu] = useState(false);

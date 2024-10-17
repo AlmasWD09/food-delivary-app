@@ -12,6 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
+import useMenus from "@/hooks/useMenus";
 
 const columnHelper = createColumnHelper();
 
@@ -155,6 +156,7 @@ const Users = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnFiltersChange: setFilter,
   });
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 gap-5">
