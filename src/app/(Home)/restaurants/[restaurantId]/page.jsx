@@ -11,28 +11,28 @@ import RestaurantMap from "@/components/RestaurantMap";
 import ReviewModal from "@/components/ReviewModal";
 import useResturantReviews from "@/hooks/useResturantReviews";
 import { useQuery } from "@tanstack/react-query";
+import Restaurants from './../page';
 
 export default function RestaurantD({ params }) {
   const [foods, setFoods] = useState([]);
-  const [restaurant, setRestaurant] = useState(null);
+  const [restaurant, setRestaurant] = useState([]);
 
-  console.log("params is ", params.restaurantId);
+  const id = params.restaurantId;
+  
 
   useEffect(() => {
     fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/${params.restaurantId}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/${id}`
     )
       .then((res) => res.json())
-      .then((data) => setRestaurant(data))
-      .catch((error) => {
-        console.error("Error fetching restaurant:", error);
-        setRestaurant(null); // Set to null if there is an error
-      });
-  }, [params]);
+      .then((data) => setRestaurant(data));
+  }, [id]);
 
+  // const restaurant = restaurants?.find(
+  //   (restaurent) => restaurent._id === params.restaurantId
+  // );
   const name = restaurant?.restaurantName;
 
-  const [data, isLoading, refetch] = useResturantReviews({ name });
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
@@ -40,7 +40,11 @@ export default function RestaurantD({ params }) {
       .then((data) => setFoods(data));
   }, []);
 
-  if (!restaurant || foods.length === 0 || isLoading) {
+
+  const [data, isLoading, refetch] = useResturantReviews({});
+
+  
+  if (!restaurant || foods?.length === 0 || isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -50,17 +54,26 @@ export default function RestaurantD({ params }) {
       food.restaurant?.trim().toLowerCase() ===
       restaurant?.restaurantName?.trim().toLowerCase()
   );
+
+  // reviews
+  const reviews = data?.filter(
+    (review) =>
+      review.restaurantName?.trim().toLowerCase() ===
+      restaurant?.restaurantName?.trim().toLowerCase()
+  );
+  
   return (
     <div className="container px-2 mx-auto">
       <div className="mb-5 relative">
         <Image
           src={restaurant?.restaurantImage}
+          alt={restaurant?.restaurantName}
           width={900}
           height={450}
-          alt="restaurant image"
           className="h-52 object-cover bg-center w-full md:h-80 lg:h-[450px] rounded-xl"
         />
         <ReviewModal restaurantName={restaurant?.restaurantName} />
+        
       </div>
       <div>
         <div className="flex items-center gap-5">
@@ -172,8 +185,8 @@ export default function RestaurantD({ params }) {
       <div className="my-10 lg:max-w-[1240px] mx-auto">
         <h3 className="text-2xl   font-semibold">Rating and Reviews</h3>
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data?.length > 0 ? (
-            data?.map((review) => (
+          {reviews?.length > 0 ? (
+            reviews?.map((review) => (
               <>
                 <div className="border hover:shadow-lg p-6 rounded-lg">
                   <h1 className="text-orange-500 flex items-center justify-center gap-2">

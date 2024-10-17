@@ -3,7 +3,6 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa6";
 import Link from "next/link";
-// import RestaurentD from "@/components/RestaurentD";
 import { useEffect, useState } from "react";
 
 export default function Restaurants() {
@@ -13,14 +12,7 @@ export default function Restaurants() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents?search=${search}`)
       .then((res) => res.json())
-      .then((data) => {
-        // Ensure the data is an array, even if the response is not as expected
-        setRestaurant(Array.isArray(data) ? data : []);
-      })
-      .catch((error) => {
-        console.error("Error fetching restaurants:", error);
-        setRestaurant([]); // Set an empty array in case of an error
-      });
+      .then((data) => setRestaurant(data.restaurents));
   }, [search]);
   console.log(restaurants)
 
@@ -31,8 +23,6 @@ export default function Restaurants() {
     console.log(search);
     setSearch(search);
   };
-
- 
 
   return (
     <>
