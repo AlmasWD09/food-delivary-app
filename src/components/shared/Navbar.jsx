@@ -10,6 +10,7 @@ import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const pathname = usePathname();
+
   const [getMenu, setMenu] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ const Navbar = () => {
     },
   ];
 
-
+  // console.log(items);
   return (
     <div className="h-20 font-Inter bg-white  relative  shadow-md ">
       <div className=" h-full flex items-center justify-between  container mx-auto top-0  p-2 ">
@@ -86,7 +87,8 @@ const Navbar = () => {
               <Link key={item.path} href={item.path}>
                 <div className="group relative">
                   <li
-                    className={`px-2 py-1 rounded-md ${pathname == item.path
+                    className={`px-2 py-1 rounded-md ${
+                      pathname == item.path
                         ? " font-extrabold text-primary"
                         : ""
                     }`}
@@ -141,25 +143,25 @@ const Navbar = () => {
                 />
               </div>
               <div
-                className={` ${session?.data?.user ? "w-full" : "p-10"
-                  }   text-nowrap bg-white  border-4 border-primary`}>
-
-
+                className={` ${
+                  session?.data?.user ? "w-full" : "p-10"
+                }   text-nowrap bg-white  border-4 border-primary`}
+              >
                 {/* condition rendering use for social signIn */}
                 {session?.data?.user || session?.status === "authenticated" ? (
                   <>
                     <div className="w-[240px]">
-                      {
-                        session?.data?.user?.name ? <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                      {session?.data?.user?.name ? (
+                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
                           {/* only social signIn */}
                           {session?.data?.user?.name}
                         </h1>
-                          :
-                          <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                            {session?.data?.user?.firstName}{" "}
-                            {session?.data?.user?.lastName}
-                          </h1>
-                      }
+                      ) : (
+                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                          {session?.data?.user?.firstName}{" "}
+                          {session?.data?.user?.lastName}
+                        </h1>
+                      )}
 
                       <div>
                         <ul className=" font-semibold  ">
@@ -233,10 +235,11 @@ const Navbar = () => {
               <span className="w-full h-0.5 absolute -bottom-1 left-0 scale-x-0 group-hover:scale-x-100 bg-primary transition-all duration-300 ease-in-out"></span>
               <div className="absolute  flex justify-center items-center ">
                 <span
-                  className={` absolute ${items?.length === 0 && "hidden"
-                    } bg-primary rounded-full text-white w-fit h-fit p-1 -top-2  text-sm font-semibold -right-2`}
+                  className={` absolute ${
+                    items?.length === 0 && "hidden"
+                  } bg-primary rounded-full text-white w-fit h-fit p-1 -top-2  text-sm font-semibold -right-2`}
                 >
-                  {items.slice(0,8).length}
+                  {items.slice(0, 8).length}
                 </span>
                 {items?.length > 0 && (
                   <span className="  w-10 h-10 rounded-full animate-ping bg-primaryGray "></span>
@@ -254,8 +257,9 @@ const Navbar = () => {
                 />
               </div>
               <div
-                className={` ${session?.data?.user && "w-full"
-                  }   text-nowrap bg-white  border-4 p-6 border-primary`}
+                className={` ${
+                  session?.data?.user && "w-full"
+                }   text-nowrap bg-white  border-4 p-6 border-primary`}
               >
                 <>
                   <h1 className="uppercase font-bold text-xl text-center">
@@ -271,7 +275,7 @@ const Navbar = () => {
                   {items?.length > 0 && (
                     <>
                       <div className="divide-y-2 space-y-3 py-3">
-                        {items?.slice(0,8)?.map((item, idx) => (
+                        {items?.slice(0, 8)?.map((item, idx) => (
                           <div
                             key={idx}
                             className="flex items-center justify-between gap-2 "
@@ -297,7 +301,10 @@ const Navbar = () => {
                           </div>
                         ))}
                       </div>
-                      <Link href={"/order"} className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold">
+                      <Link
+                        href={"/order"}
+                        className="capitalize px-4 py-2  w-full rounded-lg bg-primary text-white font-bold"
+                      >
                         Process to Checkout
                       </Link>
                     </>
@@ -327,8 +334,9 @@ const Navbar = () => {
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-white ease-in-out duration-300 transform ${getMenu ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-white ease-in-out duration-300 transform ${
+          getMenu ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="p-10 ">
           <ul className=" flex flex-col gap-6">
@@ -340,8 +348,9 @@ const Navbar = () => {
               >
                 <li
                   key={item.path}
-                  className={`font-bold p-4 hover:bg-primaryGray/20 ${pathname === item.path && "bg-primaryGray/20 text-primary"
-                    } `}
+                  className={`font-bold p-4 hover:bg-primaryGray/20 ${
+                    pathname === item.path && "bg-primaryGray/20 text-primary"
+                  } `}
                 >
                   {item.title}
                 </li>
@@ -351,10 +360,11 @@ const Navbar = () => {
 
           <hr />
           <div
-            className={` ${session
+            className={` ${
+              session
                 ? " border-4  border-primary w-fit mx-auto mt-10"
                 : "w-full"
-              }`}
+            }`}
           >
             {session?.data?.user || session?.status === "authenticated" ? (
               <>
@@ -370,17 +380,17 @@ const Navbar = () => {
                   </div>
 
                   <div>
-                    {
-                      session?.data?.user?.name ? <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                    {session?.data?.user?.name ? (
+                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
                         {/* only social signIn */}
                         {session?.data?.user?.name}
                       </h1>
-                        :
-                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                          {session?.data?.user?.firstName}{" "}
-                          {session?.data?.user?.lastName}
-                        </h1>
-                    }
+                    ) : (
+                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
+                        {session?.data?.user?.firstName}{" "}
+                        {session?.data?.user?.lastName}
+                      </h1>
+                    )}
                     <h2 className="font-semibold capitalize">
                       {session?.data?.user?.role}
                     </h2>
