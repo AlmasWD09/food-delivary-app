@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function RestaurantD({ params }) {
   const [foods, setFoods] = useState([]);
-  const [restaurants, setRestaurant] = useState([]);
+  const [restaurant, setRestaurant] = useState(null);
 
   console.log("params is ", params.restaurantId);
 
@@ -23,12 +23,13 @@ export default function RestaurantD({ params }) {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/${params.restaurantId}`
     )
       .then((res) => res.json())
-      .then((data) => setRestaurant(data));
-  }, []);
+      .then((data) => setRestaurant(data))
+      .catch((error) => {
+        console.error("Error fetching restaurant:", error);
+        setRestaurant(null); // Set to null if there is an error
+      });
+  }, [params]);
 
-  const restaurant = restaurants?.find(
-    (restaurent) => restaurent._id === params.restaurantId
-  );
   const name = restaurant?.restaurantName;
 
   const [data, isLoading, refetch] = useResturantReviews({ name });
@@ -49,7 +50,6 @@ export default function RestaurantD({ params }) {
       food.restaurant?.trim().toLowerCase() ===
       restaurant?.restaurantName?.trim().toLowerCase()
   );
-
   return (
     <div className="container px-2 mx-auto">
       <div className="mb-5 relative">

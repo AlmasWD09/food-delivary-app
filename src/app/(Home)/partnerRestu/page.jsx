@@ -17,7 +17,7 @@ const PartnerRestu = () => {
     mutationKey: ["restu"],
     mutationFn: async (item) => {
       const { data } = await axiosPub.post("/restaurents", item);
-      console.log(data);
+     
       return data;
     },
     onSuccess: () => {

@@ -13,8 +13,16 @@ export default function Restaurants() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents?search=${search}`)
       .then((res) => res.json())
-      .then((data) => setRestaurant(data));
+      .then((data) => {
+        // Ensure the data is an array, even if the response is not as expected
+        setRestaurant(Array.isArray(data) ? data : []);
+      })
+      .catch((error) => {
+        console.error("Error fetching restaurants:", error);
+        setRestaurant([]); // Set an empty array in case of an error
+      });
   }, [search]);
+  console.log(restaurants)
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -24,7 +32,7 @@ export default function Restaurants() {
     setSearch(search);
   };
 
-  console.log(process.env.NEXT_PUBLIC_SERVER_URL);
+ 
 
   return (
     <>

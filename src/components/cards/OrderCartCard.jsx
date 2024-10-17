@@ -61,7 +61,7 @@ const OrderCartCard = ({ item, refetch, totalPrice }) => {
           Quantity: <span className="font-semibold">{item.quantity}</span>
         </p>
         <p className="my-2">
-          Total: <span className="font-semibold text-xl">${totalPrice}</span>
+          Price: <span className="font-semibold text-xl">${item?.price}</span>
         </p>
         <button
           onClick={() => handleDelete(item._id)}

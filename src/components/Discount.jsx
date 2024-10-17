@@ -11,29 +11,32 @@ import { Pagination } from "swiper/modules";
 
 import { CiLocationArrow1 } from "react-icons/ci";
 import { IoRestaurant } from "react-icons/io5";
+import useMenus from "@/hooks/useMenus";
+import Link from "next/link";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Discount = () => {
   const [hover, setHover] = useState(0);
 
   const [hoveredItem, setHoveredItem] = useState(null);
   const [items, setItems] = useState([]);
+  const [menuData] = useMenus()
+console.log(menuData)
 
-
-
-  const fetchItems = async () => {
-    try {
-        const response = await axios.get("menu.json");
-        setItems(response.data);
+//   const fetchItems = async () => {
+//     try {
+//         const response = await axios.get("menu.json");
+//         setItems(response.data);
         
-    } catch (error) {
-        console.log(error.message);
-    }
-};
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// };
 
 
-    useEffect(() => {
-        fetchItems();
-    }, []);
+//     useEffect(() => {
+//         fetchItems();
+//     }, []);
 
 
 
@@ -43,17 +46,12 @@ const Discount = () => {
         {/* ----background Pattern image && Container---- */}
         <div
           className="h-[500px] py-8 px-4 space-y-[50px]"
-          style={{
-            backgroundImage: `url(https://i.ibb.co.com/CVdvL3Q/food-Pattern.jpg)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+         
         >
           {/* --- heading section ---   */}
           <div>
             <div className="flex flex-col justify-center items-center text-center ">
-              <IoRestaurant className="text-[#68ee5c] text-2xl" />
+              <IoRestaurant className="text-primary text-2xl" />
               <div className="leading-6 mt-[5px]">
                 <h3 className="font-normal text-[13px] tracking-[.35rem]">
                   MENU FOR EVERY TASTE
@@ -105,7 +103,7 @@ const Discount = () => {
 
                 
               {
-                items.map((item , index) => (
+                menuData?.slice(0,6)?.map((item , index) => (
                   
                   <SwiperSlide 
                   key={index}
@@ -117,7 +115,7 @@ const Discount = () => {
                 >
                   {/* upper discount part */}
                   <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
-                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <h3 className="font-semibold text-[16px]">-${parseInt(item.MRP) - parseInt(item.price)}</h3>
                     <sub className="text-sm font-thin">/per</sub>
                   </div>
 
@@ -127,7 +125,7 @@ const Discount = () => {
                     onMouseLeave={() => setHoveredItem(null)}
                     className={`flex items-center transition duration-300    ${
                       hoveredItem === index
-                        ? "bg-[#68ee5c]  -translate-y-4 transition-delay-400"
+                        ? "bg-primaryGray  -translate-y-4 transition-delay-400"
                         : "bg-white  transition-transform transform "
                     }`}
                   >
@@ -146,15 +144,15 @@ const Discount = () => {
                     <div className="ml-[24px]">
                       {/* heading */}
                       <div className="text-left ">
-                        <h3 className="">{item.title}</h3>
+                        <h3 className="font-semibold text-xl">{item.title}</h3>
                         <h3
                           className={`${
-                            hoveredItem === index ? "text-[#ffffff]" : "text-[#68ee5c]"
+                            hoveredItem === index ? "text-[#ffffff]" : "text-black font-semibold"
                           }`}
                         >
-                          $85<span className="text-sm font-light">only </span>{" "}
+                          ${item.price}<span className="text-sm font-light">only </span>{" "}
                           <span className="line-through text-[#a5a5a5] text-sm">
-                            $99
+                            ${item.MRP}
                           </span>
                         </h3>
                       </div>
@@ -186,7 +184,7 @@ const Discount = () => {
 
                       {/* button */}
                       <div className="mt-[10px] text-left text-[14px] font-normal ">
-                        <button className="flex justify-center items-center space-x-2">
+                        <Link href={`/menu/${item?._id}`} className="flex font-medium items-center space-x-2">
                           <p
                             className={` ${
                               hoveredItem === index ? "text-white text-[14px] " : ""
@@ -197,11 +195,11 @@ const Discount = () => {
                           <CiLocationArrow1
                             className={` ${
                               hoveredItem === index
-                                ? "text-white text-[14px] rotate-45"
-                                : "text-primary transition-transform duration-300 transform "
+                                ? "text-white font-medium text-[14px] rotate-45"
+                                : "text-primary font-medium transition-transform duration-300 transform "
                             }`}
                           />
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -215,6 +213,15 @@ const Discount = () => {
               </Swiper>
             </div>
           </div>
+          <div className="flex my-6 justify-center">
+                <Link href={"/menu"} className="relative inline-flex items-center w-36 justify-center p-2 px-3 py-2 overflow-hidden font-medium text-primaryLight transition duration-300 ease-out border-2 border-primaryLight rounded-full shadow-md group">
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primaryLight group-hover:translate-x-0 ease">
+                <FaArrowRightLong className="w-6 h-6" />
+                </span>
+                <span className="absolute flex items-center justify-center w-full h-full text-primaryLight transition-all duration-300 transform group-hover:translate-x-full ease">SEE MORE</span>
+                <span className="relative invisible">SEE MORE</span>
+                </Link>
+                </div>
         </div>
       </div>
     </div>
