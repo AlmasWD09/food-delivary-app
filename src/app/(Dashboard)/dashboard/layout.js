@@ -11,19 +11,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="flex items-center h-screen relative">
+        {/* <div className="flex items-center h-screen relative">
           <div className=" absolute lg:static z-50 top-0   font-Manrope font-bold w-full lg:w-fit">
             <DashboardNav />
           </div>
           <div className=" h-screen flex-1  font-Manrope  overflow-y-auto ">
-            <div className="sticky top-0 hidden lg:flex ">
+            <div className="sticky top-0 hidden lg:flex z-50 ">
               <TopBar />
             </div>
-            <div className=" bg-gray-100 px-3 pb-3  pt-24  lg:p-10 ">
+            <div className=" bg-gray-100 px-3 pb-3  pt-32  lg:p-5 h-[calc(100vh-100px)] ">
               {children}
             </div>
           </div>
-        </div>
+        </div> */}
       </body>
     </html>
   );

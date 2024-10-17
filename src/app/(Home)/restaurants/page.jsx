@@ -3,7 +3,6 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa6";
 import Link from "next/link";
-// import RestaurentD from "@/components/RestaurentD";
 import { useEffect, useState } from "react";
 
 export default function Restaurants() {
@@ -12,10 +11,11 @@ export default function Restaurants() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/restaurents?search=${search}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents?search=${search}`)
       .then(res => res.json())
       .then(data => setRestaurant(data.restaurents))
-  }, [search])
+  }, [search]);
+  console.log(restaurants)
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ export default function Restaurants() {
           <form action="" onSubmit={handleSearch} id="handleReSet" className="flex gap-2 items-center justify-center bg-[#c7c6c6] w-9/12 mx-auto py-3 px-8 rounded-lg">
             <input
               type="text"
-              name="search" 
+              name="search"
               className="text-lg rounded-lg p-2 w-full"
               placeholder="Search here by restaurant name...."
             />
@@ -60,7 +60,7 @@ export default function Restaurants() {
       <div className="w-11/12 mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-7">
         {/* 1st Card */}
         {
-          restaurants.map(restaurant =>
+          restaurants?.map(restaurant =>
             <div key={restaurant._id}>
               <div className="mb-5">
                 <Image src={restaurant?.restaurantImage} width={500} height={400} alt="restaurant image" className="h-64" />

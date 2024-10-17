@@ -11,14 +11,14 @@ import React from "react";
 const page = () => {
   return (
     <div>
-      <Banner />
+      {/* <Banner />
       <div className="py-10 space-y-28">
         <Discount></Discount>
         <Partner/>
         <CustomerReviews />
         <TopSell></TopSell>
         <Parallex />
-      </div>
+      </div> */}
     </div>
   );
 };

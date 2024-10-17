@@ -1,25 +1,40 @@
 "use client";
-import axios from "axios";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { TiDeleteOutline } from "react-icons/ti";
 
-const OrderCartCard = ({ item }) => {
+const OrderCartCard = ({ item,refetch,totalPrice }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [id, setId] = useState(null);
+    const axiosPub = useAxiosPublic()
+
+    //  cart item delete st
+  const {mutateAsync} = useMutation({
+    mutationKey: ["cart"],
+    mutationFn : async(id)=>{
+      const {data} = await axiosPub.delete(`/cart-menu-delete/${id}`)
+      return data
+    },
+    onSuccess : () => {
+      toast.success("You have successfully remove this item")
+      setIsModalOpen(false); 
+      refetch()
+     
+    }
+  })
+  // end
 
     const handleDelete = (id) => {
         setId(id);
         setIsModalOpen(true); 
     };
 
-    const confirmDelete = async() => {
+    const confirmDelete = () => {
       
-        const response = await axios.delete(`http://localhost:5000/cart-menu-delete/${id}`)
-        if(response?.data?.deletedCount > 0){
-            alert("You have successfully remove this item")
-        }
-        setIsModalOpen(false); 
+        mutateAsync(id)
     };
 
     const cancelDelete = () => {
@@ -39,7 +54,7 @@ const OrderCartCard = ({ item }) => {
                 <p>
                     Quantity: <span className="font-semibold">{item.quantity}</span>
                 </p>
-                <p className="my-2">Total:  <span className="font-semibold text-xl">${item?.price}</span></p>
+                <p className="my-2">Total:  <span className="font-semibold text-xl">${totalPrice}</span></p>
                 <button onClick={() => handleDelete(item._id)} className="absolute text-xl font-semibold top-2 right-2">
                     <TiDeleteOutline />
                 </button>
