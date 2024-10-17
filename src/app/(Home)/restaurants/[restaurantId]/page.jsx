@@ -73,6 +73,7 @@ export default function RestaurantD({ params }) {
           className="h-52 object-cover bg-center w-full md:h-80 lg:h-[450px] rounded-xl"
         />
         <ReviewModal restaurantName={restaurant?.restaurantName} />
+        
       </div>
       <div>
         <div className="flex items-center gap-5">
