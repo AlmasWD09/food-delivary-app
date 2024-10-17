@@ -13,21 +13,64 @@ import {
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
 import useMenus from "@/hooks/useMenus";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const columnHelper = createColumnHelper();
 
 const columns = [
-  columnHelper.accessor("id", {
-    cell: (info) => <div>#{info.getValue()}</div>,
-    header: () => (
-      <div className="">
-        <h1>ID</h1>
+  // columnHelper.accessor("image", {
+  //   cell: (info) => (
+  //     <div className="h-10 w-10 rounded-full overflow-hidden">
+  //       <Image
+  //         className="w-full h-full"
+  //         src={info.getValue()}
+  //         height={1000}
+  //         width={1000}
+  //         alt={info.row.original.firstName}
+  //       />
+  //     </div>
+  //   ),
+  //   header: () => (
+  //     <div>
+  //       <h1>Image</h1>
+  //     </div>
+  //   ),
+  // }),
+
+  columnHelper.accessor("firstName", {
+    cell: (info) => (
+      <div className="flex items-center justify-start gap-2 ">
+        <div className="h-10 w-10 rounded-full overflow-hidden">
+          {info.row.original.image ? (
+            <Image
+              className="w-full h-full"
+              src={info.row.original.image}
+              height={1000}
+              width={1000}
+              alt={info.row.original.firstName}
+            />
+          ) : (
+            <Image
+              className="w-full h-full"
+              src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
+              height={1000}
+              width={1000}
+              alt={info.row.original.firstName}
+            />
+          )}
+
+          <Image
+            className="w-full h-full"
+            src={info.row.original.image}
+            height={1000}
+            width={1000}
+            alt={info.row.original.firstName}
+          />
+        </div>
+        {info.getValue()} {info.row.original.lastName}
       </div>
     ),
-  }),
-
-  columnHelper.accessor("name", {
-    cell: (info) => <div>{info.getValue()}</div>,
     header: () => (
       <div>
         <h1>NAME</h1>
@@ -44,7 +87,7 @@ const columns = [
     ),
   }),
 
-  columnHelper.accessor("phone", {
+  columnHelper.accessor("phoneNumber", {
     cell: (info) => <div>{info.getValue()}</div>,
     header: () => (
       <div>
@@ -52,44 +95,23 @@ const columns = [
       </div>
     ),
   }),
-  columnHelper.accessor("address", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>ADDRESS</h1>
-      </div>
-    ),
-  }),
-  columnHelper.accessor("lastLogin", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>LAST LOGIN</h1>
-      </div>
-    ),
-  }),
-  columnHelper.accessor("orderCount", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>ORDER COUNT</h1>
-      </div>
-    ),
-  }),
+
   columnHelper.accessor("role", {
     cell: (info) => (
-      <div
-        className={`p-1 rounded-full   ${
-          info.getValue() == "admin"
-            ? "bg-green-100 text-green-700"
-            : info.getValue() == "rider"
-            ? "bg-pink-100 text-pink-700"
-            : info.getValue() == "restaurant"
-            ? "bg-blue-100 text-blue-700"
-            : "bg-yellow-100 text-yellow-700"
-        } `}
-      >
-        {info.getValue()}
+      <div className="flex justify-center items-center">
+        <div
+          className={`p-2 rounded-full capitalize w-fit  ${
+            info.getValue() == "admin"
+              ? "bg-red-100 text-red-700"
+              : info.getValue() == "rider"
+              ? "bg-orange-100 text-orange-700"
+              : info.getValue() == "restaurant"
+              ? "bg-blue-100 text-blue-700"
+              : "bg-green-100 text-green-700"
+          } `}
+        >
+          {info.getValue()}
+        </div>
       </div>
     ),
     header: () => (
@@ -100,14 +122,14 @@ const columns = [
   }),
   columnHelper.accessor("action", {
     cell: (info) => (
-      <div className="flex items-center gap-4">
-        <button className="p-1   text-white bg-green-700 text-xl">
+      <div className="flex items-center justify-center gap-4">
+        <button className="p-2 rounded-full   text-white bg-green-700 text-xl">
           <Icon icon="bxs:edit" />
         </button>
-        <button className="p-1    bg-secondary text-white  text-xl">
+        <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
           <Icon icon="material-symbols:pause-circle" />
         </button>
-        <button className="p-1  bg-red-500  text-white  text-xl">
+        <button className=" p-2 rounded-full   bg-red-500  text-white  text-xl">
           <Icon icon="fluent:delete-28-filled" />
         </button>
       </div>
@@ -117,7 +139,24 @@ const columns = [
 ];
 
 const Users = () => {
-  const [user, setUser] = useState([...UsersData]);
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: user = [],
+    refetch,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["allusers"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/users");
+      return res.data;
+    },
+  });
+  console.log(user.length);
+  console.log(user);
+
+  // const [user, setUser] = useState([...UsersData]);
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
 
