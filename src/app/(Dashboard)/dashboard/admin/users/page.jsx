@@ -155,7 +155,6 @@ const columns = [
 const Users = () => {
   const [user, refetch, isLoading, isError] = useAllUser();
 
-  // const [user, setUser] = useState([...UsersData]);
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
 
