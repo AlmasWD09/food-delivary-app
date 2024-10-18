@@ -1,6 +1,5 @@
 "use client";
 import { React, useState } from "react";
-import ComingSoon from "../../../../../../public/comingsoon.svg";
 import Image from "next/image";
 import UsersData from "./users.json";
 import {
@@ -12,7 +11,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import useMenus from "@/hooks/useMenus";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import moment from "moment";
