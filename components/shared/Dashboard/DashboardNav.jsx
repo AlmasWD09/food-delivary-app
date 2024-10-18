@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import navLinks from "./DashboardLinks";
-import logo from "../../../../public/assets/logo.png";
+import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
