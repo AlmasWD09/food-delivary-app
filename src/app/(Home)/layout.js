@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
             <Navbar />
           </div>
           {/* don't remove height  */}
-          <div className=" font-poppins min-h-[calc(100vh-80px)] pb-10  ">
+          <div className=" font-Inter min-h-[calc(100vh-80px)] pb-10  ">
             {children}
             <Toaster />
           </div>
