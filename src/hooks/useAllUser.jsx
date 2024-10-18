@@ -5,18 +5,19 @@ const useAllUser = () => {
   const axiosPublic = useAxiosPublic();
 
   const {
-    data: allUserData = [],
-    isLoading: loading,
+    data: user = [],
     refetch,
+    isLoading,
+    isError,
   } = useQuery({
-    queryKey: ["all"],
+    queryKey: ["allusers"],
     queryFn: async () => {
       const res = await axiosPublic.get("/users");
       return res.data;
     },
   });
 
-  return [allUserData, refetch];
+  return [user, refetch, isLoading, isError];
 };
 
 export default useAllUser;

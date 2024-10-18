@@ -11,10 +11,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "@/hooks/useAxiosPublic";
 import moment from "moment";
-
+import useAllUser from "@/hooks/useAllUser";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../../../../../public/assets/loading.json";
 const columnHelper = createColumnHelper();
 
 const columns = [
@@ -86,12 +86,12 @@ const columns = [
         <div
           className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
             info.getValue() == "admin"
-              ? "bg-red-100 text-red-500"
+              ? "bg-red-100 text-red-600"
               : info.getValue() == "rider"
-              ? "bg-orange-100 text-orange-500"
+              ? "bg-orange-100 text-orange-600"
               : info.getValue() == "restaurant"
-              ? "bg-blue-100 text-blue-500"
-              : "bg-green-100 text-green-500"
+              ? "bg-blue-100 text-blue-600"
+              : "bg-green-100 text-green-600"
           } `}
         >
           {info.getValue()}
@@ -105,15 +105,28 @@ const columns = [
     ),
   }),
 
-  columnHelper.accessor("status", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => <div>status</div>,
-  }),
   columnHelper.accessor("created", {
-    cell: (info) => <div>{moment(info.getValue()).format("L")}</div>,
+    cell: (info) => <div>{moment(info.getValue()).format("ll")}</div>,
     header: () => <div>created</div>,
   }),
-
+  columnHelper.accessor("status", {
+    cell: (info) => (
+      <div
+        className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+          info.getValue() == "active"
+            ? "bg-green-100 text-green-600"
+            : info.getValue() == "suspend"
+            ? "bg-orange-100 text-orange-600"
+            : info.getValue() == "block"
+            ? "bg-red-100 text-red-600"
+            : ""
+        } `}
+      >
+        {info.getValue()}
+      </div>
+    ),
+    header: () => <div>status</div>,
+  }),
   columnHelper.accessor("action", {
     cell: (info) => (
       <div className="flex items-center justify-center gap-4">
@@ -123,7 +136,7 @@ const columns = [
         <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
           <Icon icon="material-symbols:pause-circle" />
         </button>
-        <button className=" p-2 rounded-full   bg-red-500  text-white  text-xl">
+        <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
           <Icon icon="fluent:delete-28-filled" />
         </button>
       </div>
@@ -133,22 +146,7 @@ const columns = [
 ];
 
 const Users = () => {
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: user = [],
-    refetch,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["allusers"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/users");
-      return res.data;
-    },
-  });
-  console.log(user.length);
-  console.log(user);
+  const [user, refetch, isLoading, isError] = useAllUser();
 
   // const [user, setUser] = useState([...UsersData]);
   const [sorting, setSorting] = useState([]);
@@ -189,6 +187,18 @@ const Users = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnFiltersChange: setFilter,
   });
+
+  if (isLoading) {
+    return (
+      <div className="h-screen  flex justify-center items-center">
+        <Lottie
+          className="w-1/4"
+          animationData={loadingAnimation}
+          loop={true}
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -231,7 +241,7 @@ const Users = () => {
                   <th
                     onClick={header.column.getToggleSortingHandler()}
                     key={header.id}
-                    className=" py-4  capitalize text-sm  bg-blue-500 text-white "
+                    className=" py-4  capitalize text-sm  bg-blue-600 text-white "
                   >
                     <div className="flex items-center  justify-center">
                       {flexRender(
