@@ -19,7 +19,7 @@ const columnHelper = createColumnHelper();
 
 const columns = [
   columnHelper.accessor("userId", {
-    cell: (info) => <div>#{info.getValue()}</div>,
+    cell: (info) => <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>,
     header: () => <div>user</div>,
   }),
   columnHelper.accessor("firstName", {
@@ -106,7 +106,14 @@ const columns = [
   }),
 
   columnHelper.accessor("created", {
-    cell: (info) => <div>{moment(info.getValue()).format("ll")}</div>,
+    cell: (info) => (
+      <div>
+        {info.getValue()
+          ? new Date(info.getValue()).toLocaleDateString("en-IN")
+          : "N/A"}
+        {}
+      </div>
+    ),
     header: () => <div>created</div>,
   }),
   columnHelper.accessor("status", {
@@ -122,7 +129,7 @@ const columns = [
             : ""
         } `}
       >
-        {info.getValue()}
+        {info.getValue() ? info.getValue() : "N/A"}
       </div>
     ),
     header: () => <div>status</div>,
@@ -232,7 +239,7 @@ const Users = () => {
           <p>entries</p>
         </div>
       </div>
-      <div className="overflow-auto  bg-white divide-y-2 rounded-3xl ">
+      <div className="overflow-auto  bg-white divide-y-2 rounded-t-3xl w-full ">
         <table className="w-full text-center ">
           <thead>
             {table.getHeaderGroups().map((headerGroups) => (
@@ -290,58 +297,57 @@ const Users = () => {
           </tbody>
         </table>
         {/* pagination footer  */}
+      </div>
+      <div className=" w-full">
+        <div className="flex items-center justify-center gap-2 py-2 bg-primary/30 w-full  rounded-b-3xl">
+          {/* left side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
+            </button>
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-left-12-regular"
+              />
+            </button>
+          </div>
 
-        <div lassName="">
-          <div className="flex items-center justify-center gap-2 py-2   bg-primary/30 ">
-            {/* left side  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
-              </button>
-              <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-left-12-regular"
-                />
-              </button>
-            </div>
+          {/* center */}
+          <div>
+            <p>
+              Page {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </p>
+          </div>
 
-            {/* center  */}
-            <div>
-              <p>
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </p>
-            </div>
-
-            {/* right  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-right-12-regular"
-                />
-              </button>
-              <button
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
-              </button>
-            </div>
+          {/* right side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-right-12-regular"
+              />
+            </button>
+            <button
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
+            </button>
           </div>
         </div>
       </div>
