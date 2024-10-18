@@ -241,7 +241,7 @@ const Users = () => {
                   <th
                     onClick={header.column.getToggleSortingHandler()}
                     key={header.id}
-                    className=" py-4  capitalize text-sm  bg-blue-600 text-white "
+                    className=" py-4  capitalize text-sm  bg-primary text-white "
                   >
                     <div className="flex items-center  justify-center">
                       {flexRender(
@@ -292,7 +292,7 @@ const Users = () => {
         {/* pagination footer  */}
 
         <div lassName="">
-          <div className="flex items-center justify-center gap-2 py-2   bg-blue-100 ">
+          <div className="flex items-center justify-center gap-2 py-2   bg-primary/30 ">
             {/* left side  */}
             <div className="flex items-center gap-2">
               <button
