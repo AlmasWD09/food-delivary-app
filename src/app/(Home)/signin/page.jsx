@@ -1,9 +1,31 @@
+"use client";
+import SocialSignin from "@/components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+const SignInPage = () => {
+  const router = useRouter();
+  const handleSignin = async (event) => {
+    event.preventDefault();
+    const email = event.target.emailAddress.value;
+    const password = event.target.password.value;
+
+    const resp = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (resp.status === 200) {
+      router.push("/");
+    } else {
+      // Handle error (optional)
+      alert("Sign-in failed. Please check your credentials.");
+    }
+  };
+
   return (
     <div className=" max-w-6xl mx-auto  h-screen flex justify-center">
       <div className="  flex items-center justify-center lg:pr-10 ">
@@ -20,11 +42,11 @@ const page = () => {
 
         {/* right side area  */}
 
-        <div className="border-2 border-blue-600 lg:w-2/5  p-8  relative  ">
-          <div className="h-full w-full absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
-            <span className="w-36 h-36 bg-blue-600 absolute -top-20 -right-20 rotate-[-40deg]"></span>
+        <div className="border-2 border-primary lg:w-2/5  p-8  relative  ">
+          <div className="h-full w-full bg-white absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
+            <span className="w-36 h-36 bg-primary absolute -top-20 -right-20 rotate-[-40deg]"></span>
           </div>
-          <span className="h-full w-full bg-blue-100 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
+          <span className="h-full w-full bg-primaryGray/15 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
 
           <div className="pb-6 space-y-4 ">
             <h1 className="text-center text-3xl font-semibold">Hello Again!</h1>
@@ -32,28 +54,32 @@ const page = () => {
               Make today tasty—let&apos;s get your order started!
             </h1>
           </div>
-          <form action="" className="flex flex-col gap-4">
+          <form
+            onSubmit={handleSignin}
+            action=""
+            className="flex flex-col gap-4"
+          >
             <input
               type="email"
-              className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-blue-200 "
+              className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
               placeholder="Email Address"
-              name="emailaddress"
+              name="emailAddress"
             />
             <input
               type="password"
-              className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-blue-200 "
+              className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
               placeholder="password"
               name="password"
             />
             <h2 className="text-sm py-4">
               Forgot Your Password?{" "}
-              <button className="font-semibold hover:text-red-400">
-                click here
-              </button>
+              <button className="font-semibold text-primary">click here</button>
             </h2>
-            <button className="relative py-4 bg-blue-500 text-white group overflow-hidden flex items-center justify-center">
-              <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-green-500 rounded-full group-hover:w-96 group-hover:h-96 "></span>
-
+            <button
+              type="submit"
+              className="relative py-4 bg-primaryGray text-black hover:text-white group overflow-hidden flex items-center justify-center"
+            >
+              <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-primary  text-white rounded-full group-hover:w-96 group-hover:h-96 "></span>
               <span className="relative">Sign In</span>
             </button>
           </form>
@@ -65,25 +91,14 @@ const page = () => {
               <span className="h-0.5 bg-gray-200 w-full"></span>
             </div>
 
-            <div className=" flex items-center justify-center gap-10 py-6">
-              <button>
-                <Icon className="text-4xl" icon="flat-color-icons:google" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="logos:facebook" />
-              </button>
-
-              <button>
-                <Icon className="text-4xl" icon="devicon:twitter" />
-              </button>
-            </div>
+            {/* social sign here */}
+            <SocialSignin />
           </div>
 
           <h1 className="text-center py-4">
             Don&apos;t have an account ?{" "}
             <Link href="/signup">
-              <span className="font-semibold hover:text-red-500">sign in</span>
+              <span className="font-semibold text-primary">sign up</span>
             </Link>{" "}
           </h1>
         </div>
@@ -92,4 +107,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignInPage;

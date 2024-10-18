@@ -1,17 +1,21 @@
 "use client";
 import { Icon } from "@iconify/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-const page = () => {
+const ProfilePage = () => {
+  const session = useSession();
+  console.log(session);
+
   return (
     <div className="container mx-auto p-4 lg:mt-10 mt-8">
       <div className="flex justify-center items-center h-full w-full">
-        <div className="h-1/2 flex flex-col lg:flex-row   w-full gap-6 ">
+        <div className="h-1/2 flex flex-col lg:flex-row w-full gap-6 ">
           {/* left side profile  */}
 
-          <div className="h-fit w-full lg:w-1/3  relative  shadow-lg">
+          <div className="h-fit w-full lg:w-1/3 relative shadow-lg">
             <div className="w-full h-52 object-cover">
               <Image
                 src="/assets/profile-cover.webp"
@@ -421,4 +425,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;

@@ -24,21 +24,27 @@ module.exports = {
       colors: {
         // background: "var(--background)",
         // foreground: "var(--foreground)",
-        primary: "#d97706", // amber-600
         primaryLight: "#fd8802",
-        primaryGray: "#fffbeb", // amber-50
-        secondary: "#fde68a", // amber-200
-        secondaryGray: "#fef3c7", // amber-100
-        redish: "#ff0055", // redandpink
-        text: "#9B9B93", // lightgray
+        // secondary: "#fde68a", // amber-200
+        redish: "#ff0055", // dashboard
+        globalText: "#9B9B93", // textcolor
+
+        primary: "#FF9100", //orange
+        primaryGray: "#f9ac7d",
+
+        secondary: "#4681F4", // blue
+        secondaryGray: "#bbebff", //
+
+        secondaryBg: "#FFFBE6", //snehashisroy
+        third: "#D5ED9F", //snehashisroy
+        fourth: "#00712D", //snehashisroy
       },
     },
     fontFamily: {
-      urbanist: ["Urbanist"],
+      urbanist: ["Inter"],
       kanit: ["Kanit"],
       poppins: ["Poppins"],
-      Manrope: ["Manrope"],
+      Inter: ["Inter"],
     },
   },
-  plugins: [require("daisyui")],
 };
