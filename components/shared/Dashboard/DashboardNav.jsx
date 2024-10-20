@@ -57,8 +57,8 @@ const DashboardNav = () => {
           </div>
 
           <ul className="space-y-4">
-            {navRule.map((item) => (
-              <li key={item.path}>
+            {navRule.map((item, idx) => (
+              <li key={idx}>
                 <Link
                   href={item.link}
                   onClick={() => setMenu(false)}
