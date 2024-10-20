@@ -10,12 +10,10 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(); // Fetch the session here
-
   return (
     <html lang="en">
       <body>
-        <AuthProvider session={session}>
+        <AuthProvider>
           {" "}
           {/* Pass the session */}
           <div className="flex items-center h-screen relative font-Inter">
