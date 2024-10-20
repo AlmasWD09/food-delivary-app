@@ -11,7 +11,6 @@ const DashboardNav = () => {
   const [getMenu, setMenu] = useState(false);
   const navRule = navLinks[currentUser];
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div
       className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}

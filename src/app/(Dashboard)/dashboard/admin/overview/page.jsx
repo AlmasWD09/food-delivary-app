@@ -6,10 +6,8 @@ import raw from "./growth.json";
 import { useState } from "react";
 import salesData from "./sales.json";
 import Image from "next/image";
-
+import Chart from "react-apexcharts";
 import transactionData from "./transactiondata.json";
-
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import TimeAgo from "react-timeago";
 import {
@@ -119,12 +117,9 @@ const Overview = () => {
   // tanstack table end
 
   // Create an array of registration counts
-  const userJoined = raw.map((item) => item.joined);
-  const userDate = raw.map((item) => item.date);
-  const userLeft = raw.map((item) => item.left);
-
-  // Create an array of dates
-  const registrationDates = raw.map((item) => item.date);
+  const orderDeliver = raw.map((item) => item.deliver || 0);
+  const orderDate = raw.map((item) => item.date || "N/A");
+  const orderCancel = raw.map((item) => item.cancel || 0);
 
   const graphColors = ["#33d400"];
 
@@ -132,16 +127,16 @@ const Overview = () => {
     series: [
       {
         name: "Delivered",
-        data: userJoined,
+        data: orderDeliver,
       },
       {
         name: "Canceled",
-        data: userLeft,
+        data: orderCancel,
       },
     ],
     options: {
       xaxis: {
-        categories: userDate,
+        categories: orderDate,
         type: "datetime",
       },
       colors: ["#33d300", "#ff0000"],
