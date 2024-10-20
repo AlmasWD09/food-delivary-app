@@ -232,7 +232,7 @@ const Overview = () => {
           <div className="">
             {salesData.map((item, idx) => (
               <div
-                key="idx"
+                key={idx}
                 className="flex items-center justify-between py-4 border-t-2 "
               >
                 <div className="flex items-center gap-4">
