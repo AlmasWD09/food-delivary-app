@@ -1,7 +1,7 @@
 "use client";
 import { React, useState } from "react";
 import Image from "next/image";
-import UsersData from "./users.json";
+// import UsersData from "./users.json";
 import {
   createColumnHelper,
   flexRender,
@@ -11,12 +11,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import moment from "moment";
 import useAllUser from "@/hooks/useAllUser";
 import Lottie from "lottie-react";
 import loadingAnimation from "../../../../../../public/assets/loading.json";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+
 const columnHelper = createColumnHelper();
 
 const columns = [
@@ -155,22 +155,8 @@ const columns = [
 ];
 
 const Users = () => {
-  // const [user, refetch, isLoading, isError] = useAllUser();
+  const [user, refetch, isLoading, isError] = useAllUser();
   const axiosPublic = useAxiosPublic();
-
-  const {
-    data: user = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["users-data"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(
-        "https://food-delivary-app-server.vercel.app/users"
-      );
-      return res.data;
-    },
-  });
 
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
