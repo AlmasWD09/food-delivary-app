@@ -6,16 +6,15 @@ import "./styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
+import Image from "next/image";
 
 const CustomerReviews = () => {
     return (
-        <div className='relative bg-no-repeat bg-cover bg-blend-darken'  style={{
-            backgroundImage: "url(https://i.ibb.co.com/H4T28jw/360-F-219949741-f-Yw-RBdw-SW2-ZRn9-PLZ6-Dv-Djn1jw-RIx8-YS.jpg)",
-          }}>
-           <div className="absolute inset-0 bg-gradient-to-r from-yellow-800 to-slate-800 opacity-80"></div>
+        <div className='relative bg-no-repeat bg-cover bg-blend-darken'  >
+           
         <div className="px-2 lg:px-0 lg:max-w-[1240px] mx-auto dark:bg-gray-900">
             <div className="container  py-10 mx-auto">
-                <div className="my-6 text-white md:flex md:items-center md:justify-between">
+                <div className="my-6  md:flex md:items-center md:justify-between">
                     <div className='flex z-40 flex-col justify-center text-center'>
                         <p className='font-semibold my-3'>Testimonials</p>
                         <h1 className="text-2xl font-semibold  capitalize lg:text-3xl dark:text-white">
@@ -76,8 +75,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>
@@ -95,8 +94,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>
@@ -114,8 +113,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>
@@ -133,8 +132,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>
@@ -152,8 +151,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>
@@ -171,8 +170,8 @@ const CustomerReviews = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-2 items-center '>
-                                        <img className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                        <div className='text-white'>
+                                        <Image width={64} height={32} className='max-w-16 rounded-tl-3xl rounded-tr-lg rounded-bl-lg rounded-br-3xl h-8' src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+                                        <div>
                                         <p className='font-medium'>John Doe</p>
                                         <p className='flex items-center gap-1'>4.5 <FaStar className='text-orange-500' /></p>
                                         </div>

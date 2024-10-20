@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  
   images: {
     remotePatterns: [
       {
@@ -11,11 +10,11 @@ const nextConfig = {
       },
     ],
   },
-  redirects: async () => {
+  async redirects() {
     return [
       {
         source: "/dashboard",
-        destination: "/dashboard/overview",
+        destination: "/dashboard/admin/overview",
         permanent: true,
       },
     ];

@@ -1,5 +1,6 @@
 "use client";
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useRef,useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -10,26 +11,47 @@ import { Pagination } from "swiper/modules";
 
 import { CiLocationArrow1 } from "react-icons/ci";
 import { IoRestaurant } from "react-icons/io5";
+import useMenus from "@/hooks/useMenus";
+import Link from "next/link";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Discount = () => {
   const [hover, setHover] = useState(0);
+
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [items, setItems] = useState([]);
+  const [menuData] = useMenus()
+console.log(menuData)
+
+//   const fetchItems = async () => {
+//     try {
+//         const response = await axios.get("menu.json");
+//         setItems(response.data);
+        
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// };
+
+
+//     useEffect(() => {
+//         fetchItems();
+//     }, []);
+
+
+
   return (
     <div>
       <div className="mt-10 container mx-auto">
         {/* ----background Pattern image && Container---- */}
         <div
           className="h-[500px] py-8 px-4 space-y-[50px]"
-          style={{
-            backgroundImage: `url(https://i.ibb.co.com/CVdvL3Q/food-Pattern.jpg)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+         
         >
           {/* --- heading section ---   */}
           <div>
             <div className="flex flex-col justify-center items-center text-center ">
-              <IoRestaurant className="text-[#68ee5c] text-2xl" />
+              <IoRestaurant className="text-primary text-2xl" />
               <div className="leading-6 mt-[5px]">
                 <h3 className="font-normal text-[13px] tracking-[.35rem]">
                   MENU FOR EVERY TASTE
@@ -78,7 +100,13 @@ const Discount = () => {
                   "--swiper-pagination-bullet-horizontal-gap": "6px",
                 }}
               >
-                <SwiperSlide
+
+                
+              {
+                menuData?.slice(0,6)?.map((item , index) => (
+                  
+                  <SwiperSlide 
+                  key={index}
                   style={{
                     height: "250px",
                     position: "relative",
@@ -87,24 +115,24 @@ const Discount = () => {
                 >
                   {/* upper discount part */}
                   <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
-                    <h3 className="font-semibold text-[16px]">$17</h3>
+                    <h3 className="font-semibold text-[16px]">-${parseInt(item.MRP) - parseInt(item.price)}</h3>
                     <sub className="text-sm font-thin">/per</sub>
                   </div>
 
                   {/* --card-- */}
                   <div
-                    onMouseEnter={() => setHover(1)}
-                    onMouseLeave={() => setHover(0)}
+                    onMouseEnter={() => setHoveredItem(index)}
+                    onMouseLeave={() => setHoveredItem(null)}
                     className={`flex items-center transition duration-300    ${
-                      hover === 1
-                        ? "bg-[#68ee5c]  -translate-y-4 transition-delay-400"
+                      hoveredItem === index
+                        ? "bg-primaryGray  -translate-y-4 transition-delay-400"
                         : "bg-white  transition-transform transform "
                     }`}
                   >
                     {/* card img */}
                     <div
                       style={{
-                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
+                        backgroundImage: `url(${item.image})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
@@ -116,15 +144,15 @@ const Discount = () => {
                     <div className="ml-[24px]">
                       {/* heading */}
                       <div className="text-left ">
-                        <h3 className="">Chickhen Curry</h3>
+                        <h3 className="font-semibold text-xl">{item.title}</h3>
                         <h3
                           className={`${
-                            hover === 1 ? "text-[#ffffff]" : "text-[#68ee5c]"
+                            hoveredItem === index ? "text-[#ffffff]" : "text-black font-semibold"
                           }`}
                         >
-                          $85<span className="text-sm font-light">only </span>{" "}
+                          ${item.price}<span className="text-sm font-light">only </span>{" "}
                           <span className="line-through text-[#a5a5a5] text-sm">
-                            $99
+                            ${item.MRP}
                           </span>
                         </h3>
                       </div>
@@ -140,334 +168,60 @@ const Discount = () => {
                               padding: "0",
                             }}
                             className={`${
-                              hover === 1
+                              hoveredItem === index
                                 ? "marker:text-white "
                                 : "marker:text-[#d97706]"
                             }`}
                           >
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                            <li>Lorem ipsum dolor elit.</li>
-                            <li>Lorem ipsum dolor sit amet elit.</li>
+                            {
+                              item.recipe.map((reci,index) => (
+                                <li key={index}>{reci}</li>
+                              ))
+                            }
                           </ul>
                         </div>
                       </div>
 
                       {/* button */}
                       <div className="mt-[10px] text-left text-[14px] font-normal ">
-                        <button className="flex justify-center items-center space-x-2">
+                        <Link href={`/menu/${item?._id}`} className="flex font-medium items-center space-x-2">
                           <p
                             className={` ${
-                              hover === 1 ? "text-white text-[14px] " : ""
+                              hoveredItem === index ? "text-white text-[14px] " : ""
                             }`}
                           >
                             Details
                           </p>{" "}
                           <CiLocationArrow1
                             className={` ${
-                              hover === 1
-                                ? "text-white text-[14px] rotate-45"
-                                : "text-primary transition-transform duration-300 transform "
+                              hoveredItem === index
+                                ? "text-white font-medium text-[14px] rotate-45"
+                                : "text-primary font-medium transition-transform duration-300 transform "
                             }`}
                           />
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </SwiperSlide>
+                ))
+              }
 
-                <SwiperSlide
-                  style={{
-                    height: "250px",
-                    position: "relative",
-                  }}
-                  className="relative z-10 "
-                >
-                  {/* upper discount part */}
-                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
-                    <h3 className="font-semibold text-[16px]">$17</h3>
-                    <sub className="text-sm font-thin">/per</sub>
-                  </div>
+                
 
-                  {/* --card-- */}
-                  <div
-                    onMouseEnter={() => setHover(2)}
-                    onMouseLeave={() => setHover(0)}
-                    className={`flex items-center transition duration-300   ${
-                      hover === 2
-                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
-                        : "bg-white transition-transform transform "
-                    }`}
-                  >
-                    {/* card img */}
-                    <div
-                      style={{
-                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
-                    ></div>
-
-                    {/* card details */}
-                    <div className="ml-[24px]">
-                      {/* heading */}
-                      <div className="text-left ">
-                        <h3 className="">Chickhen Curry</h3>
-                        <h3
-                          className={`${
-                            hover === 2 ? "text-[#ffffff]" : "text-[#68ee5c]"
-                          }`}
-                        >
-                          $85<span className="text-sm font-light">only </span>{" "}
-                          <span className="line-through text-[#a5a5a5] text-sm">
-                            $99
-                          </span>
-                        </h3>
-                      </div>
-
-                      {/* bullet points */}
-                      <div className="mt-[10px] text-left text-[13px] font-light">
-                        <div>
-                          <ul
-                            style={{
-                              listStyleType: "disc",
-                              listStylePosition: "inside",
-                              margin: "0",
-                              padding: "0",
-                            }}
-                            className={`${
-                              hover === 2
-                                ? "marker:text-white "
-                                : "marker:text-[#d97706]"
-                            }`}
-                          >
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                            <li>Lorem ipsum dolor elit.</li>
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* button */}
-                      <div className="mt-[10px] text-left text-[14px] font-normal ">
-                        <button className="flex justify-center items-center space-x-2">
-                          <p
-                            className={` ${
-                              hover === 2 ? "text-white text-[14px] " : ""
-                            }`}
-                          >
-                            Details
-                          </p>{" "}
-                          <CiLocationArrow1
-                            className={` ${
-                              hover === 2
-                                ? "text-white text-[14px] rotate-45"
-                                : "text-primary transition-transform duration-300 transform "
-                            }`}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide
-                  style={{
-                    height: "250px",
-                    position: "relative",
-                  }}
-                  className="relative z-10 "
-                >
-                  {/* upper discount part */}
-                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
-                    <h3 className="font-semibold text-[16px]">$17</h3>
-                    <sub className="text-sm font-thin">/per</sub>
-                  </div>
-
-                  {/* --card-- */}
-                  <div
-                    onMouseEnter={() => setHover(3)}
-                    onMouseLeave={() => setHover(0)}
-                    className={`flex items-center transition duration-300   ${
-                      hover === 3
-                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
-                        : "bg-white  transition-transform transform "
-                    }`}
-                  >
-                    {/* card img */}
-                    <div
-                      style={{
-                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
-                    ></div>
-
-                    {/* card details */}
-                    <div className="ml-[24px]">
-                      {/* heading */}
-                      <div className="text-left ">
-                        <h3 className="">Chickhen Curry</h3>
-                        <h3
-                          className={`${
-                            hover === 3 ? "text-[#ffffff]" : "text-[#68ee5c]"
-                          }`}
-                        >
-                          $85<span className="text-sm font-light">only </span>{" "}
-                          <span className="line-through text-[#a5a5a5] text-sm">
-                            $99
-                          </span>
-                        </h3>
-                      </div>
-
-                      {/* bullet points */}
-                      <div className="mt-[10px] text-left text-[13px] font-light">
-                        <div>
-                          <ul
-                            style={{
-                              listStyleType: "disc",
-                              listStylePosition: "inside",
-                              margin: "0",
-                              padding: "0",
-                            }}
-                            className={`${
-                              hover === 3
-                                ? "marker:text-white "
-                                : "marker:text-[#d97706]"
-                            }`}
-                          >
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                            <li>Lorem ipsum dolor elit.</li>
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* button */}
-                      <div className="mt-[10px] text-left text-[14px] font-normal ">
-                        <button className="flex justify-center items-center space-x-2">
-                          <p
-                            className={` ${
-                              hover === 3 ? "text-white text-[14px] " : ""
-                            }`}
-                          >
-                            Details
-                          </p>{" "}
-                          <CiLocationArrow1
-                            className={` ${
-                              hover === 3
-                                ? "text-white text-[14px] rotate-45"
-                                : "text-primary transition-transform duration-300 transform "
-                            }`}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide
-                  style={{
-                    height: "250px",
-                    position: "relative",
-                  }}
-                  className="relative z-10 "
-                >
-                  {/* upper discount part */}
-                  <div className="absolute top-[-8%] left-[8%] z-50 flex p-3 rounded-md bg-primary text-white">
-                    <h3 className="font-semibold text-[16px]">$17</h3>
-                    <sub className="text-sm font-thin">/per</sub>
-                  </div>
-
-                  {/* --card-- */}
-                  <div
-                    onMouseEnter={() => setHover(4)}
-                    onMouseLeave={() => setHover(0)}
-                    className={`flex items-center transition duration-300   ${
-                      hover === 4
-                        ? "bg-[#68ee5c] -translate-y-4 transition-delay-200"
-                        : "bg-white  transition-transform transform "
-                    }`}
-                  >
-                    {/* card img */}
-                    <div
-                      style={{
-                        backgroundImage: `url(https://i.ibb.co.com/N6PRdt7/foodIMG.png)`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                      className="basis-1/3 h-[250px] rounded-tr-full rounded-br-full"
-                    ></div>
-
-                    {/* card details */}
-                    <div className="ml-[24px]">
-                      {/* heading */}
-                      <div className="text-left ">
-                        <h3 className="">Chickhen Curry</h3>
-                        <h3
-                          className={`${
-                            hover === 4 ? "text-[#ffffff]" : "text-[#68ee5c]"
-                          }`}
-                        >
-                          $85<span className="text-sm font-light">only </span>{" "}
-                          <span className="line-through text-[#a5a5a5] text-sm">
-                            $99
-                          </span>
-                        </h3>
-                      </div>
-
-                      {/* bullet points */}
-                      <div className="mt-[10px] text-left text-[13px] font-light">
-                        <div>
-                          <ul
-                            style={{
-                              listStyleType: "disc",
-                              listStylePosition: "inside",
-                              margin: "0",
-                              padding: "0",
-                            }}
-                            className={`${
-                              hover === 4
-                                ? "marker:text-white "
-                                : "marker:text-[#d97706]"
-                            }`}
-                          >
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                            <li>Lorem ipsum dolor elit.</li>
-                            <li>Lorem ipsum dolor sit amet elit.</li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* button */}
-                      <div className="mt-[10px] text-left text-[14px] font-normal ">
-                        <button className="flex justify-center items-center space-x-2">
-                          <p
-                            className={` ${
-                              hover === 4 ? "text-white text-[14px] " : ""
-                            }`}
-                          >
-                            Details
-                          </p>{" "}
-                          <CiLocationArrow1
-                            className={` ${
-                              hover === 4
-                                ? "text-white text-[14px] rotate-45"
-                                : "text-primary transition-transform duration-300 transform "
-                            }`}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+          
               </Swiper>
             </div>
           </div>
+          <div className="flex my-6 justify-center">
+                <Link href={"/menu"} className="relative inline-flex items-center w-36 justify-center p-2 px-3 py-2 overflow-hidden font-medium text-primaryLight transition duration-300 ease-out border-2 border-primaryLight rounded-full shadow-md group">
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primaryLight group-hover:translate-x-0 ease">
+                <FaArrowRightLong className="w-6 h-6" />
+                </span>
+                <span className="absolute flex items-center justify-center w-full h-full text-primaryLight transition-all duration-300 transform group-hover:translate-x-full ease">SEE MORE</span>
+                <span className="relative invisible">SEE MORE</span>
+                </Link>
+                </div>
         </div>
       </div>
     </div>

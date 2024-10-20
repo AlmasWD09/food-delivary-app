@@ -4,7 +4,7 @@ const navLinks = {
   admin: [
     {
       title: "Overview",
-      link: "admin-overview",
+      link: "overview",
       icons: <Icon icon="charm:home" />,
     },
     {
@@ -14,58 +14,68 @@ const navLinks = {
     },
     {
       title: "Reports",
-      link: "admin/reports",
+      link: "reports",
       icons: <Icon icon="iconoir:reports" />,
     },
     {
-      title: "All Restaurants",
-      link: "restaurants",
-      icons: <Icon icon="solar:shop-linear" />,
+      title: "Manage Restaurants",
+      link: "manage-restaurants",
+      icons: <Icon icon="mdi:shop-outline" />,
+    },
+    {
+      title: "Manage Riders",
+      link: "manage-riders",
+      icons: <Icon icon="mdi:bike" />,
     },
 
     {
       title: "New Listing",
-      link: "orders",
+      link: "new-listings",
       icons: <Icon icon="mdi:shop-plus" />,
     },
 
     {
       title: "Listing Requests",
-      link: "admin/reports",
+      link: "listing-requests",
       icons: <Icon icon="hugeicons:message-user-01" />,
     },
 
     {
       title: "Support Inbox",
-      link: "admin/support",
+      link: "support-inbox",
       icons: <Icon icon="ic:outline-contact-support" />,
     },
   ],
   restaurants: [
     {
       title: "Overview",
-      link: "overview",
-      icons: <Icon icon="charm:home" />,
+      link: "restaurant/overview",
+      icons: <Icon icon="material-symbols:dashboard" />,
     },
     {
       title: "Orders",
-      link: "orders",
+      link: "restaurant/orders",
       icons: <Icon icon="material-symbols:orders" />,
     },
     {
       title: "Menu",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="hugeicons:menu-restaurant" />,
     },
     {
       title: "Reviews",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="carbon:review" />,
     },
     {
       title: "Payments",
-      link: "admin-overview",
+      link: "restaurant/admin-overview",
       icons: <Icon icon="la:money-bill-wave" />,
+    },
+    {
+      title: "Home",
+      link: "/",
+      icons: <Icon icon="charm:home" />,
     },
   ],
 };
