@@ -24,12 +24,7 @@ const TopRestaurants = () => {
          <p className="text-center">Loading....</p>
         </>
     }
-// restaurantImage
-// restaurantName
-// reviewNumber
-// rating
-// location
-// favoriteNumber
+
     return (
         <div className="container my-10 mx-auto px-2">
             <h3 className="text-4xl font-bold text-center uppercase">Top Restaurants</h3>
