@@ -10,7 +10,7 @@ const useResturantReviews = ({name}) => {
     const {data,isLoading,refetch} = useQuery({
         queryKey: ["reviews"],
         queryFn: async()=>{
-            const {data} = await axiosPub.get(`/restaurents/restReviews/${title}`)
+            const {data} = await axiosPub.get("/reviews")
             return data
         }
     })

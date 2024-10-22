@@ -3,7 +3,6 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa6";
 import Link from "next/link";
-// import RestaurentD from "@/components/RestaurentD";
 import { useEffect, useState } from "react";
 
 export default function Restaurants() {
@@ -13,8 +12,9 @@ export default function Restaurants() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents?search=${search}`)
       .then((res) => res.json())
-      .then((data) => setRestaurant(data));
+      .then((data) => setRestaurant(data.restaurents));
   }, [search]);
+  console.log(restaurants)
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -23,8 +23,6 @@ export default function Restaurants() {
     console.log(search);
     setSearch(search);
   };
-
-  console.log(process.env.NEXT_PUBLIC_SERVER_URL);
 
   return (
     <>
