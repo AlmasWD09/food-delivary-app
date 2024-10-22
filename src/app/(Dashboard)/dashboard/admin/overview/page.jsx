@@ -1,6 +1,5 @@
 "use client";
 import { Icon } from "@iconify/react";
-import dynamic from "next/dynamic";
 import React from "react";
 import raw from "./growth.json";
 import { useState } from "react";
