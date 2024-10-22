@@ -1,12 +1,16 @@
 "use client";
 import { Icon } from "@iconify/react";
 import React from "react";
+import dynamic from "next/dynamic";
 import raw from "./growth.json";
 import { useState } from "react";
 import salesData from "./sales.json";
 import Image from "next/image";
-import Chart from "react-apexcharts";
 import transactionData from "./transactiondata.json";
+
+const Chart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 import TimeAgo from "react-timeago";
 import {
