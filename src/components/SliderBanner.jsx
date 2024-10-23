@@ -109,7 +109,7 @@ const SliderBanner = () =>{
 
                 {/* Search Results */}
                 <div
-                  className={`absolute ${search.trim() === "" ? "hidden" : ""} bg-primaryGray grid gap-3 z-[100] p-8 right-0 left-0 shadow-lg rounded-lg min-h-40 w-3/4`}
+                  className={`absolute ${search.trim() === "" ? "hidden" : ""} bg-primaryGray grid gap-3 z-[100] p-8 right-0 left-0 shadow-lg rounded-lg min-h-40 lg:w-3/4`}
                 >
                   <p>Results: {restaurants?.length}</p>
                   {restaurants?.length === 0 ? (
@@ -124,7 +124,7 @@ const SliderBanner = () =>{
                         <Image
                           width={40}
                           height={40}
-                          src={restaurant?.restaurantImage || foodImage}
+                          src={restaurant?.restaurantImage}
                           className="w-[40px] rounded-xl h-[40px]"
                           alt={restaurant?.restaurantName || "Restaurant Image"}
                         />
@@ -174,19 +174,45 @@ const SliderBanner = () =>{
                     <div>
                     <h3 className="lg:text-6xl md:text-5xl text-4xl my-5 md:my-7 text-white font-bold">Enjoy Delicious Tasty Treats!</h3>
                     <h3 className="lg:text-xl text-lg mb-4 text-white font-bold">Delicious meals delivered fast, satisfying cravings at your doorstep!</h3>
-                    <div className="relative pl-2 lg:w-3/4">
-                        <input
-                            className="p-3  pl-10 pr-16 rounded-full bg-white w-full"
-                            placeholder="What's your address?"
-                            type="text"
-                        />
-                        <span className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400">
-                        <LuMapPin />
-                        </span>
-                        <button className="absolute top-1/2 transform -translate-y-1/2 right-3 bg-orange-500 text-white px-4 py-2 rounded-full">
-                            Search
-                        </button>
+                     {/* Voice and text input search start */}
+                <VoiceSearch search={search} setSearch={setSearch} />
+                {/* Voice and text input search end */}
+
+                {/* Search Results */}
+                <div
+                  className={`absolute ${search.trim() === "" ? "hidden" : ""} bg-primaryGray grid gap-3 z-[100] p-8 right-0 left-0 shadow-lg rounded-lg min-h-40  lg:w-[555px]`}
+                >
+                  <p>Results: {restaurants?.length}</p>
+                  {restaurants?.length === 0 ? (
+                    <div className="flex justify-center items-center">
+                      <h3 className="text-xl font-medium text-center">
+                        We have no available for<br/> this location!
+                      </h3>
                     </div>
+                  ) : (
+                    restaurants?.map((restaurant) => (
+                      <div key={restaurant._id} className="border-b-2 flex items-center gap-2 pb-2">
+                        <Image
+                          width={40}
+                          height={40}
+                          src={restaurant?.restaurantImage}
+                          className="w-[40px] rounded-xl h-[40px]"
+                          alt={restaurant?.restaurantName || "Restaurant Image"}
+                        />
+                        <div>
+                          <Link href={`/restaurants/${restaurant._id}`} className="flex items-center gap-2">
+                            <span className="font-medium">{restaurant?.restaurantName}</span>
+                            <h3 className="flex items-center">
+                              <FaStar className="text-orange-500" />
+                              {restaurant?.rating} ({restaurant?.reviewNumber})
+                            </h3>
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+                {/* Search Results End */}
                    
 
                     </div>
@@ -221,19 +247,45 @@ const SliderBanner = () =>{
                     <div>
                     <h3 className="lg:text-6xl md:text-5xl text-4xl my-5 md:my-7 text-white font-bold">Best Places to Eat and Enjoy</h3>
                     <h3 className="lg:text-xl text-lg mb-4 text-white font-bold">Highlighting the best dining experiences in town, featuring top-rated restaurants.</h3>
-                    <div className="relative pl-2 lg:w-3/4">
-                        <input
-                            className="p-3  pl-10 pr-16 rounded-full bg-white w-full"
-                            placeholder="What's your address?"
-                            type="text"
-                        />
-                        <span className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-400">
-                        <LuMapPin />
-                        </span>
-                        <button className="absolute top-1/2 transform -translate-y-1/2 right-3 bg-orange-500 text-white px-4 py-2 rounded-full">
-                            Search
-                        </button>
+                     {/* Voice and text input search start */}
+                <VoiceSearch search={search} setSearch={setSearch} />
+                {/* Voice and text input search end */}
+
+                {/* Search Results */}
+                <div
+                  className={`absolute ${search.trim() === "" ? "hidden" : ""} bg-primaryGray grid gap-3 z-[100] p-8 right-0 left-0 shadow-lg rounded-lg min-h-40 lg:w-[555px]`}
+                >
+                  <p>Results: {restaurants?.length}</p>
+                  {restaurants?.length === 0 ? (
+                    <div className="flex justify-center items-center">
+                      <h3 className="text-xl font-medium text-center">
+                        We have no available for<br/> this location!
+                      </h3>
                     </div>
+                  ) : (
+                    restaurants?.map((restaurant) => (
+                      <div key={restaurant._id} className="border-b-2 flex items-center gap-2 pb-2">
+                        <Image
+                          width={40}
+                          height={40}
+                          src={restaurant?.restaurantImage}
+                          className="w-[40px] rounded-xl h-[40px]"
+                          alt={restaurant?.restaurantName || "Restaurant Image"}
+                        />
+                        <div>
+                          <Link href={`/restaurants/${restaurant._id}`} className="flex items-center gap-2">
+                            <span className="font-medium">{restaurant?.restaurantName}</span>
+                            <h3 className="flex items-center">
+                              <FaStar className="text-orange-500" />
+                              {restaurant?.rating} ({restaurant?.reviewNumber})
+                            </h3>
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+                {/* Search Results End */}
                    
 
                     </div>
