@@ -18,7 +18,7 @@ import Link from "next/link";
 
 const PrevArrow = (props) => {
   const { onClick } = props;
- 
+//  okk
   return (
     <button
       onClick={onClick}
