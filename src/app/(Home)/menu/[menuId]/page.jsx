@@ -1,11 +1,9 @@
 "use client";
 import Image from "next/image";
 import { FaArrowRight, FaStar } from "react-icons/fa";
-import img from "../../../../../public/chickenFry.jpg";
 import { IoCartOutline } from "react-icons/io5";
 import RecommendMenu from "@/components/RecommendMenu";
 import { useState } from "react";
-import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast from "react-hot-toast";

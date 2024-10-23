@@ -16,7 +16,7 @@ const Menu = ({ menuData, refetch }) => {
   const queryClient = useQueryClient();
   const session = useSession();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync,reset } = useMutation({
     mutationKey: ["cart"],
     mutationFn: async (item) => {
       const { data } = await axiosPub.post("/single-menu", item);
@@ -25,6 +25,7 @@ const Menu = ({ menuData, refetch }) => {
     },
     onSuccess: () => {
       toast.success("You have successfully added to cart");
+      reset()
       queryClient.invalidateQueries("cart");
     },
   });

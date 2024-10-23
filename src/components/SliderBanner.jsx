@@ -81,8 +81,8 @@ const SliderBanner = () =>{
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
     arrows: true, 
-    // autoplay: true, // Enable autoplay
-    // autoplaySpeed: 3000, // Slide will change every 3 seconds
+    autoplay: true, 
+    autoplaySpeed: 3000, 
   };
 
 

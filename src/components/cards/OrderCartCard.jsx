@@ -2,7 +2,7 @@
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { TiDeleteOutline } from "react-icons/ti";
 
@@ -10,8 +10,9 @@ const OrderCartCard = ({ item, refetch, totalPrice }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [id, setId] = useState(null);
   const axiosPub = useAxiosPublic();
+  const [quantity, setQuantity] = useState(item?.quantity);
 
-  //  cart item delete st
+  //  Cart item delete mutation
   const { mutateAsync } = useMutation({
     mutationKey: ["cart"],
     mutationFn: async (id) => {
@@ -19,13 +20,46 @@ const OrderCartCard = ({ item, refetch, totalPrice }) => {
       return data;
     },
     onSuccess: () => {
-      toast.success("You have successfully remove this item");
+      toast.success("You have successfully removed this item");
       setIsModalOpen(false);
       refetch();
     },
   });
-  // end
 
+  // Handle quantity changes
+  const handleQuantity = (qua) => {
+    if (qua === "plus") {
+      setQuantity((prev) => prev + 1);
+    } else if (qua === "minus" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  
+  const { mutateAsync: updateQuantity } = useMutation({
+    mutationKey: ["quantity"],
+    mutationFn: async (upData) => {
+      const { data } = await axiosPub.patch("/cart-menu/quantity", upData);
+      return data;
+    },
+    onSuccess: () => {
+      // toast.success("You have successfully updated the quantity.");
+      refetch();
+    },
+  });
+
+ 
+  useEffect(() => {
+    if (quantity !== item?.quantity) { 
+      const upData = {
+        title: item?.title,
+        quantity: quantity,
+      };
+      updateQuantity(upData);
+    }
+  }, [quantity, item?.title]);
+
+  // Handle delete modal
   const handleDelete = (id) => {
     setId(id);
     setIsModalOpen(true);
@@ -57,9 +91,26 @@ const OrderCartCard = ({ item, refetch, totalPrice }) => {
         <h3 className="font-semibold">{item.title}</h3>
         <p className="text-base">{item.description.slice(0, 65)}</p>
 
+        {/* Display the current quantity from state */}
         <p>
-          Quantity: <span className="font-semibold">{item.quantity}</span>
+          Quantity: <span className="font-semibold">{quantity}</span>
         </p>
+        <div className="flex items-center  gap-3">
+          <button
+            onClick={() => handleQuantity("minus")}
+            className={`font-semibold ${quantity === 1 && "disabled:"} rounded-full text-white px-2 py-1 bg-primaryLight`}
+          >
+            -
+          </button>
+          <p>{quantity}</p>
+          <button
+            onClick={() => handleQuantity("plus")}
+            className="font-semibold rounded-full text-white px-2 py-1 bg-primaryLight"
+          >
+            +
+          </button>
+        </div>
+
         <p className="my-2">
           Price: <span className="font-semibold text-xl">${item?.price}</span>
         </p>

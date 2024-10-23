@@ -27,6 +27,7 @@ const OrderPage = () => {
         return res.data;
     }
 })
+console.log(cartData)
 
   if (isLoading) {
     return <li>Loading...</li>;
