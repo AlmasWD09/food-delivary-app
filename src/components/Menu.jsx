@@ -64,7 +64,7 @@ const Menu = ({ menuData, refetch }) => {
 
   return (
     <div className="my-10 lg:max-w-[1240px] mx-auto">
-      <h3 className="text-2xl text-[#FF4D00] text-center font-semibold">
+      <h3 className="text-2xl text-primary text-center font-semibold">
         Food Menu
       </h3>
       <h2 className="text-3xl my-3 text-center font-bold">Our Specials Menu</h2>
@@ -75,7 +75,7 @@ const Menu = ({ menuData, refetch }) => {
               onClick={() => filterByCategory("All")}
               className={`${
                 click === "All" &&
-                "bg-[#FF4D00] border text-white transition-all duration-700"
+                "bg-primaryLight border text-white transition-all duration-700"
               } md:border-none  rounded-lg p-3`}
             >
               All
@@ -84,7 +84,7 @@ const Menu = ({ menuData, refetch }) => {
               onClick={() => filterByCategory("Main Dishes")}
               className={`${
                 click === "Main Dishes" &&
-                "bg-[#FF4D00] text-white transition-all duration-700"
+                "bg-primaryLight text-white transition-all duration-700"
               }  border md:border-none  rounded-lg p-3`}
             >
               Main Dishes
@@ -93,7 +93,7 @@ const Menu = ({ menuData, refetch }) => {
               onClick={() => filterByCategory("Desserts")}
               className={`${
                 click === "Desserts" &&
-                "bg-[#FF4D00] text-white transition-all duration-700"
+                "bg-primaryLight text-white transition-all duration-700"
               } border md:border-none  rounded-lg p-3`}
             >
               Desserts
@@ -102,7 +102,7 @@ const Menu = ({ menuData, refetch }) => {
               onClick={() => filterByCategory("Sea Food")}
               className={`${
                 click === "Sea Food" &&
-                "bg-[#FF4D00]  text-white transition-all duration-700"
+                "bg-primaryLight  text-white transition-all duration-700"
               }  border md:border-none  rounded-lg p-3`}
             >
               Sea Food
@@ -111,7 +111,7 @@ const Menu = ({ menuData, refetch }) => {
               onClick={() => filterByCategory("Beverage")}
               className={`${
                 click === "Beverage" &&
-                "bg-[#FF4D00] text-white transition-all duration-700"
+                "bg-primaryLight text-white transition-all duration-700"
               }  border md:border-none  rounded-lg p-3`}
             >
               Beverage
@@ -153,7 +153,7 @@ const Menu = ({ menuData, refetch }) => {
                   <p>{food?.description.slice(0, 80)}</p>
                   <button
                     onClick={() => handleCart(food)}
-                    className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-[#FF4D00]"
+                    className="flex mt-3 justify-center w-full items-center text-medium gap-2 border rounded-full hover:text-white p-3 transition-all duration-700 hover:bg-primaryLight"
                   >
                     <IoCartOutline /> Add to cart
                   </button>

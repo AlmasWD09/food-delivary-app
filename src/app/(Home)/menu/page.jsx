@@ -20,7 +20,7 @@ const MenuPage = () => {
         
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <h3 className="lg:text-6xl text-4xl text-white font-bold">Delish all menu</h3>
-                <div className="bg-[#FF4D00] mx-auto md:w-1/2 text-center mt-8 p-4">
+                <div className="bg-primary mx-auto md:w-1/2 text-center mt-8 p-4">
                     <h3 className="text-xl text-white flex justify-center items-center gap-4">Home <FaArrowRight/> Menu</h3>
                 </div>
             </div>

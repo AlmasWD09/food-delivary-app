@@ -18,7 +18,8 @@ const TopRestaurants = () => {
             return data
         }
     })
-  console.log(data?.restaurents)
+    const topRestaurants = data?.restaurents.sort((a, b) => b.rating - a.rating);
+   
     if(isLoading){
         return <>
          <p className="text-center">Loading....</p>
@@ -35,7 +36,7 @@ const TopRestaurants = () => {
                 {/* cards start */}
 
                 {
-                    data?.restaurents?.slice(0, 5)?.map(restaurant => <>
+                    topRestaurants?.slice(0, 5)?.map(restaurant => <>
                      {/* card 1 */}
                 <div className="flex justify-center items-center flex-col">
                    <div className="overflow-hidden rounded-full">
