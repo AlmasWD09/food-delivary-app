@@ -1,10 +1,12 @@
 "use client";
+
 import SocialSignin from "@/components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -22,7 +24,7 @@ const SignInPage = () => {
       router.push("/");
     } else {
       // Handle error (optional)
-      alert("Sign-in failed. Please check your credentials.");
+      toast.error("Sign-in failed. Please check your credentials.");
     }
   };
 

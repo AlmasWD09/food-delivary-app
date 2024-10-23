@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats:['image/webp'],
+    domains: ['i.ibb.co'],
     remotePatterns: [
       {
         protocol: "https",
