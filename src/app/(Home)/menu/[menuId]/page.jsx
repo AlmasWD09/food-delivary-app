@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { FaArrowRight, FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import RecommendMenu from "@/components/RecommendMenu";
+import RecommendMenu from "../../../../../components/RecommendMenu";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
@@ -289,7 +289,7 @@ const MenuDetails = ({ params }) => {
                                         name="review"
                                         rows="3"
                                         cols="80"
-                                        className="bg-slate-200 w-full mt-2 rounded-xl p-3"
+                                        className="bg-slate-200 outline-none w-full mt-2 rounded-xl p-3"
                                         placeholder="Type your comment here..."
                                     />
                                 </div>

@@ -6,24 +6,21 @@ import { BsThreeDots } from "react-icons/bs";
 // import Link from "next/link";
 import { FaSpinner, FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import SpecificMenus from "@/components/SpecificMenus";
-import RestaurantMap from "@/components/RestaurantMap";
-import ReviewModal from "@/components/ReviewModal";
+import SpecificMenus from "../../../../../components/SpecificMenus";
+import RestaurantMap from "../../../../../components/RestaurantMap";
+import ReviewModal from "../../../../../components/ReviewModal";
 import useResturantReviews from "@/hooks/useResturantReviews";
 import { useQuery } from "@tanstack/react-query";
-import Restaurants from './../page';
+import Restaurants from "./../page";
 
 export default function RestaurantD({ params }) {
   const [foods, setFoods] = useState([]);
   const [restaurant, setRestaurant] = useState([]);
 
   const id = params.restaurantId;
-  
 
   useEffect(() => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/${id}`
-    )
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/restaurents/${id}`)
       .then((res) => res.json())
       .then((data) => setRestaurant(data));
   }, [id]);
@@ -33,17 +30,14 @@ export default function RestaurantD({ params }) {
   // );
   const name = restaurant?.restaurantName;
 
-
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/menus`)
       .then((res) => res.json())
       .then((data) => setFoods(data));
   }, []);
 
-
   const [data, isLoading, refetch] = useResturantReviews({});
 
-  
   if (!restaurant || foods?.length === 0 || isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,7 +55,7 @@ export default function RestaurantD({ params }) {
       review.restaurantName?.trim().toLowerCase() ===
       restaurant?.restaurantName?.trim().toLowerCase()
   );
-  
+
   return (
     <div className="container px-2 mx-auto">
       <div className="mb-5 relative">
@@ -73,7 +67,6 @@ export default function RestaurantD({ params }) {
           className="h-52 object-cover bg-center w-full md:h-80 lg:h-[450px] rounded-xl"
         />
         <ReviewModal restaurantName={restaurant?.restaurantName} />
-        
       </div>
       <div>
         <div className="flex items-center gap-5">

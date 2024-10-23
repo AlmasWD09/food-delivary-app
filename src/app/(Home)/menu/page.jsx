@@ -1,17 +1,18 @@
-"use client"
-import Menu from '@/components/Menu';
-import RecommendMenu from '@/components/RecommendMenu';
-import useMenus from '@/hooks/useMenus';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+"use client";
+import Menu from "../../../../components/Menu";
+import RecommendMenu from "../../../../components/RecommendMenu";
+import useMenus from "@/hooks/useMenus";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 const MenuPage = () => {
    
      const [menuData,isLoading,refetch] = useMenus()
    
     return (
-        <div>
+       <div>
+         <div>
         <div
            style={{
             backgroundImage: `url(https://i.ibb.co.com/9W09Tgs/food1.jpg)`,
@@ -25,16 +26,16 @@ const MenuPage = () => {
                 </div>
             </div>
         </div>
-       <Menu menuData={menuData} refetch={refetch} />
-       <div className="py-20 px-3 lg:px-0 lg:max-w-[1240px] mx-auto">
+      </div>
+      <Menu menuData={menuData} refetch={refetch} />
+      <div className="py-20 px-3 lg:px-0 lg:max-w-[1240px] mx-auto">
         <p className="text-xl  font-medium">Recommended</p>
-          <h3 className="text-4xl mt-1 mb-8 font-bold">Just for you</h3>
-          <RecommendMenu menuData={menuData} isLoading={isLoading} />
-       </div>
+        <h3 className="text-4xl mt-1 mb-8 font-bold">Just for you</h3>
+        <RecommendMenu menuData={menuData} isLoading={isLoading} />
+      </div>
     </div>
-    );
+      
+  );
 };
-
-
 
 export default MenuPage;
