@@ -1,8 +1,7 @@
 "use client";
 import { React, useState } from "react";
-import ComingSoon from "../../../../../../public/comingsoon.svg";
 import Image from "next/image";
-import UsersData from "./users.json";
+// import UsersData from "./users.json";
 import {
   createColumnHelper,
   flexRender,
@@ -12,16 +11,18 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import useMenus from "@/hooks/useMenus";
+import moment from "moment";
+import useAllUser from "@/hooks/useAllUser";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../../../../../public/assets/loading.json";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import moment from "moment";
 
 const columnHelper = createColumnHelper();
 
 const columns = [
   columnHelper.accessor("userId", {
-    cell: (info) => <div>#{info.getValue()}</div>,
+    cell: (info) => <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>,
     header: () => <div>user</div>,
   }),
   columnHelper.accessor("firstName", {
@@ -88,12 +89,12 @@ const columns = [
         <div
           className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
             info.getValue() == "admin"
-              ? "bg-red-100 text-red-500"
+              ? "bg-red-100 text-red-600"
               : info.getValue() == "rider"
-              ? "bg-orange-100 text-orange-500"
+              ? "bg-orange-100 text-orange-600"
               : info.getValue() == "restaurant"
-              ? "bg-blue-100 text-blue-500"
-              : "bg-green-100 text-green-500"
+              ? "bg-blue-100 text-blue-600"
+              : "bg-green-100 text-green-600"
           } `}
         >
           {info.getValue()}
@@ -107,15 +108,35 @@ const columns = [
     ),
   }),
 
-  columnHelper.accessor("status", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => <div>status</div>,
-  }),
   columnHelper.accessor("created", {
-    cell: (info) => <div>{moment(info.getValue()).format("L")}</div>,
+    cell: (info) => (
+      <div>
+        {info.getValue()
+          ? new Date(info.getValue()).toLocaleDateString("en-IN")
+          : "N/A"}
+        {}
+      </div>
+    ),
     header: () => <div>created</div>,
   }),
-
+  columnHelper.accessor("status", {
+    cell: (info) => (
+      <div
+        className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+          info.getValue() == "active"
+            ? "bg-green-100 text-green-600"
+            : info.getValue() == "suspend"
+            ? "bg-orange-100 text-orange-600"
+            : info.getValue() == "block"
+            ? "bg-red-100 text-red-600"
+            : ""
+        } `}
+      >
+        {info.getValue() ? info.getValue() : "N/A"}
+      </div>
+    ),
+    header: () => <div>status</div>,
+  }),
   columnHelper.accessor("action", {
     cell: (info) => (
       <div className="flex items-center justify-center gap-4">
@@ -125,7 +146,7 @@ const columns = [
         <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
           <Icon icon="material-symbols:pause-circle" />
         </button>
-        <button className=" p-2 rounded-full   bg-red-500  text-white  text-xl">
+        <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
           <Icon icon="fluent:delete-28-filled" />
         </button>
       </div>
@@ -135,24 +156,9 @@ const columns = [
 ];
 
 const Users = () => {
+  const [user, refetch, isLoading, isError] = useAllUser();
   const axiosPublic = useAxiosPublic();
 
-  const {
-    data: user = [],
-    refetch,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["allusers"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/users");
-      return res.data;
-    },
-  });
-  console.log(user.length);
-  console.log(user);
-
-  // const [user, setUser] = useState([...UsersData]);
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
 
@@ -192,10 +198,18 @@ const Users = () => {
     onColumnFiltersChange: setFilter,
   });
 
-  // console.log()
-  // console.log()
-  // console.log()
-  // console.log()
+  if (isLoading) {
+    return (
+      <div className="h-screen  flex justify-center items-center">
+        <Lottie
+          className="w-1/4"
+          animationData={loadingAnimation}
+          loop={true}
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 gap-5">
@@ -228,7 +242,7 @@ const Users = () => {
           <p>entries</p>
         </div>
       </div>
-      <div className="overflow-auto  bg-white divide-y-2 rounded-3xl ">
+      <div className="overflow-auto  bg-white divide-y-2 rounded-t-3xl w-full ">
         <table className="w-full text-center ">
           <thead>
             {table.getHeaderGroups().map((headerGroups) => (
@@ -237,7 +251,7 @@ const Users = () => {
                   <th
                     onClick={header.column.getToggleSortingHandler()}
                     key={header.id}
-                    className=" py-4  capitalize text-sm  bg-blue-500 text-white "
+                    className=" py-4  capitalize text-sm  bg-primary text-white "
                   >
                     <div className="flex items-center  justify-center">
                       {flexRender(
@@ -286,58 +300,57 @@ const Users = () => {
           </tbody>
         </table>
         {/* pagination footer  */}
+      </div>
+      <div className=" w-full">
+        <div className="flex items-center justify-center gap-2 py-2 bg-primary/30 w-full  rounded-b-3xl">
+          {/* left side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
+            </button>
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-left-12-regular"
+              />
+            </button>
+          </div>
 
-        <div lassName="">
-          <div className="flex items-center justify-center gap-2 py-2   bg-blue-100 ">
-            {/* left side  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
-              </button>
-              <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-left-12-regular"
-                />
-              </button>
-            </div>
+          {/* center */}
+          <div>
+            <p>
+              Page {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </p>
+          </div>
 
-            {/* center  */}
-            <div>
-              <p>
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </p>
-            </div>
-
-            {/* right  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-right-12-regular"
-                />
-              </button>
-              <button
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
-              </button>
-            </div>
+          {/* right side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-right-12-regular"
+              />
+            </button>
+            <button
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
+            </button>
           </div>
         </div>
       </div>

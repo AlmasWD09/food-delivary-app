@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import navLinks from "./DashboardLinks";
-import logo from "../../../../public/assets/logo.png";
+import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -11,7 +11,6 @@ const DashboardNav = () => {
   const [getMenu, setMenu] = useState(false);
   const navRule = navLinks[currentUser];
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div
       className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}
@@ -57,8 +56,8 @@ const DashboardNav = () => {
           </div>
 
           <ul className="space-y-4">
-            {navRule.map((item) => (
-              <li key={item.path}>
+            {navRule.map((item, idx) => (
+              <li key={idx}>
                 <Link
                   href={item.link}
                   onClick={() => setMenu(false)}

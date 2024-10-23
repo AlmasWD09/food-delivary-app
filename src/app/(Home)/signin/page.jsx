@@ -1,5 +1,5 @@
 "use client";
-import SocialSignin from "@/components/shared/SocialSignin";
+import SocialSignin from "../../../../components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";

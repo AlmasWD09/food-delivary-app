@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import img from "../../public/cheeseBurger.jpg";
+import img from "../public/cheeseBurger.jpg";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
