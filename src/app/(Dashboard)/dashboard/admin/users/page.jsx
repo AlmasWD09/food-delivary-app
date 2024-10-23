@@ -1,5 +1,5 @@
 "use client";
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Image from "next/image";
 // import UsersData from "./users.json";
 import {
@@ -17,147 +17,15 @@ import Lottie from "lottie-react";
 import loadingAnimation from "../../../../../../public/assets/loading.json";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-
-const columnHelper = createColumnHelper();
-
-const columns = [
-  columnHelper.accessor("userId", {
-    cell: (info) => <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>,
-    header: () => <div>user</div>,
-  }),
-  columnHelper.accessor("firstName", {
-    cell: (info) => (
-      <div className="flex items-center justify-start gap-4 font-medium">
-        <div className="h-8 w-8 rounded-full overflow-hidden">
-          {info.row.original.image ? (
-            <Image
-              className="w-full h-full"
-              src={info.row.original.image}
-              height={1000}
-              width={1000}
-              alt={info.row.original.firstName}
-            />
-          ) : (
-            <Image
-              className="w-full h-full"
-              src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
-              height={1000}
-              width={1000}
-              alt={info.row.original.firstName}
-            />
-          )}
-
-          <Image
-            className="w-full h-full"
-            src={info.row.original.image}
-            height={1000}
-            width={1000}
-            alt={info.row.original.firstName}
-          />
-        </div>
-        {info.getValue()} {info.row.original.lastName}
-      </div>
-    ),
-    header: () => (
-      <div>
-        <h1>name</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("email", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>email</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("phoneNumber", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>phone</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("role", {
-    cell: (info) => (
-      <div className="flex justify-center items-center">
-        <div
-          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
-            info.getValue() == "admin"
-              ? "bg-red-100 text-red-600"
-              : info.getValue() == "rider"
-              ? "bg-orange-100 text-orange-600"
-              : info.getValue() == "restaurant"
-              ? "bg-blue-100 text-blue-600"
-              : "bg-green-100 text-green-600"
-          } `}
-        >
-          {info.getValue()}
-        </div>
-      </div>
-    ),
-    header: () => (
-      <div>
-        <h1>role</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("created", {
-    cell: (info) => (
-      <div>
-        {info.getValue()
-          ? new Date(info.getValue()).toLocaleDateString("en-IN")
-          : "N/A"}
-        {}
-      </div>
-    ),
-    header: () => <div>created</div>,
-  }),
-  columnHelper.accessor("status", {
-    cell: (info) => (
-      <div
-        className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
-          info.getValue() == "active"
-            ? "bg-green-100 text-green-600"
-            : info.getValue() == "suspend"
-            ? "bg-orange-100 text-orange-600"
-            : info.getValue() == "block"
-            ? "bg-red-100 text-red-600"
-            : ""
-        } `}
-      >
-        {info.getValue() ? info.getValue() : "N/A"}
-      </div>
-    ),
-    header: () => <div>status</div>,
-  }),
-  columnHelper.accessor("action", {
-    cell: (info) => (
-      <div className="flex items-center justify-center gap-4">
-        <button className="p-2 rounded-full   text-white bg-green-700 text-xl">
-          <Icon icon="bxs:edit" />
-        </button>
-        <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
-          <Icon icon="material-symbols:pause-circle" />
-        </button>
-        <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
-          <Icon icon="fluent:delete-28-filled" />
-        </button>
-      </div>
-    ),
-    header: () => <div>action</div>,
-  }),
-];
+import EditUserModal from "../../../../../../components/admin/EditUserModal";
 
 const Users = () => {
   const [user, refetch, isLoading, isError] = useAllUser();
   const axiosPublic = useAxiosPublic();
+
+  // modal
+  const [openModal, setModal] = useState(false);
+  const [modalUser, setModalUser] = useState("");
 
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
@@ -168,6 +36,144 @@ const Users = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const columnHelper = createColumnHelper();
+
+  const columns = [
+    columnHelper.accessor("userId", {
+      cell: (info) => (
+        <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>
+      ),
+      header: () => <div>user</div>,
+    }),
+    columnHelper.accessor("firstName", {
+      cell: (info) => (
+        <div className="flex items-center justify-start gap-4 font-medium">
+          <div className="h-8 w-8 rounded-full overflow-hidden">
+            {info.row.original.image ? (
+              <Image
+                className="w-full h-full"
+                src={info.row.original.image}
+                height={1000}
+                width={1000}
+                alt={info.row.original.firstName}
+              />
+            ) : (
+              <Image
+                className="w-full h-full"
+                src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
+                height={1000}
+                width={1000}
+                alt={info.row.original.firstName}
+              />
+            )}
+          </div>
+          {info.getValue()} {info.row.original.lastName}
+        </div>
+      ),
+      header: () => (
+        <div>
+          <h1>name</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("email", {
+      cell: (info) => <div>{info.getValue()}</div>,
+      header: () => (
+        <div>
+          <h1>email</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("phoneNumber", {
+      cell: (info) => <div>{info.getValue()}</div>,
+      header: () => (
+        <div>
+          <h1>phone</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("role", {
+      cell: (info) => (
+        <div className="flex justify-center items-center">
+          <div
+            className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+              info.getValue() == "admin"
+                ? "bg-red-100 text-red-600"
+                : info.getValue() == "rider"
+                ? "bg-orange-100 text-orange-600"
+                : info.getValue() == "restaurant"
+                ? "bg-blue-100 text-blue-600"
+                : "bg-green-100 text-green-600"
+            } `}
+          >
+            {info.getValue()}
+          </div>
+        </div>
+      ),
+      header: () => (
+        <div>
+          <h1>role</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("created", {
+      cell: (info) => (
+        <div>
+          {info.getValue()
+            ? new Date(info.getValue()).toLocaleDateString("en-IN")
+            : "N/A"}
+          {}
+        </div>
+      ),
+      header: () => <div>created</div>,
+    }),
+    columnHelper.accessor("status", {
+      cell: (info) => (
+        <div
+          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+            info.getValue() == "active"
+              ? "bg-green-100 text-green-600"
+              : info.getValue() == "suspend"
+              ? "bg-orange-100 text-orange-600"
+              : info.getValue() == "block"
+              ? "bg-red-100 text-red-600"
+              : ""
+          } `}
+        >
+          {info.getValue() ? info.getValue() : "N/A"}
+        </div>
+      ),
+      header: () => <div>status</div>,
+    }),
+    columnHelper.accessor("id", {
+      cell: (info) => (
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={() => {
+              setModal(true);
+              setModalUser(info.row.original);
+            }}
+            className="p-2 rounded-full   text-white bg-green-700 text-xl"
+          >
+            <Icon icon="bxs:edit" />
+          </button>
+
+          <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
+            <Icon icon="material-symbols:pause-circle" />
+          </button>
+          <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
+            <Icon icon="fluent:delete-28-filled" />
+          </button>
+        </div>
+      ),
+      header: () => <div>action</div>,
+    }),
+  ];
 
   const table = useReactTable({
     data: user,
@@ -210,8 +216,10 @@ const Users = () => {
     );
   }
 
+  const closeModal = () => setModal(false);
+
   return (
-    <div>
+    <div className="relative">
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 gap-5">
         <form action="" className=" relative flex items-center justify-end ">
           <input
@@ -354,6 +362,13 @@ const Users = () => {
           </div>
         </div>
       </div>
+      {openModal && (
+        <EditUserModal
+          closeModal={closeModal}
+          id={modalUser}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };
