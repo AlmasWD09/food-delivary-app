@@ -1,15 +1,14 @@
 "use client";
 import Image from "next/image";
 import { FaArrowRight, FaStar } from "react-icons/fa";
-import img from "../../../../../public/chickenFry.jpg";
 import { IoCartOutline } from "react-icons/io5";
 import RecommendMenu from "../../../../../components/RecommendMenu";
 import { useState } from "react";
-import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import ReactStars from "react-rating-stars-component";
 
 const MenuDetails = ({ params }) => {
   const axiosPub = useAxiosPublic();
@@ -17,6 +16,7 @@ const MenuDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
   const queryClient = useQueryClient();
   const session = useSession();
+  const [rating,setRating] = useState()
 
   const { data, isLoading } = useQuery({
     queryKey: ["menu"],
@@ -41,7 +41,38 @@ const MenuDetails = ({ params }) => {
   });
   // end
 
+
+    //  send review st
+    const {mutateAsync:menuRev,reset} = useMutation({
+      mutationKey: ["menuReview"],
+      mutationFn : async(review)=>{
+        const {data} = await axiosPub.post('/reviews/menuRev',review)
+        return data
+      },
+      onSuccess : () => {
+        toast.success("Thank you. For your valuable review")
+       reset()
+       setRating(0)
+       document.getElementById('reviewForm').reset();
+      }
+    })
+    // end
+
+
   const singleData = data?.find((food) => food._id === params.menuId);
+
+  
+    // review get
+    const {data:itemReviews,refetch} = useQuery({
+      queryKey: ["menuItemsReview"],
+      queryFn: async()=>{
+        const{data} = await axiosPub.get(`/reviews/menuRev?title=${singleData?.title}`)
+        return data
+      }
+    })
+  
+    refetch()
+ 
 
   const handleQuantity = (qua) => {
     if (qua === "plus") {
@@ -68,6 +99,23 @@ const MenuDetails = ({ params }) => {
       alert(error.message);
     }
   };
+
+ 
+  const handleReview = e => {
+    e.preventDefault()
+    const review = {
+      userName : session?.data?.user?.name,
+      userEmail : session?.data?.user?.email,
+      revDate : new Date,
+      rating : rating,
+      comment : e.target.review.value,
+      title: singleData?.title
+    }
+    menuRev(review)
+  }
+
+  
+  
 
   return (
     <div>
@@ -158,7 +206,7 @@ const MenuDetails = ({ params }) => {
               className={`p-3 ${
                 click === "overview"
                   ? "bg-primaryLight transition-all duration-700 text-white"
-                  : "bg-base-200 "
+                  : "bg-base-200 border"
               }  `}
             >
               Overview
@@ -168,7 +216,7 @@ const MenuDetails = ({ params }) => {
               className={`p-3 ${
                 click === "reviews"
                   ? "bg-primaryLight transition-all duration-700 text-white"
-                  : "bg-base-200 "
+                  : "bg-base-200 border"
               }  `}
             >
               Reviews
@@ -181,7 +229,15 @@ const MenuDetails = ({ params }) => {
               </>
             ) : (
               <div>
-                <div className="lg:w-4/5 mb-5 rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6 bg-base-300">
+                <div>
+                  {
+                    itemReviews?.length === 0 ? 
+                    <div className="flex p-6 lg:w-4/5 border mb-5  rounded-lg   items-center justify-center">
+                      <h3 className="text-xl font-medium text-center">This item have not<br/> any ratings!</h3>
+                    </div>
+                    :
+                   itemReviews?.map(review => <>
+                     <div className="lg:w-4/5 border mb-5  rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6  bg-base-300">
                   <div>
                     <Image
                       width={128}
@@ -191,57 +247,55 @@ const MenuDetails = ({ params }) => {
                       alt="image"
                     />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="text-lg">
-                      Ahmed Antor{" "}
+                      {review?.userName}
                       <span className="text-sm border p-1 ml-2">
-                        15 July, 2024
+                      {new Date(review?.revDate).toLocaleString()}
                       </span>
                     </h3>
-                    <div className="flex gap-1 my-2 text-orange-600">
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
+                    <div className="flex gap-1 my-2 text-orange-400">
+                    {Array(review?.rating)
+                      .fill()
+                      .map((_, i) => (
+                        <span key={i}>
+                          <FaStar />
+                        </span>
+                      ))}
                     </div>
                     <p className="mt-5">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Similique saepe recusandae dolore modi facere labore omnis
-                      maxime eum fugiat quod!
+                     {review?.comment}
                     </p>
                   </div>
+                 </div>
+                   </>)
+                  }
                 </div>
-                <div className="lg:w-4/5 rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6 bg-base-300">
-                  <div>
-                    <Image
-                      width={128}
-                      height={120}
-                      className="md:w-32 rounded-xl"
-                      src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg"
-                      alt="image"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg">
-                      Ahmed Antor{" "}
-                      <span className="text-sm border p-1 ml-2">
-                        15 July, 2024
-                      </span>
-                    </h3>
-                    <div className="flex gap-1 my-2 text-orange-600">
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                    </div>
-                    <p className="mt-5">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Similique saepe recusandae dolore modi facere labore omnis
-                      maxime eum fugiat quod!
-                    </p>
-                  </div>
+               
+                <div className="lg:w-4/5 lg:max-h[180px] mt-4 border rounded-lg flex flex-col lg:flex-row items-center gap-4 p-6 bg-base-300">
+                <div>
+                            <form id="reviewForm" onSubmit={handleReview}> 
+                                <div className="mt-5">
+                                    <div>
+                                        <ReactStars
+                                            count={5}
+                                            onChange={setRating}
+                                            size={30}
+                                            activeColor="#ffd700"
+                                        />
+                                    </div>
+                                    <textarea
+                                        id="review"
+                                        name="review"
+                                        rows="3"
+                                        cols="80"
+                                        className="bg-slate-200 outline-none w-full mt-2 rounded-xl p-3"
+                                        placeholder="Type your comment here..."
+                                    />
+                                </div>
+                                <input type="submit" className="border hover:bg-primary transition-all duration-700 cursor-pointer rounded-lg hover:text-white px-3 py-1" value="Add a comment" />
+                            </form>
+                        </div>
                 </div>
               </div>
             )}

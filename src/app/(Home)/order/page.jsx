@@ -18,19 +18,13 @@ const OrderPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
-  const {
-    data: cartData = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["cartData"],
-    queryFn: async () => {
-      const res = await axiosPub.get(
-        `/cart-menu/${session?.data?.user?.email}`
-      );
-      return res.data;
-    },
-  });
+  const {data: cartData = [],refetch,isLoading} = useQuery({
+    queryKey: ['cartData',], 
+    queryFn: async() =>{
+        const res = await axiosPub.get(`/cart-menu/${session?.data?.user?.email}`);
+        return res.data;
+    }
+})
 
   if (isLoading) {
     return <li>Loading...</li>;
@@ -64,46 +58,7 @@ const OrderPage = () => {
     itemsId: cartData?.map((item) => item?._id) || [],
   };
 
-  // const handleAddress = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target
-  //   const name = form.name.value
-  //   const number = form.number.value
-  //   const address = form.address.value
-  //   const email = form.email.value
-  //   const message = form.message.value
-  //   const userInfo = {
-  //     name,
-  //     number,
-  //     address,
-  //     email,
-  //     message
-  //   }
-  //   localStorage.setItem("userOrder",userInfo)
-
-  // }
-
-  // useEffect(() => {
-  //   let discountedAmount = totalAmount;
-
-  //   if (totalAmount >= 50) {
-  //     const discount = Math.ceil(totalAmount / 10);
-  //     discountedAmount = totalAmount - discount;
-  //   } else if (totalAmount >= 100) {
-  //     const discount = Math.ceil(totalAmount / 16);
-  //     discountedAmount = totalAmount - discount;
-  //   } else if (totalAmount >= 150) {
-  //     const discount = Math.ceil(totalAmount / 20);
-  //     discountedAmount = totalAmount - discount;
-  //   } else if (totalAmount >= 190) {
-  //     const discount = Math.ceil(totalAmount / 25);
-  //     discountedAmount = totalAmount - discount;
-  //   }
-
-  //   setTotal(discountedAmount);
-  // }, [totalAmount]);
-
-  // console.log(total);
+  
   return (
     <div className="px-3">
       <div className="lg:max-w-[1240px] py-20 mx-auto">

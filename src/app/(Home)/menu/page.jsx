@@ -7,25 +7,24 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 const MenuPage = () => {
-  const [menuData, isLoading, refetch] = useMenus();
-
-  return (
-    <div>
-      <div
-        style={{
-          backgroundImage: `url(https://i.ibb.co.com/9W09Tgs/food1.jpg)`,
-        }}
-        className="relative w-full bg-fixed h-[500px] bg-no-repeat bg-bottom bg-cover"
-      >
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h3 className="lg:text-6xl text-4xl text-white font-bold">
-            Delish all menu
-          </h3>
-          <div className="bg-[#FF4D00] mx-auto md:w-1/2 text-center mt-8 p-4">
-            <h3 className="text-xl text-white flex justify-center items-center gap-4">
-              Home <FaArrowRight /> Menu
-            </h3>
-          </div>
+   
+     const [menuData,isLoading,refetch] = useMenus()
+   
+    return (
+       <div>
+         <div>
+        <div
+           style={{
+            backgroundImage: `url(https://i.ibb.co.com/9W09Tgs/food1.jpg)`,
+          }}
+         className="relative w-full bg-fixed h-[500px] bg-no-repeat bg-bottom bg-cover">
+        
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <h3 className="lg:text-6xl text-4xl text-white font-bold">Delish all menu</h3>
+                <div className="bg-primary mx-auto md:w-1/2 text-center mt-8 p-4">
+                    <h3 className="text-xl text-white flex justify-center items-center gap-4">Home <FaArrowRight/> Menu</h3>
+                </div>
+            </div>
         </div>
       </div>
       <Menu menuData={menuData} refetch={refetch} />
@@ -35,6 +34,7 @@ const MenuPage = () => {
         <RecommendMenu menuData={menuData} isLoading={isLoading} />
       </div>
     </div>
+      
   );
 };
 
