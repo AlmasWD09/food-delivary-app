@@ -34,7 +34,7 @@ const DashboardNav = () => {
       </div>
 
       <div
-        className={` top-20  overflow-y-auto bg-white lg:bg-orange-100 lg:static absolute z-30 lg:h-screen  flex flex-col items-start justify-between w-full   lg:p-10  px-8 py-4  transition-all lg:translate-x-0   ${
+        className={` top-20  overflow-y-auto bg-white lg:bg-white lg:static absolute z-30 lg:h-screen  flex flex-col items-start justify-between w-full   lg:p-10  px-8 py-4  transition-all lg:translate-x-0   ${
           getMenu
             ? "translate-x-0 h-[calc(100vh-80px)]  "
             : "-translate-x-full "
