@@ -4,7 +4,11 @@ import Image from "next/image";
 
 const NavCartList = () => {
   const [data, refetch, isLoading] = useCartItems();
+  refetch()
 
+  if(isLoading){
+    return <p>Loading...</p>
+  }
   return (
     <>
       {data.length > 0 ? (

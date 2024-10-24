@@ -18,18 +18,14 @@ const TopRestaurants = () => {
             return data
         }
     })
-  console.log(data?.restaurents)
+    const topRestaurants = data?.restaurents.sort((a, b) => b.rating - a.rating);
+   
     if(isLoading){
         return <>
          <p className="text-center">Loading....</p>
         </>
     }
-// restaurantImage
-// restaurantName
-// reviewNumber
-// rating
-// location
-// favoriteNumber
+
     return (
         <div className="container my-10 mx-auto px-2">
             <h3 className="text-4xl font-bold text-center uppercase">Top Restaurants</h3>
@@ -40,7 +36,7 @@ const TopRestaurants = () => {
                 {/* cards start */}
 
                 {
-                    data?.restaurents?.slice(0, 5)?.map(restaurant => <>
+                    topRestaurants?.slice(0, 5)?.map(restaurant => <>
                      {/* card 1 */}
                 <div className="flex justify-center items-center flex-col">
                    <div className="overflow-hidden rounded-full">
