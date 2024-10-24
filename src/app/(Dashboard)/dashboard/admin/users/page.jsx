@@ -251,7 +251,7 @@ const Users = () => {
         </div>
       </div>
       <div className="overflow-auto  bg-white divide-y-2 rounded-t-3xl w-full ">
-        <table className="w-full text-center ">
+        <table className="w-full text-center min-h-[700px] ">
           <thead>
             {table.getHeaderGroups().map((headerGroups) => (
               <tr key={headerGroups.id}>

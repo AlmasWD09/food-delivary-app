@@ -37,12 +37,18 @@ const EditUserModal = ({ closeModal, id, refetch }) => {
       {/* modal background  */}
       <div
         onClick={closeModal}
-        className=" bg-black backdrop-blur-sm inset-0 bg-opacity-10 fixed "
+        className="  inset-0 bg-opacity-40 fixed "
       ></div>
 
       {/* modal show  */}
-      <div className=" fixed  top-1/2 left-[60%] transform  -translate-x-1/2 -translate-y-1/2  ">
-        <div className="bg-white  overflow-y-auto px-10 py-6 rounded-xl   max-w-6xl w-full max-h-[500px] border-4 border-primary shadow-md  ">
+      <div
+        className={` fixed  top-1/2 left-[60%] transform  -translate-x-1/2 -translate-y-1/2 `}
+      >
+        <div
+          className={`bg-white  overflow-y-auto px-10 py-6 rounded-xl   max-w-6xl w-full max-h-[500px] border-4 border-green-500 shadow-md transition-all  ${
+            closeModal ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
+          }   `}
+        >
           <form onSubmit={handleSubmit} action="">
             <h2 className="text-center text-xl font-semibold">
               Update User Profile
