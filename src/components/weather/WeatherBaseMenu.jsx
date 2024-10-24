@@ -1,16 +1,17 @@
 "use client"
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import WeatherMenuCrud from "./WeatherMenuCrud";
+
 
 
 const WeatherBaseMenu = () => {
     const session = useSession()
-    console.log(session);
     const [menuItems, setMenuItems] = useState([]);
     const [weatherCondition, setWeatherCondition] = useState('');
     const [menuData, setMenuData] = useState([]);
+    const [showAll , setShowAll] = useState(false);
 
      // Fetch menu data from JSON file
      useEffect(() => {
@@ -18,7 +19,7 @@ const WeatherBaseMenu = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                setMenuData(data);
+                setMenuItems(data);
             })
             .catch(error => {
                 console.error('Error loading menu data:', error);
@@ -73,27 +74,36 @@ const WeatherBaseMenu = () => {
     }, [weatherCondition, menuData]);
 
 
+const categories = menuItems.map(item => item.weatherName);
+const categoryName = categories[0]
+
+const classesToDisplay = showAll ? menuItems : menuItems.slice(0, 7);
     return (
         <>
-        <div className="container my-10 mx-auto px-2">
-            <h1 className="text-3xl font-bold uppercase text-center text-primary py-6">Weather Base Menu </h1>
-            <div className="text-center grid grid-cols-1 md:grid-cols-2 gap-6">
-                {menuItems.map((item) => (
-                    <div key={item.id} className="bg-green-300">
-                        <img src={item.image} alt="" className="w-[200px] h-[200px]" />
-                        {/* <Image
-              width={400}
-              height={400}
-              src={item?.image}
-              className="lg:max-h-[400px] w-full"
-              alt={item.name} 
-            />*/}
-                        <p className="uppercase font-bold text-2xl text-gray-400">Category: <span className="text-sky-600">{item.category}</span></p>
-                        <p className="text-red-600 font-bold">{item.name} - ${item.price.toFixed(2)}</p>
-                        <p className="text-red-600 font-bold">{item.description}</p>
-                    </div>
-                ))}
+        <div className="container mt-10 mx-auto px-4 lg:px-10">
+            <h1 className="text-3xl font-bold uppercase text-center py-6">Weather Base Menu </h1>
+              <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2"><span className="text-primary">Weather:</span> {categoryName}</h1>
+            <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {
+                    classesToDisplay.map((item,idx)=>{
+                      return  <WeatherMenuCrud key={idx} item={item} />
+                    })
+                }
             </div>
+
+              {/* Show the "Show All" button only if there are more than 3 items and not all are shown */}
+              {
+                            menuItems.length > 4 && !showAll && (
+                                <div className="w-full flex justify-center mt-6">
+                                    <button
+                                        onClick={() => setShowAll(true)} // On click, show all items
+                                        className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-primary rounded-full hover:bg-primary/60 focus:outline-none focus:bg-primary"
+                                    >
+                                        Show All
+                                    </button>
+                                </div>
+                            )
+                        }
         </div>
         </>
     );

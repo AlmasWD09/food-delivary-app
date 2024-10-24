@@ -69,6 +69,7 @@ const MenuDetails = ({ params }) => {
     }
   };
 
+
   return (
     <div>
       <div
