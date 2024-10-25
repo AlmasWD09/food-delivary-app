@@ -14,8 +14,7 @@ const WeatherBaseMenu = () => {
 
      // Fetch menu data from JSON file
      useEffect(() => {
-        const url = 'http://localhost:5000/weatherMenus'
-        // const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/weatherMenus`
+        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/weatherMenus`
         fetch(url)
             .then(res => res.json())
             .then(data => {
