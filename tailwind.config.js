@@ -47,4 +47,18 @@ module.exports = {
       Inter: ["Inter"],
     },
   },
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".no-scrollbar": {
+          /* Hide scrollbar for modern browsers */
+          "scrollbar-width": "none" /* Firefox */,
+          "-ms-overflow-style": "none" /* IE 10+ */,
+        },
+        ".no-scrollbar::-webkit-scrollbar": {
+          display: "none" /* Safari and Chrome */,
+        },
+      });
+    },
+  ],
 };

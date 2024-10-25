@@ -10,8 +10,8 @@ const page = () => {
   return (
     <div>
       <Banner />
-      <WeatherBaseMenu />
-      <div className="py-40 space-y-40">
+      <div className="py-16 space-y-36">
+        <WeatherBaseMenu />
         <TopRestaurants />
         <Discount></Discount>
         <Partner />
