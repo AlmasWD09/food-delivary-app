@@ -15,6 +15,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
+// console.log(session?.data?.user?.image, 'line--------> 18');
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -49,10 +50,13 @@ const Navbar = () => {
       title: "Menu",
       path: "/menu",
     },
-
     {
       title: "Restaurants",
       path: "/restaurants",
+    },
+    {
+      title: "Membership",
+      path: "/membership",
     },
     {
       title: "Profile",
@@ -63,7 +67,7 @@ const Navbar = () => {
       path: "/dashboard",
     },
   ];
-
+const image = session?.data?.user?.image
   // console.log(items);
   return (
     <div className="h-20 font-Inter bg-white  relative  shadow-md ">
@@ -111,14 +115,14 @@ const Navbar = () => {
           {/* button start  */}
 
           <div className="group relative hidden lg:flex">
-            {session?.data?.user ? (
+            {session?.data?.user?.image ? (
               <div className="h-12 w-12 overflow-hidden rounded-full object-center   z-20 ">
                 <Image
-                  className="object-cover h-full w-full"
-                  src={session?.data?.user?.image}
+                   className="object-cover h-full w-full"
+                  src={image}
                   alt={session?.data?.user?.name}
-                  height={100}
-                  width={100}
+                  height={500}
+                  width={500}
                 />
               </div>
             ) : (
