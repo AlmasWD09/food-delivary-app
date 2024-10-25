@@ -63,7 +63,7 @@ const Footer = () => {
         {/* first col */}
         <div className="space-y-4 flex flex-col items-center lg:items-start">
           <Image
-            src="/assets/dldogo.png"
+            src="/assets/footerlogo.png"
             alt="logo"
             height={1000}
             width={200}

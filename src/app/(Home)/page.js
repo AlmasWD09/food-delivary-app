@@ -12,7 +12,7 @@ const page = () => {
   return (
     <div>
       <Banner />
-      <div className="py-40 space-y-40">
+      <div className="py-16 space-y-36">
         <TopRestaurants />
         <Discount></Discount>
         <Partner />
