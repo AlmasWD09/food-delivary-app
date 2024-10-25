@@ -1,8 +1,7 @@
 "use client";
-import { React, useState } from "react";
-import ComingSoon from "../../../../../../public/comingsoon.svg";
+import { React, useEffect, useState } from "react";
 import Image from "next/image";
-import UsersData from "./users.json";
+// import UsersData from "./users.json";
 import {
   createColumnHelper,
   flexRender,
@@ -12,147 +11,22 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import useMenus from "@/hooks/useMenus";
+import moment from "moment";
+import useAllUser from "@/hooks/useAllUser";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../../../../../public/assets/loading.json";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import moment from "moment";
-
-const columnHelper = createColumnHelper();
-
-const columns = [
-  columnHelper.accessor("userId", {
-    cell: (info) => <div>#{info.getValue()}</div>,
-    header: () => <div>user</div>,
-  }),
-  columnHelper.accessor("firstName", {
-    cell: (info) => (
-      <div className="flex items-center justify-start gap-4 font-medium">
-        <div className="h-8 w-8 rounded-full overflow-hidden">
-          {info.row.original.image ? (
-            <Image
-              className="w-full h-full"
-              src={info.row.original.image}
-              height={1000}
-              width={1000}
-              alt={info.row.original.firstName}
-            />
-          ) : (
-            <Image
-              className="w-full h-full"
-              src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
-              height={1000}
-              width={1000}
-              alt={info.row.original.firstName}
-            />
-          )}
-
-          <Image
-            className="w-full h-full"
-            src={info.row.original.image}
-            height={1000}
-            width={1000}
-            alt={info.row.original.firstName}
-          />
-        </div>
-        {info.getValue()} {info.row.original.lastName}
-      </div>
-    ),
-    header: () => (
-      <div>
-        <h1>name</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("email", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>email</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("phoneNumber", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => (
-      <div>
-        <h1>phone</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("role", {
-    cell: (info) => (
-      <div className="flex justify-center items-center">
-        <div
-          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
-            info.getValue() == "admin"
-              ? "bg-red-100 text-red-500"
-              : info.getValue() == "rider"
-              ? "bg-orange-100 text-orange-500"
-              : info.getValue() == "restaurant"
-              ? "bg-blue-100 text-blue-500"
-              : "bg-green-100 text-green-500"
-          } `}
-        >
-          {info.getValue()}
-        </div>
-      </div>
-    ),
-    header: () => (
-      <div>
-        <h1>role</h1>
-      </div>
-    ),
-  }),
-
-  columnHelper.accessor("status", {
-    cell: (info) => <div>{info.getValue()}</div>,
-    header: () => <div>status</div>,
-  }),
-  columnHelper.accessor("created", {
-    cell: (info) => <div>{moment(info.getValue()).format("L")}</div>,
-    header: () => <div>created</div>,
-  }),
-
-  columnHelper.accessor("action", {
-    cell: (info) => (
-      <div className="flex items-center justify-center gap-4">
-        <button className="p-2 rounded-full   text-white bg-green-700 text-xl">
-          <Icon icon="bxs:edit" />
-        </button>
-        <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
-          <Icon icon="material-symbols:pause-circle" />
-        </button>
-        <button className=" p-2 rounded-full   bg-red-500  text-white  text-xl">
-          <Icon icon="fluent:delete-28-filled" />
-        </button>
-      </div>
-    ),
-    header: () => <div>action</div>,
-  }),
-];
+import EditUserModal from "../../../../../../components/admin/EditUserModal";
 
 const Users = () => {
+  const [user, refetch, isLoading, isError] = useAllUser();
   const axiosPublic = useAxiosPublic();
 
-  const {
-    data: user = [],
-    refetch,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["allusers"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/users");
-      return res.data;
-    },
-  });
-  console.log(user.length);
-  console.log(user);
+  // modal
+  const [openModal, setModal] = useState(false);
+  const [modalUser, setModalUser] = useState("");
 
-  // const [user, setUser] = useState([...UsersData]);
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
 
@@ -162,6 +36,144 @@ const Users = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const columnHelper = createColumnHelper();
+
+  const columns = [
+    columnHelper.accessor("userId", {
+      cell: (info) => (
+        <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>
+      ),
+      header: () => <div>user</div>,
+    }),
+    columnHelper.accessor("firstName", {
+      cell: (info) => (
+        <div className="flex items-center justify-start gap-4 font-medium">
+          <div className="h-8 w-8 rounded-full overflow-hidden">
+            {info.row.original.image ? (
+              <Image
+                className="w-full h-full"
+                src={info.row.original.image}
+                height={1000}
+                width={1000}
+                alt={info.row.original.firstName}
+              />
+            ) : (
+              <Image
+                className="w-full h-full"
+                src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
+                height={1000}
+                width={1000}
+                alt={info.row.original.firstName}
+              />
+            )}
+          </div>
+          {info.getValue()} {info.row.original.lastName}
+        </div>
+      ),
+      header: () => (
+        <div>
+          <h1>name</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("email", {
+      cell: (info) => <div>{info.getValue()}</div>,
+      header: () => (
+        <div>
+          <h1>email</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("phoneNumber", {
+      cell: (info) => <div>{info.getValue()}</div>,
+      header: () => (
+        <div>
+          <h1>phone</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("role", {
+      cell: (info) => (
+        <div className="flex justify-center items-center">
+          <div
+            className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+              info.getValue() == "admin"
+                ? "bg-red-100 text-red-600"
+                : info.getValue() == "rider"
+                ? "bg-orange-100 text-orange-600"
+                : info.getValue() == "restaurant"
+                ? "bg-blue-100 text-blue-600"
+                : "bg-green-100 text-green-600"
+            } `}
+          >
+            {info.getValue()}
+          </div>
+        </div>
+      ),
+      header: () => (
+        <div>
+          <h1>role</h1>
+        </div>
+      ),
+    }),
+
+    columnHelper.accessor("created", {
+      cell: (info) => (
+        <div>
+          {info.getValue()
+            ? new Date(info.getValue()).toLocaleDateString("en-IN")
+            : "N/A"}
+          {}
+        </div>
+      ),
+      header: () => <div>created</div>,
+    }),
+    columnHelper.accessor("status", {
+      cell: (info) => (
+        <div
+          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+            info.getValue() == "active"
+              ? "bg-green-100 text-green-600"
+              : info.getValue() == "suspend"
+              ? "bg-orange-100 text-orange-600"
+              : info.getValue() == "block"
+              ? "bg-red-100 text-red-600"
+              : ""
+          } `}
+        >
+          {info.getValue() ? info.getValue() : "N/A"}
+        </div>
+      ),
+      header: () => <div>status</div>,
+    }),
+    columnHelper.accessor("id", {
+      cell: (info) => (
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={() => {
+              setModal(true);
+              setModalUser(info.row.original);
+            }}
+            className="p-2 rounded-full   text-white bg-green-700 text-xl"
+          >
+            <Icon icon="bxs:edit" />
+          </button>
+
+          <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
+            <Icon icon="material-symbols:pause-circle" />
+          </button>
+          <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
+            <Icon icon="fluent:delete-28-filled" />
+          </button>
+        </div>
+      ),
+      header: () => <div>action</div>,
+    }),
+  ];
 
   const table = useReactTable({
     data: user,
@@ -192,12 +204,22 @@ const Users = () => {
     onColumnFiltersChange: setFilter,
   });
 
-  // console.log()
-  // console.log()
-  // console.log()
-  // console.log()
+  if (isLoading) {
+    return (
+      <div className="h-screen  flex justify-center items-center">
+        <Lottie
+          className="w-1/4"
+          animationData={loadingAnimation}
+          loop={true}
+        />
+      </div>
+    );
+  }
+
+  const closeModal = () => setModal(false);
+
   return (
-    <div>
+    <div className="relative">
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 gap-5">
         <form action="" className=" relative flex items-center justify-end ">
           <input
@@ -228,8 +250,8 @@ const Users = () => {
           <p>entries</p>
         </div>
       </div>
-      <div className="overflow-auto  bg-white divide-y-2 rounded-3xl ">
-        <table className="w-full text-center ">
+      <div className="overflow-auto  bg-white divide-y-2 rounded-t-3xl w-full ">
+        <table className="w-full text-center min-h-[700px] ">
           <thead>
             {table.getHeaderGroups().map((headerGroups) => (
               <tr key={headerGroups.id}>
@@ -237,7 +259,7 @@ const Users = () => {
                   <th
                     onClick={header.column.getToggleSortingHandler()}
                     key={header.id}
-                    className=" py-4  capitalize text-sm  bg-blue-500 text-white "
+                    className=" py-4  capitalize text-sm  bg-primary text-white "
                   >
                     <div className="flex items-center  justify-center">
                       {flexRender(
@@ -286,61 +308,67 @@ const Users = () => {
           </tbody>
         </table>
         {/* pagination footer  */}
+      </div>
+      <div className=" w-full">
+        <div className="flex items-center justify-center gap-2 py-2 bg-primary/30 w-full  rounded-b-3xl">
+          {/* left side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
+            </button>
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-left-12-regular"
+              />
+            </button>
+          </div>
 
-        <div lassName="">
-          <div className="flex items-center justify-center gap-2 py-2   bg-blue-100 ">
-            {/* left side  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-left-2" />
-              </button>
-              <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-left-12-regular"
-                />
-              </button>
-            </div>
+          {/* center */}
+          <div>
+            <p>
+              Page {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </p>
+          </div>
 
-            {/* center  */}
-            <div>
-              <p>
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </p>
-            </div>
-
-            {/* right  */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon
-                  className="text-3xl"
-                  icon="fluent:arrow-circle-right-12-regular"
-                />
-              </button>
-              <button
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
-                className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
-              >
-                <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
-              </button>
-            </div>
+          {/* right side */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon
+                className="text-3xl"
+                icon="fluent:arrow-circle-right-12-regular"
+              />
+            </button>
+            <button
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+              className="p-2 hover:bg-primary/20 rounded-xl disabled:opacity-10"
+            >
+              <Icon className="text-3xl" icon="iconamoon:arrow-right-2" />
+            </button>
           </div>
         </div>
       </div>
+      {openModal && (
+        <EditUserModal
+          closeModal={closeModal}
+          id={modalUser}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

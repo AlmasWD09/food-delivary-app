@@ -48,10 +48,13 @@ const Navbar = () => {
       title: "Menu",
       path: "/menu",
     },
-
     {
       title: "Restaurants",
       path: "/restaurants",
+    },
+    {
+      title: "Membership",
+      path: "/membership",
     },
     {
       title: "Profile",

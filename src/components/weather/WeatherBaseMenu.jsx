@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import WeatherMenuCrud from "./WeatherMenuCrud";
 
 
-
 const WeatherBaseMenu = () => {
     const session = useSession()
     const [menuItems, setMenuItems] = useState([]);
@@ -15,7 +14,8 @@ const WeatherBaseMenu = () => {
 
      // Fetch menu data from JSON file
      useEffect(() => {
-        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/weatherMenus`
+        const url = 'http://localhost:5000/weatherMenus'
+        // const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/weatherMenus`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -25,7 +25,6 @@ const WeatherBaseMenu = () => {
                 console.error('Error loading menu data:', error);
             });
     }, []);
-
 
     // Fetch weather data based on geolocation
     const fetchWeatherData = async (latitude, longitude) => {
@@ -73,7 +72,6 @@ const WeatherBaseMenu = () => {
         }
     }, [weatherCondition, menuData]);
 
-
 const categories = menuItems.map(item => item.weatherName);
 const categoryName = categories[0]
 
@@ -81,7 +79,7 @@ const classesToDisplay = showAll ? menuItems : menuItems.slice(0, 7);
     return (
         <>
         <div className="container mt-10 mx-auto px-4 lg:px-10">
-            <h1 className="text-3xl font-bold uppercase text-center py-6">Weather Base Menu </h1>
+            <h1 className="text-3xl font-bold uppercase text-center  py-6">Weather Base Menu </h1>
               <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2"><span className="text-primary">Weather:</span> {categoryName}</h1>
             <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {

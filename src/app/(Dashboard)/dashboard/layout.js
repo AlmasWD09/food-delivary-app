@@ -1,6 +1,6 @@
-import DashboardNav from "@/components/shared/Dashboard/DashboardNav";
+import DashboardNav from "../../../../components/shared/Dashboard/DashboardNav";
 import "../../globals.css";
-import TopBar from "@/components/shared/Dashboard/TopBar";
+import TopBar from "../../../../components/shared/Dashboard/TopBar";
 import AuthProvider from "@/services/AuthProvider";
 import { getServerSession } from "next-auth"; // Adjust the import based on your setup
 
@@ -10,12 +10,10 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(); // Fetch the session here
-
   return (
     <html lang="en">
       <body>
-        <AuthProvider session={session}>
+        <AuthProvider>
           {" "}
           {/* Pass the session */}
           <div className="flex items-center h-screen relative font-Inter">
