@@ -28,31 +28,34 @@ export default function Restaurants() {
     <>
       {/* Search and Banner */}
       <div
-        className="text-center p-32 mb-8"
+        className="text-center py-10 md:p-32 mb-8"
         style={{
-          backgroundImage: `url('/assets/Bg restaurant.jpg')`,
+          backgroundImage:`linear-gradient(
+        rgba(0, 0, 0, 0.6), 
+        rgba(0, 0, 0, 0.9)
+      ),  url('/assets/Bg restaurant.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
         <div className="m-12">
-          <h1 className="text-5xl font-poppins text-[#FFFFFF] font-semibold mb-3">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-poppins text-gray-300 font-semibold mb-3">
             Restaurants & Cafe
           </h1>
           <form
             action=""
             onSubmit={handleSearch}
             id="handleReSet"
-            className="flex gap-2 items-center justify-center bg-[#c7c6c6] w-9/12 mx-auto py-3 px-8 rounded-lg"
+            className="flex gap-2 items-center justify-center bg-gray-400 lg:w-9/12 mx-auto py-2 md:py-4 px-2 md:px-4 rounded-lg"
           >
             <input
               type="text"
               name="search"
-              className="text-lg rounded-lg p-2 w-full"
+              className="bg-gray-200 text-sm md:text-base lg:text-lg rounded-lg md:px-4 p-2 w-full outline-none"
               placeholder="Search here by restaurant name...."
             />
-            <button className="bg-[#F7A582] text-[#FFFFFF] h-11 rounded-lg p-2 px-4 border-[#F7A582] text-xl">
+            <button className="bg-primaryLight text-white rounded-lg px-2 md:px-4 py-2 border-primary md:text-xl ">
               {" "}
               Search
             </button>
@@ -65,13 +68,13 @@ export default function Restaurants() {
         {/* 1st Card */}
         {restaurants?.map((restaurant) => (
           <div key={restaurant._id}>
-            <div className="mb-5">
+            <div className="mb-5 rounded-md">
               <Image
                 src={restaurant?.restaurantImage}
                 width={500}
                 height={400}
                 alt="restaurant image"
-                className="h-64"
+                className="h-64 rounded-md"
               />
             </div>
             <div className="grid grid-cols-11 items-center">

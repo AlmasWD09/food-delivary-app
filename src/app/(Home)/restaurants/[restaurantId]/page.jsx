@@ -57,8 +57,8 @@ export default function RestaurantD({ params }) {
   );
 
   return (
-    <div className="container px-2 mx-auto">
-      <div className="mb-5 relative">
+    <div className="container mx-auto px-4 lg:px-0 mt-2">
+      <div className="mb-5 relative ">
         <Image
           src={restaurant?.restaurantImage}
           alt={restaurant?.restaurantName}
@@ -68,7 +68,7 @@ export default function RestaurantD({ params }) {
         />
         <ReviewModal restaurantName={restaurant?.restaurantName} />
       </div>
-      <div>
+      <div className="">
         <div className="flex items-center gap-5">
           <h1 className="text-3xl md:text-4xl font-semibold">
             {restaurant?.restaurantName}
@@ -99,66 +99,68 @@ export default function RestaurantD({ params }) {
       </div>
       <hr className="my-3" />
       {/* Discount */}
-      <div className="my-10 lg:max-w-[1240px] mx-auto">
-        <h3 className="text-2xl  font-semibold">Available Deals</h3>
+      <div className="container mx-auto px-4 my-10">
+        <h3 className="text-2xl  font-semibold lg:ml-4">Available Deals</h3>
         {/* discount cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 my-6 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:space-y-5 lg:space-y-0">
           {/* card1 */}
-          <div className="flex w-full shadow-lg cursor-pointer hover:bg-primary transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-br-full p-3 lg:p-6 gap-3">
-            <div className="border-r-2 pr-3">
+          <div className="flex w-full lg:w-[310px] lg:ml-4 pl-4 py-4  shadow-lg cursor-pointer hover:bg-primary transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-br-full gap-3">
+            <div className="flex flex-col justify-center items-center border-r-2 pr-3">
               <h2 className="text-3xl  font-semibold">10%</h2>
               <p className="text-xl font-semibold">OFF</p>
             </div>
 
             <div>
               <p className="text-base">For all items</p>
-              <h2 className="text-3xl my-1 font-semibold">{`${"'LOVE50'"}`}</h2>
+              <h2 className="text-xl my-1 font-semibold">{`${"'LOVE50'"}`}</h2>
               <p className="text-xs">Min: $50 order</p>
               <p className="text-xs">
-                Valid from Oct 1, 2024 <br /> - Oct 31, 2024
+                Valid from Oct 1, 2024 - <br /> Oct 31, 2024
               </p>
             </div>
           </div>
-          {/* card2 */}
-          <div className="flex shadow-lg cursor-pointer hover:bg-primary pl-8 transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-tl-full p-3 lg:p-6 gap-3">
-            <div className="border-r-2 pr-3">
-              <h2 className="text-3xl  font-semibold">18%</h2>
+
+           {/* card2 */}
+           <div className="flex justify-center items-center w-full lg:w-[310px]  px-10 py-4  shadow-lg cursor-pointer bg-primaryGray hover:bg-primary  transition-all duration-700 hover:text-white rounded-lg md:rounded-tl-full gap-3">
+            <div className="flex flex-col justify-center items-center border-r-2 ">
+              <h2 className="text-3xl  font-semibold px-4">18%</h2>
               <p className="text-xl font-semibold">OFF</p>
             </div>
 
             <div>
               <p className="text-base">For all items</p>
-              <h2 className="text-3xl my-1 font-semibold">{`${"'LOVE100'"}`}</h2>
+              <h2 className="text-xl my-1 font-semibold">{`${"'LOVE100'"}`}</h2>
               <p className="text-xs">Min: $100 order</p>
               <p className="text-xs">Valid from Oct 1, 2024 - Oct 31, 2024</p>
             </div>
           </div>
           {/* card3 */}
-          <div className="flex shadow-lg cursor-pointer hover:bg-primary transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-br-full p-3 lg:p-6 gap-3">
-            <div className="border-r-2 pr-3">
-              <h2 className="text-3xl  font-semibold">22%</h2>
+          <div className="flex w-full lg:w-[310px] lg:ml-4 pl-4 py-4 shadow-lg cursor-pointer bg-primaryGray hover:bg-primary transition-all duration-700 hover:text-white items-center rounded-lg md:rounded-br-full gap-3">
+            <div className="flex flex-col justify-center items-center  border-r-2 pr-3">
+              <h2 className="text-3xl  font-semibold ">22%</h2>
               <p className="text-xl font-semibold">OFF</p>
             </div>
 
             <div>
               <p className="text-base">For all items</p>
-              <h2 className="text-3xl my-1 font-semibold">{`${"'LOVE150'"}`}</h2>
+              <h2 className="text-xl my-1 font-semibold">{`${"'LOVE150'"}`}</h2>
               <p className="text-xs">Min: $150 order</p>
-              <p className="text-xs">Valid from Oct 1, 2024 - Oct 31, 2024</p>
+              <p className="text-xs  max-[100px]">Valid from Oct 1, 2024 - <br /> Oct 31, 2024</p>
             </div>
           </div>
+
           {/* card4 */}
-          <div className="flex shadow-lg cursor-pointer hover:bg-primary pl-8 transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-tl-full p-3 lg:p-6 gap-3">
-            <div className="border-r-2 pr-3">
+          <div className="flex w-full lg:w-[310px] pl-16 py-4 shadow-lg cursor-pointer hover:bg-primary transition-all duration-700 hover:text-white items-center bg-primaryGray rounded-lg md:rounded-tl-full gap-3">
+            <div className="flex flex-col justify-center items-center border-r-2 pr-3">
               <h2 className="text-3xl  font-semibold">25%</h2>
               <p className="text-xl font-semibold">OFF</p>
             </div>
 
-            <div>
+            <div className="">
               <p className="text-base">For all items</p>
-              <h2 className="text-3xl my-1 font-semibold">{`${"'TOPSERVE'"}`}</h2>
+              <h2 className="text-xl my-1 font-semibold">{`${"'TOPSERVE'"}`}</h2>
               <p className="text-xs">Min: less $150 order</p>
-              <p className="text-xs">Valid from Oct 1, 2024 - Oct 31, 2024</p>
+              <p className="text-xs">Valid from Oct 1, 2024 - <br /> Oct 31, 2024</p>
             </div>
           </div>
         </div>
@@ -175,7 +177,7 @@ export default function RestaurantD({ params }) {
         </div>
       </div>
       {/* Review */}
-      <div className="my-10 lg:max-w-[1240px] mx-auto">
+      <div className="my-10 lg:max-w-[1240px] mx-auto ">
         <h3 className="text-2xl   font-semibold">Rating and Reviews</h3>
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews?.length > 0 ? (
@@ -215,7 +217,7 @@ export default function RestaurantD({ params }) {
         </div>
       </div>
 
-      <div className="my-10">
+      <div className="my-10 ">
         <RestaurantMap location={restaurant?.location} />
       </div>
     </div>
