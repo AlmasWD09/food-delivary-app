@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import navLinks from "./DashboardLinks";
 import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
@@ -7,10 +7,14 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 const DashboardNav = () => {
+  const pathname = usePathname();
   const currentUser = "admin";
   const [getMenu, setMenu] = useState(false);
+
+  // const session = useSession();
+
   const navRule = navLinks[currentUser];
-  const pathname = usePathname();
+
   return (
     <div
       className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}
@@ -56,7 +60,7 @@ const DashboardNav = () => {
           </div>
 
           <ul className="space-y-4">
-            {navRule.map((item, idx) => (
+            {navRule?.map((item, idx) => (
               <li key={idx}>
                 <Link
                   href={item.link}

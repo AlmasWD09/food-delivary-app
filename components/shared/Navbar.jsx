@@ -33,6 +33,8 @@ const Navbar = () => {
     fetchItems();
   }, [session?.data?.user?.email]);
 
+  console.log(session);
+
   // if (loading) {
   //     return <li>Loading...</li>;
   // }
