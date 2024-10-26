@@ -6,13 +6,14 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 const DashboardNav = () => {
   const pathname = usePathname();
-  const currentUser = "admin";
+  // const currentUser = "admin";
   const [getMenu, setMenu] = useState(false);
 
-  // const session = useSession();
-
+  const session = useSession();
+  const currentUser = session?.data?.user?.role;
   const navRule = navLinks[currentUser];
 
   return (
@@ -90,7 +91,10 @@ const DashboardNav = () => {
             </button>
           </div>
 
-          <button className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-600 p-4 rounded-2xl text-white font-extrabold">
+          <button
+            onClick={signOut}
+            className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-600 p-4 rounded-2xl text-white font-extrabold"
+          >
             <Icon className="text-xl" icon="tabler:logout-2" />
             Logout
           </button>

@@ -1,6 +1,7 @@
 "use client";
 import { Icon } from "@iconify/react";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
@@ -11,6 +12,9 @@ const TopBar = () => {
   const pathname = usePathname();
   const lastPart = pathname.split("/").filter(Boolean).slice(-1)[0];
   const final = lastPart.split("-").join(" ");
+
+  const session = useSession();
+  console.log(session?.data?.user?.role);
 
   // current user demo
   const currentUser = {
@@ -88,7 +92,7 @@ const TopBar = () => {
               <li className="flex items-center justify-between gap-4 w-full h-full">
                 <div className="w-8 h-8 rounded-full overflow-hidden">
                   <Image
-                    src={currentUser.image}
+                    src={session?.data?.user.image}
                     height={1000}
                     width={1000}
                     alt="snehashisroy"
@@ -113,15 +117,18 @@ const TopBar = () => {
         <div className="flex items-center gap-2 lg:pl-10">
           <span className="w-12 h-12 rounded-full overflow-hidden">
             <Image
-              src={currentUser.image}
-              alt={currentUser.name}
+              src={session?.data?.user.image}
+              alt={session?.data?.user?.firstName}
               height={500}
               width={500}
               className="object-cover w-full h-full"
             />
           </span>
           <span>
-            <p className="text-md font-bold">{currentUser.name}</p>
+            <p className="text-md font-bold">
+              {session?.data?.user?.firstName}
+              {session?.data?.user?.lastName}
+            </p>
             <p className="text-sm font-bold text-globalText">
               {currentUser.role}
             </p>

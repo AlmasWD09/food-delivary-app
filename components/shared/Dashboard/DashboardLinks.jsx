@@ -49,33 +49,28 @@ const navLinks = {
   restaurants: [
     {
       title: "Overview",
-      link: "restaurant/overview",
+      link: "overview",
       icons: <Icon icon="material-symbols:dashboard" />,
     },
     {
       title: "Orders",
-      link: "restaurant/orders",
+      link: "orders",
       icons: <Icon icon="material-symbols:orders" />,
     },
     {
       title: "Menu",
-      link: "restaurant/admin-overview",
+      link: "menu",
       icons: <Icon icon="hugeicons:menu-restaurant" />,
     },
     {
       title: "Reviews",
-      link: "restaurant/admin-overview",
+      link: "reviews",
       icons: <Icon icon="carbon:review" />,
     },
     {
       title: "Payments",
-      link: "restaurant/admin-overview",
+      link: "payments",
       icons: <Icon icon="la:money-bill-wave" />,
-    },
-    {
-      title: "Home",
-      link: "/",
-      icons: <Icon icon="charm:home" />,
     },
   ],
 };
