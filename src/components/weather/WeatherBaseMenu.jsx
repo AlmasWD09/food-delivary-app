@@ -18,7 +18,7 @@ const WeatherBaseMenu = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                setMenuItems(data);
+                setMenuData(data);
             })
             .catch(error => {
                 console.error('Error loading menu data:', error);
@@ -52,14 +52,14 @@ const WeatherBaseMenu = () => {
     }, []);
 
     // Update menu based on weather condition
-    const updateMenu = (weather) => {
+    const updateMenu = (weatherCondition) => {
         let filteredItems = [];
-        if (weather.includes('clouds') || weather.includes('cold')) {
-            filteredItems = menuData.filter(item => item.category === 'cold');
-        } else if (weather.includes('clear') || weather.includes('hot')) {
-            filteredItems = menuData.filter(item => item.category === 'hot');
-        } else if (weather.includes('rain')) {
-            filteredItems = menuData.filter(item => item.category === 'rain');
+        if (weatherCondition.includes('clouds') || weatherCondition.includes('cold')) {
+            filteredItems = menuData.filter(item => item.weatherName === 'cold');
+        } else if (weatherCondition.includes('clear') || weatherCondition.includes('hot')) {
+            filteredItems = menuData.filter(item => item.weatherName === 'hot');
+        } else if (weatherCondition.includes('rain')) {
+            filteredItems = menuData.filter(item => item.weatherName === 'rain');
         }
         setMenuItems(filteredItems);
     };
@@ -70,16 +70,12 @@ const WeatherBaseMenu = () => {
             updateMenu(weatherCondition);
         }
     }, [weatherCondition, menuData]);
-
-const categories = menuItems.map(item => item.weatherName);
-const categoryName = categories[0]
-
-const classesToDisplay = showAll ? menuItems : menuItems.slice(0, 7);
+    const classesToDisplay = showAll ? menuItems : menuItems.slice(0, 7);
     return (
         <>
         <div className="container mt-10 mx-auto px-4 lg:px-10">
             <h1 className="text-3xl font-bold uppercase text-center  py-6">Weather Base Menu </h1>
-              <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2"><span className="text-primary">Weather:</span> {categoryName}</h1>
+              <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2"><span className="text-primary">Weather:</span>{weatherCondition}</h1>
             <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {
                     classesToDisplay.map((item,idx)=>{
@@ -88,13 +84,12 @@ const classesToDisplay = showAll ? menuItems : menuItems.slice(0, 7);
                 }
             </div>
 
-              {/* Show the "Show All" button only if there are more than 3 items and not all are shown */}
-              {
+            {
                             menuItems.length > 4 && !showAll && (
                                 <div className="w-full flex justify-center mt-6">
                                     <button
                                         onClick={() => setShowAll(true)} // On click, show all items
-                                        className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-primary rounded-full hover:bg-primary/60 focus:outline-none focus:bg-primary"
+                                         className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-primary rounded-full hover:bg-primary/60 focus:outline-none focus:bg-primary"
                                     >
                                         Show All
                                     </button>
