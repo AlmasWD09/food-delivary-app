@@ -51,6 +51,8 @@ const WeatherDetails = ({ params }) => {
                 className="object-cover object-center w-full h-64 md:h-96 rounded-lg"
                 src={singleWeatherMenu.photo}
                 alt={singleWeatherMenu.name}
+                width={1000}
+                height={1000}
             />
         
             <div className="p-6">
