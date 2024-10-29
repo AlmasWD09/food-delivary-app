@@ -1,6 +1,6 @@
-import Navbar from "../../../components/shared/Navbar";
+import Navbar from "../components/shared/Navbar";
 import "../globals.css";
-import Footer from "../../../components/shared/Footer";
+import Footer from "../components/shared/Footer";
 import AuthProvider from "@/services/AuthProvider";
 import { Toaster } from "react-hot-toast";
 

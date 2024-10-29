@@ -15,7 +15,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-// console.log(session?.data?.user?.image, 'line--------> 18');
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -35,9 +35,17 @@ const Navbar = () => {
 
   console.log(session);
 
-  // if (loading) {
-  //     return <li>Loading...</li>;
-  // }
+  const dynamicDashboard = () => {
+    if (session?.data?.user?.role == "admin") {
+      return "/dashboard/admin/overview";
+    } else if (session?.data?.user?.role == "restaurants") {
+      return "/dashboard/restaurant/overview";
+    } else if (session?.data?.user?.role == "rider") {
+      return "/dashboard/rider/overview";
+    } else {
+      return "/signin";
+    }
+  };
 
   const itemsSuper = 0;
 
@@ -62,12 +70,13 @@ const Navbar = () => {
       title: "Profile",
       path: "/profile",
     },
+
     {
       title: "Dashboard",
-      path: "/dashboard",
+      path: dynamicDashboard(),
     },
   ];
-const image = session?.data?.user?.image
+  const image = session?.data?.user?.image;
   // console.log(items);
   return (
     <div className="h-20 font-Inter bg-white  relative  shadow-md ">
@@ -118,7 +127,7 @@ const image = session?.data?.user?.image
             {session?.data?.user?.image ? (
               <div className="h-12 w-12 overflow-hidden rounded-full object-center   z-20 ">
                 <Image
-                   className="object-cover h-full w-full"
+                  className="object-cover h-full w-full"
                   src={image}
                   alt={session?.data?.user?.name}
                   height={500}

@@ -1,9 +1,9 @@
 "use client";
 import Slider from "react-slick";
-import foodImage from "../public/food.png";
-import foodImage2 from "../public/food3.png";
-import deli from "../public/deli.webp";
-import res from "../public/re1.jpg";
+import foodImage from "../../../public/food.png";
+import foodImage2 from "../../../public/food3.png";
+import deli from "../../../public/deli.webp";
+import res from "../../../public/re1.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LuMapPin } from "react-icons/lu";
