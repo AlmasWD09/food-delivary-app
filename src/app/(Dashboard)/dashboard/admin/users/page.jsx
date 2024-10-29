@@ -17,7 +17,7 @@ import Lottie from "lottie-react";
 import loadingAnimation from "../../../../../../public/assets/loading.json";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import EditUserModal from "../../../../../../components/admin/EditUserModal";
+import EditUserModal from "../../../../components/admin/EditUserModal";
 
 const Users = () => {
   const [user, refetch, isLoading, isError] = useAllUser();

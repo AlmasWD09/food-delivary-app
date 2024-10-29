@@ -12,7 +12,7 @@ const router = useRouter();
   return (
     <div className="relative rounded-2xl overflow-hidden group ">
     <div className="">
-      <Image width={400} height={500} src={photo} className="lg:max-h-[400px] w-full " alt="image" />
+      <Image width={300} height={300} src={photo} className="" alt="image" />
     </div>
 
     <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300">
