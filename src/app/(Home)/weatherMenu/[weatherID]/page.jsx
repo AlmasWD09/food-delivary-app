@@ -1,5 +1,6 @@
 "use client";  // To ensure this is a Client Component
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const WeatherDetails = ({ params }) => {
@@ -37,7 +38,7 @@ const WeatherDetails = ({ params }) => {
   // Render loading, error, or weather menu details
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold text-center py-6">Weather Details: ({weatherID})</h1>
+      <h1 className="text-3xl font-bold text-center py-6">Weather Details</h1>
 
       {loading ? (
         <loading />
@@ -46,7 +47,7 @@ const WeatherDetails = ({ params }) => {
       ) : (
         singleWeatherMenu && (
             <div className="max-w-2xl mx-auto  bg-white rounded-lg shadow-md mt-2">
-            <img
+            <Image
                 className="object-cover object-center w-full h-64 md:h-96 rounded-lg"
                 src={singleWeatherMenu.photo}
                 alt={singleWeatherMenu.name}

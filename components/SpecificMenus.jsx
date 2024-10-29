@@ -49,7 +49,7 @@ const SpecificMenus = ({restaurantMenus}) => {
     return (
         <div>
       {/* Category Buttons */}
-      <div className="category-buttons">
+      <div className="category-buttons flex gap-4">
         {categories.map((category, index) => (
           <button 
             key={index} 
