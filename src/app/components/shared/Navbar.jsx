@@ -38,7 +38,7 @@ const Navbar = () => {
   const dynamicDashboard = () => {
     if (session?.data?.user?.role == "admin") {
       return "/dashboard/admin/overview";
-    } else if (session?.data?.user?.role == "restaurants") {
+    } else if (session?.data?.user?.role == "restaurant") {
       return "/dashboard/restaurant/overview";
     } else if (session?.data?.user?.role == "rider") {
       return "/dashboard/rider/overview";
@@ -172,10 +172,15 @@ const Navbar = () => {
                           {session?.data?.user?.name}
                         </h1>
                       ) : (
-                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                          {session?.data?.user?.firstName}{" "}
-                          {session?.data?.user?.lastName}
-                        </h1>
+                        <span className=" p-6 text-center uppercase">
+                          <h1 className="uppercase font-bold text-xl  ">
+                            {session?.data?.user?.firstName}{" "}
+                            {session?.data?.user?.lastName}
+                          </h1>
+                          <h1 className="text-sm">
+                            {session?.data?.user?.role}
+                          </h1>
+                        </span>
                       )}
 
                       <div>

@@ -61,44 +61,25 @@ const navLinks = {
   ],
   rider: [
     {
-      title: "Dashboard",
-      link: "dashboard",
+      title: "Overview",
+      link: "overview",
       icons: <Icon icon="material-symbols:dashboard" />,
     },
     {
-      title: "Current Deliveries",
-      link: "current-deliveries",
-      icons: <Icon icon="material-symbols:delivery-dining" />,
+      title: "Active Deliveries",
+      link: "active-deliveries",
+      icons: <Icon icon="solar:delivery-bold" />,
     },
     {
       title: "Order History",
       link: "order-history",
       icons: <Icon icon="material-symbols:history" />,
     },
-    {
-      title: "Profile",
-      link: "profile",
-      icons: <Icon icon="material-symbols:person" />,
-    },
-    {
-      title: "Notifications",
-      link: "notifications",
-      icons: <Icon icon="material-symbols:notifications" />,
-    },
+
     {
       title: "Earnings",
       link: "earnings",
-      icons: <Icon icon="material-symbols:monetization-on" />,
-    },
-    {
-      title: "Help & Support",
-      link: "help",
-      icons: <Icon icon="material-symbols:help" />,
-    },
-    {
-      title: "Logout",
-      link: "logout",
-      icons: <Icon icon="material-symbols:logout" />,
+      icons: <Icon icon="healthicons:money-bag-outline" />,
     },
   ],
 };

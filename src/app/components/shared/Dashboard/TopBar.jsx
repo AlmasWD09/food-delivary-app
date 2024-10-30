@@ -124,13 +124,13 @@ const TopBar = () => {
               className="object-cover w-full h-full"
             />
           </span>
-          <span>
+          <span className="uppercase">
             <p className="text-md font-bold">
               {session?.data?.user?.firstName}
               {session?.data?.user?.lastName}
             </p>
-            <p className="text-sm font-bold text-globalText">
-              {currentUser.role}
+            <p className="text-sm  text-globalText">
+              {session?.data?.user?.role}
             </p>
           </span>
         </div>

@@ -72,7 +72,7 @@ const DashboardNav = () => {
                       : ""
                   }`}
                 >
-                  <span className="text-lg">{item.icons}</span>
+                  <span className="text-2xl">{item.icons}</span>
                   {item.title}
                 </Link>
               </li>
