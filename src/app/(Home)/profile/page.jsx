@@ -10,6 +10,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 const ProfilePage = () => {
   const session = useSession();
+  const isSocialUser = session?.data?.user?.provider !== 'credentials';
+  console.log(session);
   const axiosPublic = useAxiosPublic();
   const { userAllInfo, refetch } = useProfile();
   const { address, block, house, location, road } = userAllInfo || {};
@@ -150,42 +152,123 @@ const ProfilePage = () => {
               {/* User Profile */}
               <TabPanel>
                 <div className="lg:py-8 lg:pr-8 h-full space-y-4  ">
-                  <div className="flex items-center justify-between gap-2 border p-2  lg:p-6 overflow-hidden">
-                    {/* left side columns */}
-                    <div className="space-y-3 ">
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-2xl" icon="ci:user-add" />
-                        <h2 className="flex-wrap text-nowrap">
-                          <span className="font-bold">First Name: </span>
-                          {session?.data?.user?.firstName}
-                        </h2>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-2xl" icon="ci:user-add" />
-                        <h2 className="flex-wrap text-nowrap">
-                          <span className="font-bold">Last Name: </span>
-                          {session?.data?.user?.lastName}
-                        </h2>
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between gap-2 border p-2 lg:p-6 overflow-hidden">
+                    {session?.data ? (
+                      isSocialUser ? (
+                        <div className="flex justify-between gap-8">
+                          {/* Left side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">First Name: </span>
+                                {session.data.user?.name}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap font-bold">
+                                provider:
+                                <span className="flex-wrap font-medium text-nowrap uppercase"> {session.data.user?.provider} </span>
+                              </h2>
+                            </div>
+                          </div>
 
-                    {/* right side columns */}
-                    <div className="space-y-3 ">
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-xl" icon="hugeicons:calling" />
-                        <h2 className="flex-wrap">
-                          <span className="font-bold">Mobile: </span>
-                          {session?.data?.user?.phoneNumber}
-                        </h2>
+                          {/* Right side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="ic:outline-email" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Email: </span>
+                                {session.data.user?.email}
+                              </h2>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap font-bold">
+                                Role:
+                                <span className="flex-wrap text-nowrap font-medium uppercase"> role asva dynamic </span>
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex gap-8">
+                          {/* Left side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">First Name: </span>
+                                {session.data.user?.firstName}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">Last Name: </span>
+                                {session.data.user?.lastName}
+                              </h2>
+                            </div>
+                          </div>
+
+                          {/* Right side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="hugeicons:calling" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Mobile: </span>
+                                {session.data.user?.phoneNumber}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="ic:outline-email" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Email: </span>
+                                {session.data.user?.email}
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    ) : (
+                      <div className="flex justify-between gap-8">
+                        {/* Left side columns */}
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-2xl" icon="ci:user-add" />
+                            <h2 className="flex-wrap text-nowrap">
+                              <span className="font-bold">First Name: </span>
+                            </h2>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-2xl" icon="ci:user-add" />
+                            <h2 className="flex-wrap text-nowrap">
+                              <span className="font-bold">Last Name: </span>
+                            </h2>
+                          </div>
+                        </div>
+
+                        {/* Right side columns */}
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-xl" icon="hugeicons:calling" />
+                            <h2 className="flex-wrap">
+                              <span className="font-bold">Mobile: </span>
+                            </h2>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-xl" icon="ic:outline-email" />
+                            <h2 className="flex-wrap">
+                              <span className="font-bold">Email: </span>
+                            </h2>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-xl" icon="ic:outline-email" />
-                        <h2 className="flex-wrap">
-                          <span className="font-bold">Email: </span>
-                          {session?.data?.user?.email}
-                        </h2>
-                      </div>
-                    </div>
+                    )}
+
+
                   </div>
                   <div className="space-y-3">
                     <h1 className="font-bold">Saved Address:</h1>
@@ -213,6 +296,9 @@ const ProfilePage = () => {
                     onSubmit={handleProfileUpdate}
                     className="space-y-6 mt-8"
                   >
+                    
+
+                    
                     <div className="flex gap-3">
                       <div className="w-full">
                         <label

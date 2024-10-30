@@ -33,7 +33,6 @@ const Navbar = () => {
     fetchItems();
   }, [session?.data?.user?.email]);
 
-  console.log(session);
 
   const dynamicDashboard = () => {
     if (session?.data?.user?.role == "admin") {
