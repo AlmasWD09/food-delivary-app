@@ -15,11 +15,13 @@ export const POST = async (request) => {
     }
     const hashPassword = bcrypt.hashSync(newUser.password, 15);
 
-    // Insert new user
-    const resp = await userCollection.insertOne({
-      ...newUser,
-      password: hashPassword,
-    });
+     // Insert new user without the confirmPassword field
+     const { confirmPassword, ...userData } = newUser;
+     const resp = await userCollection.insertOne({
+       ...userData,
+       password: hashPassword,
+     });
+     
     return Response.json(
       { message: "user created Sucessfully" },
       { status: 200 }
