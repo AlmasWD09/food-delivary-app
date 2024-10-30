@@ -1,5 +1,5 @@
 "use client";
-import SocialSignin from "../../../../components/shared/SocialSignin";
+import SocialSignin from "../../components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -23,6 +23,7 @@ const SignInPage = () => {
     });
     if (resp.status === 200) {
       router.push("/");
+      console.log("this is from singin line no.24", resp);
     } else {
       // Handle error (optional)
       toast.error("Sign-in failed. Please check your credentials.");

@@ -6,9 +6,9 @@ import { BsThreeDots } from "react-icons/bs";
 // import Link from "next/link";
 import { FaSpinner, FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import SpecificMenus from "../../../../../components/SpecificMenus";
-import RestaurantMap from "../../../../../components/RestaurantMap";
-import ReviewModal from "../../../../../components/ReviewModal";
+import SpecificMenus from "../../../components/SpecificMenus";
+import RestaurantMap from "../../../components/RestaurantMap";
+import ReviewModal from "../../../components/ReviewModal";
 import useResturantReviews from "@/hooks/useResturantReviews";
 import { useQuery } from "@tanstack/react-query";
 import Restaurants from "./../page";
@@ -120,8 +120,8 @@ export default function RestaurantD({ params }) {
             </div>
           </div>
 
-           {/* card2 */}
-           <div className="flex justify-center items-center w-full lg:w-[310px]  px-10 py-4  shadow-lg cursor-pointer bg-primaryGray hover:bg-primary  transition-all duration-700 hover:text-white rounded-lg md:rounded-tl-full gap-3">
+          {/* card2 */}
+          <div className="flex justify-center items-center w-full lg:w-[310px]  px-10 py-4  shadow-lg cursor-pointer bg-primaryGray hover:bg-primary  transition-all duration-700 hover:text-white rounded-lg md:rounded-tl-full gap-3">
             <div className="flex flex-col justify-center items-center border-r-2 ">
               <h2 className="text-3xl  font-semibold px-4">18%</h2>
               <p className="text-xl font-semibold">OFF</p>
@@ -145,7 +145,9 @@ export default function RestaurantD({ params }) {
               <p className="text-base">For all items</p>
               <h2 className="text-xl my-1 font-semibold">{`${"'LOVE150'"}`}</h2>
               <p className="text-xs">Min: $150 order</p>
-              <p className="text-xs  max-[100px]">Valid from Oct 1, 2024 - <br /> Oct 31, 2024</p>
+              <p className="text-xs  max-[100px]">
+                Valid from Oct 1, 2024 - <br /> Oct 31, 2024
+              </p>
             </div>
           </div>
 
@@ -160,7 +162,9 @@ export default function RestaurantD({ params }) {
               <p className="text-base">For all items</p>
               <h2 className="text-xl my-1 font-semibold">{`${"'TOPSERVE'"}`}</h2>
               <p className="text-xs">Min: less $150 order</p>
-              <p className="text-xs">Valid from Oct 1, 2024 - <br /> Oct 31, 2024</p>
+              <p className="text-xs">
+                Valid from Oct 1, 2024 - <br /> Oct 31, 2024
+              </p>
             </div>
           </div>
         </div>
