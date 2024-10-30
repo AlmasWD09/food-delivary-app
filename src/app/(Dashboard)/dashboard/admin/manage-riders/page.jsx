@@ -1,7 +1,10 @@
 import React from "react";
 import ComingSoon from "../../../../../../public/comingsoon.svg";
 import Image from "next/image";
+
+
 const Users = () => {
+  
   return (
     <div className="min-h-screen w-full flex justify-center items-center">
       <Image
