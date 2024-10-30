@@ -1,12 +1,12 @@
 "use client";
+import SocialSignin from "@/app/components/shared/SocialSignin";
 import { imageUpload } from "@/lib/imageUpload";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import SocialSignin from "../../../../components/shared/SocialSignin";
+
 
 
 const SignupPage = () => {
