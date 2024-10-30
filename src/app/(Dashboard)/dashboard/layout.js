@@ -2,7 +2,6 @@ import DashboardNav from "../../components/shared/Dashboard/DashboardNav";
 import "../../globals.css";
 import TopBar from "../../components/shared/Dashboard/TopBar";
 import AuthProvider from "@/services/AuthProvider";
-import { getServerSession } from "next-auth"; // Adjust the import based on your setup
 
 export const metadata = {
   title: "Delish - Your Favorite Flavors, Delivered",
