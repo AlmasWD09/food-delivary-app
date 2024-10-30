@@ -14,15 +14,19 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import EditUserModal from "@/app/components/admin/EditUserModal";
 import { MdDone } from "react-icons/md";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 
 const Users = () => {
  
   const [riders,refetch,isLoading] = useAllRiders()
- 
+  const [id,setId] = useState()
+  const axiosPub = useAxiosPublic()
   // modal
-  const [openModal, setModal] = useState(false);
-  const [modalUser, setModalUser] = useState("");
+ 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
@@ -32,6 +36,59 @@ const Users = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+   // Handle delete st
+  
+   // delivery man delete mutation
+  const { mutateAsync } = useMutation({
+    mutationKey: ["deliverMan"],
+    mutationFn: async (id) => {
+      const { data } = await axiosPub.delete(`/delivery-man/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("You have successfully removed this rider.");
+      setIsModalOpen(false);
+      refetch();
+    },
+  });
+
+   const handleDelete = (id) => {
+    setId(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    mutateAsync(id);
+  };
+
+  const cancelDelete = () => {
+    setIsModalOpen(false);
+  };
+  // Handle delete end
+
+  // handle accept rider st
+   const {mutateAsync:updateStatus} = useMutation({
+    mutationKey : ['deliveryBoy'],
+    mutationFn : async(upData)=>{
+    const {data} = await axiosPub.patch("/delivery-man/status",upData)
+    return data
+    },
+    onSuccess: () => {
+      toast.success("This rider request is accepted.");
+      
+      refetch();
+    },
+   })
+  
+   const handleStatus = (email) => {
+    const upData = {
+      email : email
+    }
+    updateStatus(upData)
+   }
+ 
+  // handle accept rider end
 
   const columnHelper = createColumnHelper();
 
@@ -73,7 +130,7 @@ const Users = () => {
           src="https://icon-library.com/images/admin-user-icon/admin-user-icon-5.jpg"
           height={1000}
           width={1000}
-          alt={info.row.original.firstName}
+          alt={info.row.original.name}
         />
       )}
     </div>,
@@ -127,8 +184,7 @@ const Users = () => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={() => {
-              setModal(true);
-              setModalUser(info.row.original);
+              handleStatus(info.row.original?.email)
             }}
             className="p-2 rounded-full   text-white bg-green-700 text-xl"
           >
@@ -136,7 +192,7 @@ const Users = () => {
           </button>
 
          
-          <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
+          <button onClick={()=>handleDelete(info.row.original?._id)} className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
             <Icon icon="fluent:delete-28-filled" />
           </button>
         </div>
@@ -174,6 +230,8 @@ const Users = () => {
     onColumnFiltersChange: setFilter,
   });
 
+ 
+
   if (isLoading) {
     return (
       <div className="h-screen  flex justify-center items-center">
@@ -195,7 +253,7 @@ const Users = () => {
             onChange={(e) => setFilter(e.target.value)}
             placeholder=" type here.."
             type="text"
-            className="px-4 py-2 outline-none rounded-xl focus:ring-2 border-2  "
+            className="px-4 py-2 outline-primaryLight rounded-xl  border-2  "
           />
           <button type="submit" className=" absolute  pr-4">
             <Icon className="text-2xl" icon="mingcute:search-line" />
@@ -330,12 +388,28 @@ const Users = () => {
           </div>
         </div>
       </div>
-      {openModal && (
-        <EditUserModal
-          closeModal={closeModal}
-          id={modalUser}
-          refetch={refetch}
-        />
+       {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed px-5 lg:px-0 z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 max-w-sm mx-auto">
+            <h2 className="text-lg font-semibold">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this item?</p>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white rounded px-4 py-2"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-300 rounded px-4 py-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -12,6 +12,7 @@ const Users = () => {
    const axiosPub = useAxiosPublic();
   const queryClient = useQueryClient();
   const session = useSession();
+  
 
   // delivery man post
   const { mutateAsync:deliveryMan } = useMutation({
@@ -24,6 +25,7 @@ const Users = () => {
     onSuccess: () => {
       toast.success("You have successfully listed.");
       queryClient.invalidateQueries("heroNew");
+      
     },
   });
 
@@ -82,7 +84,7 @@ const Users = () => {
   // restaurant listing end
 
   // delivery man listing
-  const handleHero = (e) => {
+  const handleHero = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -90,7 +92,15 @@ const Users = () => {
     const address = form.address.value;
     const email = form.email.value
     const message = form.message.value;
+    const fileInput = form.fileInput.files[0];
+    const formData = new FormData();
+    formData.append("image", fileInput);
 
+   try{
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,
+      formData
+    );
     const hero = {
       name,
       number,
@@ -98,9 +108,13 @@ const Users = () => {
       email,
       message,
       status: "pending",
+      image: data?.data?.url
     };
 
     deliveryMan(hero);
+   }catch (error) {
+    console.log(error);
+  }
   };
   // delivery man listing end
 
@@ -111,7 +125,7 @@ const Users = () => {
         click === "deliveryMan" ? 
         <div>
           <h3 className="text-3xl font-semibold my-3 ">List a delivery man</h3>
-          <div className="md:shadow-xl lg:w-2/3 lg:p-10">
+          <div className="md:shadow-xl lg:w-4/5 lg:p-10">
             <form onSubmit={handleHero}>
               <div className="grid lg:grid-cols-2 gap-5">
                 <div className="flex col-span-1 flex-col">
@@ -167,6 +181,18 @@ const Users = () => {
                   />
                 </div>
               </div>
+              <div className="mt-5 flex flex-col">
+                <label className="block text-sm font-medium text-gray-700">
+                  Upload a file:
+                </label>
+                <input
+                  type="file"
+                  className="border outline-primaryLight mt-2 w-full rounded-xl p-3"
+                  id="fileInput"
+                  name="fileInput"
+                  accept=".jpg, .jpeg, .png, .pdf"
+                />
+              </div>
 
               <div className="mt-5">
                 <label
@@ -197,7 +223,7 @@ const Users = () => {
         </div>:
          <div>
           <h3 className="text-3xl font-semibold my-3 ">List a restaurant</h3>
-          <div className="md:shadow-xl lg:w-2/3 lg:p-10">
+          <div className="md:shadow-xl lg:w-4/5 lg:p-10">
             <form onSubmit={handlePartner}>
               <div className="grid lg:grid-cols-2 gap-5">
                 <div className="flex col-span-1 flex-col">
