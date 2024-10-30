@@ -15,7 +15,7 @@ const DashboardNav = () => {
   const session = useSession();
   const currentUser = session?.data?.user?.role;
   const navRule = navLinks[currentUser];
-
+  console.log(currentUser);
   return (
     <div
       className={`flex flex-col justify-between items-center absolute top-0 w-full lg:relative h-20 lg:h-auto   `}
@@ -72,7 +72,7 @@ const DashboardNav = () => {
                       : ""
                   }`}
                 >
-                  <span className="text-lg">{item.icons}</span>
+                  <span className="text-2xl">{item.icons}</span>
                   {item.title}
                 </Link>
               </li>

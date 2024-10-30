@@ -12,11 +12,7 @@ const navLinks = {
       link: "users",
       icons: <Icon icon="mdi:user" />,
     },
-    {
-      title: "Reports",
-      link: "reports",
-      icons: <Icon icon="iconoir:reports" />,
-    },
+
     {
       title: "Manage Restaurants",
       link: "manage-restaurants",
@@ -39,14 +35,8 @@ const navLinks = {
       link: "listing-requests",
       icons: <Icon icon="hugeicons:message-user-01" />,
     },
-
-    {
-      title: "Support Inbox",
-      link: "support-inbox",
-      icons: <Icon icon="ic:outline-contact-support" />,
-    },
   ],
-  restaurants: [
+  restaurant: [
     {
       title: "Overview",
       link: "overview",
@@ -62,15 +52,34 @@ const navLinks = {
       link: "menu",
       icons: <Icon icon="hugeicons:menu-restaurant" />,
     },
-    {
-      title: "Reviews",
-      link: "reviews",
-      icons: <Icon icon="carbon:review" />,
-    },
+
     {
       title: "Payments",
       link: "payments",
       icons: <Icon icon="la:money-bill-wave" />,
+    },
+  ],
+  rider: [
+    {
+      title: "Overview",
+      link: "overview",
+      icons: <Icon icon="material-symbols:dashboard" />,
+    },
+    {
+      title: "Active Deliveries",
+      link: "active-deliveries",
+      icons: <Icon icon="solar:delivery-bold" />,
+    },
+    {
+      title: "Order History",
+      link: "order-history",
+      icons: <Icon icon="material-symbols:history" />,
+    },
+
+    {
+      title: "Earnings",
+      link: "earnings",
+      icons: <Icon icon="healthicons:money-bag-outline" />,
     },
   ],
 };
