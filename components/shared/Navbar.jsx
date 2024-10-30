@@ -15,7 +15,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-// console.log(session?.data?.user?.image, 'line--------> 18');
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -33,7 +33,6 @@ const Navbar = () => {
     fetchItems();
   }, [session?.data?.user?.email]);
 
-  console.log(session);
 
   // if (loading) {
   //     return <li>Loading...</li>;
