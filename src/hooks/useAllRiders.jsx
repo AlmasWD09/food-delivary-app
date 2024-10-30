@@ -1,9 +1,12 @@
+"use client"
 import { useQuery } from "@tanstack/react-query"; 
 import useAxiosPublic from "./useAxiosPublic";
+import { useState } from "react";
 
 
 const useAllRiders = () => {
     const axiosPublic = useAxiosPublic();
+   
 
     const {
       data: riders = [],
@@ -17,8 +20,9 @@ const useAllRiders = () => {
         return res.data;
       },
     });
+
   
-    return [riders, refetch, isLoading, isError];
+    return [riders,refetch,isLoading];
 };
 
 export default useAllRiders;
