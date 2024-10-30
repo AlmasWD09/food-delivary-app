@@ -1,5 +1,4 @@
 import React from "react";
-import WithAuth from "@/app/components/protectedRoutes/WithAuth";
 
 const Users = () => {
   return (
