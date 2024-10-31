@@ -15,7 +15,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-
+  console.log(session?.data?.user?.role);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -33,7 +33,6 @@ const Navbar = () => {
     fetchItems();
   }, [session?.data?.user?.email]);
 
-
   const dynamicDashboard = () => {
     if (session?.data?.user?.role == "admin") {
       return "/dashboard/admin/overview";
@@ -42,7 +41,7 @@ const Navbar = () => {
     } else if (session?.data?.user?.role == "rider") {
       return "/dashboard/rider/overview";
     } else {
-      return "/signin";
+      return "/";
     }
   };
 
