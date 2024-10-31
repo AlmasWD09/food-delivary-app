@@ -1,0 +1,107 @@
+[
+  {
+    "date": "2024-10-16",
+    "earnings": 100.0,
+    "completedOrders": 5,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-17",
+    "earnings": 120.0,
+    "completedOrders": 6,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-18",
+    "earnings": 80.0,
+    "completedOrders": 4,
+    "cancelledOrders": 2,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-19",
+    "earnings": 150.0,
+    "completedOrders": 8,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-20",
+    "earnings": 200.0,
+    "completedOrders": 10,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-21",
+    "earnings": 130.0,
+    "completedOrders": 7,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-22",
+    "earnings": 90.0,
+    "completedOrders": 5,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-23",
+    "earnings": 160.0,
+    "completedOrders": 9,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-24",
+    "earnings": 110.0,
+    "completedOrders": 6,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-25",
+    "earnings": 140.0,
+    "completedOrders": 11,
+    "cancelledOrders": 2,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-26",
+    "earnings": 170.0,
+    "completedOrders": 7,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-27",
+    "earnings": 90.0,
+    "completedOrders": 8,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-28",
+    "earnings": 130.0,
+    "completedOrders": 10,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-29",
+    "earnings": 110.0,
+    "completedOrders": 6,
+    "cancelledOrders": 0,
+    "activeOrders": 5
+  },
+  {
+    "date": "2024-10-30",
+    "earnings": 150.0,
+    "completedOrders": 9,
+    "cancelledOrders": 1,
+    "activeOrders": 5
+  }
+]
