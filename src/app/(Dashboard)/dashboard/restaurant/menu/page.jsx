@@ -15,15 +15,18 @@ import loadingAnimation from "../../../../../../public/assets/loading.json";
 import Lottie from "lottie-react";
 import { MdCreate } from "react-icons/md";
 import AddMenuModal from "@/app/components/AddMenuModal";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const RestaurantMenus = () => {
     const [menuData, refetch, loading] = useMenus()
     const filterMenu = menuData.filter(menu => menu.restaurant === "Spice Paradise")
     const [id,setId] = useState()
     const axiosPub = useAxiosPublic()
+    
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [deleteModal,setDeleteModal] = useState(false)
    const [sorting, setSorting] = useState([]);
    const [filter, setFilter] = useState([]);
 
@@ -32,6 +35,34 @@ const RestaurantMenus = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  // delete menu item
+  const { mutateAsync } = useMutation({
+    mutationKey: ["deleteMenu"],
+    mutationFn: async (id) => {
+      const { data } = await axiosPub.delete(`/menus/delete-menu/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("You have successfully removed this item.");
+      setDeleteModal(false);
+      refetch();
+    },
+  });
+
+  const handleDeleteMenu = (id) => {
+    setId(id);
+    setDeleteModal(true);
+  }
+
+  const confirmDelete = () => {
+  mutateAsync(id)
+  };
+
+  const cancelDelete = () => {
+    setDeleteModal(false);
+  };
+  // Handle delete end
 
   const columnHelper = createColumnHelper();
 
@@ -103,7 +134,7 @@ const RestaurantMenus = () => {
           </button>
 
          
-          <button  className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
+          <button onClick={()=>handleDeleteMenu(info.row.original?._id)}  className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
             <Icon icon="fluent:delete-28-filled" />
           </button>
         </div>
@@ -302,9 +333,32 @@ const RestaurantMenus = () => {
           </div>
         </div>
       </div>
-        {
+           {
                     isModalOpen && <AddMenuModal refetch={refetch} setIsModalOpen={setIsModalOpen}/>
                 }
+                 {/* delete Modal */}
+                {deleteModal && (
+                  <div className="fixed px-5 lg:px-0 z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg p-6 max-w-sm mx-auto">
+                      <h2 className="text-lg font-semibold">Confirm Deletion</h2>
+                      <p>Are you sure you want to delete this item?</p>
+                      <div className="flex justify-between mt-4">
+                        <button
+                          onClick={confirmDelete}
+                          className="bg-red-500 text-white rounded px-4 py-2"
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={cancelDelete}
+                          className="bg-gray-300 rounded px-4 py-2"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
            </div>
     );
 };
