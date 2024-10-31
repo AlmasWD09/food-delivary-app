@@ -41,9 +41,9 @@ const Users = () => {
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("userId", {
+    columnHelper.accessor("_id", {
       cell: (info) => (
-        <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>
+        <div>{info.getValue() ? `#${info.getValue()}` : "N/A"}</div>
       ),
       header: () => <div>user</div>,
     }),
@@ -122,7 +122,7 @@ const Users = () => {
       ),
     }),
 
-    columnHelper.accessor("created", {
+    columnHelper.accessor("date", {
       cell: (info) => (
         <div>
           {info.getValue()
