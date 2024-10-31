@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Partner = () => {
   return (
@@ -21,12 +22,20 @@ const Partner = () => {
             <h3 className="lg:text-3xl md:text-2xl text-xl text-white  font-semibold">
               Became a Hero
             </h3>
+            <div className="py-4">
             <Link
               href={"/partnerHero"}
-              className="bg-primaryLight mt-4 justify-center w-40 flex items-center p-2 gap-2 rounded-lg lg:p-3 text-white"
+              className="relative inline-flex items-center w-36 justify-center p-2 px-3 py-2 overflow-hidden font-medium text-white transition duration-300 ease-out  bg-primary rounded-full shadow-md group"
             >
-              Learn More <FaArrowRight />
+              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primaryLight group-hover:translate-x-0 ease">
+            <FaArrowRightLong className="w-6 h-6" />
+          </span>
+          <span className="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease">
+            LEARN MORE
+          </span>
+          <span className="relative invisible">LEARN MORE</span>
             </Link>
+            </div>
           </div>
         </div>
 
@@ -44,12 +53,20 @@ const Partner = () => {
             <h3 className="lg:text-3xl md:text-2xl text-xl text-white  font-semibold">
               Became a Partner
             </h3>
+            <div className="py-4">
             <Link
               href={"/partnerRestu"}
-              className="bg-primaryLight mt-4 justify-center w-40 flex items-center p-2 gap-2 rounded-lg lg:p-3 text-white"
+              className="relative inline-flex items-center w-36 justify-center p-2 px-3 py-2 overflow-hidden font-medium text-white transition duration-300 ease-out  bg-primary rounded-full shadow-md group"
             >
-              Learn More <FaArrowRight />
+              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primaryLight group-hover:translate-x-0 ease">
+            <FaArrowRightLong className="w-6 h-6" />
+          </span>
+          <span className="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease">
+            LEARN MORE
+          </span>
+          <span className="relative invisible">LEARN MORE</span>
             </Link>
+            </div>
           </div>
         </div>
       </div>
