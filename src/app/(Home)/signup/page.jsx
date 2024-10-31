@@ -74,13 +74,13 @@ const SignupPage = () => {
 
           {/* right side area  */}
 
-          <div className="border-2 border-primary lg:w-2/5  p-10  relative  ">
+          <div className="border-2 border-primary lg:w-2/5  px-10  relative ">
             <div className="h-full bg-white w-full absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
               <span className="w-36 h-36 bg-primary absolute -top-20 -right-20 rotate-[-40deg]"></span>
             </div>
             <span className="h-full w-full bg-primaryGray/20 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
 
-            <div className="pb-6 ">
+            <div className="pb-2">
               <h1 className="text-center text-3xl font-semibold">
                 Create Account
               </h1>
@@ -88,7 +88,7 @@ const SignupPage = () => {
                 sign up now and unlock exclusive access!
               </h1>
             </div>
-            <form onSubmit={handleSignUp} className="flex flex-col gap-4">
+            <form onSubmit={handleSignUp} className="flex flex-col gap-4 pb-4">
               {/* First Name */}
               <input
                 type="text"
@@ -151,8 +151,7 @@ const SignupPage = () => {
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-primary rounded-full group-hover:w-96 group-hover:h-96 "></span>
                 <span className="relative">Create Account</span>
               </button>
-            </form>
-            <h1 className="text-center py-4">
+              <h1 className="text-center ">
               have an account ?{" "}
               <Link href="/signin">
                 <span className="font-semibold text-primary">sign in</span>
@@ -160,6 +159,7 @@ const SignupPage = () => {
             </h1>
             {/* socialLogin */}
             <SocialSignin />
+            </form>
           </div>
         </div>
       </div>

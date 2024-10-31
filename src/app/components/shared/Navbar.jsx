@@ -8,13 +8,15 @@ import NavCartList from "../NavCartList";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import profilePhoto from "../../../../public/assets/profile-photo.webp";
+import useRole from "@/hooks/useRole";
 const Navbar = () => {
   const pathname = usePathname();
-
   const [getMenu, setMenu] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
+  const {role} = useRole();
+  console.log(session, 'session line navbar  19');
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -35,14 +37,18 @@ const Navbar = () => {
 
 
   const dynamicDashboard = () => {
-    if (session?.data?.user?.role == "admin") {
-      return "/dashboard/admin/overview";
-    } else if (session?.data?.user?.role == "restaurant") {
-      return "/dashboard/restaurant/overview";
-    } else if (session?.data?.user?.role == "rider") {
-      return "/dashboard/rider/overview";
+    if (session?.status === "authenticated") {
+      if (role === "admin") {
+        return "/dashboard/admin/overview";
+      } else if (role === "restaurant") {
+        return "/dashboard/restaurant/overview";
+      } else if (role === "rider") {
+        return "/dashboard/rider/overview";
+      } else {
+        return "/dashboard/user/overview";
+      }
     } else {
-      return "/signin";
+      return `/signin?redirectTo=${pathname}`; 
     }
   };
 
@@ -102,7 +108,7 @@ const Navbar = () => {
                 <div className="group relative">
                   <li
                     className={`px-2 py-1 rounded-md ${
-                      pathname == item.path
+                      pathname === item.path
                         ? " font-extrabold text-primary"
                         : ""
                     }`}
