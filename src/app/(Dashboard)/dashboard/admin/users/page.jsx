@@ -17,7 +17,8 @@ import Lottie from "lottie-react";
 import loadingAnimation from "../../../../../../public/assets/loading.json";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import EditUserModal from "../../../../../../components/admin/EditUserModal";
+import EditUserModal from "../../../../components/admin/EditUserModal";
+import WithAuth from "@/app/components/protectedRoutes/WithAuth";
 
 const Users = () => {
   const [user, refetch, isLoading, isError] = useAllUser();
@@ -40,9 +41,9 @@ const Users = () => {
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("userId", {
+    columnHelper.accessor("_id", {
       cell: (info) => (
-        <div>{info.getValue() ? `${info.getValue()}` : "N/A"}</div>
+        <div>{info.getValue() ? `#${info.getValue()}` : "N/A"}</div>
       ),
       header: () => <div>user</div>,
     }),
@@ -100,7 +101,7 @@ const Users = () => {
       cell: (info) => (
         <div className="flex justify-center items-center">
           <div
-            className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+            className={`p-2 rounded-full  w-full font-semibold text-sm ${
               info.getValue() == "admin"
                 ? "bg-red-100 text-red-600"
                 : info.getValue() == "rider"
@@ -121,7 +122,7 @@ const Users = () => {
       ),
     }),
 
-    columnHelper.accessor("created", {
+    columnHelper.accessor("date", {
       cell: (info) => (
         <div>
           {info.getValue()
@@ -135,7 +136,7 @@ const Users = () => {
     columnHelper.accessor("status", {
       cell: (info) => (
         <div
-          className={`p-2 rounded-full capitalize w-full font-semibold text-sm ${
+          className={`p-2 rounded-full  w-full font-semibold text-sm ${
             info.getValue() == "active"
               ? "bg-green-100 text-green-600"
               : info.getValue() == "suspend"

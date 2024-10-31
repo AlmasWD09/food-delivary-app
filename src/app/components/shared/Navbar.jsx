@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import NavCartList from "../NavCartList";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
-
+import profilePhoto from "../../../../public/assets/profile-photo.webp";
 const Navbar = () => {
   const pathname = usePathname();
 
@@ -15,7 +15,7 @@ const Navbar = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const session = useSession();
-// console.log(session?.data?.user?.image, 'line--------> 18');
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -33,11 +33,18 @@ const Navbar = () => {
     fetchItems();
   }, [session?.data?.user?.email]);
 
-  console.log(session);
 
-  // if (loading) {
-  //     return <li>Loading...</li>;
-  // }
+  const dynamicDashboard = () => {
+    if (session?.data?.user?.role == "admin") {
+      return "/dashboard/admin/overview";
+    } else if (session?.data?.user?.role == "restaurant") {
+      return "/dashboard/restaurant/overview";
+    } else if (session?.data?.user?.role == "rider") {
+      return "/dashboard/rider/overview";
+    } else {
+      return "/signin";
+    }
+  };
 
   const itemsSuper = 0;
 
@@ -62,12 +69,13 @@ const Navbar = () => {
       title: "Profile",
       path: "/profile",
     },
+
     {
       title: "Dashboard",
-      path: "/dashboard",
+      path: dynamicDashboard(),
     },
   ];
-const image = session?.data?.user?.image
+  const image = session?.data?.user?.image;
   // console.log(items);
   return (
     <div className="h-20 font-Inter bg-white  relative  shadow-md ">
@@ -118,7 +126,7 @@ const image = session?.data?.user?.image
             {session?.data?.user?.image ? (
               <div className="h-12 w-12 overflow-hidden rounded-full object-center   z-20 ">
                 <Image
-                   className="object-cover h-full w-full"
+                  className="object-cover h-full w-full"
                   src={image}
                   alt={session?.data?.user?.name}
                   height={500}
@@ -163,10 +171,15 @@ const image = session?.data?.user?.image
                           {session?.data?.user?.name}
                         </h1>
                       ) : (
-                        <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                          {session?.data?.user?.firstName}{" "}
-                          {session?.data?.user?.lastName}
-                        </h1>
+                        <span className=" p-6 text-center uppercase">
+                          <h1 className="uppercase font-bold text-xl  ">
+                            {session?.data?.user?.firstName}{" "}
+                            {session?.data?.user?.lastName}
+                          </h1>
+                          <h1 className="text-sm">
+                            {session?.data?.user?.role}
+                          </h1>
+                        </span>
                       )}
 
                       <div>
@@ -340,12 +353,51 @@ const image = session?.data?.user?.image
       {/* mobile responsive section  */}
 
       <div
-        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999]   transition-all bg-white ease-in-out duration-300 transform ${
+        className={`h-screen overflow-y-auto w-full lg:hidden  absolute z-[9999] border-t-2 border-primary   transition-all bg-white ease-in-out duration-300 transform ${
           getMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-10 ">
-          <ul className=" flex flex-col gap-6">
+        <div className="px-9 py-4 divide-y-2">
+          <>
+            <div className="flex items-center gap-2 p-4 ">
+              <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
+                <Image
+                  className="object-cover h-full w-full"
+                  src={session?.data?.user?.image}
+                  alt={session?.data?.user?.firstName}
+                  height={1000}
+                  width={1000}
+                />
+              </div>
+
+              <div className="w-full">
+                {session?.data?.user ? (
+                  session?.data?.user?.name ? (
+                    <h1 className="capitalize font-bold text-xl  p-6 text-center">
+                      {/* only social signIn */}
+                      {session?.data?.user?.name}
+                    </h1>
+                  ) : (
+                    <>
+                      <h1 className="capitalize font-bold text-xl  lg:p-6 text-center">
+                        {session?.data?.user?.firstName}
+                        {session?.data?.user?.lastName}
+                      </h1>
+                      <h2 className="font-semibold capitalize">
+                        {session?.data?.user?.role}
+                      </h2>
+                    </>
+                  )
+                ) : (
+                  <button className="flex items-center justify-center gap-2 w-full border-2 border-primary hover:bg-red-600  rounded-2xl text-primary font-extrabold">
+                    Sign In
+                  </button>
+                )}
+              </div>
+            </div>
+          </>
+          <div></div>
+          <ul className=" flex flex-col gap-2">
             {navLinks.map((item) => (
               <Link
                 onClick={() => setMenu(false)}
@@ -354,7 +406,7 @@ const image = session?.data?.user?.image
               >
                 <li
                   key={item.path}
-                  className={`font-bold p-4 hover:bg-primaryGray/20 ${
+                  className={`font-medium p-4 hover:bg-primaryGray/20 ${
                     pathname === item.path && "bg-primaryGray/20 text-primary"
                   } `}
                 >
@@ -363,110 +415,13 @@ const image = session?.data?.user?.image
               </Link>
             ))}
           </ul>
-
-          <hr />
-          <div
-            className={` ${
-              session
-                ? " border-4  border-primary w-fit mx-auto mt-10"
-                : "w-full"
-            }`}
+          <button
+            onClick={signOut}
+            className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-600 p-4 rounded-2xl text-white font-extrabold"
           >
-            {session?.data?.user || session?.status === "authenticated" ? (
-              <>
-                <div className="flex items-center gap-2 p-4 ">
-                  <div className="h-12 w-12 overflow-hidden rounded-full object-center  z-20 ">
-                    <Image
-                      className="object-cover h-full w-full"
-                      src={session?.data?.user?.image}
-                      alt={session?.data?.user?.firstName}
-                      height={1000}
-                      width={1000}
-                    />
-                  </div>
-
-                  <div>
-                    {session?.data?.user?.name ? (
-                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                        {/* only social signIn */}
-                        {session?.data?.user?.name}
-                      </h1>
-                    ) : (
-                      <h1 className="uppercase font-bold text-xl  p-6 text-center">
-                        {session?.data?.user?.firstName}{" "}
-                        {session?.data?.user?.lastName}
-                      </h1>
-                    )}
-                    <h2 className="font-semibold capitalize">
-                      {session?.data?.user?.role}
-                    </h2>
-                  </div>
-                </div>
-
-                <div>
-                  <ul className=" font-semibold  text-lg">
-                    <Link
-                      className=" gap-2 hover:bg-primaryGray/20 hover:text-fouth flex items-center p-4 border-b-2 border-primary  w-full "
-                      href="/profile"
-                    >
-                      <Icon className="text-lg" icon="gg:profile" />
-                      <li>Profile</li>
-                    </Link>
-                    <Link
-                      className=" gap-2 hover:bg-primaryGray/20 hover:text-fouth flex items-center p-4 border-b-2 border-primary  w-full"
-                      href="/orders"
-                    >
-                      <Icon className="text-lg" icon="solar:box-broken" />
-                      <li>Orders</li>
-                    </Link>
-                    <Link
-                      className=" gap-2 hover:bg-primaryGray/20 hover:text-fouth flex items-center p-4 border-b-2 border-primary  w-full"
-                      href="/whishlist"
-                    >
-                      <Icon className="text-lg" icon="solar:heart-outline" />
-                      <li>Wishlist</li>
-                    </Link>
-                    <button
-                      onClick={signOut}
-                      className=" gap-2 hover:bg-primary hover:text-white  p-4 flex items-center w-full"
-                    >
-                      <Icon className="text-lg" icon="hugeicons:logout-04" />
-                      <span>Logout</span>
-                    </button>
-                  </ul>
-                </div>
-              </>
-            ) : (
-              <div className="p-4">
-                <h1 className="capitalize font-semibold text-xl text-center">
-                  Welcome to Feast Express
-                </h1>
-                <h3 className="capitalize  text-md text-center">
-                  login to access your accounts
-                </h3>
-
-                <div className="flex flex-col items-center gap-4 justify-center pt-4">
-                  <Link href="/signin" className="w-full">
-                    <button
-                      onClick={() => setMenu(false)}
-                      className="w-full py-2 bg-blue-600 text-white font-semibold hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-in-out"
-                    >
-                      Sign In
-                    </button>
-                  </Link>
-
-                  <h2>
-                    don&apos;t have an account ?{" "}
-                    <Link onClick={() => setMenu(false)} href="/signup">
-                      <span className="font-semibold underline">
-                        create now
-                      </span>
-                    </Link>
-                  </h2>
-                </div>
-              </div>
-            )}
-          </div>
+            <Icon className="text-xl" icon="tabler:logout-2" />
+            Logout
+          </button>
         </div>
       </div>
     </div>

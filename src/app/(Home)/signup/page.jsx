@@ -1,11 +1,12 @@
 "use client";
+import SocialSignin from "@/app/components/shared/SocialSignin";
 import { imageUpload } from "@/lib/imageUpload";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
 
 
 const SignupPage = () => {
@@ -15,21 +16,24 @@ const SignupPage = () => {
     event.preventDefault();
 
     const imageFile = event.target.image.files[0];
-    try{
+    try {
       const image_url = await imageUpload(imageFile)
-      
       const newUser = {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value,
         email: event.target.emailAddress.value,
         phoneNumber: event.target.phoneNumber.value,
-        image : image_url,
+        image: image_url,
         password: event.target.password.value,
-        role: "admin",
+        ConfirmPassword: event.target.ConfirmPassword.value,
+        status: "active",
+        role: "user",
+        loginName: "normalUser",
+        date: new Date(),
       }
-      
+
       // user info save for database request
-       const resp = await fetch(
+      const resp = await fetch(
         `${process.env.NEXT_PUBLIC_LIVE_URL}/signup/api`,
         {
           method: "POST",
@@ -42,19 +46,19 @@ const SignupPage = () => {
 
       if (resp.status === 200) {
         event.target.reset(); // Reset form after successful submission
-        router.push("/");
+        router.push("/signin");
         toast.success("user create successfully");
       } else {
         toast.error("Sign-up failed. Please try again");
       }
     }
-    catch(error){
+    catch (error) {
       toast.error(error.message)
     }
   };
 
   return (
-    <div>
+    <div className="mt-20 lg:mt-0">
       <div className=" max-w-6xl mx-auto  h-screen flex justify-center ">
         <div className=" flex flex-col lg:flex-row items-center justify-center lg:pr-10 lg:gap-10">
           {/* left side area  */}
@@ -132,6 +136,14 @@ const SignupPage = () => {
                 placeholder="password"
               />
 
+              {/* Confirm Password */}
+              <input
+                type="password"
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
+                placeholder="Confirm Password"
+                name="ConfirmPassword"
+              />
+
               <button
                 type="submit"
                 className="relative py-4 bg-primaryGray text-black hover:text-white group overflow-hidden flex items-center justify-center"
@@ -146,6 +158,8 @@ const SignupPage = () => {
                 <span className="font-semibold text-primary">sign in</span>
               </Link>{" "}
             </h1>
+            {/* socialLogin */}
+            <SocialSignin />
           </div>
         </div>
       </div>

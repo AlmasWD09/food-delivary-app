@@ -15,3 +15,4 @@ packages i used
 #npm i socket.io-client
 #npm install react-slick --save
 #npm i slick-carousel
+#npm install react-responsive-masonry --save

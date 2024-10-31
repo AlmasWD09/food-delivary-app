@@ -46,6 +46,7 @@ const handler = NextAuth({
           phoneNumber: currentUser.phoneNumber,
           role: currentUser.role,
           image: currentUser.image, // if stored in DB
+          provider: 'credentials', 
         };
       },
     }),
@@ -77,14 +78,17 @@ const handler = NextAuth({
           firstName: user.name || "", // Get firstName from OAuth if available
           lastName: "",
           phoneNumber: "",
-          role: "user", // Default role
           image: user.image || "", // Add user image if available
+          status: "active",
+          role: "user", // Default role
+          loginName: "socialUser",
+          date: new Date(),
         });
       }
 
       return true;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         // Add custom user fields to the token
         token.id = user.id;
@@ -94,6 +98,7 @@ const handler = NextAuth({
         token.phoneNumber = user.phoneNumber;
         token.role = user.role;
         token.picture = user.image; // User's profile picture
+        token.provider = account?.provider || 'credentials';  // Set provider in token
       }
       return token;
     },
@@ -106,6 +111,7 @@ const handler = NextAuth({
       session.user.phoneNumber = token.phoneNumber;
       session.user.role = token.role;
       session.user.image = token.picture; // Pass the user's picture
+      session.user.provider = token.provider; // Pass provider to the session
       return session;
     },
   },
