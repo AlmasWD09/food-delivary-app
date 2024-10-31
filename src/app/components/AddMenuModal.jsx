@@ -44,7 +44,8 @@ const AddMenuModal = ({refetch,setIsModalOpen}) => {
         price,
         MRP,
         description,
-        image : data?.data?.url
+        image : data?.data?.url,
+        restaurant: "Spice Paradise"
       }
      
       mutateAsync(menu)

@@ -1,6 +1,7 @@
 "use client";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import useProfile from "@/hooks/useProfile";
+import useRole from "@/hooks/useRole";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -8,8 +9,13 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
+
 const ProfilePage = () => {
   const session = useSession();
+  const {role} = useRole();
+  const isSocialUser = session?.data?.user?.provider !== 'credentials';
+
   const axiosPublic = useAxiosPublic();
   const { userAllInfo, refetch } = useProfile();
   const { address, block, house, location, road } = userAllInfo || {};
@@ -150,47 +156,128 @@ const ProfilePage = () => {
               {/* User Profile */}
               <TabPanel>
                 <div className="lg:py-8 lg:pr-8 h-full space-y-4  ">
-                  <div className="flex items-center justify-between gap-2 border p-2  lg:p-6 overflow-hidden">
-                    {/* left side columns */}
-                    <div className="space-y-3 ">
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-2xl" icon="ci:user-add" />
-                        <h2 className="flex-wrap text-nowrap">
-                          <span className="font-bold">First Name: </span>
-                          {session?.data?.user?.firstName}
-                        </h2>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-2xl" icon="ci:user-add" />
-                        <h2 className="flex-wrap text-nowrap">
-                          <span className="font-bold">Last Name: </span>
-                          {session?.data?.user?.lastName}
-                        </h2>
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between gap-2 border p-2 lg:p-6 overflow-hidden">
+                    {session?.data ? (
+                      isSocialUser ? (
+                        <div className="flex justify-between gap-8">
+                          {/* Left side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">First Name: </span>
+                                {session.data.user?.name}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap font-bold">
+                                provider:
+                                <span className="flex-wrap font-medium text-nowrap uppercase"> {session.data.user?.provider} </span>
+                              </h2>
+                            </div>
+                          </div>
 
-                    {/* right side columns */}
-                    <div className="space-y-3 ">
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-xl" icon="hugeicons:calling" />
-                        <h2 className="flex-wrap">
-                          <span className="font-bold">Mobile: </span>
-                          {session?.data?.user?.phoneNumber}
-                        </h2>
+                          {/* Right side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="ic:outline-email" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Email: </span>
+                                {session.data.user?.email}
+                              </h2>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap font-bold">
+                                Role:
+                                <span className="flex-wrap text-nowrap font-medium uppercase"> {role}</span>
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex gap-8">
+                          {/* Left side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">First Name: </span>
+                                {session.data.user?.firstName}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-2xl" icon="ci:user-add" />
+                              <h2 className="flex-wrap text-nowrap">
+                                <span className="font-bold">Last Name: </span>
+                                {session.data.user?.lastName}
+                              </h2>
+                            </div>
+                          </div>
+
+                          {/* Right side columns */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="hugeicons:calling" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Mobile: </span>
+                                {session.data.user?.phoneNumber}
+                              </h2>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Icon className="text-xl" icon="ic:outline-email" />
+                              <h2 className="flex-wrap">
+                                <span className="font-bold">Email: </span>
+                                {session.data.user?.email}
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    ) : (
+                      <div className="flex justify-between gap-8">
+                        {/* Left side columns */}
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-2xl" icon="ci:user-add" />
+                            <h2 className="flex-wrap text-nowrap">
+                              <span className="font-bold">First Name: </span>
+                            </h2>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-2xl" icon="ci:user-add" />
+                            <h2 className="flex-wrap text-nowrap">
+                              <span className="font-bold">Last Name: </span>
+                            </h2>
+                          </div>
+                        </div>
+
+                        {/* Right side columns */}
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-xl" icon="hugeicons:calling" />
+                            <h2 className="flex-wrap">
+                              <span className="font-bold">Mobile: </span>
+                            </h2>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Icon className="text-xl" icon="ic:outline-email" />
+                            <h2 className="flex-wrap">
+                              <span className="font-bold">Email: </span>
+                            </h2>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Icon className="text-xl" icon="ic:outline-email" />
-                        <h2 className="flex-wrap">
-                          <span className="font-bold">Email: </span>
-                          {session?.data?.user?.email}
-                        </h2>
-                      </div>
-                    </div>
+                    )}
+
+
                   </div>
                   <div className="space-y-3">
                     <h1 className="font-bold">Saved Address:</h1>
                     <div className="border p-4">
-                      {userAllInfo ? (
+                      {session?.data ? (
                         <div>
                           <h1 className="text-xl font-bold">{address}</h1>
                           <p>
@@ -199,7 +286,13 @@ const ProfilePage = () => {
                           <p>Location# {location}</p>
                         </div>
                       ) : (
-                        <p className="capitalize">address not added yet!</p>
+                        <div>
+                        <h1 className="text-xl font-bold">{address}</h1>
+                        <p>
+                          House#{house} Block#{block} Road#{road}
+                        </p>
+                        <p>Location# {location}</p>
+                      </div>
                       )}
                     </div>
                   </div>
@@ -213,52 +306,59 @@ const ProfilePage = () => {
                     onSubmit={handleProfileUpdate}
                     className="space-y-6 mt-8"
                   >
-                    <div className="flex gap-3">
+                   
+
+                   {session?.data ? (
+                      isSocialUser ? (
+                  <div>
+                     <div className="flex gap-3 mt-5">
                       <div className="w-full">
                         <label
                           for="firstName"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
+                          className="block text-sm font-bold pb-2 text-gray-800"
                         >
                           FirstName
                         </label>
                         <input
                           type="text"
                           name="firstName"
-                          defaultValue={session?.data?.user?.firstName}
+                          defaultValue={session?.data?.user?.name}
                           placeholder="firstName"
                           className=" w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
                         />
                       </div>
                       <div className="w-full">
                         <label
-                          for="lastName"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
+                          for="provider"
+                          className="block text-sm font-bold pb-2 text-gray-800"
                         >
-                          LastName
+                          Provider
                         </label>
                         <input
                           type="text"
-                          name="lastName"
-                          defaultValue={session?.data?.user?.lastName}
-                          placeholder="lastName"
+                          name="provider"
+                          defaultValue={session?.data?.user?.provider}
+                          readOnly
+                          placeholder="provider"
                           className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
                         />
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 mt-5">
                       <div className="w-full">
                         <label
-                          for="phoneNumber"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
+                          for="role"
+                          className="block text-sm font-bold pb-2 text-gray-800"
                         >
-                          Phone Number
+                          Role
                         </label>
                         <input
-                          type="tel"
-                          name="phoneNumber"
-                          defaultValue={session?.data?.user?.phoneNumber}
-                          placeholder="phoneNumber"
+                          type="text"
+                          name="role"
+                          defaultValue={role}
+                          readOnly
+                          placeholder="role"
                           className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
                         />
                       </div>
@@ -266,7 +366,7 @@ const ProfilePage = () => {
                       <div className="w-full">
                         <label
                           for="email"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
+                          className="block text-sm font-bold pb-2 text-gray-800"
                         >
                           Email
                         </label>
@@ -274,11 +374,151 @@ const ProfilePage = () => {
                           type="email"
                           name="email"
                           defaultValue={session?.data?.user?.email}
+                          readOnly
                           placeholder="email"
                           className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
                         />
                       </div>
                     </div>
+                  </div>
+                      ) : (
+                        <div>
+                        <div className="flex gap-3 mt-5">
+                         <div className="w-full">
+                           <label
+                             for="firstName"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             FirstName
+                           </label>
+                           <input
+                             type="text"
+                             name="firstName"
+                             defaultValue={session?.data?.user?.firstName}
+                             placeholder="firstName"
+                             className=" w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                         <div className="w-full">
+                           <label
+                             for="lastName"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             LastName
+                           </label>
+                           <input
+                             type="text"
+                             name="lastName"
+                             defaultValue={session?.data?.user?.lastName}
+                             placeholder="lastName"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                       </div>
+   
+                       <div className="flex gap-3 mt-5">
+                         <div className="w-full">
+                           <label
+                             for="phoneNumber"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             Phone Number
+                           </label>
+                           <input
+                             type="tel"
+                             name="phoneNumber"
+                             defaultValue={session?.data?.user?.phoneNumber}
+                             placeholder="phoneNumber"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+   
+                         <div className="w-full">
+                           <label
+                             for="email"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             Email
+                           </label>
+                           <input
+                             type="email"
+                             name="email"
+                             defaultValue={session?.data?.user?.email}
+                             placeholder="email"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                       </div>
+                     </div>
+                      )
+                    ) : (
+                      <div>
+                        <div className="flex gap-3 mt-5">
+                         <div className="w-full">
+                           <label
+                             for="firstName"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             FirstName
+                           </label>
+                           <input
+                             type="text"
+                             name="firstName"
+                             defaultValue={session?.data?.user?.firstName}
+                             placeholder="firstName"
+                             className=" w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                         <div className="w-full">
+                           <label
+                             for="lastName"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             LastName
+                           </label>
+                           <input
+                             type="text"
+                             name="lastName"
+                             placeholder="lastName"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                       </div>
+   
+                       <div className="flex gap-3 mt-5">
+                         <div className="w-full">
+                           <label
+                             for="phoneNumber"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             Phone Number
+                           </label>
+                           <input
+                             type="tel"
+                             name="phoneNumber"
+                             placeholder="phoneNumber"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+   
+                         <div className="w-full">
+                           <label
+                             for="email"
+                             className="block text-sm font-bold pb-2 text-gray-800"
+                           >
+                             Email
+                           </label>
+                           <input
+                             type="email"
+                             name="email"
+                             placeholder="email"
+                             className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                           />
+                         </div>
+                       </div>
+                     </div>
+                    )}
+
 
                     {/* button */}
                     <div className="flex justify-end gap-4">
@@ -302,84 +542,87 @@ const ProfilePage = () => {
                     onSubmit={handleProfileAddressUpdate}
                     className="space-y-6 mt-8"
                   >
+                   <div>
                     <div className="flex gap-3">
-                      <div className="w-full">
-                        <label
-                          for="address"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
-                        >
-                          Address Type
-                        </label>
-                        <input
-                          type="text"
-                          name="address"
-                          placeholder="Ex.Home, office, partner or other"
-                          className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      for="address"
+                      className="block text-sm font-bold pb-2 text-gray-800"
+                    >
+                      Address Type
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Ex.Home, office, partner or other"
+                      className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                    />
+                  </div>
 
-                      <div className="w-full">
-                        <label
-                          for="house"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
-                        >
-                          House
-                        </label>
-                        <input
-                          type="tel"
-                          name="house"
-                          placeholder="Enter House no."
-                          className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
-                        />
-                      </div>
-                    </div>
+                  <div className="w-full">
+                    <label
+                      for="house"
+                      className="block text-sm font-bold pb-2 text-gray-800"
+                    >
+                      House
+                    </label>
+                    <input
+                      type="tel"
+                      name="house"
+                      placeholder="Enter House no."
+                      className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                    />
+                  </div>
+                </div>
 
-                    <div className="flex gap-3">
-                      <div className="w-full">
-                        <label
-                          for="road"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
-                        >
-                          Road
-                        </label>
-                        <input
-                          type="text"
-                          name="road"
-                          placeholder="Enter Road no."
-                          className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
-                        />
-                      </div>
+                <div className="flex gap-3">
+                  <div className="w-full">
+                    <label
+                      for="road"
+                      className="block text-sm font-bold pb-2 text-gray-800"
+                    >
+                      Road
+                    </label>
+                    <input
+                      type="text"
+                      name="road"
+                      placeholder="Enter Road no."
+                      className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                    />
+                  </div>
 
-                      <div className="w-full">
-                        <label
-                          for="block"
-                          className="block text-sm font-semibold pb-2 text-gray-700"
-                        >
-                          Block
-                        </label>
-                        <input
-                          type="tel"
-                          name="block"
-                          placeholder="Enter Block no."
-                          className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
-                        />
-                      </div>
-                    </div>
+                  <div className="w-full">
+                    <label
+                      for="block"
+                      className="block text-sm font-bold pb-2 text-gray-800"
+                    >
+                      Block
+                    </label>
+                    <input
+                      type="tel"
+                      name="block"
+                      placeholder="Enter Block no."
+                      className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                    />
+                  </div>
+                </div>
 
-                    <div className="w-full">
-                      <label
-                        for="location"
-                        className="block text-sm font-semibold pb-2 text-gray-700"
-                      >
-                        Location
-                      </label>
-                      <input
-                        type="text"
-                        name="location"
-                        placeholder="Location"
-                        className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
-                      />
-                    </div>
+                <div className="w-full">
+                  <label
+                    for="location"
+                    className="block text-sm font-bold pb-2 text-gray-800"
+                  >
+                    Location
+                  </label>
+                  <input
+                    type="text"
+                    name="location"
+                    placeholder="Location"
+                    className="w-full placeholder-gray-400/70  border border-gray-200 bg-white px-5 py-2.5 text-gray-700 outline-none"
+                  />
+                </div>
+                </div>
+
 
                     {/* button */}
                     <div className="flex justify-end gap-4">
