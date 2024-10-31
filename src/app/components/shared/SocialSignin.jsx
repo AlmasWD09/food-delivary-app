@@ -26,7 +26,7 @@ const SocialSignin = () => {
 
     return (
 
-        <div className=" flex items-center justify-center gap-10 py-6">
+        <div className=" flex items-center justify-center gap-10 ">
             <button
                 type="button"
                 onClick={() => handleSocialLogin('google')}
