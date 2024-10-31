@@ -27,6 +27,7 @@ const AddMenuModal = ({refetch,setIsModalOpen}) => {
       const title = form.title.value
       const price = form.price.value
       const description = form.description.value
+      const MRP = form.mrp.value
       const fileInput = form.fileInput.files[0];
 
      const formData = new FormData();
@@ -41,6 +42,7 @@ const AddMenuModal = ({refetch,setIsModalOpen}) => {
       const menu = {
         title,
         price,
+        MRP,
         description,
         image : data?.data?.url
       }
@@ -82,6 +84,22 @@ const AddMenuModal = ({refetch,setIsModalOpen}) => {
                   />
                 </div>
               
+                <div>
+                  <label
+                    htmlFor="mrp"
+                    className="block text-sm text-gray-500 dark:text-gray-300"
+                  >
+                    MRP
+                  </label>
+                  <input
+                    type="number"
+                    id="mrp"
+                    name="mrp"
+                   
+                    placeholder="Type mrp"
+                    className="block outline-primaryLight  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 "
+                  />
+                </div>
                 <div>
                   <label
                     htmlFor="price"

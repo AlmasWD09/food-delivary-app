@@ -114,6 +114,14 @@ const RestaurantMenus = () => {
         </div>
       ),
     }),
+    columnHelper.accessor("MRP", {
+      cell: (info) => <div>${info.getValue()}</div>,
+      header: () => (
+        <div>
+          <h1>MRP</h1>
+        </div>
+      ),
+    }),
     columnHelper.accessor("price", {
       cell: (info) => <div>${info.getValue()}</div>,
       header: () => (
@@ -333,7 +341,8 @@ const RestaurantMenus = () => {
           </div>
         </div>
       </div>
-           {
+            {/* add modal */}
+            {
                     isModalOpen && <AddMenuModal refetch={refetch} setIsModalOpen={setIsModalOpen}/>
                 }
                  {/* delete Modal */}
