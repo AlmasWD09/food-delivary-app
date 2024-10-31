@@ -134,8 +134,9 @@ const Users = () => {
        {
         click === "deliveryMan" ? 
         <div>
-          <h3 className="text-3xl font-semibold my-3 ">List a delivery man</h3>
-          <div className="md:shadow-xl lg:w-4/5 lg:p-10">
+          <h3 className="text-3xl font-semibold my-6 text-center">List a delivery man</h3>
+         <div className="lg:flex justify-center">
+         <div className="md:shadow-xl  lg:w-4/5 lg:p-10">
             <form onSubmit={handleHero}>
               <div className="grid lg:grid-cols-2 gap-5">
                 <div className="flex col-span-1 flex-col">
@@ -230,9 +231,11 @@ const Users = () => {
               </div>
             </form>
           </div> 
+         </div>
         </div>:
          <div>
-          <h3 className="text-3xl font-semibold my-3 ">List a restaurant</h3>
+          <h3 className="text-3xl font-semibold my-3 text-center">List a restaurant</h3>
+          <div className="lg:flex justify-center">
           <div className="md:shadow-xl lg:w-4/5 lg:p-10">
             <form onSubmit={handlePartner}>
               <div className="grid lg:grid-cols-2 gap-5">
@@ -350,6 +353,7 @@ const Users = () => {
               <button onClick={()=>setClick("deliveryMan")} className="w-1/4 rounded-lg cursor-pointer uppercase mt-5 text-center py-2 border border-primaryLight ">Or hero</button>
               </div>
             </form>
+          </div>
           </div>
          </div>
        }

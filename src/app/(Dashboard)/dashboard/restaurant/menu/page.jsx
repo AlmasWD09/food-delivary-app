@@ -152,7 +152,7 @@ const RestaurantMenus = () => {
   ];
 
   const table = useReactTable({
-    data: menuData,
+    data: filterMenu,
     columns,
     state: {
       sorting,
