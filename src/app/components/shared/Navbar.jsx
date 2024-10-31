@@ -16,8 +16,8 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const session = useSession();
   const {role} = useRole();
-  console.log(session, 'session line navbar  19');
 
+console.log(role);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -34,7 +34,6 @@ const Navbar = () => {
 
     fetchItems();
   }, [session?.data?.user?.email]);
-
 
   const dynamicDashboard = () => {
     if (session?.status === "authenticated") {
