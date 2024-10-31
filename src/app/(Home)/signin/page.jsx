@@ -17,12 +17,10 @@ const SignInPage = () => {
     event.preventDefault();
     const email = event.target.emailAddress.value;
     const password = event.target.password.value;
-    const ConfirmPassword = event.target.ConfirmPassword.value;
 
     const resp = await signIn("credentials", {
       email,
       password,
-      ConfirmPassword,
       redirect: false,
     });
 
@@ -80,14 +78,7 @@ const SignInPage = () => {
               placeholder="password"
               name="password"
             />
-            {/* Confirm Password */}
-            <input
-              type="password"
-              className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
-              placeholder="Confirm Password"
-              name="ConfirmPassword"
-            />
-
+       
             <h2 className="text-sm py-1">
               Forgot Your Password?{" "}
               <button className="font-semibold text-primary">click here</button>
