@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import WeatherMenuCrud from "./WeatherMenuCrud";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const WeatherBaseMenu = () => {
   const session = useSession();
@@ -97,11 +98,16 @@ const WeatherBaseMenu = () => {
 
         {menuItems.length > 4 && !showAll && (
           <div className="w-full flex justify-center mt-6">
-            <button
-              onClick={() => setShowAll(true)} // On click, show all items
-              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-primary rounded-full hover:bg-primary/60 focus:outline-none focus:bg-primary"
-            >
-              Show All
+            <button 
+            onClick={() => setShowAll(true)}
+            className="relative inline-flex items-center w-36 justify-center p-2 px-3 py-2 overflow-hidden font-medium text-primaryLight transition duration-300 ease-out border-2 border-primaryLight rounded-full shadow-md group">
+            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primaryLight group-hover:translate-x-0 ease">
+            <FaArrowRightLong className="w-6 h-6" />
+          </span>
+          <span className="absolute flex items-center justify-center w-full h-full text-primaryLight transition-all duration-300 transform group-hover:translate-x-full ease">
+          Show All
+          </span>
+          <span className="relative invisible">Show All</span>
             </button>
           </div>
         )}
