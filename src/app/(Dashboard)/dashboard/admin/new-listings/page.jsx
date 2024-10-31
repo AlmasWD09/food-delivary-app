@@ -7,12 +7,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAllUser from "@/hooks/useAllUser";
 const Users = () => {
    const [click,setClick] = useState("deliveryMan")
    const axiosPub = useAxiosPublic();
   const queryClient = useQueryClient();
   const session = useSession();
-  
+  const [user] = useAllUser()
 
   // delivery man post
   const { mutateAsync:deliveryMan } = useMutation({
@@ -75,8 +76,12 @@ const Users = () => {
         status: "pending",
         image: data?.data?.url,
       };
-     
-      mutateAsync(restaurant);
+      const filterUser = user?.find(us => us?.email === email)
+      if(filterUser){
+        mutateAsync(restaurant);
+      }else{
+        alert("This email have not sign up")
+      }
     } catch (error) {
       console.log(error);
     }
@@ -110,8 +115,13 @@ const Users = () => {
       status: "pending",
       image: data?.data?.url
     };
-
-    deliveryMan(hero);
+   
+    const filterUser = user?.find(us => us?.email === email)
+    if(filterUser){
+      deliveryMan(hero);
+    }else{
+      alert("This email have not sign up")
+    }
    }catch (error) {
     console.log(error);
   }
