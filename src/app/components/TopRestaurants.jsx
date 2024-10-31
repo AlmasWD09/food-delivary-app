@@ -7,10 +7,11 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const TopRestaurants = () => {
   const axiosPub = useAxiosPublic();
-
+  const session = useSession()
   const { data, isLoading } = useQuery({
     queryKey: ["restaurants"],
     queryFn: async () => {
@@ -50,10 +51,10 @@ const TopRestaurants = () => {
             <div className="flex justify-center items-center flex-col">
               <div className="overflow-hidden rounded-full">
                 <Image
-                  className="rounded-full transition-all object-cover duration-700 hover:scale-110  w-[200px] h-[200px]"
+                  className="rounded-full transition-all object-cover duration-700 hover:scale-110  w-[250px] h-[250px]"
                   src={restaurant?.restaurantImage}
-                  width={200}
-                  height={200}
+                  width={250}
+                  height={250}
                   alt="restaurant"
                 />
               </div>
