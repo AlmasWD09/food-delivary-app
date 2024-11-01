@@ -2,6 +2,8 @@
 
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -11,7 +13,7 @@ const CheckoutForm = ({setIsModalOpen,setPage,refetch,paymentData}) => {
     const [err,setErr] = useState('')
     const [clientSecret,setClientSecret] = useState("")
     const axiosPub = useAxiosPublic()
-
+    const router = useRouter();
 
     useEffect(()=>{
         axiosPub.post("/payment/intent",{price: paymentData?.totalAmount})
@@ -77,7 +79,7 @@ const CheckoutForm = ({setIsModalOpen,setPage,refetch,paymentData}) => {
                 if(res?.data?.result?.acknowledged === true && res?.data?.result2?.deletedCount >0){
                     refetch()
                     toast.success("Your order has been success")
-                    setPage("backPack")
+                    router.push('/');
                     setIsModalOpen(false)
                 }
             }
