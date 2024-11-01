@@ -19,6 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import EditUserModal from "../../../../components/admin/EditUserModal";
 import WithAuth from "@/app/components/protectedRoutes/WithAuth";
+import PauseUserModal from "@/app/components/admin/DeleteUserModal";
 
 const Users = () => {
   const [user, refetch, isLoading, isError] = useAllUser();
@@ -27,6 +28,10 @@ const Users = () => {
   // modal
   const [openModal, setModal] = useState(false);
   const [modalUser, setModalUser] = useState("");
+
+  // pasue user
+  const [deleteModal, setdeleteModal] = useState(false);
+  const [deleteModalUser, setdeleteModalUser] = useState("");
 
   const [sorting, setSorting] = useState([]);
   const [filter, setFilter] = useState([]);
@@ -167,7 +172,13 @@ const Users = () => {
           <button className=" p-2 rounded-full     bg-secondary text-white  text-xl">
             <Icon icon="material-symbols:pause-circle" />
           </button>
-          <button className=" p-2 rounded-full   bg-red-600  text-white  text-xl">
+          <button
+            onClick={() => {
+              setdeleteModal(true);
+              setdeleteModalUser(info.row.original);
+            }}
+            className=" p-2 rounded-full   bg-red-600  text-white  text-xl"
+          >
             <Icon icon="fluent:delete-28-filled" />
           </button>
         </div>
@@ -218,6 +229,7 @@ const Users = () => {
   }
 
   const closeModal = () => setModal(false);
+  const closedeleteModal = () => setdeleteModal(false);
 
   return (
     <div className="relative">
@@ -367,6 +379,13 @@ const Users = () => {
         <EditUserModal
           closeModal={closeModal}
           id={modalUser}
+          refetch={refetch}
+        />
+      )}
+      {deleteModal && (
+        <PauseUserModal
+          closeModal={closedeleteModal}
+          id={deleteModalUser}
           refetch={refetch}
         />
       )}
