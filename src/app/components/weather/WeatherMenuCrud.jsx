@@ -10,12 +10,12 @@ const router = useRouter();
 
   }
   return (
-    <div className="relative rounded-2xl overflow-hidden group ">
-    <div className="">
-      <Image width={300} height={300} src={photo} className="" alt="image" />
+    <div className="relative rounded-2xl overflow-hidden group justify-center items-center md:max-h-[200px] md:max-w-[300px] w-full">
+    <div className="md:max-h-[200px] md:max-w-[300px] rounded-2xl">
+      <Image width={300} height={100} src={photo} className="md:max-h[100px] rounded-2xl" alt="image" />
     </div>
 
-    <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300">
+    <div className="absolute rounded-2xl max-w-[300px] inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300">
       <p className="text-lg font-semibold">{weatherName}</p>
       <p className="text-lg font-semibold">{name}</p>
       <p className="text-md">${price}</p>
