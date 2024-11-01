@@ -240,7 +240,7 @@ const PartnerRestu = () => {
                 />
               </div>
               <input
-                className={` w-1/4 rounded-lg cursor-pointer uppercase mt-5 text-center py-2 bg-pink-600 text-white`}
+                className={` w-1/4 rounded-lg cursor-pointer uppercase mt-5 text-center py-2 bg-primary text-white`}
                 type="submit"
                 value="Apply"
               />

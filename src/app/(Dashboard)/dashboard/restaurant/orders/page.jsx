@@ -19,7 +19,7 @@ const columns = [
     header: () => <span className="flex items-center">ID</span>,
   }),
 
-  columnHelper.accessor("date", {
+ columnHelper.accessor("date", {
     cell: (info) => info.getValue(),
     header: () => <span className="flex items-center"> date</span>,
   }),
