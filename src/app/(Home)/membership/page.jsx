@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
@@ -69,7 +70,7 @@ const page = () => {
               Gold label on the restaurant cards.
             </p>
           </details>
-          
+
           <details className="max-w-[950px] mx-auto border border-opacity-30 border-[#665857] rounded-lg bg-[#332f2f]">
             <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
               Do Gold additional offers work on top of coupons (if any)?
@@ -88,11 +89,11 @@ const page = () => {
           </details>
         </div>
       </div>
-      <div>
+      <Link href="/packages">
         <button className="bg-gradient-to-r from-orange-200 to-orange-500 text-xl rounded-xl font-semibold text-white px-20 lg:px-40 py-2 flex mx-auto mt-10">
           Join now
         </button>
-      </div>
+      </Link>
     </div>
   );
 };

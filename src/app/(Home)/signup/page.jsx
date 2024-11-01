@@ -1,4 +1,5 @@
 "use client";
+import { imageUpload } from "@/lib/imageUpload";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -6,41 +7,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const image_hosting_key = process.env.NEXT_PUBLIC_IMAGE_API_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const SignupPage = () => {
   const router = useRouter();
   const session = useSession();
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    const imageFile = event.target.image.files[0]; // Get the image file properly
-    const formData = new FormData(); // Create FormData for file upload
-    formData.append("image", imageFile); // Append image to FormData
-
-    try {
-      // Upload the image to imgbb
-      const res = await axios.post(image_hosting_api, formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
-      const imageUrl = res?.data?.data?.url; // Extract the uploaded image URL
-      console.log("Image uploaded successfully:", imageUrl);
-
-      // Create newUser object with the image URL
+    const imageFile = event.target.image.files[0];
+    try{
+      const image_url = await imageUpload(imageFile)
+      
       const newUser = {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value,
         email: event.target.emailAddress.value,
         phoneNumber: event.target.phoneNumber.value,
+        image : image_url,
         password: event.target.password.value,
-        // image: imageUrl, // Add the image URL
         role: "admin",
-      };
-
-      // Send newUser data to your server (uncomment if needed)
-      const resp = await fetch(
+      }
+      
+      // user info save for database request
+       const resp = await fetch(
         `${process.env.NEXT_PUBLIC_LIVE_URL}/signup/api`,
         {
           method: "POST",
@@ -50,7 +39,7 @@ const SignupPage = () => {
           },
         }
       );
-      console.log(resp);
+
       if (resp.status === 200) {
         event.target.reset(); // Reset form after successful submission
         router.push("/");
@@ -58,8 +47,9 @@ const SignupPage = () => {
       } else {
         toast.error("Sign-up failed. Please try again");
       }
-    } catch (error) {
-      console.error("Error uploading image:", error);
+    }
+    catch(error){
+      toast.error(error.message)
     }
   };
 

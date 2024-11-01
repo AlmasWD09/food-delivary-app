@@ -1,6 +1,6 @@
 "use client";
-import OrderCartCard from "../../../../components/cards/OrderCartCard";
-import CheckoutForm from "../../../../components/CheckoutForm";
+import OrderCartCard from "../../components/cards/OrderCartCard";
+import CheckoutForm from "../../components/CheckoutForm";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -18,13 +18,19 @@ const OrderPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
-  const {data: cartData = [],refetch,isLoading} = useQuery({
-    queryKey: ['cartData',], 
-    queryFn: async() =>{
-        const res = await axiosPub.get(`/cart-menu/${session?.data?.user?.email}`);
-        return res.data;
-    }
-})
+  const {
+    data: cartData = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["cartData"],
+    queryFn: async () => {
+      const res = await axiosPub.get(
+        `/cart-menu/${session?.data?.user?.email}`
+      );
+      return res.data;
+    },
+  });
 
   if (isLoading) {
     return <li>Loading...</li>;
@@ -58,7 +64,6 @@ const OrderPage = () => {
     itemsId: cartData?.map((item) => item?._id) || [],
   };
 
-  
   return (
     <div className="px-3">
       <div className="lg:max-w-[1240px] py-20 mx-auto">
