@@ -261,7 +261,7 @@ console.log(role);
                 <span
                   className={` absolute ${
                     items?.length === 0 && "hidden"
-                  } bg-primary rounded-full text-white w-fit h-fit p-1 -top-2  text-sm font-semibold -right-2`}
+                  } bg-primary rounded-full text-white w-8 h-8 p-1 -top-2  text-sm font-semibold -right-5`}
                 >
                   {items.slice(0, 8).length}
                 </span>

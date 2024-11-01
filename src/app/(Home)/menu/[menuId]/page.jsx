@@ -103,6 +103,7 @@ const MenuDetails = ({ params }) => {
     const review = {
       userName: session?.data?.user?.name,
       userEmail: session?.data?.user?.email,
+      userImage : session?.data?.user?.image,
       revDate: new Date(),
       rating: rating,
       comment: e.target.review.value,
@@ -239,8 +240,8 @@ const MenuDetails = ({ params }) => {
                             <Image
                               width={128}
                               height={120}
-                              className="md:w-32 rounded-xl"
-                              src="https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg"
+                              className="md:w-32 md:h-[120px] object-cover overflow-hidden  rounded-xl"
+                              src={review?.userImage ||"https://i.ibb.co.com/y0JYWDk/web-development-react-javascript-website-coding.jpg"}
                               alt="image"
                             />
                           </div>
