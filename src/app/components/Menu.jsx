@@ -1,5 +1,6 @@
 "use client";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import useCartItems from "@/hooks/useCartItems";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -9,25 +10,26 @@ import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 
-const Menu = ({ menuData, refetch }) => {
+const Menu = ({ menuData}) => {
   const [filterData, setFilterData] = useState([]);
   const [click, setClick] = useState("All");
   const axiosPub = useAxiosPublic();
   const queryClient = useQueryClient();
   const session = useSession();
-
-  const { mutateAsync,reset } = useMutation({
+ const [refetch] = useCartItems()
+  const { mutateAsync } = useMutation({
     mutationKey: ["cart"],
     mutationFn: async (item) => {
       const { data } = await axiosPub.post("/single-menu", item);
-      console.log(data);
+     
       return data;
     },
     onSuccess: () => {
       toast.success("You have successfully added to cart");
-      reset()
       queryClient.invalidateQueries("cart");
+      
     },
+    
   });
 
   useEffect(() => {
