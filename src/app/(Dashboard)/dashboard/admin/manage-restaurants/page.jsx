@@ -18,7 +18,6 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import EditUserModal from "../../../../components/admin/EditUserModal";
 import WithAuth from "@/app/components/protectedRoutes/WithAuth";
 
-
 const ManageRestaurants = () => {
   const [restaurants, refetch, isLoading, isError] = useManageRestaurants();
   const axiosPublic = useAxiosPublic();
