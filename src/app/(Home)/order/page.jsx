@@ -62,6 +62,7 @@ const OrderPage = () => {
     userNumber: "01568606366",
     titles: cartData?.map((item) => item?.title) || [],
     itemsId: cartData?.map((item) => item?._id) || [],
+    restaurantNames: cartData?.map((item) => item?.restaurant) || []
   };
 
   return (
