@@ -1,11 +1,12 @@
 "use client";
+import SocialSignin from "@/app/components/shared/SocialSignin";
 import { imageUpload } from "@/lib/imageUpload";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
 
 
 const SignupPage = () => {
@@ -15,21 +16,24 @@ const SignupPage = () => {
     event.preventDefault();
 
     const imageFile = event.target.image.files[0];
-    try{
+    try {
       const image_url = await imageUpload(imageFile)
-      
       const newUser = {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value,
         email: event.target.emailAddress.value,
         phoneNumber: event.target.phoneNumber.value,
-        image : image_url,
+        image: image_url,
         password: event.target.password.value,
-        role: "admin",
+        ConfirmPassword: event.target.ConfirmPassword.value,
+        status: "active",
+        role: "user",
+        loginName: "normalUser",
+        date: new Date(),
       }
-      
+
       // user info save for database request
-       const resp = await fetch(
+      const resp = await fetch(
         `${process.env.NEXT_PUBLIC_LIVE_URL}/signup/api`,
         {
           method: "POST",
@@ -42,19 +46,19 @@ const SignupPage = () => {
 
       if (resp.status === 200) {
         event.target.reset(); // Reset form after successful submission
-        router.push("/");
+        router.push("/signin");
         toast.success("user create successfully");
       } else {
         toast.error("Sign-up failed. Please try again");
       }
     }
-    catch(error){
+    catch (error) {
       toast.error(error.message)
     }
   };
 
   return (
-    <div>
+    <div className="mt-20 lg:mt-0">
       <div className=" max-w-6xl mx-auto  h-screen flex justify-center ">
         <div className=" flex flex-col lg:flex-row items-center justify-center lg:pr-10 lg:gap-10">
           {/* left side area  */}
@@ -70,13 +74,13 @@ const SignupPage = () => {
 
           {/* right side area  */}
 
-          <div className="border-2 border-primary lg:w-2/5  p-10  relative  ">
+          <div className="border-2 border-primary lg:w-2/5  px-10  relative ">
             <div className="h-full bg-white w-full absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
               <span className="w-36 h-36 bg-primary absolute -top-20 -right-20 rotate-[-40deg]"></span>
             </div>
             <span className="h-full w-full bg-primaryGray/20 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
 
-            <div className="pb-6 ">
+            <div className="pb-2">
               <h1 className="text-center text-3xl font-semibold">
                 Create Account
               </h1>
@@ -84,7 +88,7 @@ const SignupPage = () => {
                 sign up now and unlock exclusive access!
               </h1>
             </div>
-            <form onSubmit={handleSignUp} className="flex flex-col gap-4">
+            <form onSubmit={handleSignUp} className="flex flex-col gap-4 pb-4">
               {/* First Name */}
               <input
                 type="text"
@@ -132,6 +136,14 @@ const SignupPage = () => {
                 placeholder="password"
               />
 
+              {/* Confirm Password */}
+              <input
+                type="password"
+                className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
+                placeholder="Confirm Password"
+                name="ConfirmPassword"
+              />
+
               <button
                 type="submit"
                 className="relative py-4 bg-primaryGray text-black hover:text-white group overflow-hidden flex items-center justify-center"
@@ -139,13 +151,15 @@ const SignupPage = () => {
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-primary rounded-full group-hover:w-96 group-hover:h-96 "></span>
                 <span className="relative">Create Account</span>
               </button>
-            </form>
-            <h1 className="text-center py-4">
+              <h1 className="text-center ">
               have an account ?{" "}
               <Link href="/signin">
                 <span className="font-semibold text-primary">sign in</span>
               </Link>{" "}
             </h1>
+            {/* socialLogin */}
+            <SocialSignin />
+            </form>
           </div>
         </div>
       </div>

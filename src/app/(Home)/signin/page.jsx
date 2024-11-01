@@ -4,11 +4,15 @@ import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 const SignInPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/";
+
+
   const handleSignin = async (event) => {
     event.preventDefault();
     const email = event.target.emailAddress.value;
@@ -19,11 +23,10 @@ const SignInPage = () => {
       password,
       redirect: false,
     });
+
     if (resp.status === 200) {
-      router.push("/");
-      console.log("this is from singin line no.24", resp);
+      router.push(redirectTo);
     } else {
-      // Handle error (optional)
       toast.error("Sign-in failed. Please check your credentials.");
     }
   };
@@ -44,13 +47,13 @@ const SignInPage = () => {
 
         {/* right side area  */}
 
-        <div className="border-2 border-primary lg:w-2/5  p-8  relative  ">
+        <div className="border-2 border-primary lg:w-2/5  px-8  relative  ">
           <div className="h-full w-full bg-white absolute overflow-hidden top-0 left-0 bg-base-100 -z-10">
             <span className="w-36 h-36 bg-primary absolute -top-20 -right-20 rotate-[-40deg]"></span>
           </div>
           <span className="h-full w-full bg-primaryGray/15 absolute -z-20 top-4 left-4 lg:top-8 lg:left-8 "></span>
 
-          <div className="pb-6 space-y-4 ">
+          <div className="pb-6 space-y-2 pt-2">
             <h1 className="text-center text-3xl font-semibold">Hello Again!</h1>
             <h1 className="text-center text-sm ">
               Make today tasty—let&apos;s get your order started!
@@ -61,19 +64,22 @@ const SignInPage = () => {
             action=""
             className="flex flex-col gap-4"
           >
+            {/* Email */}
             <input
               type="email"
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
               placeholder="Email Address"
               name="emailAddress"
             />
+            {/* Password */}
             <input
               type="password"
               className="p-4 outline-none bg-gray-100 w-full rounded-2xl focus:border-2 focus:border-primaryGray/20 "
               placeholder="password"
               name="password"
             />
-            <h2 className="text-sm py-4">
+       
+            <h2 className="text-sm py-1">
               Forgot Your Password?{" "}
               <button className="font-semibold text-primary">click here</button>
             </h2>
@@ -86,15 +92,15 @@ const SignInPage = () => {
             </button>
           </form>
 
-          <div className="pt-10">
-            <div className="flex items-center gap-6">
+          <div className="">
+            <div className="flex items-center gap-6 py-4">
               <span className="h-0.5 bg-gray-200 w-full"></span>
               <h2 className="text-nowrap text-sm">or continue with </h2>{" "}
               <span className="h-0.5 bg-gray-200 w-full"></span>
             </div>
 
             {/* social sign here */}
-            {/* <SocialSignin /> */}
+            <SocialSignin />
           </div>
 
           <h1 className="text-center py-4">

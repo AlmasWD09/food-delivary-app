@@ -18,6 +18,7 @@ const EditUserModal = ({ closeModal, id, refetch }) => {
     axios
       .patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/${id._id}`, finalData)
       .then((res) => {
+        toast.success("updated successfully");
         setError("");
         closeModal();
         refetch();
@@ -32,11 +33,11 @@ const EditUserModal = ({ closeModal, id, refetch }) => {
       {/* modal background  */}
       <div
         onClick={closeModal}
-        className=" bg-slate-100 backdrop-blur-sm inset-0 bg-opacity-10 fixed "
+        className=" fixed px-5 lg:px-0 z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50"
       ></div>
       {/* modal show  */}
-      <div className=" fixed  top-1/2 left-[60%] transform  -translate-x-1/2 -translate-y-1/2  ">
-        <div className="bg-white  overflow-y-auto px-10 py-6 rounded-xl   max-w-6xl w-full max-h-[500px] border-4 border-primary shadow-md  ">
+      <div className=" flex justify-center items-center z-[999]  fixed top-0 left-0 right-0 bottom-0 w-fit  mx-auto">
+        <div className="bg-white  overflow-y-auto px-10 py-6 rounded-xl   max-w-6xl w-full max-h-[500px]  shadow-md  ">
           <form onSubmit={handleSubmit} action="">
             <h2 className="text-center text-xl font-semibold">
               Update User Profile

@@ -10,7 +10,7 @@ const useProfile = () => {
         queryKey: ['user-address', session?.data?.user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/user-profile/get-address/${session?.data?.user?.email}`)
-            return res.data
+            return res?.data
         }
     })
     return { userAllInfo, refetch }

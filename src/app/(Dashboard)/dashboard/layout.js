@@ -2,7 +2,7 @@ import DashboardNav from "../../components/shared/Dashboard/DashboardNav";
 import "../../globals.css";
 import TopBar from "../../components/shared/Dashboard/TopBar";
 import AuthProvider from "@/services/AuthProvider";
-import { getServerSession } from "next-auth"; // Adjust the import based on your setup
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Delish - Your Favorite Flavors, Delivered",
@@ -27,6 +27,7 @@ export default async function RootLayout({ children }) {
 
               <div className="w-full bg-gray-100 px-3 pb-3 pt-32 lg:p-5 min-h-screen">
                 {children}
+                <Toaster />
               </div>
             </div>
           </div>
