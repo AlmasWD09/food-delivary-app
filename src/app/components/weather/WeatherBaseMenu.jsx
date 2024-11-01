@@ -93,7 +93,7 @@ const WeatherBaseMenu = () => {
                 <span className="text-primary">Weather:</span>
                 {weatherCondition}
               </h1>
-              <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 ">
                 {classesToDisplay.map((item, idx) => {
                   return <WeatherMenuCrud key={idx} item={item} />;
                 })}
