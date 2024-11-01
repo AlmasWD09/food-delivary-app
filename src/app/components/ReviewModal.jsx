@@ -7,13 +7,21 @@ import ReactStars from "react-rating-stars-component";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useFavourite from "@/hooks/useFavourite";
 
-const ReviewModal = ({restaurantName}) => {
+const ReviewModal = ({refetch:reload,restaurantName}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rating, setRating] = useState(null);
     const axiosPub = useAxiosPublic()
     const session = useSession();
+    
+    const favo = {
+      restaurantName: restaurantName,
+      userEmail:session?.data?.user?.email,
+    };
 
+    const [data,refetch] = useFavourite(favo)
+ console.log(favo)
      //  send review st
   const {mutateAsync} = useMutation({
     mutationKey: ["review"],
@@ -25,7 +33,7 @@ const ReviewModal = ({restaurantName}) => {
     onSuccess : () => {
       toast.success("Thank you. For your valuable review")
       setIsModalOpen(false); 
-     
+      reload()
     }
   })
   // end
@@ -40,7 +48,7 @@ const ReviewModal = ({restaurantName}) => {
     onSuccess : () => {
       toast.success("You have successfully added on your favorite list.")
       setIsModalOpen(false); 
-     
+    
     }
   })
   // end
@@ -56,9 +64,10 @@ const ReviewModal = ({restaurantName}) => {
         const review= {
             rating : rating,
             review : message,
-            userName : session?.data?.user?.name,
+            userName : `${session?.data?.user?.firstName} ${session?.data?.user?.lastName}`,
             restaurantName : restaurantName
         }
+       
        mutateAsync(review)
        
     };
@@ -73,21 +82,9 @@ const ReviewModal = ({restaurantName}) => {
         favorite(favourite)
     }
   
-    const favo = {
-        restaurantName: restaurantName,
-        userName:session?.data?.user?.name,
-      };
+    
    
-      const { data=[], isLoading, refetch } = useQuery({
-        queryKey: ["fav"],
-        queryFn: async () => {
-       
-          const queryString = new URLSearchParams(favo).toString();
-      
-          const { data } = await axiosPub.get(`/favorite?${queryString}`);
-          return data;
-        },
-      });
+     
       
   
     return (
@@ -124,7 +121,7 @@ const ReviewModal = ({restaurantName}) => {
                                         placeholder="Type your review here..."
                                     />
                                 </div>
-                                <input type="submit" className="bg-pink-600 cursor-pointer rounded-lg text-white px-3 py-1" value="Send" />
+                                <input type="submit" className="bg-primaryLight cursor-pointer rounded-lg text-white px-3 py-1" value="Send" />
                             </form>
                         </div>
                     </div>
