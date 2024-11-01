@@ -49,6 +49,7 @@ const page = () => {
           >
             <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
               Which restaurants do I get free delivery on?
+              
             </summary>
             <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-600">
               With Zomato Gold, you get unlimited free deliveries at all
