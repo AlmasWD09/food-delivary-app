@@ -27,7 +27,7 @@ const SignupPage = () => {
         password: event.target.password.value,
         ConfirmPassword: event.target.ConfirmPassword.value,
         status: "active",
-        role: "user",
+        role: "restaurant",
         loginName: "normalUser",
         date: new Date(),
       }
