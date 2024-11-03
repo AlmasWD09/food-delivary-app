@@ -80,7 +80,7 @@ const handler = NextAuth({
           phoneNumber: "",
           image: user.image || "", // Add user image if available
           status: "active",
-          role: "user", // Default role
+          role: "restaurant", // Default role
           loginName: "socialUser",
           date: new Date(),
         });
