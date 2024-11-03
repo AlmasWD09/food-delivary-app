@@ -1,6 +1,6 @@
 "use client";
 
-import SocialSignin from "@/app/components/shared/SocialSignin";
+
 import { imageUpload } from "@/lib/imageUpload";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -159,7 +159,7 @@ const SignupPage = () => {
               </Link>{" "}
             </h1>
             {/* socialLogin */}
-            <SocialSignin />
+            {/* <SocialSignin /> */}
             </form>
           </div>
         </div>

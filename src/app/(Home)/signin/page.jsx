@@ -1,6 +1,5 @@
 "use client";
 
-import SocialSignin from "@/app/components/shared/SocialSignin";
 import { Icon } from "@iconify/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -101,7 +100,7 @@ const SignInPage = () => {
             </div>
 
             {/* social sign here */}
-            <SocialSignin />
+            {/* <SocialSignin /> */}
           </div>
 
           <h1 className="text-center py-4">
