@@ -89,7 +89,7 @@ const WeatherBaseMenu = () => {
               <h1 className="text-3xl font-bold uppercase text-center  py-6">
                 Weather Base Menu{" "}
               </h1>
-              <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2">
+              <h1 className="text-xl font-bold border-l-4 border-primary rounded my-2 px-2 ml-10 md:ml-7 lg:ml-0 ">
                 <span className="text-primary">Weather:</span>
                 {weatherCondition}
               </h1>
